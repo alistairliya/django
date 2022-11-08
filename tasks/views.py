@@ -1,7 +1,9 @@
 from django import forms
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.shortcuts import render
 
-tasks = ["foo", "bar", "baz"]
+tasks = []
 
 class NewTaskForm(forms.Form):
     task = forms.CharField(label="New Task")
@@ -19,6 +21,8 @@ def add(request):
         if form.is_valid():
             task = form.cleaned_data["task"]
             tasks.append(task)
+            # given name of route, reverse engineer what that route is.
+            return HttpResponseRedirect(reverse("tasks:index"))
         else:
             return render(request, "tasks/add.html",{
                 "form":form
