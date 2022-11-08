@@ -1,0 +1,5 @@
+*.pyc
+insure/__pycache__/
+mybusiness/__pycache__/
+mybusiness/migrations/__pycache__/
+
