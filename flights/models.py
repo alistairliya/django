@@ -37,6 +37,18 @@ class Flight(models.Model):
     def __str__(self):
         return f"{self.id}: {self.origin} to {self.destination}"
 
+class Passenger(models.Model):
+    first = models.CharField(max_length=64)
+    last = models.CharField(max_length=64)
+    # Passengers have many-to-many relationship with flights.
+    # Under the hood, need additional table 
+    # blank=True to allow passenger with no flight
+    # related_name so that if we have a flight, we can traceback to the passengers
+    flights = models.ManyToManyField(Flight, blank=True, related_name="passengers")
+
+    def __str__(self):
+        return f"{self.first} {self.last}"
+
 
 
 
