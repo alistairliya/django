@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+admin.site.site_header = 'My Admin' # Django administration
+admin.site.site_title = 'My Title'
+admin.site.index_title = 'Site Administration' # Site administsration
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tasks/', include("tasks.urls")),
