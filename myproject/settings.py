@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'flights',
+    'users',
     'hello',
     'newyear',
     'tasks',
