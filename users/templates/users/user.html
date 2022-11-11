@@ -1,4 +1,7 @@
-{% extends "users/layout.html" %} {% block body %}
+{% extends "users/layout.html" %} {% block body %} 
+{% if request.user.is_staff %}
+<a href="{% url 'admin:index' %}">Admin</a>
+{% endif %}
 <h1>Welcome, {{request.user.first_name}}</h1>
 <ul>
   <li>Username: {{ request.user.username }}</li>

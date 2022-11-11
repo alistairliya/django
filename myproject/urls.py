@@ -16,12 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+# https://docs.djangoproject.com/en/4.1/ref/contrib/admin/
+# https://adiramadhan17.medium.com/modify-title-and-header-django-admin-interface-a6ad6e470d92
+# https://www.dothedev.com/blog/django-admin-change-color/ # for color 
+# https://docs.djangoproject.com/en/4.1/howto/overriding-templates/ # overriding templates
 admin.site.site_header = 'My Admin' # Django administration
 admin.site.site_title = 'My Title'
 admin.site.index_title = 'Site Administration' # Site administsration
+#admin.site.site_url = "Your Page" # VIEW SITE
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', include("users.urls")),
+    path('admin/', admin.site.urls ),
     path('tasks/', include("tasks.urls")),
     path('hello/', include("hello.urls")),
     path('newyear/', include("newyear.urls")),
