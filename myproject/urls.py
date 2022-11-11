@@ -33,6 +33,6 @@ urlpatterns = [
     path('hello/', include("hello.urls")),
     path('newyear/', include("newyear.urls")),
     path('flights/', include("flights.urls")),
-    path('users/', include("users.urls")),
+    #path('users/', include("users.urls")),
     path('business/',include("business.urls") )
 ]
