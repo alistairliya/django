@@ -6,7 +6,8 @@ from django.db import models
 # Custom User Model:
 # https://docs.djangoproject.com/en/4.0/topics/auth/customizing/#using-a-custom-user-model-when-starting-a-project
 # https://learndjango.com/tutorials/django-custom-user-model
-
+# Reset Migration:
+# https://raturi.in/blog/how-reset-django-migrations/
 # Create your models here.
 class MyBusiness(models.Model):
     pass
