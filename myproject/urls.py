@@ -35,5 +35,5 @@ urlpatterns = [
     path('flights/', include("flights.urls")),
     #path('users/', include("users.urls")),
     path('business/',include("business.urls") ),
-    path('mybusiness', include("mybusiness")), # To replace business
+    path('mybusiness/', include("mybusiness.urls")), # To replace business
 ]
