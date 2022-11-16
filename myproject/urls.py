@@ -32,8 +32,8 @@ urlpatterns = [
     path('tasks/', include("tasks.urls")),
     path('hello/', include("hello.urls")),
     path('newyear/', include("newyear.urls")),
-    path('flights/', include("flights.urls")),
-    #path('users/', include("users.urls")),
-    path('business/',include("business.urls") ),
+    #path('flights/', include("flights.urls")), # Don't want to migrate flights
+    #path('users/', include("users.urls")), # Root path already using users.urls
+    #path('business/',include("business.urls") ), # Replaced by mybusiness
     path('mybusiness/', include("mybusiness.urls")), # To replace business
 ]

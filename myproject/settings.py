@@ -32,8 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'mybusiness', # To Replacing 'business'
-    'business',
-    'flights',
+#    'business', # Replaced by mybusinesss
+#    'flights', # Don't want to migrate flights
     'users',
     'hello',
     'newyear',
