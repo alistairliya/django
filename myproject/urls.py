@@ -34,5 +34,6 @@ urlpatterns = [
     path('newyear/', include("newyear.urls")),
     path('flights/', include("flights.urls")),
     #path('users/', include("users.urls")),
-    path('business/',include("business.urls") )
+    path('business/',include("business.urls") ),
+    path('mybusiness', include("mybusiness")), # To replace business
 ]

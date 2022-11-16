@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'mybusiness', # To Replacing 'business'
     'business',
     'flights',
     'users',
