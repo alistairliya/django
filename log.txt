@@ -1,0 +1,95 @@
+- 2022-11-11 4 hr 30 min  
+	- 11:30 Start  
+	- Adding app_name to users app caused warning. Investigation and fix. 2 hrs.  
+		- Additional entry of users in myproject/urls.py originally there to redirect root path to users.  
+		- Restructured by removing the second entry of users: path('users/', include("users.urls"))  
+		- In users/url.py, adding app_name to it.  
+		- Update all files referencing resources under users app.  
+	- 1:30pm break, 2 hr  
+	- 2:00 resume  
+	- DONE User loggedin required to access My Business  
+		- Change the login-redirect mechanism to use the @login_required decorator  
+		- Redirecting back to the page that required login.  
+	- DONE Link to NBF from My Business  
+		- DONE My Business and NBF must know which user is currently logged in.  
+	- 3:30pm break, 1.5hr  
+	- 5:30pm resume  
+	- DOING Start on NBF  
+		-  Data Modelling  
+	- 6:30pm break, 1hr  
+- 2022-11-10 5 hr 30 min  
+	- 12:30pm start  
+	- Login  
+	- Admin  
+	- Added "Business" app. Start to work on My Business and NBF  
+	- end at 6pm  
+- 2022-11-09 4 hr 15 min  
+	- 11 am start  
+	- **str**() for model  
+	- Adding additional model, introduce foreign key in the model. Running makemigrations and migrations  
+	- Modifying model. Migrate database when the model has been changed.  
+	- Created superuser for admin  
+	- Creating admin page  
+	- Adding individual page to display details of each record in a model (flight)  
+	- Model (passenger) with many-to-many relationship  
+	- Posting to URL to add a record into model (passenger)  
+	- break at 14:00, 3hrs  
+	- 9pm start  
+	- Web Frontend to allow selecting from query from a search for updating the model. (Adding passenger to flight)  
+	- customize admin  
+	- user login.  
+	- end at 22:14, 1 hr 15 min  
+- 2022-11-08: 5 hr  
+	- 11 am start  
+	- Using render function in views.py for hello app, and added html templates. Will try to make this the base code.  
+	- git checkout -b devevlop # integration branch  
+	- git checkout -b hello # the "hello" feature branch, branched from develop  
+	- git checkout -b newyear # "newyear" feature branch, branched from develop  
+	- dynamic content in newyear/index  
+	- styling with static/newyear/styles.css  
+	- merge branch newyear into develop  
+	- git checkout -b tasks # "tasks" feature branch, branched from develop  
+	- Template Inheritance  
+	- Dynamic Link  
+	- CSRF Token  
+	- Using Django form instead of directly marking up with HTML  
+	- Django form server side validation.  
+	- Redirect, by reverse engineering from name to URL  
+	- Store session in table, by first running: python manage.py migrate  
+	- 14:34 break - 3.5 hr  
+	- 3pm start, with focus on DB  
+	- git checkout -b flights # "flight" feature branch, branched from develop  
+	- $ python manage.py makemigrations  
+	  Migrations for 'flights':  
+	  flights/migrations/0001_initial.py  
+		- Create model Flight  
+	- $ python manage.py migrate  
+	  Operations to perform:  
+	  Apply all migrations: admin, auth, contenttypes, flights, sessions  
+	  Running migrations:  
+	  Applying flights.0001_initial... OK  
+	- Examine DB models with $python manage.py shell  
+	- 16:30 break - 1.5 hr  
+	-  
+	-  
+	-  
+- 2022-11-07: 4.5 hr  
+	- Created directory  
+	- **conda create -n insure pip python=3.10**  
+	- **[conda install -c anaconda django](https://anaconda.org/anaconda/django)**  
+	- **django-admin startproject insure**  
+	- python manage.py startapp mybusiness  
+	- created git repo  
+	- **git remote set-url origin https://eugenelin89:edXYwF4K5gYdKxQN4kq7@bitbucket.org/coldbrew-insure/my-business.git**  
+	- **git push --set-upstream origin master**  
+	- **hello world** e529aff53fa508942f25690e8a8cbd712040a01a  
+		- created mybusiness/urls.py  
+		- modified:   insure/settings.py  
+		- modified:   insure/urls.py  
+		- modified:   mybusiness/views.py  
+	- There was something wrong with the path configuration. To make things simple because we are so early in the dev process, I recreated a new project and new app.  
+		- Project: myproject  
+		- App: hello  
+		- Repo: git remote add origin https://eugenelin89:edXYwF4K5gYdKxQN4kq7@bitbucket.org/coldbrew-insure/hello.git  
+	-  
+		-  
