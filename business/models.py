@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Referencing User Model:
@@ -8,9 +9,18 @@ from django.db import models
 # https://learndjango.com/tutorials/django-custom-user-model
 # Reset Migration:
 # https://raturi.in/blog/how-reset-django-migrations/
-# Create your models here.
-class MyBusiness(models.Model):
-    pass
 
-class Business_User(models.Model):
+# Cusstom User Based on: 
+# https://learndjango.com/tutorials/django-custom-user-model
+class CustomUser(AbstractUser):
     pass
+    # add additional fields in here
+
+    def __str__(self):
+        return self.username
+
+# class MyBusiness(models.Model):
+#     pass
+
+# class Business_User(models.Model):
+#     pass
