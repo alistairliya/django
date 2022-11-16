@@ -43,6 +43,7 @@ class BusinessType(models.Model):
     business_type_name = models.CharField(max_length=64)
     description = models.CharField(max_length=1024)    
 
+# Checked
 class MyBusiness(models.Model):
     business_type = models.ForeignKey(BusinessType, on_delete=models.PROTECT, related_name="mybusinesses")
     product = models.ForeignKey(Product, on_delete = models.PROTECT, related_name="mybusinesses")
@@ -56,14 +57,13 @@ class MyBusiness(models.Model):
     created_date = models.DateTimeField()
     modified_date = models.DateTimeField()
 
-
-
+# Checked
 class BusinessUserRole(models.Model):
     user_role_name = models.CharField(max_length=64)
     description = models.CharField(max_length=1024)
     default_split = models.IntegerField() # 0 to 10000, with two implied decimals
 
-
+# Checked
 # M-2-M Association
 class Business_User(models.Model):
     business = models.ForeignKey(MyBusiness, on_delete=models.PROTECT, related_name="users")
@@ -85,8 +85,6 @@ class Business_ComplianceEntity(models.Model):
     compliance_entity = models.ForeignKey(ComplianceEntity, on_delete=models.PROTECT, name="businesses")
     businesss = models.ForeignKey(MyBusiness, on_delete=models.PROTECT, name="complianceentities")
     notes = models.CharField(max_length=1024)
-
-
 
 class Document(models.Model):
     client = models.ForeignKey(Client, on_delete=models.PROTECT, related_name="documents")
