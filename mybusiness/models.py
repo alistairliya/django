@@ -174,6 +174,45 @@ class Business_Document(models.Model):
     is_submitted = models.BooleanField()
     url = models.CharField(max_length=1024)
 
+# Checked
+class InsuranceProvider(models.Model):
+    insurance_provider_name = models.CharField(max_length=64)
+    description = models.CharField(max_length=1024)
+
+# Checked
+class InsurancePlanType(models.Model):
+    insurnace_plan_type_name = models.CharField(max_length=64)
+    insurance_plan_type_code = models.CharField(max_length=64, null=True)
+    description = models.CharField(max_length=1024)
+
+# Checked
+class InsurancePlan(models.Modle):
+    insurance_plan_name = models.CharField(max_length=64)
+    insurance_plan_code = models.CharField(max_length=64, null=True)
+    description = models.CharField(max_length=1024)
+
+# Checked
+class InsuranceApplication(models.Model):
+    businesss = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, related_name="insurance_application") #1-2-1 relationship
+    product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name = "insurance_applications")
+    provider = models.ForeignKey(InsuranceProvider, on_delete=models.PROTECT, related_name="insurance_applications")
+    plan_type = models.ForeignKey(InsurancePlanType, on_delete=models.PROTECT, related_name="insurance_applications")
+    plan = models.ForeignKey(InsurancePlan, on_delete=models.PROTECT, related_name="insurance_applications")
+    face_amount = models.FloatField()
+    planned_premium = models.FloatField()
+
+# Checked
+class Medical(models.Model):
+    medical_name = models.CharField(max_length=64)
+    description = models.CharField(max_length=1024)
+
+# Checked
+class InsuranceApplication_Medical(models.Model):
+    insurance_application = models.ForeignKey(InsuranceApplication, on_delete=models.CASCADE, related_name="insurance_applications")
+    medical = models.ForeignKey(Medical, on_delete=models.PROTECT, related_name="insurance_applications")
+
+class ActivityLog(models.Model):
+    pass
 
 
 
