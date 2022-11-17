@@ -76,10 +76,12 @@ class Business_User(models.Model):
     created_date = models.DateTimeField()
     modified_date = models.DateTimeField()
 
+# Checked
 class ComplianceEntity(models.Model):
     compliance_entity_name = models.CharField(max_length=64)
     description = models.CharField(max_length=1024)
 
+# Checked
 # M-2-M Association
 class Business_ComplianceEntity(models.Model):
     compliance_entity = models.ForeignKey(ComplianceEntity, on_delete=models.PROTECT, name="businesses")
@@ -87,7 +89,7 @@ class Business_ComplianceEntity(models.Model):
     notes = models.CharField(max_length=1024)
 
 class Document(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.PROTECT, related_name="documents")
+    client = models.ForeignKey(Client, on_delete=models.PROTECT, related_name="document")
     document_name = models.CharField(max_length=64)
     description = models.CharField(max_length=1024)
 
