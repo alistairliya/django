@@ -138,7 +138,7 @@ class BusinessUserRole(models.Model):
 # Checked
 # M-2-M Association
 class Business_User(models.Model):
-    business = models.ForeignKey(MyBusiness, on_delete=models.PROTECT, related_name="users")
+    business = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, related_name="users")
     user = models.ForeignKey(MyUser, on_delete = models.PROTECT, related_name="businesses")
     split = models.IntegerField() # 0 to 10000, with two implied decimals
     user_role = models.ForeignKey(BusinessUserRole, on_delete=models.PROTECT, related_name = "businessusers")
@@ -157,19 +157,19 @@ class ComplianceEntity(models.Model):
 # M-2-M Association
 class Business_ComplianceEntity(models.Model):
     compliance_entity = models.ForeignKey(ComplianceEntity, on_delete=models.PROTECT, name="businesses")
-    businesss = models.ForeignKey(MyBusiness, on_delete=models.PROTECT, name="complianceentities")
+    businesss = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, name="complianceentities")
     notes = models.CharField(max_length=1024)
 
 # Checked
 class Document(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.PROTECT, related_name="document")
+    client = models.ForeignKey(Client, on_delete=models.DO_NOTHING, related_name="document")
     document_name = models.CharField(max_length=64)
     description = models.CharField(max_length=1024)
 
 # Checked
 # M-2-M Association
 class Business_Document(models.Model):
-    business = models.ForeignKey(MyBusiness, on_delete=models.PROTECT, related_name="documents")
+    business = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, related_name="documents")
     document = models.ForeignKey(Document, on_delete=models.PROTECT, related_name="mybusinesses")
     is_submitted = models.BooleanField()
     url = models.CharField(max_length=1024)
