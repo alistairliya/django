@@ -23,12 +23,12 @@ class MyUser(AbstractUser):
 class Gender(models.Model):
     gender_name = models.CharField(max_length=64)
     gender_code = models.CharField(max_length=64)
-    description = models.CharField(max_length=1024)
+    description = models.CharField(max_length=1024, null=True)
 
 # checked
 class Client(models.Model):
     first_name = models.CharField(max_length=64)
-    middle_name = models.CharField(max_length=64)
+    middle_name = models.CharField(max_length=64, null=True)
     last_name = models.CharField(max_length=64)
     birthdate = models.DateField()
     sin = models.CharField(max_length=64)
@@ -52,7 +52,7 @@ class ProvinceState(models.Model):
 # checked
 class AddressType(models.Model):
     address_type_name = models.CharField(max_length=64)
-    description = models.CharField(max_length=1024)
+    description = models.CharField(max_length=1024, none=True)
 
 # checked
 class Address(models.Model):
@@ -67,7 +67,7 @@ class Address(models.Model):
 # checked
 class PhoneType(models.Model):
     phone_type_name = models.CharField(max_length=64)
-    description = models.CharField(max_length=1024)
+    description = models.CharField(max_length=1024, null=True)
 
 # checked
 class Phone(models.Model):
@@ -78,12 +78,12 @@ class Phone(models.Model):
     is_primary = models.BooleanField()
     is_active = models.BooleanField()
     is_archived = models.BooleanField()
-    notes = models.CharField(max_length=1024)
+    notes = models.CharField(max_length=1024, null=True)
 
 # checked
 class EmailType(models.Model):
     email_type_name = models.CharField(max_length=64)
-    description = models.CharField(max_length=1024)
+    description = models.CharField(max_length=1024, null=True)
 
 # checked
 class Email(models.Model):
@@ -93,37 +93,38 @@ class Email(models.Model):
     is_primary = models.BooleanField()
     is_active = models.BooleanField()
     is_primary = models.BooleanField()
+    notes = models.CharField(max_length=1024, null=True)
 
 # checked
 class ProductType(models.Model):
     product_type_name = models.CharField(max_length=64)
-    description = models.CharField(max_length=1024)
+    description = models.CharField(max_length=1024, null=True)
 
 # checked
 class Product(models.Model):
     product_name = models.CharField(max_length=64)
     product_type = models.ForeignKey(ProductType, on_delete=models.PROTECT, related_name="products")
-    description = models.CharField(max_length=1024)
+    description = models.CharField(max_length=1024, null=True)
 
 # Checked
 class BusinessStatus(models.Model):
     status_name = models.CharField(max_length=64)
-    description = models.CharField(max_length=1024)
+    description = models.CharField(max_length=1024, null=True)
 
 # Checked
 class BusinessType(models.Model):
     business_type_name = models.CharField(max_length=64)
-    description = models.CharField(max_length=1024)    
+    description = models.CharField(max_length=1024, null=True)    
 
 # Checked
 class MyBusiness(models.Model):
-    business_type = models.ForeignKey(BusinessType, on_delete=models.PROTECT, related_name="mybusinesses")
-    product = models.ForeignKey(Product, on_delete = models.PROTECT, related_name="mybusinesses")
+    business_type = models.ForeignKey(BusinessType, on_delete=models.PROTECT, related_name="mybusinesses", null=True)
+    product = models.ForeignKey(Product, on_delete = models.PROTECT, related_name="mybusinesses", null=True)
     client = models.ForeignKey(Client, on_delete=models.PROTECT, related_name="businesses")
     status = models.ForeignKey(BusinessStatus, on_delete=models.PROTECT, related_name="mybusinesses")
-    projected_FYC = models.FloatField()
-    application_date = models.DateField()
-    application_location = models.CharField(max_length=64)
+    projected_FYC = models.FloatField(null=True)
+    application_date = models.DateField(null=True)
+    application_location = models.CharField(max_length=64, null=True)
     # Owner Datetime
     created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="created_businesses")
     created_date = models.DateTimeField()
@@ -132,17 +133,17 @@ class MyBusiness(models.Model):
 # Checked
 class BusinessUserRole(models.Model):
     user_role_name = models.CharField(max_length=64)
-    description = models.CharField(max_length=1024)
-    default_split = models.IntegerField() # 0 to 10000, with two implied decimals
+    description = models.CharField(max_length=1024, null=True)
+    default_split = models.IntegerField(null=True) # 0 to 10000, with two implied decimals
 
 # Checked
 # M-2-M Association
 class Business_User(models.Model):
     business = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, related_name="users")
     user = models.ForeignKey(MyUser, on_delete = models.PROTECT, related_name="businesses")
-    split = models.IntegerField() # 0 to 10000, with two implied decimals
+    split = models.IntegerField(null=True) # 0 to 10000, with two implied decimals
     user_role = models.ForeignKey(BusinessUserRole, on_delete=models.PROTECT, related_name = "businessusers")
-    notes = models.CharField(max_length=1024)
+    notes = models.CharField(max_length=1024, null=True)
     # Owner Datetime
     created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="created_businessusers")
     created_date = models.DateTimeField()
@@ -151,20 +152,20 @@ class Business_User(models.Model):
 # Checked
 class ComplianceEntity(models.Model):
     compliance_entity_name = models.CharField(max_length=64)
-    description = models.CharField(max_length=1024)
+    description = models.CharField(max_length=1024, null=True)
 
 # Checked
 # M-2-M Association
 class Business_ComplianceEntity(models.Model):
     compliance_entity = models.ForeignKey(ComplianceEntity, on_delete=models.PROTECT, name="businesses")
     businesss = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, name="complianceentities")
-    notes = models.CharField(max_length=1024)
+    notes = models.CharField(max_length=1024, null=True)
 
 # Checked
 class Document(models.Model):
     client = models.ForeignKey(Client, on_delete=models.DO_NOTHING, related_name="document")
     document_name = models.CharField(max_length=64)
-    description = models.CharField(max_length=1024)
+    description = models.CharField(max_length=1024, null=True)
 
 # Checked
 # M-2-M Association
@@ -177,19 +178,19 @@ class Business_Document(models.Model):
 # Checked
 class InsuranceProvider(models.Model):
     insurance_provider_name = models.CharField(max_length=64)
-    description = models.CharField(max_length=1024)
+    description = models.CharField(max_length=1024, null=True)
 
 # Checked
 class InsurancePlanType(models.Model):
     insurnace_plan_type_name = models.CharField(max_length=64)
     insurance_plan_type_code = models.CharField(max_length=64, null=True)
-    description = models.CharField(max_length=1024)
+    description = models.CharField(max_length=1024, null=True)
 
 # Checked
-class InsurancePlan(models.Modle):
+class InsurancePlan(models.Model):
     insurance_plan_name = models.CharField(max_length=64)
     insurance_plan_code = models.CharField(max_length=64, null=True)
-    description = models.CharField(max_length=1024)
+    description = models.CharField(max_length=1024, null=True)
 
 # Checked
 class InsuranceApplication(models.Model):
@@ -198,13 +199,13 @@ class InsuranceApplication(models.Model):
     provider = models.ForeignKey(InsuranceProvider, on_delete=models.PROTECT, related_name="insurance_applications")
     plan_type = models.ForeignKey(InsurancePlanType, on_delete=models.PROTECT, related_name="insurance_applications")
     plan = models.ForeignKey(InsurancePlan, on_delete=models.PROTECT, related_name="insurance_applications")
-    face_amount = models.FloatField()
-    planned_premium = models.FloatField()
+    face_amount = models.FloatField(null=True)
+    planned_premium = models.FloatField(null=True)
 
 # Checked
 class Medical(models.Model):
     medical_name = models.CharField(max_length=64)
-    description = models.CharField(max_length=1024)
+    description = models.CharField(max_length=1024, null=True)
 
 # Checked
 class InsuranceApplication_Medical(models.Model):
@@ -215,10 +216,10 @@ class InsuranceApplication_Medical(models.Model):
 class ActivityLog(models.Model):
     event_datetime = models.DateTimeField()
     user = models.ForeignKey(MyUser, on_delete=models.DO_NOTHING, related_name="activities")
-    model_name = models.CharField(max_length=64)
-    field_name = models.CharField(max_length=64)
-    value = models.CharField(max_length=1024)
-    notes = models.CharField(max_length=1024)
+    model_name = models.CharField(max_length=64, null=True)
+    field_name = models.CharField(max_length=64, null=True)
+    value = models.CharField(max_length=1024, null=True)
+    notes = models.CharField(max_length=1024, null=True)
 
 
 
