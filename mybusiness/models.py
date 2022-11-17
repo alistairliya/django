@@ -19,8 +19,80 @@ class MyUser(AbstractUser):
     def __str__(self):
         return self.username
 
+# checked
+class Gender(models.Model):
+    gender_name = models.CharField(max_length=64)
+    gender_code = models.CharField(max_length=64)
+    description = models.CharField(max_length=1024)
+
+# checked
 class Client(models.Model):
-    pass
+    first_name = models.CharField(max_length=64)
+    middle_name = models.CharField(max_length=64)
+    last_name = models.CharField(max_length=64)
+    birthdate = models.DateField()
+    sin = models.CharField(max_length=64)
+    gender = models.ForeignKey(Gender, on_delete=models.PROTECT, related_name="clients")
+    # Owner Datetime
+    created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="created_clients")
+    created_date = models.DateTimeField()
+    modified_date = models.DateTimeField()
+
+# checked
+class Country(models.Model):
+    country_name = models.CharField(max_length=64)
+    country_code = models.CharField(max_length=64)
+
+# checked
+class ProvinceState(models.Model):
+    province_state_name = models.CharField(max_length=64)
+    province_state_code = models.CharField(max_length=64)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="provinces_states")
+    
+# checked
+class AddressType(models.Model):
+    address_type_name = models.CharField(max_length=64)
+    description = models.CharField(max_length=1024)
+
+# checked
+class Address(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    stree_address = models.CharField(max_length=1024)
+    city = models.CharField(max_length=64)
+    province_state = models.ForeignKey(ProvinceState, on_delete=models.PROTECT, related_name="addresses")
+    country = models.ForeignKey(Country, on_delete=models.PROTECT, related_name="addressess")
+    postal_code = models.CharField(max_length=64)
+    address_type = models.ForeignKey(AddressType, on_delete=models.PROTECT, related_name="addresses")
+
+# checked
+class PhoneType(models.Model):
+    phone_type_name = models.CharField(max_length=64)
+    description = models.CharField(max_length=1024)
+
+# checked
+class Phone(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name="phones")
+    area_code = models.CharField(max_length=64)
+    phone_number = models.CharField(max_length=64)
+    phone_type = models.ForeignKey(PhoneType, on_delete=models.PROTECT, related_name="phones")
+    is_primary = models.BooleanField()
+    is_active = models.BooleanField()
+    is_archived = models.BooleanField()
+    notes = models.CharField(max_length=1024)
+
+# checked
+class EmailType(models.Model):
+    email_type_name = models.CharField(max_length=64)
+    description = models.CharField(max_length=1024)
+
+# checked
+class Email(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name="emails")
+    email = models.CharField(max_length=1024)
+    email_type = models.ForeignKey(EmailType, on_delete=models.PROTECT, related_name="emails")
+    is_primary = models.BooleanField()
+    is_active = models.BooleanField()
+    is_primary = models.BooleanField()
 
 # checked
 class ProductType(models.Model):
@@ -53,7 +125,7 @@ class MyBusiness(models.Model):
     application_date = models.DateField()
     application_location = models.CharField(max_length=64)
     # Owner Datetime
-    created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="mybusinesses")
+    created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="created_businesses")
     created_date = models.DateTimeField()
     modified_date = models.DateTimeField()
 
@@ -72,7 +144,7 @@ class Business_User(models.Model):
     user_role = models.ForeignKey(BusinessUserRole, on_delete=models.PROTECT, related_name = "businessusers")
     notes = models.CharField(max_length=1024)
     # Owner Datetime
-    created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="businessusers")
+    created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="created_businessusers")
     created_date = models.DateTimeField()
     modified_date = models.DateTimeField()
 
@@ -88,11 +160,13 @@ class Business_ComplianceEntity(models.Model):
     businesss = models.ForeignKey(MyBusiness, on_delete=models.PROTECT, name="complianceentities")
     notes = models.CharField(max_length=1024)
 
+# Checked
 class Document(models.Model):
     client = models.ForeignKey(Client, on_delete=models.PROTECT, related_name="document")
     document_name = models.CharField(max_length=64)
     description = models.CharField(max_length=1024)
 
+# Checked
 # M-2-M Association
 class Business_Document(models.Model):
     business = models.ForeignKey(MyBusiness, on_delete=models.PROTECT, related_name="documents")
