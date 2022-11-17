@@ -211,8 +211,14 @@ class InsuranceApplication_Medical(models.Model):
     insurance_application = models.ForeignKey(InsuranceApplication, on_delete=models.CASCADE, related_name="insurance_applications")
     medical = models.ForeignKey(Medical, on_delete=models.PROTECT, related_name="insurance_applications")
 
+# Checked
 class ActivityLog(models.Model):
-    pass
+    event_datetime = models.DateTimeField()
+    user = models.ForeignKey(MyUser, on_delete=models.DO_NOTHING, related_name="activities")
+    model_name = models.CharField(max_length=64)
+    field_name = models.CharField(max_length=64)
+    value = models.CharField(max_length=1024)
+    notes = models.CharField(max_length=1024)
 
 
 
