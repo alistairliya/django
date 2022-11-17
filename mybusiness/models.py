@@ -52,7 +52,7 @@ class ProvinceState(models.Model):
 # checked
 class AddressType(models.Model):
     address_type_name = models.CharField(max_length=64)
-    description = models.CharField(max_length=1024, none=True)
+    description = models.CharField(max_length=1024, null=True)
 
 # checked
 class Address(models.Model):
