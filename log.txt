@@ -1,3 +1,68 @@
+- [[Project Insure]] [[Proposal]] [[Insurance Software Zoom Meeting Summary]]  
+- 2017-11-18: 2.5 hr  
+	- 8pm start: 2.5hr  
+		- Serializing model for frontend SPA using React  
+	- 10:30pm break  
+- 2022-11-17  
+	- 11:00am Start: 2hr  
+		- Continue with coding data model  
+			- InsuranceProvider  
+			- InsurancePlanType  
+			- InsurancePlan  
+			- Medical  
+			- InsuranceApplication_Medical  
+		- Go thru the models to verify fields can be null  
+	- 1pm Break  
+	- 1:30 Resume: 2hr  
+		- Creating unit test for models  
+	- 3:30 Break  
+- 2022-11-16: 5 hrs  
+	- 11:00 start: 3 hr  
+		- Implementing data model in code  
+			- BusinessUserRole  
+			- Business_User  
+			- BusinessType  
+			- ProductType  
+			- Product  
+			- ComplianceEntity  
+			- Business_ComplianceEntity  
+			- Document  
+			- Business_Document  
+			- BusinessStatus  
+			- MyBusiness  
+	- 2pm break  
+	- 8pm resume: 2hrs  
+		- Continue to implement data model in code  
+			- Client  
+			- Gender  
+			- Country  
+			- ProvinceState  
+			- AddressType  
+			- Address  
+			- Phone  
+			- PhoneType  
+			- Email  
+			- EmailType  
+			- InsuranceApplication  
+	- 10pm break  
+		-  
+- 2022-11-15: 6 hr  
+	- 11:00 Start 2 hr  
+	- Continue with Data Modelling. Constructing [E-R Diagram](https://drive.google.com/file/d/1sLgDExGoH5syGOMjvTHr2W5pHGKaCoBv/view?usp=sharing)  
+	- [Data Model](https://drive.google.com/file/d/1sLgDExGoH5syGOMjvTHr2W5pHGKaCoBv/view?usp=sharing)  
+	- code.  
+	- 13:00 Break  
+	- 13:30 Resume 4 hr  
+	- Implement Data Model  
+	- Custom User Model  
+	- 5:30 Finish  
+- 2022-11-14: 5.5 hr  
+	- 11:00 Start: 3.5 hr  
+		- [Data Modelling](https://docs.google.com/document/d/1j89GsAP12X44chXHaSQd0__7xqlAB9cEP1OZXGvgKYk/edit?usp=sharing)  
+	- 14:30 Break  
+	- 3:00 start: 2 hr  
+		- Continue with Data Modelling  
+	- 5:00 Finsh  
 - 2022-11-11 4 hr 30 min  
 	- 11:30 Start  
 	- Adding app_name to users app caused warning. Investigation and fix. 2 hrs.  
@@ -8,14 +73,31 @@
 	- 1:30pm break, 2 hr  
 	- 2:00 resume  
 	- DONE User loggedin required to access My Business  
+:logbook:
+	  		  CLOCK: [2022-11-11 Fri 14:26:38]--[2022-11-11 Fri 15:12:35] =>  00:45:57
+	  		  CLOCK: [2022-11-11 Fri 15:12:49]--[2022-11-11 Fri 15:12:50] =>  00:00:01
+:END:
 		- Change the login-redirect mechanism to use the @login_required decorator  
 		- Redirecting back to the page that required login.  
 	- DONE Link to NBF from My Business  
+:logbook:
+	  		  CLOCK: [2022-11-11 Fri 15:15:46]--[2022-11-11 Fri 15:26:36] =>  00:10:50
+:END:
 		- DONE My Business and NBF must know which user is currently logged in.  
+:logbook:
+		  			  CLOCK: [2022-11-11 Fri 15:16:53]--[2022-11-11 Fri 15:20:01] =>  00:03:08
+:END:
 	- 3:30pm break, 1.5hr  
 	- 5:30pm resume  
 	- DOING Start on NBF  
-		-  Data Modelling  
+:logbook:
+	  		  CLOCK: [2022-11-11 Fri 17:26:26]--[2022-11-11 Fri 17:26:28] =>  00:00:02
+	  		  CLOCK: [2022-11-11 Fri 17:32:22]
+:END:
+		- DONE Data Modelling  
+:logbook:
+		  			  CLOCK: [2022-11-11 Fri 17:32:34]--[2022-11-11 Fri 18:38:16] =>  01:05:42
+:END:
 	- 6:30pm break, 1hr  
 - 2022-11-10 5 hr 30 min  
 	- 12:30pm start  
