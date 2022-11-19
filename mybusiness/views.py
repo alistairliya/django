@@ -21,3 +21,5 @@ def new_business(request):
 class MyBusinessView(viewsets.ModelViewSet):
     serializer_class = MyBusinessSerializer
     queryset = MyUser.objects.all()
+    # Need switch from User to Mybusiness.
+    # How to define the verbs?
