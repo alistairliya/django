@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders', # for REST API
+    'rest_framework',# for REST API
+    'myapi' # for REST API
 ]
 
 MIDDLEWARE = [
@@ -54,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # for REST API
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -133,3 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = "users:login"
 AUTH_USER_MODEL = "mybusiness.MyUser"
+
+CORS_ORIGIN_WHITELIST = [
+     'http://localhost:3000'
+] # for REST API

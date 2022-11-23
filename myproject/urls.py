@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework import routers
+from myapi import views
+
 # https://docs.djangoproject.com/en/4.1/ref/contrib/admin/
 # https://adiramadhan17.medium.com/modify-title-and-header-django-admin-interface-a6ad6e470d92
 # https://www.dothedev.com/blog/django-admin-change-color/ # for color 
@@ -24,6 +27,8 @@ admin.site.site_title = 'My Title'
 admin.site.index_title = 'Site Administration' # Site administsration
 #admin.site.site_url = "Your Page" # VIEW SITE
 
+router = routers.DefaultRouter()
+router.register('mybusiness',views.MyBusinessView,'')
 urlpatterns = [
     path('', include("users.urls")),
     path('admin/', admin.site.urls ),
@@ -34,4 +39,5 @@ urlpatterns = [
     #path('users/', include("users.urls")), # Root path already using users.urls
     #path('business/',include("business.urls") ), # Replaced by mybusiness
     path('mybusiness/', include("mybusiness.urls")), # To replace business
+    path('api/',include(router.urls))
 ]
