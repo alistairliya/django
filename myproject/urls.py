@@ -28,7 +28,8 @@ admin.site.index_title = 'Site Administration' # Site administsration
 #admin.site.site_url = "Your Page" # VIEW SITE
 
 router = routers.DefaultRouter()
-router.register('mybusiness',views.MyBusinessView,'')
+router.register(r'mybusiness',views.MyBusinessView,'')
+router.register(r'users', views.UserViewSet)
 urlpatterns = [
     path('', include("users.urls")),
     path('admin/', admin.site.urls ),
@@ -39,5 +40,6 @@ urlpatterns = [
     #path('users/', include("users.urls")), # Root path already using users.urls
     #path('business/',include("business.urls") ), # Replaced by mybusiness
     path('mybusiness/', include("mybusiness.urls")), # To replace business
-    path('api/',include(router.urls))
+    path('api/',include(router.urls)),
+    #path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

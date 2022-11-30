@@ -1,9 +1,52 @@
-- [[Project Insure]] [[Proposal]] [[Insurance Software Zoom Meeting Summary]]  
-- 2017-11-18: 2.5 hr  
+ 
+- 2022-11-29 (Taiwan Time): 5 hr  
+	- 9:30am Start: 3.5 hr  
+		- authentication and permissions  
+	- 1:00pm break  
+	- 1:30pm resume: 1.5 hr  
+		- Hyperlink API  
+		- Viewsets  
+		- Routers  
+	- 3:00 break  
+	-  
+- 2022-11-28 (Taiwan Time): 1 hr  
+	- 7:50am Start  
+	- 8:50am Break  
+- 2022-11-26 (Taiwan Time): 3 hr  
+	- 9am start  
+		- RESTful Authenticaiotn  
+	- 12pm Break  
+	-  
+- 2022-11-25: 3.5 hr  
+	- 3:30am Start (in the air plane)  
+	- 4:00am break  
+	- 7:00am Resume  
+	- 8:00am break  
+	- 9:30am Resume  
+	- 11:00am break  
+- 2022-11-24: 2 hr  
+	- 9:30am Start: 2 hr  
+		- Installing and configuring REST API documentation with MD Viewer  
+	- 11:30am Break  
+- 2022-11-23: 1.5 hr  
+	- 11am start: 1.5 hr  
+		- Continuing with Serialization  
+	- 12:30pm break  
+- 2022-11-22: 3.5 hrs  
+	- 2pm start: 1 hr  
+		- Django REST Framework setup. Investigation and revert.  
+	- 3pm break  
+	- 3:30pm resume: 1.5 hr  
+		- Extracted REST API to its own app within the project.  
+	- 5:00 break  
+	- 9pm resume: 1 hr  
+		- Serialization  
+	- 10pm break  
+- 2022-11-18: 2.5 hr  
 	- 8pm start: 2.5hr  
 		- Serializing model for frontend SPA using React  
 	- 10:30pm break  
-- 2022-11-17  
+- 2022-11-17: 4 hrs  
 	- 11:00am Start: 2hr  
 		- Continue with coding data model  
 			- InsuranceProvider  
