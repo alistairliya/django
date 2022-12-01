@@ -13,7 +13,7 @@ from django.db import models
 # Cusstom User Based on: 
 # https://learndjango.com/tutorials/django-custom-user-model
 class MyUser(AbstractUser):
-    pass
+    #pass
     # add additional fields in here
 
     def __str__(self):
@@ -28,7 +28,7 @@ class Gender(models.Model):
 # checked
 class Client(models.Model):
     first_name = models.CharField(max_length=64)
-    middle_name = models.CharField(max_length=64, null=True)
+    middle_name = models.CharField(max_length=64, blank=True, null=True)
     last_name = models.CharField(max_length=64)
     birthdate = models.DateField()
     sin = models.CharField(max_length=64)
