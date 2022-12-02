@@ -12,10 +12,10 @@ from mybusiness.models import *
 # https://www.youtube.com/watch?v=NAQEj-c2CI8
 # https://stackoverflow.com/questions/60500597/what-is-the-purpose-of-the-class-meta-in-django
 
-class MyBusinessSerializer(serializers.ModelSerializer):
+class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = MyBusiness 
-        fields = ('product',) 
+        fields = ('business_type','product','client','status','projected_FYC','application_date','application_location','created_by', 'created_date', 'modified_date') 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -57,3 +57,24 @@ class GenderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Gender
         fields = ['id', 'gender_name', 'gender_code', 'description']
+
+class BusinessTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BusinessType
+        fields = ['id','business_type_name', 'description']
+    
+class ProductSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['id','product_name','product_type', 'description']
+
+
+class ProductTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductType
+        fields = ['id', 'product_type_name', 'description']
+
+class BusinessStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BusinessStatus
+        fields = ['id', 'status_name', 'description']

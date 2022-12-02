@@ -13,8 +13,8 @@ from rest_framework import status
 # Create your views here.
 
 class MyBusinessView(viewsets.ModelViewSet):
-    serializer_class = MyBusinessSerializer
     queryset = MyBusiness.objects.all()
+    serializer_class = MyBusinessSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -31,3 +31,19 @@ class ClientViewSet(viewsets.ModelViewSet):
 class GenderViewSet(viewsets.ModelViewSet):
     queryset = Gender.objects.all()
     serializer_class = GenderSerializer
+
+class BusinessTypeViewSet(viewsets.ModelViewSet):
+    queryset = BusinessType.objects.all()
+    serializer_class = BusinessTypeSerializer
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class ProductTypeViewSet(viewsets.ModelViewSet):
+    queryset = ProductType.objects.all()
+    serializer_class = ProductTypeSerializer
+
+class BusinessStatusViewSet(viewsets.ModelViewSet):
+    queryset = BusinessStatus.objects.all()
+    serializer_class = BusinessStatusSerializer

@@ -31,7 +31,11 @@ router = routers.DefaultRouter()
 router.register(r'mybusiness',views.MyBusinessView,'')
 router.register(r'users', views.UserViewSet)
 router.register(r'clients', views.ClientViewSet)
-router.register('gender', views.GenderViewSet)
+router.register(r'gender', views.GenderViewSet)
+router.register(r'businesstype', views.BusinessTypeViewSet)
+router.register(r'product', views.ProductViewSet)
+router.register(r'producttype', views.ProductTypeViewSet)
+router.register(r'businessstatus', views.BusinessStatusViewSet)
 urlpatterns = [
     path('', include("users.urls")),
     path('admin/', admin.site.urls ),
