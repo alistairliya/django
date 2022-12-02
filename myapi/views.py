@@ -27,3 +27,7 @@ class UserViewSet(viewsets.ModelViewSet):
 class ClientViewSet(viewsets.ModelViewSet):
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
+
+class GenderViewSet(viewsets.ModelViewSet):
+    queryset = Gender.objects.all()
+    serializer_class = GenderSerializer

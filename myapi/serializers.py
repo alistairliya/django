@@ -48,8 +48,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 # >>> s.data
 # {'id': 1, 'first_name': 'Foo', 'middle_name': 'Dan', 'birthdate': '2022-12-01', 'last_name': 'Bar', 'sin': '', 'gender': 1, 'created_by': 1, 'created_date': '2022-12-01T00:00:00Z', 'modified_date': '2022-12-01T00:00:00Z'}
 # >>> 
-class ClientSerializer(serializers.ModelSerializer):
+class ClientSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Client
         fields = ['id', 'first_name', 'middle_name','birthdate', 'last_name','sin','gender','created_by','created_date','modified_date']
 
+class GenderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Gender
+        fields = ['id', 'gender_name', 'gender_code', 'description']
