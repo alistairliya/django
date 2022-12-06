@@ -9,12 +9,11 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-
 # Create your views here.
-
 class MyBusinessView(viewsets.ModelViewSet):
     queryset = MyBusiness.objects.all()
     serializer_class = MyBusinessSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class UserViewSet(viewsets.ModelViewSet):
     """

@@ -47,5 +47,5 @@ urlpatterns = [
     #path('business/',include("business.urls") ), # Replaced by mybusiness
     path('mybusiness/', include("mybusiness.urls")), # To replace business
     path('api/',include(router.urls)),
-    #path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

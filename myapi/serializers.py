@@ -15,7 +15,7 @@ from mybusiness.models import *
 class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = MyBusiness 
-        fields = ('business_type','product','client','status','projected_FYC','application_date','application_location','created_by', 'created_date', 'modified_date') 
+        fields = ['id','business_type','product','client','status','projected_FYC','application_date','application_location','created_by', 'created_date', 'modified_date'] 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
