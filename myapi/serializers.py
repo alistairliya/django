@@ -13,14 +13,18 @@ from mybusiness.models import *
 # https://stackoverflow.com/questions/60500597/what-is-the-purpose-of-the-class-meta-in-django
 
 class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
+    created_by = serializers.ReadOnlyField(source='created_by.username')
     class Meta:
         model = MyBusiness 
         fields = ['id','business_type','product','client','status','projected_FYC','application_date','application_location','created_by', 'created_date', 'modified_date'] 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    # corresponds to related_name in MyUser model.
+    my_businesses = serializers.PrimaryKeyRelatedField(many=True,queryset=MyBusiness.objects.all())
+
     class Meta:
         model = MyUser
-        fields = ['url', 'username', 'email', 'groups']
+        fields = ['url', 'username', 'email', 'groups','my_businesses']
 
 # >>> print(repr(serializer))
 # ClientSerializer():

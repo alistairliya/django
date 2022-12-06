@@ -15,6 +15,9 @@ class MyBusinessView(viewsets.ModelViewSet):
     serializer_class = MyBusinessSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.

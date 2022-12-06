@@ -126,7 +126,9 @@ class MyBusiness(models.Model):
     application_date = models.DateField(null=True)
     application_location = models.CharField(max_length=64, null=True)
     # Owner Datetime
-    created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="created_businesses")
+    # The related name in created_by, my_businesses, corresponds to the my_businesses field in UserSerializer
+    # This is so that the User json from API will display a list of related mybusiness created by the user.
+    created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="my_businesses")
     created_date = models.DateTimeField()
     modified_date = models.DateTimeField()
 
