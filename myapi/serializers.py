@@ -20,11 +20,11 @@ class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     # corresponds to related_name in MyUser model.
-    my_businesses = serializers.PrimaryKeyRelatedField(many=True,queryset=MyBusiness.objects.all())
+    created_businesses = serializers.PrimaryKeyRelatedField(many=True,queryset=MyBusiness.objects.all())
 
     class Meta:
         model = MyUser
-        fields = ['url', 'username', 'email', 'groups','my_businesses']
+        fields = ['url', 'username', 'email', 'groups','created_businesses']
 
 # >>> print(repr(serializer))
 # ClientSerializer():
@@ -82,3 +82,13 @@ class BusinessStatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = BusinessStatus
         fields = ['id', 'status_name', 'description']
+
+class BusinessUserRoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BusinessUserRole
+        fields = ['id', 'user_role_name', 'description']
+
+class BusinessUserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Business_User
+        fields = ['business', 'user', 'split', 'user_role', 'notes', 'created_by', 'created_date', 'modified_date']

@@ -10,3 +10,13 @@ p.save()
 
 bs = BusinessStatus(status_name='Review', description='Under Review')
 bs.save()
+
+g = Gender(gender_name='Male', gender_code='M', description='Has Penis')
+g.save()
+
+import datetime
+c = Client(gender = g, first_name='Joe',middle_name='Yi',last_name='Fang',birthdate=datetime.datetime.now(), created_by = MyUser.objects.all()[0], created_date=datetime.datetime.now(), modified_date = datetime.datetime.now())
+c.save()
+
+bur = BusinessUserRole(user_role_name = 'owner', description='a user who is responsible for the business', default_split=100)
+bur.save()

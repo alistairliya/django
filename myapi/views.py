@@ -51,3 +51,11 @@ class ProductTypeViewSet(viewsets.ModelViewSet):
 class BusinessStatusViewSet(viewsets.ModelViewSet):
     queryset = BusinessStatus.objects.all()
     serializer_class = BusinessStatusSerializer
+
+class BusinessUserRoleViewSet(viewsets.ModelViewSet):
+    queryset = BusinessUserRole.objects.all()
+    serializer_class = BusinessUserRoleSerializer
+
+class BusinessUserViewSet(viewsets.ModelViewSet):
+    queryset = Business_User.objects.all()
+    serializer_class = BusinessUserSerializer

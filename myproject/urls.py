@@ -28,7 +28,7 @@ admin.site.index_title = 'Site Administration' # Site administsration
 #admin.site.site_url = "Your Page" # VIEW SITE
 
 router = routers.DefaultRouter()
-router.register(r'mybusiness',views.MyBusinessView,'')
+router.register(r'mybusiness',views.MyBusinessView)
 router.register(r'users', views.UserViewSet)
 router.register(r'clients', views.ClientViewSet)
 router.register(r'gender', views.GenderViewSet)
@@ -36,6 +36,8 @@ router.register(r'businesstype', views.BusinessTypeViewSet)
 router.register(r'product', views.ProductViewSet)
 router.register(r'producttype', views.ProductTypeViewSet)
 router.register(r'businessstatus', views.BusinessStatusViewSet)
+router.register(r'businessuserrole', views.BusinessUserRoleViewSet)
+router.register(r'businessuser', views.BusinessUserViewSet)
 urlpatterns = [
     path('', include("users.urls")),
     path('admin/', admin.site.urls ),
