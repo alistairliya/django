@@ -9,14 +9,15 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from myapi.permissions import IsOwnerOrReadOnly
+from myapi.permissions import IsOwnerOrReadOnly, IsOwnerOrCreator
 # Create your views here.
 class MyBusinessView(viewsets.ModelViewSet):
     queryset = MyBusiness.objects.all()
     serializer_class = MyBusinessSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                      IsOwnerOrReadOnly]
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+    #                  IsOwnerOrReadOnly]
 
+    permission_classes = [IsOwnerOrCreator]
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
 
