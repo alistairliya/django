@@ -142,7 +142,7 @@ class BusinessUserRole(models.Model):
 # M-2-M Association
 class Business_User(models.Model):
     business = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, related_name="users")
-    user = models.ForeignKey(MyUser, on_delete = models.PROTECT, related_name="businesses")
+    user = models.ForeignKey(MyUser, on_delete = models.PROTECT, related_name="my_businesses")
     split = models.IntegerField(null=True) # 0 to 10000, with two implied decimals
     user_role = models.ForeignKey(BusinessUserRole, on_delete=models.PROTECT, related_name = "businessusers")
     notes = models.CharField(max_length=1024, null=True)
