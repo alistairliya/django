@@ -141,7 +141,14 @@ class BusinessUserRole(models.Model):
 # Checked
 # M-2-M Association
 class Business_User(models.Model):
-    business = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, related_name="users")
+    business = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, related_name="related_users")
+    # Reverse relationship from MyUser with the attribute my_businesses
+    # Eg:
+    # >>> bob = MyUser.objects.filter(username='bob')[0]
+    # >>> bob.my_businesses
+    # <django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager object at 0x7f82562bf190>
+    # >>> bob.my_businesses.all()[0].split
+    # To Do: Refactor the name from my_businesses to related_businesses
     user = models.ForeignKey(MyUser, on_delete = models.PROTECT, related_name="my_businesses")
     split = models.IntegerField(null=True) # 0 to 10000, with two implied decimals
     user_role = models.ForeignKey(BusinessUserRole, on_delete=models.PROTECT, related_name = "businessusers")
