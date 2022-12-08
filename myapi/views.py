@@ -12,14 +12,28 @@ from rest_framework import status
 from myapi.permissions import IsOwnerOrReadOnly, IsOwnerOrCreator
 # Create your views here.
 class MyBusinessView(viewsets.ModelViewSet):
-    queryset = MyBusiness.objects.all()
+    
+    #queryset = MyBusiness.objects.filter(created_by = 1) #MyBusiness.objects.all()
+    queryset = MyBusiness.objects.all() #get_queryset() 
+    
     serializer_class = MyBusinessSerializer
     #permission_classes = [permissions.IsAuthenticatedOrReadOnly,
     #                  IsOwnerOrReadOnly]
-
     permission_classes = [IsOwnerOrCreator]
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
+
+
+    def get_queryset(self):
+        # A user should only see instances that
+        # - he is a creator of 
+        # - he is an owner of
+        # Business_User related to the request user
+        # somehow append the business attribute into queryset
+        request_user = self.request.user 
+        qs = MyBusiness.objects.filter(created_by = request_user.id)
+        return qs
+    
 
 class UserViewSet(viewsets.ModelViewSet):
     """

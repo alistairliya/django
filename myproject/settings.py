@@ -143,6 +143,7 @@ CORS_ORIGIN_WHITELIST = [
 ] # for REST API
 
 # For Logging
+# https://docs.djangoproject.com/en/dev/topics/logging/#django-s-default-logging-configuration
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
