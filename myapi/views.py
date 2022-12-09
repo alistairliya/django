@@ -40,10 +40,7 @@ class MyBusinessView(viewsets.ModelViewSet):
         #   Creat queryset based on the collection
         #   The query below will crash if user not authenticated.
         owner_businesses =list( Business_User.objects.filter(user = request_user).values_list('business', flat=True)) 
-        q2 = self.queryset.filter(pk__in = owner_businesses)
-
-        qs |= q2
-
+        qs |= self.queryset.filter(pk__in = owner_businesses)
         return qs
     
 
