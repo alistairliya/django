@@ -19,7 +19,7 @@ class MyBusinessView(viewsets.ModelViewSet):
     serializer_class = MyBusinessSerializer
     #permission_classes = [permissions.IsAuthenticatedOrReadOnly,
     #                  IsOwnerOrReadOnly]
-    permission_classes = [IsOwnerOrCreator]
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrCreator]
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
 
@@ -30,9 +30,21 @@ class MyBusinessView(viewsets.ModelViewSet):
         # - he is an owner of
         # Business_User related to the request user
         # somehow append the business attribute into queryset
+        
         request_user = self.request.user 
-        self.queryset = self.queryset.filter(created_by = request_user.id)
-        return self.queryset
+        # User is the creator of:
+        qs = self.queryset.filter(created_by = request_user.id)
+        # User is the owner of:
+        #   Query Business_User where user == request_user
+        #   Loop over the result to collect the businesses (ids)
+        #   Creat queryset based on the collection
+        #   The query below will crash if user not authenticated.
+        owner_businesses =list( Business_User.objects.filter(user = request_user).values_list('business', flat=True)) 
+        q2 = self.queryset.filter(pk__in = owner_businesses)
+
+        qs |= q2
+
+        return qs
     
 
 class UserViewSet(viewsets.ModelViewSet):
