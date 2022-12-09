@@ -31,8 +31,8 @@ class MyBusinessView(viewsets.ModelViewSet):
         # Business_User related to the request user
         # somehow append the business attribute into queryset
         request_user = self.request.user 
-        qs = MyBusiness.objects.filter(created_by = request_user.id)
-        return qs
+        self.queryset = self.queryset.filter(created_by = request_user.id)
+        return self.queryset
     
 
 class UserViewSet(viewsets.ModelViewSet):
