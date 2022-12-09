@@ -1,4 +1,49 @@
- 
+- [[Project Insure]] [[Proposal]] [[Insurance Software Zoom Meeting Summary]]  
+-  
+- 2022-12-09 (Taiwan Time)  
+	- 8:30 Start: 2 hr  
+		- visibility for creator and owner of businesses  
+	- 10:30 Break  
+	- 11:30 Resume: 1hr  
+		- visibility done.  
+		- Start implementing frontend.  
+	- 12:30 Lunch  
+- 2022-12-08 (Taiwan Time)  
+	- 8:30am Start 3.5 hr  
+		- permissions.py for MyBusiness  
+			- Done: 10:19  
+		- Permission for the My Business list  
+			- MyBusinessView.get_queryset(self)  
+	- 12:00pm Break  
+- 2022-12-07 (Taiwan Time)  
+	- 9am Start: 3 hr  
+		- Continue from yesterday, connecting "owner" to "business"  
+			- First, need to serialize Business_User and associated models  
+			- Serialized BusinessUserRole  
+		- Next time: Continue on permissions.py  
+	- 12pm End  
+- 2022-12-06 (Taiwan Time)  
+	- 10:00am Start: 4 hr  
+		- Authentication and Permissions  
+		- User instance shows businesses that he created.  
+		- Next: Do the same thing with the MyUser and Business_User models  
+	- 2:00PM End  
+- 2022-12-05 (Taiwan Time)  
+	- 8:30 am Start: 3.5 hr  
+		- Authentication and Permissions  
+	- 12:00 pm End  
+		-  
+- 2022-12-02 (Taiwan Time)  
+	- 8:30 Start  
+		- Serialized Gender Model  
+		- Switched to HyperlinkedModelSerializer  
+	- 11:30 break  
+- 2022-12-01 (Taiwan Time): 4.5 hr  
+	- 8:00am Start  
+		- Serializing Client  
+		- Client View Set  
+	- 12:30pm break  
+		-  
 - 2022-11-29 (Taiwan Time): 5 hr  
 	- 9:30am Start: 3.5 hr  
 		- authentication and permissions  
