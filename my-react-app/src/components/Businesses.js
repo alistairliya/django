@@ -1,12 +1,12 @@
 // from Tasks in example
-
+import Business from './Business'
 
 
 const Businesses = ({businesses}) => {
   return (
     <>
       {businesses.map((business)=>(
-        <h3 key={business.id}>{business.id}</h3>
+        <Business key={business.id} business={business}/>
       ))}
     </>
   )
