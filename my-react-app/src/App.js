@@ -18,7 +18,8 @@ function App() {
         "application_location": "Kaohsiung",
         "created_by": "eugene",
         "created_date": "2022-12-09T13:22:00Z",
-        "modified_date": "2022-12-09T13:22:00Z"
+        "modified_date": "2022-12-09T13:22:00Z",
+        "highlighted": false
       },
       {
         "id": 2,
@@ -31,7 +32,8 @@ function App() {
         "application_location": "Vancouver",
         "created_by": "eugene",
         "created_date": "2022-12-12T15:52:00Z",
-        "modified_date": "2022-12-12T15:52:00Z"
+        "modified_date": "2022-12-12T15:52:00Z",
+        "highlighted": false
       }
     ]
   )
@@ -45,6 +47,7 @@ function App() {
   // Using toggleReminder in example 57:53
   const toggleReminder = (id) => {
     console.log('toggle', id)
+    setBusinesses(businesses.map((business)=>business.id === id? {...business, highlighted: !business.highlighted }: business))
   }
 
   return (

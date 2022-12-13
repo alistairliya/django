@@ -5,7 +5,7 @@ import {AiFillTool} from "react-icons/ai" //https://react-icons.github.io/react-
 
 const Business = ({business, onEdit, onToggle}) => {
   return (
-    <div className='business' onDoubleClick={()=>onToggle(business.id)}>
+    <div className={`business ${business.highlighted? 'highlighted':''}`} onDoubleClick={()=>onToggle(business.id)}>
         <h3>
             {business.id}<AiFillTool style={{color:'red', cursor:'pointer'}} onClick={()=>onEdit(business.id)}/>
         </h3>

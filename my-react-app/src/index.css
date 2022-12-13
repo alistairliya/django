@@ -61,7 +61,7 @@ body {
   cursor: pointer;
 }
 
-.business.reminder {
+.business.highlighted {
   border-left: 5px solid green;
 }
 

@@ -131,6 +131,7 @@ class MyBusiness(models.Model):
     created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="created_businesses")
     created_date = models.DateTimeField()
     modified_date = models.DateTimeField()
+    highlighted = models.BooleanField(default=False)
 
 # Checked
 class BusinessUserRole(models.Model):
