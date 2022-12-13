@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import Header from './components/Header'
 import Businesses from './components/Businesses'
+import NewBusiness from './components/NewBusiness' 
 
 function App() {
 
@@ -53,6 +54,7 @@ function App() {
   return (
     <div className="container">
       <Header title='My Businesses'/>
+      <NewBusiness/>
       {businesses.length > 0?<Businesses businesses = {businesses} onEdit = {editBusiness} onToggle={toggleReminder}/> : 'No business to show'} 
     </div>
   );
