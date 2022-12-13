@@ -42,10 +42,15 @@ function App() {
     //setBusinesses(businesses.filter((business)=>business.id!=id)) // example from deleting task 55:30
   }
 
+  // Using toggleReminder in example 57:53
+  const toggleReminder = (id) => {
+    console.log('toggle', id)
+  }
+
   return (
     <div className="container">
       <Header title='My Businesses'/>
-      {businesses.length > 0?<Businesses businesses = {businesses} onEdit = {editBusiness}/> : 'No business to show'} 
+      {businesses.length > 0?<Businesses businesses = {businesses} onEdit = {editBusiness} onToggle={toggleReminder}/> : 'No business to show'} 
     </div>
   );
 }

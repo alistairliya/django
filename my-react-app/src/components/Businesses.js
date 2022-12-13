@@ -2,11 +2,11 @@
 import Business from './Business'
 
 
-const Businesses = ({businesses, onEdit}) => {
+const Businesses = ({businesses, onEdit, onToggle}) => {
   return (
     <>
       {businesses.map((business)=>(
-        <Business key={business.id} business={business} onEdit={onEdit}/>
+        <Business key={business.id} business={business} onEdit={onEdit} onToggle={onToggle}/>
       ))}
     </>
   )
