@@ -40,7 +40,7 @@ function App() {
   const editBusiness = (id) =>{
     console.log('edit', id)
     // Below is an example from deleting task 55:30
-    setBusinesses(businesses.filter((business)=>business.id!=id))
+    //setBusinesses(businesses.filter((business)=>business.id!=id))
   }
 
   return (
