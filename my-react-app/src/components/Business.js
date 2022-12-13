@@ -7,7 +7,7 @@ const Business = ({business}) => {
   return (
     <div className='business'>
         <h3>
-            {business.id}<AiFillTool/>
+            {business.id}<AiFillTool style={{color:'red', cursor:'pointer'}}/>
         </h3>
         <p>{business.product}</p>       
     </div>
