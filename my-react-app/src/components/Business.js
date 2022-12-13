@@ -3,11 +3,11 @@
 import React from 'react'
 import {AiFillTool} from "react-icons/ai" //https://react-icons.github.io/react-icons
 
-const Business = ({business}) => {
+const Business = ({business, onEdit}) => {
   return (
     <div className='business'>
         <h3>
-            {business.id}<AiFillTool style={{color:'red', cursor:'pointer'}}/>
+            {business.id}<AiFillTool style={{color:'red', cursor:'pointer'}} onClick={()=>onEdit(business.id)}/>
         </h3>
         <p>{business.product}</p>       
     </div>

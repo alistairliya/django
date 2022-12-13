@@ -36,10 +36,17 @@ function App() {
     ]
   )
 
+  // from Delete Task in example, 52:31, deleteTask
+  const editBusiness = (id) =>{
+    console.log('edit', id)
+    // Below is an example from deleting task 55:30
+    setBusinesses(businesses.filter((business)=>business.id!=id))
+  }
+
   return (
     <div className="container">
       <Header title='My Businesses'/>
-      <Businesses businesses = {businesses}/>
+      {businesses.length > 0?<Businesses businesses = {businesses} onEdit = {editBusiness}/> : 'No business to show'} 
     </div>
   );
 }
