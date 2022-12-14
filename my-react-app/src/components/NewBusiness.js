@@ -15,7 +15,7 @@ const NewBusiness = () => {
             <label>Address</label>
             <input type='text' placeholder="Client's Address" />
         </div>
-        <input type='submit' value='Add Business' />
+        <input type='submit' value='Add Business' className='btn btn-block' />
     </form>
   )
 }
