@@ -15,6 +15,10 @@ const NewBusiness = () => {
             <label>Address</label>
             <input type='text' placeholder="Client's Address" />
         </div>
+        <div className='form-control form-control-check'>
+            <label>Document Submitted</label>
+            <input type='checkbox' />
+        </div>
         <input type='submit' value='Add Business' className='btn btn-block' />
     </form>
   )
