@@ -8,8 +8,25 @@ const NewBusiness = ({onAdd}) => {
     const [address, setAddress] = useState('')
     const [submitted, setSumbmitted] = useState(false)
 
+    const onSubmit = (e) =>{
+        e.preventDefault() // avoiding submitting to a page.
+        // some validation
+        if(!lastName){
+            alert('Please add Last Name')
+            return
+        }
+
+        onAdd({lastName, firstName, address, submitted})
+        setLastName('')
+        setFirstName('')
+        setAddress('')
+        setSumbmitted(false)
+
+
+    }
+
     return (
-    <form className="add-form">
+    <form className="add-form" onSubmit={onSubmit}>
         <div className="form-control">
             <label>Last Name</label>
             <input type='text' placeholder="Client's Last Name" value={lastName} onChange={(e)=>setLastName(e.target.value)} />
@@ -24,7 +41,12 @@ const NewBusiness = ({onAdd}) => {
         </div>
         <div className='form-control form-control-check'>
             <label>Document Submitted</label>
-            <input type='checkbox' value={submitted} onChange={(e)=>setSumbmitted(e.currentTarget.checked)}/>
+            <input 
+                type='checkbox'
+                checked={submitted} 
+                value={submitted} 
+                onChange={(e)=>setSumbmitted(e.currentTarget.checked)}
+            />
         </div>
         <input type='submit' value='Add Business' className='btn btn-block' />
     </form>

@@ -41,7 +41,11 @@ function App() {
 
   // from Add Task example, 1:09:33
   const addBusiness = (business) => {
+    const id = Math.floor(Math.random() * 10000) + 1
+    console.log(id)
     console.log(business)
+    const newBusiness = {id, ...business}
+    setBusinesses([...businesses, newBusiness])
   }
   
   // from Delete Task in example, 52:31, deleteTask
