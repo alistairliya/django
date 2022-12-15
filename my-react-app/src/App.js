@@ -5,6 +5,8 @@ import NewBusiness from './components/NewBusiness'
 
 function App() {
 
+  const [showAddBusiness, setShowAddBusiness] = useState(false)
+
 
   const [businesses, setBusinesses] = useState(
     [
@@ -62,8 +64,12 @@ function App() {
 
   return (
     <div className="container">
-      <Header title='My Businesses'/>
-      <NewBusiness onAdd={addBusiness} />
+      <Header 
+        title='My Businesses'
+        onAdd={()=>setShowAddBusiness(!showAddBusiness)}
+        showAdd = {showAddBusiness}
+      />
+      {showAddBusiness && <NewBusiness onAdd={addBusiness} />}
       {businesses.length > 0?<Businesses businesses = {businesses} onEdit = {editBusiness} onToggle={toggleReminder}/> : 'No business to show'} 
     </div>
   );
