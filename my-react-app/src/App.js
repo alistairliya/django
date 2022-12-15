@@ -39,6 +39,11 @@ function App() {
     ]
   )
 
+  // from Add Task example, 1:09:33
+  const addBusiness = (business) => {
+    console.log(business)
+  }
+  
   // from Delete Task in example, 52:31, deleteTask
   const editBusiness = (id) =>{
     console.log('edit', id)
@@ -54,7 +59,7 @@ function App() {
   return (
     <div className="container">
       <Header title='My Businesses'/>
-      <NewBusiness/>
+      <NewBusiness onAdd={addBusiness} />
       {businesses.length > 0?<Businesses businesses = {businesses} onEdit = {editBusiness} onToggle={toggleReminder}/> : 'No business to show'} 
     </div>
   );

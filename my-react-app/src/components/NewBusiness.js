@@ -2,7 +2,7 @@
 import { useState } from 'react'
 
 
-const NewBusiness = () => {
+const NewBusiness = ({onAdd}) => {
     const [lastName, setLastName] = useState('')
     const [firstName, setFirstName] = useState('')
     const [address, setAddress] = useState('')
