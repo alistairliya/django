@@ -89,7 +89,15 @@ function App() {
         showAdd = {showAddBusiness}
       />
       {showAddBusiness && <NewBusiness onAdd={addBusiness} />}
-      {businesses.length > 0?<Businesses businesses = {businesses} onEdit = {editBusiness} onToggle={toggleReminder}/> : 'No business to show'} 
+      {businesses.length > 0?(
+        <Businesses 
+          businesses = {businesses} 
+          onEdit = {editBusiness} 
+          onToggle={toggleReminder}
+        /> 
+      ):( 
+        'No business to show'
+      )} 
     </div>
   );
 }
