@@ -42,21 +42,23 @@ function App() {
   )
 
   useEffect(()=>{
-    const fetchBusiness = async()=>{
-      let headers = new Headers()
-      const auth_str = 'Basic '+btoa('test:test123!') 
-      console.log(auth_str)
-      headers.set('Authorization', auth_str)
-
-
-
-      const res = await fetch('http://127.0.0.1:8000/api/mybusiness/',{headers:headers})
-      const data = await res.json()
-      console.log(data)
+    const getBusinesses = async() => {
+      const businessesFromServer = await fetchBusiness()
+      setBusinesses(businessesFromServer)      
     }
-
-    fetchBusiness()
+    //getBusinesses()
   }, [])
+
+  const fetchBusiness = async()=>{
+    let headers = new Headers()
+    const auth_str = 'Basic '+btoa('test:test123!') 
+    console.log(auth_str)
+    headers.set('Authorization', auth_str)
+    const res = await fetch('http://127.0.0.1:8000/api/mybusiness/',{headers:headers})
+    const data = await res.json()
+    console.log(data)
+    return data
+  }
 
   // from Add Task example, 1:09:33
   const addBusiness = (business) => {
