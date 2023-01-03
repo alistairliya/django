@@ -1,7 +1,10 @@
 import {useState, useEffect} from 'react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Header from './components/Header'
+import Footer from './components/Footer'
 import Businesses from './components/Businesses'
 import NewBusiness from './components/NewBusiness' 
+import About from './components/About' 
 
 function App() {
 
@@ -97,7 +100,8 @@ function App() {
         /> 
       ):( 
         'No business to show'
-      )} 
+      )}
+      <Footer /> 
     </div>
   );
 }
