@@ -49,7 +49,7 @@ function App() {
       const businessesFromServer = await fetchBusiness()
       setBusinesses(businessesFromServer)      
     }
-    //getBusinesses()
+    getBusinesses()
   }, [])
 
   const fetchBusiness = async()=>{
