@@ -101,7 +101,8 @@ function App() {
       ):( 
         'No business to show'
       )}
-      <Footer /> 
+      <Footer />
+      <a href={`contacts/1`}>TEST</a> 
     </div>
   );
 }

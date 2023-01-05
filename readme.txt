@@ -8,3 +8,6 @@ This is the project directory
 /myproject/myproject
 This is the app directory. myproject is the "root" app.
 setting.py is in this directory.
+
+
+RAFCE to quickly create component.
