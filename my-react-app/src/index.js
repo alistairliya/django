@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import Error from './components/Error';
 import About from './components/About';
+import Login from './components/Login';
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
         element: <About />,
       },
     ],
+  },
+  {
+    path:'/login',
+    element: <Login />
   }
 ]);
 
