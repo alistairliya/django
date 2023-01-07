@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Dashboard  from './pages/Dashboard';
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import reportWebVitals from './reportWebVitals';
+import { AuthProvider } from "./hooks/useAuth";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -16,7 +17,7 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <AuthProvider><App /></AuthProvider>,
     errorElement: <Error />,
     children:[
       {
