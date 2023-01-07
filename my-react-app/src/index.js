@@ -18,21 +18,23 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     errorElement: <Error />,
-  },
-  {
-    path:"dashboard",
-    element:<ProtectedRoute><Dashboard/></ProtectedRoute>,
-    children: [
+    children:[
       {
-        path: "about",
-        element: <About />,
+        path:"dashboard",
+        element:<ProtectedRoute><Dashboard/></ProtectedRoute>,
+        children: [
+          {
+            path: "about",
+            element: <About />,
+          },
+        ],
       },
-    ],
+      {
+        path:'/login',
+        element: <Login />
+      }
+    ]
   },
-  {
-    path:'/login',
-    element: <Login />
-  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
