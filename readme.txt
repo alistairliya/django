@@ -11,3 +11,8 @@ setting.py is in this directory.
 
 
 RAFCE to quickly create component.
+
+Routing and Login:
+https://blog.logrocket.com/complete-guide-authentication-with-react-router-v6/
+https://codesandbox.io/s/react-router-v6-auth-demo-4jzltb
+

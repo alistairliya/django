@@ -12,7 +12,7 @@ function App() {
 
 
   const [businesses, setBusinesses] = useState(
-    [
+    [/*
       {
         "id": 1,
         "business_type": "http://127.0.0.1:8000/api/businesstype/1/",
@@ -40,7 +40,7 @@ function App() {
         "created_date": "2022-12-12T15:52:00Z",
         "modified_date": "2022-12-12T15:52:00Z",
         "highlighted": false
-      }
+      }*/
     ]
   )
 
