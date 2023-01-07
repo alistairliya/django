@@ -5,6 +5,7 @@ import App from './App';
 import Error from './components/Error';
 import About from './components/About';
 import Login from './components/Login';
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
@@ -14,7 +15,7 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <ProtectedRoute><App /></ProtectedRoute>,
     errorElement: <Error />,
     children: [
       {
