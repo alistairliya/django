@@ -6,6 +6,7 @@ import Error from './components/Error';
 import About from './components/About';
 import Login from './components/Login';
 import { HomeLayout } from './components/HomeLayout';
+import {ProtectedLayout} from './components/ProtectedLayout';
 import Dashboard  from './pages/Dashboard';
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import reportWebVitals from './reportWebVitals';
@@ -22,16 +23,6 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children:[
       {
-        path:"dashboard",
-        element:<ProtectedRoute><Dashboard/></ProtectedRoute>,
-        children: [
-          {
-            path: "about",
-            element: <About />,
-          },
-        ],
-      },
-      {
         path:'/',
         element:<HomeLayout />,
         children: [
@@ -40,7 +31,22 @@ const router = createBrowserRouter([
             element: <Login />
           },
         ]
-
+      },
+      {
+        path:"dashboard",
+        element:<ProtectedRoute><ProtectedLayout/></ProtectedRoute>,
+        children:[
+          {
+            path:'',
+            element:<Dashboard/>,
+            children:[
+              {
+                path:"about",
+                element:<About/>
+              }
+            ]
+          }
+        ]
       }
     ]
   },
