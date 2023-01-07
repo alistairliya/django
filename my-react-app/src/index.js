@@ -4,10 +4,11 @@ import './index.css';
 import App from './App';
 import Error from './components/Error';
 import About from './components/About';
-import Login from './components/Login';
+//import Login from './components/Login';
 import { HomeLayout } from './components/HomeLayout';
 import {ProtectedLayout} from './components/ProtectedLayout';
 import Dashboard  from './pages/Dashboard';
+import {LoginPage} from './pages/LoginPage';
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from "./hooks/useAuth";
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
         children: [
           {
             path:'login',
-            element: <Login />
+            element: <LoginPage />
           },
         ]
       },

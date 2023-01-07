@@ -4,7 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 //import { AppBar } from "./AppBar";
 
 export const ProtectedLayout = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const outlet = useOutlet();
 
   if (!user) {
