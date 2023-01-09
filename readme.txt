@@ -18,4 +18,8 @@ https://codesandbox.io/s/react-router-v6-auth-demo-4jzltb
 
 Local Dev Env:
 http://127.0.0.1:8000/api/
-http://localhost:3000/dashboard
+http://localhost:3000/dashboar
+
+authentication:
+https://simpleisbetterthancomplex.com/tutorial/2018/11/22/how-to-implement-token-authentication-using-django-rest-framework.html
+https://testdriven.io/blog/django-spa-auth/
