@@ -23,3 +23,21 @@ http://localhost:3000/dashboar
 authentication:
 https://simpleisbetterthancomplex.com/tutorial/2018/11/22/how-to-implement-token-authentication-using-django-rest-framework.html
 https://testdriven.io/blog/django-spa-auth/
+https://medium.com/swlh/django-rest-framework-and-spa-session-authentication-with-docker-and-nginx-aa64871f29cd
+
+Token Authentication Example:
+(insure) mytutorial $ http POST http://localhost:8000/api-token-auth/ username='test' password='test123!'
+HTTP/1.1 200 OK
+Allow: POST, OPTIONS
+Content-Length: 52
+Content-Type: application/json
+Date: Mon, 09 Jan 2023 22:08:00 GMT
+Referrer-Policy: same-origin
+Server: WSGIServer/0.2 CPython/3.10.6
+Vary: Origin, Cookie
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+
+{
+    "token": "4df7736e1fc8ca1ecec9a0d6954500bf1a5ec2de"
+}
