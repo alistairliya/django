@@ -41,3 +41,5 @@ X-Frame-Options: DENY
 {
     "token": "4df7736e1fc8ca1ecec9a0d6954500bf1a5ec2de"
 }
+curl -X GET http://127.0.0.1:8000/api/mybusiness/ -H 'Authorization: Token 4df7736e1fc8ca1ecec9a0d6954500bf1a5ec2de'
+[{"id":3,"business_type":"http://127.0.0.1:8000/api/businesstype/1/","product":"http://127.0.0.1:8000/api/product/1/","client":"http://127.0.0.1:8000/api/clients/1/","status":"http://127.0.0.1:8000/api/businessstatus/1/","projected_FYC":1.0,"application_date":"2022-12-17","application_location":"Kaohsiung","created_by":"test","created_date":"2022-12-17T13:33:00Z","modified_date":"2022-12-17T13:33:00Z","highlighted":false}]

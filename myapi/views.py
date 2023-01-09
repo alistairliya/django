@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from myapi.permissions import IsOwnerOrReadOnly, IsOwnerOrCreator
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication, BasicAuthentication
 
 # Create your views here.
 class MyBusinessView(viewsets.ModelViewSet):
@@ -21,7 +21,7 @@ class MyBusinessView(viewsets.ModelViewSet):
     serializer_class = MyBusinessSerializer
     #permission_classes = [permissions.IsAuthenticatedOrReadOnly,
     #                  IsOwnerOrReadOnly]
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrCreator]
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
