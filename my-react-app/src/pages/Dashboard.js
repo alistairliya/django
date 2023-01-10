@@ -58,7 +58,7 @@ function Dashboard() {
     const auth_str = 'Basic '+btoa('test:test123!') 
     console.log(auth_str)
     headers.set('Authorization', auth_str)
-    const res = await fetch('http://127.0.0.1:8000/api/mybusiness/',{headers:headers})
+    const res = await fetch('http://localhost:8000/api/mybusiness/',{headers:headers})
     const data = await res.json()
     console.log(data)
     return data

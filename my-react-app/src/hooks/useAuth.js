@@ -10,6 +10,17 @@ export const AuthProvider = ({ children }) => {
   // call this function when you want to authenticate the user
   const login = async (data) => {
     console.log(data)
+    // With User ID andd PW, get the token
+    const token = await fetch('http://localhost:8000/api-token-auth',{
+        method:'POST',
+        body:{
+            username:'test',
+            password:'test123!'
+        }
+    })
+    console.log(token)
+    // If success, store the token and navigate to sashboard.
+    // Otherwise display login error.
     setUser(data);
     navigate("/dashboard");
   };
