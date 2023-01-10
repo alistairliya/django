@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (data) => {
     console.log(data)
     // With User ID andd PW, get the token
-    const token = await fetch('http://localhost:8000/api-token-auth',{
+    const token = await fetch('http://localhost:8000/api-token-auth/',{
         method:'POST',
         body:{
             username:'test',

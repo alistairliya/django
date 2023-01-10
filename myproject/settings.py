@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+CORS_ORIGIN_ALLOW_ALL=True # FOR REST API
 INSTALLED_APPS = [
     'mybusiness', # To Replacing 'business'
 #    'business', # Replaced by mybusinesss
