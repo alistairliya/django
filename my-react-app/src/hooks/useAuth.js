@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import { useLocalStorage } from "./useLocalStorage";
 const AuthContext = createContext();
 
@@ -11,17 +11,19 @@ export const AuthProvider = ({ children }) => {
   const login = async (data) => {
     console.log(data)
     // With User ID andd PW, get the token
-    const token = await fetch('http://localhost:8000/api-token-auth/',{
+    let formData = new FormData();
+    formData.append('username', data['email']);
+    formData.append('password', data['password']);
+    const res = await fetch('http://localhost:8000/api-token-auth/',{
         method:'POST',
-        body:{
-            username:'test',
-            password:'test123!'
-        }
+        body:formData
     })
-    console.log(token)
-    // If success, store the token and navigate to sashboard.
+    const result = await res.json()
+    const token = result['token']
+    console.log("token: " + token)
+    console.log("post result: "+ JSON.stringify(result) ) // If success, store the token and navigate to sashboard.
     // Otherwise display login error.
-    setUser(data);
+    setUser(result);
     navigate("/dashboard");
   };
 
