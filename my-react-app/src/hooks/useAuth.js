@@ -27,7 +27,9 @@ export const AuthProvider = ({ children }) => {
     if(res.status === 200){
         setUser(result);
         console.log('SUCCESS LOGGED IN');
-        navigate("/dashboard");
+        //navigate("/dashboard");
+        // Don't need above. ProtectedLayout and HomeLayout will
+        //  eventually route based on if user is set.
 }   else{
         console.log('FAILED LOGGED IN')
     }
