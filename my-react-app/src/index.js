@@ -34,11 +34,11 @@ const router = createBrowserRouter([
         ]
       },
       {
-        path:"dashboard",
+        path:"me",
         element:<ProtectedRoute><ProtectedLayout/></ProtectedRoute>,
         children:[
           {
-            path:'',
+            path:'dashboard',
             element:<Dashboard/>,
             children:[
               {
