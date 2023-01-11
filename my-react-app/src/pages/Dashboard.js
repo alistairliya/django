@@ -6,9 +6,10 @@ import Footer from '../components/Footer'
 import Businesses from '../components/Businesses'
 import NewBusiness from '../components/NewBusiness' 
 import About from '../components/About' 
-
+import { useAuth } from "../hooks/useAuth";
 function Dashboard() {
 
+    const { user } = useAuth();
   const [showAddBusiness, setShowAddBusiness] = useState(false)
 
 
@@ -55,7 +56,11 @@ function Dashboard() {
 
   const fetchBusiness = async()=>{
     let headers = new Headers()
-    const auth_str = 'Basic '+btoa('test:test123!') 
+    const token = user['token']
+    console.log('About to fetch with token '+token)
+    //const auth_str = 'Basic '+btoa('test:test123!') 
+    
+    const auth_str = 'Token '+token 
     console.log(auth_str)
     headers.set('Authorization', auth_str)
     const res = await fetch('http://localhost:8000/api/mybusiness/',{headers:headers})
