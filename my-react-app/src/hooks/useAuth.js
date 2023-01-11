@@ -18,13 +18,19 @@ export const AuthProvider = ({ children }) => {
         method:'POST',
         body:formData
     })
+    console.log(res.status) 
     const result = await res.json()
     const token = result['token']
     console.log("token: " + token)
     console.log("post result: "+ JSON.stringify(result) ) // If success, store the token and navigate to sashboard.
     // Otherwise display login error.
-    setUser(result);
-    navigate("/dashboard");
+    if(res.status === 200){
+        setUser(result);
+        console.log('SUCCESS LOGGED IN');
+        navigate("/dashboard");
+}   else{
+        console.log('FAILED LOGGED IN')
+    }
   };
 
   // call this function to sign out logged in user
