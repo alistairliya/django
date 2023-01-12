@@ -10,8 +10,14 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+
+table {
+  /*width: 80%*/
+}
+
+
 .container {
-  max-width: 500px;
+  max-width: 900px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
@@ -62,7 +68,12 @@ body {
 }
 
 .business.highlighted {
-  border-left: 5px solid green;
+  /*border-left: 5px solid green; */
+  background: yellow;
+}
+
+.business.header{
+  background: grey
 }
 
 .business h3 {
