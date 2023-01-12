@@ -5,13 +5,14 @@ import App from './App';
 import Error from './components/Error';
 import About from './components/About';
 //import Login from './components/Login';
-import { HomeLayout } from './components/HomeLayout';
+import {HomeLayout} from './components/HomeLayout';
 import {ProtectedLayout} from './components/ProtectedLayout';
 import Dashboard  from './pages/Dashboard';
 import {LoginPage} from './pages/LoginPage';
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from "./hooks/useAuth";
+import MyBusinesses from './pages/MyBusinesses'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -40,6 +41,16 @@ const router = createBrowserRouter([
           {
             path:'dashboard',
             element:<Dashboard/>,
+            children:[
+              {
+                path:"about",
+                element:<About/>
+              }
+            ]
+          },
+          {
+            path:'businesses',
+            element:<MyBusinesses/>,
             children:[
               {
                 path:"about",
