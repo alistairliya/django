@@ -10,6 +10,7 @@ const Businesses = ({businesses, onEdit, onToggle}) => {
         <td>Application Date</td>
         <td>Settled Date</td>
         <td>Trans ID</td>
+        <td></td>
      </tr>
      </tbody>
       {businesses.map((business)=>(

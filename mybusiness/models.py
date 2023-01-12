@@ -124,6 +124,7 @@ class MyBusiness(models.Model):
     status = models.ForeignKey(BusinessStatus, on_delete=models.PROTECT, related_name="mybusinesses")
     projected_FYC = models.FloatField(null=True)
     application_date = models.DateField(null=True)
+    settled_date = models.DateField(null=True)
     application_location = models.CharField(max_length=64, null=True)
     # Owner Datetime
     # The related name in created_by, my_businesses, corresponds to the my_businesses field in UserSerializer

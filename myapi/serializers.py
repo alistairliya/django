@@ -16,7 +16,7 @@ class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     created_by = serializers.ReadOnlyField(source='created_by.username')
     class Meta:
         model = MyBusiness 
-        fields = ['id','business_type','product','client','status','projected_FYC','application_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted'] 
+        fields = ['id','business_type','product','client','status','projected_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted'] 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     # corresponds to related_name in MyUser model.

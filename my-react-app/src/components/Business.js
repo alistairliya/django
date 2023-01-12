@@ -22,7 +22,8 @@ const Business = ({business, onEdit, onToggle}) => {
         <td>
             {business.application_date}
         </td>
-        <td>{business.product}</td>
+        <td>{business.settled_date}</td>
+        <td>{business.id}</td>
         <td><AiFillTool style={{color:'red', cursor:'pointer'}} onClick={()=>onEdit(business.id)}/></td>       
   </tr>
   </tbody>
