@@ -108,9 +108,6 @@ function MyBusinesses() {
       ):( 
         'No business to show'
       )}
-      <div id="about">
-        <Outlet />
-      </div>
       <Footer />
     </div>
   );
