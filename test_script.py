@@ -20,3 +20,6 @@ c.save()
 
 bur = BusinessUserRole(user_role_name = 'owner', description='a user who is responsible for the business', default_split=100)
 bur.save()
+
+plan = InsurancePlan(insurance_plan_name ='Par Whole Life', insurance_plan_code = 'par001', description = 'this is a test plan')
+plan.save()
