@@ -20,7 +20,7 @@ const Business = ({business, onEdit, onToggle}) => {
     <tbody className={`business ${business.highlighted? 'highlighted':''}`} onDoubleClick={()=>onToggle(business.id)}>
     <tr >
         <td>
-            {business.id}
+            {business.application_date}
         </td>
         <td>{business.product}</td>
         <td><AiFillTool style={{color:'red', cursor:'pointer'}} onClick={()=>onEdit(business.id)}/></td>       

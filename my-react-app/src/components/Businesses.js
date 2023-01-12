@@ -6,7 +6,7 @@ const Businesses = ({businesses, onEdit, onToggle}) => {
   return (
     <table>
       <tbody className='business'>
-      <tr align="center" border="1px solid black">
+      <tr align="center">
         <td>Application Date</td>
         <td>Settled Date</td>
         <td>Trans ID</td>
