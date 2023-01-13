@@ -92,3 +92,8 @@ class BusinessUserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Business_User
         fields = ['business', 'user', 'split', 'user_role', 'notes', 'created_by', 'created_date', 'modified_date']
+
+class InsurancePlanSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = InsurancePlan
+        fields = ['insurance_plan_name','insurance_plan_code', 'description']
