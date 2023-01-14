@@ -39,6 +39,7 @@ router.register(r'businessstatus', views.BusinessStatusViewSet)
 router.register(r'businessuserrole', views.BusinessUserRoleViewSet)
 router.register(r'businessuser', views.BusinessUserViewSet)
 router.register(r'insuranceplan', views.InsurancePlanViewSet)
+router.register(r'insuranceprovider', views.InsuranceProviderViewSet)
 urlpatterns = [
     path('', include("users.urls")),
     path('admin/', admin.site.urls ),
