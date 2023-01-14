@@ -41,6 +41,7 @@ router.register(r'businessuser', views.BusinessUserViewSet)
 router.register(r'insuranceplan', views.InsurancePlanViewSet)
 router.register(r'insuranceprovider', views.InsuranceProviderViewSet)
 router.register(r'insuranceplantype', views.InsurancePlanTypeViewSet)
+router.register(r'insuranceapplication', views.InsuranceApplicationViewSet)
 urlpatterns = [
     path('', include("users.urls")),
     path('admin/', admin.site.urls ),

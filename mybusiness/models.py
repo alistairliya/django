@@ -205,7 +205,7 @@ class InsurancePlan(models.Model):
 
 # Checked
 class InsuranceApplication(models.Model):
-    businesss = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, related_name="insurance_application") #1-2-1 relationship
+    business = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, related_name="insurance_application") #1-2-1 relationship
     product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name = "insurance_applications")
     provider = models.ForeignKey(InsuranceProvider, on_delete=models.PROTECT, related_name="insurance_applications")
     plan_type = models.ForeignKey(InsurancePlanType, on_delete=models.PROTECT, related_name="insurance_applications")
