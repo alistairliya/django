@@ -23,3 +23,6 @@ bur.save()
 
 plan = InsurancePlan(insurance_plan_name ='Par Whole Life', insurance_plan_code = 'par001', description = 'this is a test plan')
 plan.save()
+
+insuranceprovider = InsuranceProvider(insurance_provider_name='Canada Life',description='Test Provider')
+insuranceprovider.save()
