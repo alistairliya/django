@@ -232,7 +232,14 @@ class ActivityLog(models.Model):
     value = models.CharField(max_length=1024, null=True)
     notes = models.CharField(max_length=1024, null=True)
 
-
-
+class BusinessInsurance(models.Model):
+    business = models.ForeignKey(MyBusiness, on_delete=models.PROTECT, related_name="business_insurance")
+    insurance_plan = models.ForeignKey(InsurancePlan, on_delete=models.PROTECT, related_name="business_insurance")
+    insurance_application = models.ForeignKey(InsuranceApplication, on_delete=models.PROTECT, related_name="business_insurance")
+    policy_number = models.CharField(max_length=64)
+    notes = models.CharField(max_length=1024, null=True)
+    created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="created_businessinsurance")
+    created_date = models.DateTimeField()
+    modified_date = models.DateTimeField()
 
 
