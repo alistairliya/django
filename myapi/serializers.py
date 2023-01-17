@@ -15,9 +15,12 @@ from mybusiness.models import *
 class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     # Need to display policy number from related BusinessInsurance if available.
     created_by = serializers.ReadOnlyField(source='created_by.username')
+    business_insurance = serializers.PrimaryKeyRelatedField(many=True, queryset=BusinessInsurance.objects.all())
+    #policy_number = business_insurance.policy_number
+
     class Meta:
         model = MyBusiness 
-        fields = ['id','business_type','product','client','status','projected_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted'] 
+        fields = ['id','business_type','product','client','status','projected_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance'] 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     # corresponds to related_name in MyUser model.
