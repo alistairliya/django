@@ -13,6 +13,7 @@ from mybusiness.models import *
 # https://stackoverflow.com/questions/60500597/what-is-the-purpose-of-the-class-meta-in-django
 
 class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
+    # Need to display policy number from related BusinessInsurance if available.
     created_by = serializers.ReadOnlyField(source='created_by.username')
     class Meta:
         model = MyBusiness 
@@ -114,3 +115,7 @@ class InsuranceApplicationSerializer(serializers.HyperlinkedModelSerializer):
         model = InsuranceApplication
         fields = ['business','product','provider','plan_type','plan','face_amount','planned_premium']
 
+class BusinessInsuranceSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = BusinessInsurance
+        fields = ['business','insurance_plan','insurance_application', 'policy_number', 'notes','created_by','created_date','modified_date']
