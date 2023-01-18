@@ -123,7 +123,7 @@ class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     #business_insurance = serializers.HyperlinkedRelatedField(view_name = 'businessinsurance-detail', many=True, read_only=True )
     # For some reason, setting many=False below gives error
     business_insurance = BusinessInsuranceSerializer(many=True, read_only=True)    #policy_number = business_insurance.policy_number
-
+    status = BusinessStatusSerializer(read_only=True)
     class Meta:
         model = MyBusiness 
         fields = ['id','business_type','product','client','status','projected_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance'] 
