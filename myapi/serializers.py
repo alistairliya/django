@@ -12,16 +12,6 @@ from mybusiness.models import *
 # https://www.youtube.com/watch?v=NAQEj-c2CI8
 # https://stackoverflow.com/questions/60500597/what-is-the-purpose-of-the-class-meta-in-django
 
-class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
-    # Need to display policy number from related BusinessInsurance if available.
-    created_by = serializers.ReadOnlyField(source='created_by.username')
-    #business_insurance = serializers.PrimaryKeyRelatedField(many=True, queryset=BusinessInsurance.objects.all())
-    business_insurance = serializers.HyperlinkedRelatedField(view_name = 'businessinsurance-detail', many=True, read_only=True )
-    #policy_number = business_insurance.policy_number
-
-    class Meta:
-        model = MyBusiness 
-        fields = ['id','business_type','product','client','status','projected_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance'] 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     # corresponds to related_name in MyUser model.
@@ -125,3 +115,15 @@ class BusinessInsuranceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = BusinessInsurance
         fields = ['business','insurance_plan','insurance_application', 'policy_number', 'notes','created_by','created_date','modified_date']
+
+class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
+    # Need to display policy number from related BusinessInsurance if available.
+    created_by = serializers.ReadOnlyField(source='created_by.username')
+    #business_insurance = serializers.PrimaryKeyRelatedField(many=True, queryset=BusinessInsurance.objects.all())
+    #business_insurance = serializers.HyperlinkedRelatedField(view_name = 'businessinsurance-detail', many=True, read_only=True )
+    # For some reason, setting many=False below gives error
+    business_insurance = BusinessInsuranceSerializer(many=True, read_only=True)    #policy_number = business_insurance.policy_number
+
+    class Meta:
+        model = MyBusiness 
+        fields = ['id','business_type','product','client','status','projected_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance'] 
