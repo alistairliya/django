@@ -107,11 +107,13 @@ class InsurancePlaneTypeSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['insurnace_plan_type_name','insurance_plan_type_code', 'description']
 
 class InsuranceApplicationSerializer(serializers.HyperlinkedModelSerializer):
+    provider = InsuranceProviderSerializer()
     class Meta:
         model = InsuranceApplication
         fields = ['business','product','provider','plan_type','plan','face_amount','planned_premium']
 
 class BusinessInsuranceSerializer(serializers.HyperlinkedModelSerializer):
+    insurance_application = InsuranceApplicationSerializer()
     class Meta:
         model = BusinessInsurance
         fields = ['business','insurance_plan','insurance_application', 'policy_number', 'notes','created_by','created_date','modified_date']
@@ -123,7 +125,7 @@ class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     #business_insurance = serializers.HyperlinkedRelatedField(view_name = 'businessinsurance-detail', many=True, read_only=True )
     # For some reason, setting many=False below gives error
     business_insurance = BusinessInsuranceSerializer(many=True, read_only=True)    #policy_number = business_insurance.policy_number
-    status = BusinessStatusSerializer(read_only=True)
+    status = BusinessStatusSerializer()
     class Meta:
         model = MyBusiness 
         fields = ['id','business_type','product','client','status','projected_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance'] 
