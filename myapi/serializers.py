@@ -21,8 +21,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     my_businesses = serializers.HyperlinkedRelatedField(view_name='business_user-detail',read_only=True, many=True)
     class Meta:
         model = MyUser
-        fields = ['url', 'username', 'email', 'groups','created_businesses','my_businesses']
-
+        fields = ['first_name','last_name','url', 'username', 'email', 'groups','created_businesses','my_businesses']
+        #fields = '__all__'
 # >>> print(repr(serializer))
 # ClientSerializer():
 #     id = IntegerField(label='ID', read_only=True)
@@ -64,16 +64,18 @@ class BusinessTypeSerializer(serializers.ModelSerializer):
         model = BusinessType
         fields = ['id','business_type_name', 'description']
     
-class ProductSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Product
-        fields = ['id','product_name','product_type', 'description']
 
 
 class ProductTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductType
         fields = ['id', 'product_type_name', 'description']
+
+class ProductSerializer(serializers.HyperlinkedModelSerializer):
+    product_type = ProductTypeSerializer()
+    class Meta:
+        model = Product
+        fields = ['id','product_name','product_type', 'description']
 
 class BusinessStatusSerializer(serializers.ModelSerializer):
     class Meta:
@@ -86,6 +88,8 @@ class BusinessUserRoleSerializer(serializers.ModelSerializer):
         fields = ['id', 'user_role_name', 'description']
 
 class BusinessUserSerializer(serializers.HyperlinkedModelSerializer):
+    user = UserSerializer()
+    user_role = BusinessUserRoleSerializer()
     class Meta:
         model = Business_User
         fields = ['business', 'user', 'split', 'user_role', 'notes', 'created_by', 'created_date', 'modified_date']
@@ -120,13 +124,17 @@ class BusinessInsuranceSerializer(serializers.HyperlinkedModelSerializer):
 
 class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     # Need to display policy number from related BusinessInsurance if available.
-    created_by = serializers.ReadOnlyField(source='created_by.username')
+    #created_by = serializers.ReadOnlyField(source='created_by.username')
+    created_by = UserSerializer()
     #business_insurance = serializers.PrimaryKeyRelatedField(many=True, queryset=BusinessInsurance.objects.all())
     #business_insurance = serializers.HyperlinkedRelatedField(view_name = 'businessinsurance-detail', many=True, read_only=True )
     # For some reason, setting many=False below gives error
     business_insurance = BusinessInsuranceSerializer(many=True, read_only=True)    #policy_number = business_insurance.policy_number
     status = BusinessStatusSerializer()
     client = ClientSerializer()
+    related_users = BusinessUserSerializer(many=True) # Advisors
+    business_type = BusinessTypeSerializer()
+    product = ProductSerializer()
     class Meta:
         model = MyBusiness 
-        fields = ['id','business_type','product','client','status','projected_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance'] 
+        fields = ['id','business_type','product','client','status','projected_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance','related_users'] 

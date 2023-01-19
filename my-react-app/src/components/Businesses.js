@@ -14,6 +14,7 @@ const Businesses = ({businesses, onEdit, onToggle}) => {
         <td>Status</td>
         <td>Provider</td>
         <td>Client Name</td>
+        <td>Advisor</td>
         <td></td>
      </tr>
      </tbody>
