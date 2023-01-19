@@ -123,6 +123,7 @@ class MyBusiness(models.Model):
     client = models.ForeignKey(Client, on_delete=models.PROTECT, related_name="businesses")
     status = models.ForeignKey(BusinessStatus, on_delete=models.PROTECT, related_name="mybusinesses")
     projected_FYC = models.FloatField(null=True)
+    settled_FYC = models.FloatField(null=True)
     application_date = models.DateField(null=True)
     settled_date = models.DateField(null=True)
     application_location = models.CharField(max_length=64, null=True)

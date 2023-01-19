@@ -125,16 +125,16 @@ class BusinessInsuranceSerializer(serializers.HyperlinkedModelSerializer):
 class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     # Need to display policy number from related BusinessInsurance if available.
     #created_by = serializers.ReadOnlyField(source='created_by.username')
-    created_by = UserSerializer()
+    created_by = UserSerializer(read_only=True)
     #business_insurance = serializers.PrimaryKeyRelatedField(many=True, queryset=BusinessInsurance.objects.all())
     #business_insurance = serializers.HyperlinkedRelatedField(view_name = 'businessinsurance-detail', many=True, read_only=True )
     # For some reason, setting many=False below gives error
     business_insurance = BusinessInsuranceSerializer(many=True, read_only=True)    #policy_number = business_insurance.policy_number
-    status = BusinessStatusSerializer()
-    client = ClientSerializer()
-    related_users = BusinessUserSerializer(many=True) # Advisors
-    business_type = BusinessTypeSerializer()
-    product = ProductSerializer()
+    status = BusinessStatusSerializer(read_only=True)
+    client = ClientSerializer(read_only=True)
+    related_users = BusinessUserSerializer(many=True, read_only=True) # Advisors
+    business_type = BusinessTypeSerializer(read_only=True)
+    product = ProductSerializer(read_only=True)
     class Meta:
         model = MyBusiness 
-        fields = ['id','business_type','product','client','status','projected_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance','related_users'] 
+        fields = ['id','business_type','product','client','status','projected_FYC','settled_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance','related_users'] 

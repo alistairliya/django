@@ -50,6 +50,7 @@ const Business = ({business, onEdit, onToggle}) => {
         <td>{business.client.first_name} {business.client.last_name}</td>
         <td>{advisor_name}</td>
         <td>{business.projected_FYC}</td>
+        <td>{business.settled_FYC}</td>
         <td><AiFillTool style={{color:'red', cursor:'pointer'}} onClick={()=>onEdit(business.id)}/></td>       
   </tr>
   </tbody>
