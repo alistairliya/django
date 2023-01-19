@@ -49,6 +49,7 @@ const Business = ({business, onEdit, onToggle}) => {
         <td>{business.business_insurance.length>0?business.business_insurance[0]['insurance_application']['provider']['insurance_provider_name']:''}</td>
         <td>{business.client.first_name} {business.client.last_name}</td>
         <td>{advisor_name}</td>
+        <td>{business.projected_FYC}</td>
         <td><AiFillTool style={{color:'red', cursor:'pointer'}} onClick={()=>onEdit(business.id)}/></td>       
   </tr>
   </tbody>
