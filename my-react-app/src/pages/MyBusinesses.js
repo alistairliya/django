@@ -1,7 +1,7 @@
 
 
 import {useState, useEffect} from 'react'
-import Header from '../components/Header'
+import Booga from '../components/Header'
 import Footer from '../components/Footer'
 import Businesses from '../components/Businesses'
 import NewBusiness from '../components/NewBusiness' 
@@ -92,7 +92,7 @@ function MyBusinesses() {
 
   return (
     <div className="container">
-      <Header 
+      <Booga 
         title='My Businesses'
         onAdd={()=>setShowAddBusiness(!showAddBusiness)}
         showAdd = {showAddBusiness}
