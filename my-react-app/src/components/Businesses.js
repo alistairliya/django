@@ -4,6 +4,7 @@ import Business from './Business'
 
 const Businesses = ({businesses, onEdit, onToggle}) => {
   return (
+    <div className="container">
     <table>
       <tbody className='business'>
       <tr align="center">
@@ -24,6 +25,7 @@ const Businesses = ({businesses, onEdit, onToggle}) => {
         <Business key={business.id} business={business} onEdit={onEdit} onToggle={onToggle}/>
       ))}
     </table>
+    </div>
   )
 }
 

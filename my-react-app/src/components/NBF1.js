@@ -1,15 +1,6 @@
-// Modeled AddTask example, 1:03:25
-import NBF1 from './NBF1'
-const NewBusiness = ({onAdd}) => {
-    //const [user, setUser] = useState()
-    return( 
-        <div className="container"><NBF1 /></div>
-    )
-}
-export default NewBusiness
+import { useState } from 'react'
 
-/*
-const NewBusiness = ({onAdd}) => {
+const NBF1 = (onAdd) => {
     const [lastName, setLastName] = useState('')
     const [firstName, setFirstName] = useState('')
     const [address, setAddress] = useState('')
@@ -34,6 +25,7 @@ const NewBusiness = ({onAdd}) => {
 
     return (
     <form className="add-form" onSubmit={onSubmit}>
+        <h2>New Business Form - Client Information</h2>
         <div className="form-control">
             <label>Last Name</label>
             <input type='text' placeholder="Client's Last Name" value={lastName} onChange={(e)=>setLastName(e.target.value)} />
@@ -42,21 +34,9 @@ const NewBusiness = ({onAdd}) => {
             <label>First Name</label>
             <input type='text' placeholder="Client's First Name" value={firstName} onChange={(e)=>setFirstName(e.target.value)} />
         </div>
-        <div className="form-control">
-            <label>Address</label>
-            <input type='text' placeholder="Client's Address" value={address} onChange={(e)=>setAddress(e.target.value)}/>
-        </div>
-        <div className='form-control form-control-check'>
-            <label>Document Submitted</label>
-            <input 
-                type='checkbox'
-                checked={submitted} 
-                value={submitted} 
-                onChange={(e)=>setSumbmitted(e.currentTarget.checked)}
-            />
-        </div>
-        <input type='submit' value='Add Business' className='btn btn-block' />
+        <input type='submit' value='Next' className='btn btn-block' />
     </form>
   )
 }
-*/
+
+export default NBF1
