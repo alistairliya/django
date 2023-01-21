@@ -1,10 +1,8 @@
 import { useState } from 'react'
 
-const NBF1 = (onAdd) => {
+const NBF1 = ({onAdd, setUser, onNextClicked}) => {
     const [lastName, setLastName] = useState('')
     const [firstName, setFirstName] = useState('')
-    const [address, setAddress] = useState('')
-    const [submitted, setSumbmitted] = useState(false)
 
     const onSubmit = (e) =>{
         e.preventDefault() // avoiding submitting to a page.
@@ -13,12 +11,11 @@ const NBF1 = (onAdd) => {
             alert('Please add Last Name')
             return
         }
+        onNextClicked()
 
-        onAdd({lastName, firstName, address, submitted})
-        setLastName('')
-        setFirstName('')
-        setAddress('')
-        setSumbmitted(false)
+        //onAdd({lastName, firstName})
+        //setLastName('')
+        //setFirstName('')
 
 
     }
