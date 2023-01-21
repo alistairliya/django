@@ -1,15 +1,18 @@
 // Modeled AddTask example, 1:03:25
 import NBF1 from './NBF1'
+import NBF2 from './NBF2'
 import {useState} from 'react'
 const NewBusiness = ({onAdd}) => {
     const [user, setUser] = useState()
-    
+    const [index, setIndex] = useState(0)
     const onNextClicked = () => {
-        console.log("Clicked Next")
+        console.log("Clicked Next from index "+index)
+        setIndex(index+1)
     }
 
+    const nbfs = [<NBF1 onNextClicked = {onNextClicked}/>, <NBF2 index={index} onNextClicked = {onNextClicked}/>] 
     return( 
-        <div className="container"><NBF1 onNextClicked = {onNextClicked} onAdd={onAdd} setUser={setUser}/></div>
+        <div className="container">{nbfs[index]}</div>
     )
 }
 export default NewBusiness

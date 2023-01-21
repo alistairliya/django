@@ -1,7 +1,7 @@
 
-const NBF2 = () => {
+const NBF2 = ({onNextClicked, index}) => {
   return (
-    <div>NBF2</div>
+    <div>NBF2... {index}</div>
   )
 }
 
