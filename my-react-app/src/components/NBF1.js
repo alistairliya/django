@@ -7,8 +7,8 @@ const NBF1 = ({onAdd, setUser, onNextClicked}) => {
     const onSubmit = (e) =>{
         e.preventDefault() // avoiding submitting to a page.
         // some validation
-        if(!lastName){
-            alert('Please add Last Name')
+        if(!lastName||!firstName){
+            alert('Please add First Name and Last Name')
             return
         }
         setUser({lastName:lastName})
