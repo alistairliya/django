@@ -58,6 +58,17 @@ class UserViewSet(viewsets.ModelViewSet):
 class ClientViewSet(viewsets.ModelViewSet):
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        queryset = Client.objects.all()
+        client_first_name = self.request.query_params.get('first_name')
+        client_last_name = self.request.query_params.get('last_name')
+        if client_last_name is not None:
+            queryset = queryset.filter(last_name = client_last_name)
+        if client_first_name is not None:
+            queryset = queryset.filter(first_name = client_first_name)
+        return queryset
 
 class GenderViewSet(viewsets.ModelViewSet):
     queryset = Gender.objects.all()

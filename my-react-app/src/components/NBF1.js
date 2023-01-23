@@ -11,7 +11,7 @@ const NBF1 = ({onAdd, setUser, onNextClicked}) => {
             alert('Please add First Name and Last Name')
             return
         }
-        setUser({lastName:lastName})
+        setUser({lastName:lastName, firstName:firstName})
         onNextClicked()
 
         //onAdd({lastName, firstName})
