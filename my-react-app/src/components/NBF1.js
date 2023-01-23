@@ -1,17 +1,17 @@
 import { useState } from 'react'
 
-const NBF1 = ({onAdd, setUser, onNextClicked}) => {
+const NBF1 = ({onAdd, setClient, onNextClicked}) => {
     const [lastName, setLastName] = useState('')
     const [firstName, setFirstName] = useState('')
 
     const onSubmit = (e) =>{
         e.preventDefault() // avoiding submitting to a page.
         // some validation
-        if(!lastName||!firstName){
-            alert('Please add First Name and Last Name')
+        if(!lastName){
+            alert('Please add Last Name')
             return
         }
-        setUser({lastName:lastName, firstName:firstName})
+        setClient({lastName:lastName, firstName:firstName})
         onNextClicked()
 
         //onAdd({lastName, firstName})
