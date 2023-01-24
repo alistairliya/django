@@ -1,4 +1,4 @@
-
+import Clients from './Clients'
 
 import {useState, useEffect} from 'react'
 
@@ -45,7 +45,10 @@ const NBF2 = ({client,onNextClicked, index}) => {
 
 
   return (
-    <div>NBF2...{client.lastName} {client.firstName} ABC</div>
+    <div>
+    {clients.length > 0?(<Clients clients={clients}/>):('')}
+    NBF2...{client.lastName} {client.firstName} ABC
+    </div>
   )
 }
 
