@@ -1,17 +1,19 @@
 
 
-import {useEffect} from 'react'
+import {useState, useEffect} from 'react'
 
 import { useAuth } from "../hooks/useAuth"
 const NBF2 = ({client,onNextClicked, index}) => {
+    const [clients, setClients] = useState([])
 
     const { user } = useAuth()
     useEffect(()=>{
         console.log('Use Effect called')
         const getClients = async() =>{
             console.log(client)
-            const clients = await fetchClient(client.firstName, client.lastName)
-            console.log(clients)
+            const possibleClients = await fetchClient(client.firstName, client.lastName)
+            console.log(possibleClients)
+            setClients(possibleClients)
         }
         getClients()
     },[])
