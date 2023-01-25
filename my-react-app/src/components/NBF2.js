@@ -1,10 +1,11 @@
 import Clients from './Clients'
 
 import {useState, useEffect} from 'react'
-
+import Button from "@mui/material/Button"
 import { useAuth } from "../hooks/useAuth"
 const NBF2 = ({client,onNextClicked, index}) => {
     const [clients, setClients] = useState([])
+    const [nextButtonEnabled, setNextButtonEnabled] = useState(true)
 
     const { user } = useAuth()
     useEffect(()=>{
@@ -46,7 +47,8 @@ const NBF2 = ({client,onNextClicked, index}) => {
 
   return (
     <div>
-    {clients.length > 0?(<Clients clients={clients}/>):('')}
+    {clients.length > 0?(<div><Clients clients={clients}/>
+    <Button disabled={nextButtonEnabled}>Use selected client</Button></div>):('')}
     NBF2...{client.lastName} {client.firstName} ABC
     </div>
   )
