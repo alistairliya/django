@@ -18,7 +18,7 @@ const NewClient = ({client, onNextClicked, setClient, disabled}) => {
 
   const onSubmit = (e) =>{
       e.preventDefault() // avoiding submitting to a page.
-      setClient({lastName:lastName, firstName:firstName, middleName:middleName, sin:sin, birthDate:birthDate})
+      setClient({last_name:lastName, first_name:firstName, middle_name:middleName, sin:sin, birthdate:birthDate})
       onNextClicked()
 
       //onAdd({lastName, firstName})
