@@ -46,9 +46,10 @@ const NBF2 = ({client,onNextClicked, index}) => {
 
   return (
     <div>
+        <h2>New Business Form - Client Information</h2>
     {
       clients.length > 0?
-        (<Clients clients={clients}/>):
+        (<Clients clients={clients} client={client}/>):
         (<NewClient disabled={false} client={client}></NewClient>)
     }
     </div>

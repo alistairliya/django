@@ -1,11 +1,13 @@
 import {useState} from 'react'
+import Select from 'react-select' // https://react-select.com/home
 
 const NewClient = ({client, onNextClicked, setClient, disabled}) => {
 
   const [lastName, setLastName] = useState(client.lastName)
   const [firstName, setFirstName] = useState(client.firstName)
   const [middleName, setMiddleName] = useState('')
-  const [birthDate, setBirthDate] = useState('')
+  const [birthDate, setBirthDate] = useState("2000-01-01")
+  const [sin, setSin] = useState('')
 
 
 
@@ -22,7 +24,6 @@ const NewClient = ({client, onNextClicked, setClient, disabled}) => {
 
   return (
     <form className="add-form" onSubmit={onSubmit}>
-        <h2>New Business Form - Client Information</h2>
         <div className="form-control">
             <label>Last Name</label>
             <input type='text' placeholder="Client's Last Name" value={lastName} onChange={(e)=>setLastName(e.target.value)} />
@@ -38,6 +39,14 @@ const NewClient = ({client, onNextClicked, setClient, disabled}) => {
         <div className="form-control">
             <label>Birth Date</label>
             <input type='date'  value={birthDate} onChange={(e)=>setBirthDate(e.target.value)} />
+        </div>
+        <div className="form-control">
+            <label>Social Insurance Number</label>
+            <input type='text'  value={sin} onChange={(e)=>setSin(e.target.value)} />
+        </div>
+        <div className="form-control">
+        <label>Gender</label>
+          <Select options={[{value:'M',label:'Male'},{vvalue:'F', label:'Female'}]} />
         </div>
         <input type='submit' value='Next' className='btn btn-block' />
     </form>
