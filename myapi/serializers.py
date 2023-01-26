@@ -157,3 +157,9 @@ class AddressSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Address
         fields = ['id', 'street_address','city','province_state','country','postal_code','address_type','description']
+
+
+class AddressTypeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = AddressType
+        fields = ['id', 'address_type_name', 'description']
