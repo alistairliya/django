@@ -28,7 +28,7 @@ const Clients = ({clients, client, setClient, onNextClicked}) => {
     const handleSelection = (selected)=>{
         console.log('handleSelection')
         console.log(selected)
-        setClientId(selected)
+        setClientId(selected.value)
     }
 
   return (

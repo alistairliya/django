@@ -10,17 +10,14 @@ const NewClient = ({client, onNextClicked, setClient, disabled}) => {
   const [sin, setSin] = useState('')
 
   useEffect(()=>{
-    //console.log('In NewClient.js')
+    console.log('NewClient.js')
+    console.log(client)
     //console.log(onNextClicked)
     //console.log(setClient)
   })
 
   const onSubmit = (e) =>{
       e.preventDefault() // avoiding submitting to a page.
-      //console.log('NewClient.onSubmit')
-      //console.log(firstName)
-      //console.log(onNextClicked)
-      //console.log(setClient)
       setClient({lastName:lastName, firstName:firstName, middleName:middleName, sin:sin, birthDate:birthDate})
       onNextClicked()
 

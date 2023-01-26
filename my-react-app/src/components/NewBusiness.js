@@ -5,11 +5,10 @@ import NBF3 from './NBF3'
 import { useState} from 'react'
 //import { useRadioGroup } from '@mui/material'
 const NewBusiness = ({onAdd}) => {
-    const [client, setClient] = useState({})
+    const [client, setClient] = useState()
     const [index, setIndex] = useState(0)
     const onNextClicked = () => {
         console.log("Clicked Next from index "+index)
-        console.log(client)
         setIndex(index+1)
     }
 
