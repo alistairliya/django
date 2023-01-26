@@ -1,4 +1,5 @@
 import Select from 'react-select' // https://react-select.com/home
+import Button from "@mui/material/Button"
 
 
 const Clients = ({clients}) => {
@@ -12,7 +13,7 @@ const Clients = ({clients}) => {
     )
 
   return (
-    <div><Select options={clientOptions} /></div>
+    <div><Select options={clientOptions} /><Button>Use selected client</Button></div>
   )
 }
 
