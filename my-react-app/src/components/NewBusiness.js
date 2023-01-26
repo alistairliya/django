@@ -8,10 +8,14 @@ const NewBusiness = ({onAdd}) => {
     const [index, setIndex] = useState(0)
     const onNextClicked = () => {
         console.log("Clicked Next from index "+index)
+        console.log(client)
         setIndex(index+1)
     }
 
-    const nbfs = [<NBF1 setClient={setClient} onNextClicked = {onNextClicked}/>, <NBF2 client={client} index={index} onNextClicked = {onNextClicked}/>] 
+    const nbfs = [
+        <NBF1 setClient={setClient} onNextClicked = {onNextClicked}/>, 
+        <NBF2 setClient={setClient} onNextClicked = {onNextClicked} client={client} index={index} />
+    ] 
     return( 
         <div className="container">{nbfs[index]}</div>
     )

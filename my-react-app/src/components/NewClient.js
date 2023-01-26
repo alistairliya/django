@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import Select from 'react-select' // https://react-select.com/home
 
 const NewClient = ({client, onNextClicked, setClient, disabled}) => {
@@ -9,12 +9,19 @@ const NewClient = ({client, onNextClicked, setClient, disabled}) => {
   const [birthDate, setBirthDate] = useState("2000-01-01")
   const [sin, setSin] = useState('')
 
-
+  useEffect(()=>{
+    //console.log('In NewClient.js')
+    //console.log(onNextClicked)
+    //console.log(setClient)
+  })
 
   const onSubmit = (e) =>{
       e.preventDefault() // avoiding submitting to a page.
-      
-      setClient({lastName:lastName, firstName:firstName})
+      //console.log('NewClient.onSubmit')
+      //console.log(firstName)
+      //console.log(onNextClicked)
+      //console.log(setClient)
+      setClient({lastName:lastName, firstName:firstName, middleName:middleName, sin:sin, birthDate:birthDate})
       onNextClicked()
 
       //onAdd({lastName, firstName})

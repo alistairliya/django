@@ -3,12 +3,13 @@ import NewClient from './NewClient'
 
 import {useState, useEffect} from 'react'
 import { useAuth } from "../hooks/useAuth"
-const NBF2 = ({client,onNextClicked, index}) => {
+const NBF2 = ({client,setClient, onNextClicked, index}) => {
     const [clients, setClients] = useState([])
 
     const { user } = useAuth()
     useEffect(()=>{
         console.log('Use Effect called')
+        console.log(onNextClicked)
         const getClients = async() =>{
             console.log(client)
             const possibleClients = await fetchClient(client.firstName, client.lastName)
@@ -50,7 +51,7 @@ const NBF2 = ({client,onNextClicked, index}) => {
     {
       clients.length > 0?
         (<Clients clients={clients} client={client}/>):
-        (<NewClient disabled={false} client={client}></NewClient>)
+        (<NewClient client={client} setClient={setClient} onNextClicked={onNextClicked}></NewClient>)
     }
     </div>
   )
