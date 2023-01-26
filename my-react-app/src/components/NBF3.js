@@ -7,12 +7,12 @@ const NBF3 = ({client}) => {
   useEffect(()=>{
     console.log('NBF3')
     console.log(client)
-    if(client.clientId != null){
-      console.log('Existing client. Look for address')
+    if(client.client_addresses != null && client.client_addresses.length>0){
+      console.log('Existing client with existing addresses')
     }
   })
 
-  
+  //const fetchAddress =  
 
   return (
     // Create new address for new client.
