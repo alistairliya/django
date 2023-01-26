@@ -1,8 +1,8 @@
 import Select from 'react-select' // https://react-select.com/home
 import {useState} from 'react'
-import Button from "@mui/material/Button"
+//import Button from "@mui/material/Button"
 import NewClient from './NewClient'
-
+import Button from './Button'
 
 const Clients = ({clients, client, setClient, onNextClicked}) => {
     
@@ -41,7 +41,7 @@ const Clients = ({clients, client, setClient, onNextClicked}) => {
                 disabled={true}
                 onChange={handleSelection}
             />
-            <Button onClick={buttonClicked} disabled={checked}>Next</Button>
+            <Button text = 'Next' color='steelblue' onClick={buttonClicked} disabled={checked} />
         </div>
         )}
         {checked && <div><NewClient setClient={setClient} onNextClicked={onNextClicked} client={client}></NewClient></div>}
