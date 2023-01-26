@@ -50,6 +50,7 @@ class AddressTypeSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id', 'address_type_name', 'description']
 
 class ClientAddressSerializer(serializers.HyperlinkedModelSerializer):
+    address = AddressSerializer(read_only=True)
     class Meta:
         model = ClientAddress
         fields = ['id', 'address','client', 'description']
@@ -80,9 +81,11 @@ class ClientAddressSerializer(serializers.HyperlinkedModelSerializer):
 # {'id': 1, 'first_name': 'Foo', 'middle_name': 'Dan', 'birthdate': '2022-12-01', 'last_name': 'Bar', 'sin': '', 'gender': 1, 'created_by': 1, 'created_date': '2022-12-01T00:00:00Z', 'modified_date': '2022-12-01T00:00:00Z'}
 # >>> 
 class ClientSerializer(serializers.HyperlinkedModelSerializer):
+    #client_addresses = ClientAddressSerializer(many=True, read_only=True)
+    client_addresses = ClientAddressSerializer(many=True, read_only=True)
     class Meta:
         model = Client
-        fields = ['id', 'first_name', 'middle_name','birthdate', 'last_name','sin','gender','created_by','created_date','modified_date']
+        fields = ['id' ,'first_name', 'middle_name','birthdate', 'last_name','sin','gender','client_addresses','created_by','created_date','modified_date']
 
 class GenderSerializer(serializers.ModelSerializer):
     class Meta:
