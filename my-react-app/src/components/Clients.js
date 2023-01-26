@@ -27,6 +27,7 @@ const Clients = ({clients, client}) => {
             <Button disabled={checked}>Next</Button>
         </div>
         )}
+        {checked && <div><NewClient client={client}></NewClient></div>}
         <div>
             <label>
                 <input 
@@ -36,9 +37,6 @@ const Clients = ({clients, client}) => {
                 />
                 Create new client
             </label>
-        </div>
-        <div>
-            {checked && <NewClient client={client}></NewClient>}
         </div>
     </div>
   )

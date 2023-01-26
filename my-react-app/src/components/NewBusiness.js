@@ -13,7 +13,7 @@ const NewBusiness = ({onAdd}) => {
 
     const nbfs = [<NBF1 setClient={setClient} onNextClicked = {onNextClicked}/>, <NBF2 client={client} index={index} onNextClicked = {onNextClicked}/>] 
     return( 
-        <div className="container"><h1>New Business </h1>{nbfs[index]}</div>
+        <div className="container">{nbfs[index]}</div>
     )
 }
 export default NewBusiness
