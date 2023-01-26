@@ -4,9 +4,10 @@ import Button from "@mui/material/Button"
 import NewClient from './NewClient'
 
 
-const Clients = ({clients, client}) => {
+const Clients = ({clients, client, setClient, onNextClicked}) => {
     
     const [checked, setChecked] = useState(false)
+    const [clientId, setClientId] = useState()
 
     const clientOptions = clients.map(
         (client)=>({
@@ -18,16 +19,32 @@ const Clients = ({clients, client}) => {
     const handleChange = ()=>{
         setChecked(!checked)
     }
+    const buttonClicked = ()=>{
+        console.log(clientId)
+        
+        setClient({clientId:clientId})
+        onNextClicked()
+    }
+    const handleSelection = (selected)=>{
+        console.log('handleSelection')
+        console.log(selected)
+        setClientId(selected)
+    }
+
   return (
     <div>
         {!checked && (
         <div>
             <label>Select from existing clients:</label>
-            <Select options={clientOptions} disabled={true}/>
-            <Button disabled={checked}>Next</Button>
+            <Select 
+                options={clientOptions} 
+                disabled={true}
+                onChange={handleSelection}
+            />
+            <Button onClick={buttonClicked} disabled={checked}>Next</Button>
         </div>
         )}
-        {checked && <div><NewClient client={client}></NewClient></div>}
+        {checked && <div><NewClient setClient={setClient} onNextClicked={onNextClicked} client={client}></NewClient></div>}
         <div>
             <label>
                 <input 

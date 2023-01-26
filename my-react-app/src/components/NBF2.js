@@ -8,8 +8,8 @@ const NBF2 = ({client,setClient, onNextClicked, index}) => {
 
     const { user } = useAuth()
     useEffect(()=>{
-        console.log('Use Effect called')
-        console.log(onNextClicked)
+        console.log('NBF2')
+        console.log(client)
         const getClients = async() =>{
             console.log(client)
             const possibleClients = await fetchClient(client.firstName, client.lastName)
@@ -50,7 +50,7 @@ const NBF2 = ({client,setClient, onNextClicked, index}) => {
         <h2>New Business Form - Client Information</h2>
     {
       clients.length > 0?
-        (<Clients clients={clients} client={client}/>):
+        (<Clients clients={clients} client={client} setClient={setClient} onNextClicked={onNextClicked}/>):
         (<NewClient client={client} setClient={setClient} onNextClicked={onNextClicked}></NewClient>)
     }
     </div>

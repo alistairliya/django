@@ -1,10 +1,11 @@
 // Modeled AddTask example, 1:03:25
 import NBF1 from './NBF1'
 import NBF2 from './NBF2'
+import NBF3 from './NBF3'
 import { useState} from 'react'
 //import { useRadioGroup } from '@mui/material'
 const NewBusiness = ({onAdd}) => {
-    const [client, setClient] = useState()
+    const [client, setClient] = useState({})
     const [index, setIndex] = useState(0)
     const onNextClicked = () => {
         console.log("Clicked Next from index "+index)
@@ -14,7 +15,8 @@ const NewBusiness = ({onAdd}) => {
 
     const nbfs = [
         <NBF1 setClient={setClient} onNextClicked = {onNextClicked}/>, 
-        <NBF2 setClient={setClient} onNextClicked = {onNextClicked} client={client} index={index} />
+        <NBF2 setClient={setClient} onNextClicked = {onNextClicked} client={client} index={index} />,
+        <NBF3 client={client} />
     ] 
     return( 
         <div className="container">{nbfs[index]}</div>
