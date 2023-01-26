@@ -138,3 +138,22 @@ class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = MyBusiness 
         fields = ['id','business_type','product','client','status','projected_FYC','settled_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance','related_users'] 
+
+class ProvinceStateSerializer(serializers.HyperlinkedModelSerializer):
+    #country = CountrySerializer(read_only=True)
+    class Meta:
+        model = ProvinceState
+        fields = ['province_state_name', 'province_state_code', 'country']
+
+class CountrySerializer(serializers.HyperlinkedModelSerializer):
+    # provinces_states has to be a related_name in the ProvinceState model's country foreingn key field.
+    provinces_states = ProvinceStateSerializer(many=True, read_only=True)
+    #provinces_states = serializers.StringRelatedField(many=True, read_only=True)
+    class Meta:
+        model = Country
+        fields = ['country_name', 'country_code','provinces_states']
+
+class AddressSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Address
+        fields = ['id', 'street_address','city','province_state','country','postal_code','address_type','description']

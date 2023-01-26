@@ -57,12 +57,18 @@ class AddressType(models.Model):
 # checked
 class Address(models.Model):
     #client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    stree_address = models.CharField(max_length=1024)
+    street_address = models.CharField(max_length=1024)
     city = models.CharField(max_length=64)
     province_state = models.ForeignKey(ProvinceState, on_delete=models.PROTECT, related_name="addresses")
     country = models.ForeignKey(Country, on_delete=models.PROTECT, related_name="addressess")
     postal_code = models.CharField(max_length=64)
     address_type = models.ForeignKey(AddressType, on_delete=models.PROTECT, related_name="addresses")
+    description = models.CharField(max_length=1024, null=True)
+
+class ClientAddress(models.Model):
+    address = models.ForeignKey(Address, on_delete=models.PROTECT)
+    client = models.ForeignKey(Client, on_delete=models.DO_NOTHING)
+    description = models.CharField(max_length=1024, null=True)
 
 # checked
 class PhoneType(models.Model):

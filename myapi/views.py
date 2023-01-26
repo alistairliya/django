@@ -118,3 +118,15 @@ class BusinessInsuranceViewSet(viewsets.ModelViewSet):
     queryset = BusinessInsurance.objects.all()
     serializer_class = BusinessInsuranceSerializer
 
+class CountryViewSet(viewsets.ModelViewSet):
+    queryset = Country.objects.all()
+    serializer_class = CountrySerializer
+
+class ProvinceStateViewSet(viewsets.ModelViewSet):
+    queryset = ProvinceState.objects.all()
+    serializer_class = ProvinceStateSerializer
+
+class AddressViewSet(viewsets.ModelViewSet):
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer
+
