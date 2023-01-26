@@ -56,7 +56,7 @@ class AddressType(models.Model):
 
 # checked
 class Address(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    #client = models.ForeignKey(Client, on_delete=models.CASCADE)
     stree_address = models.CharField(max_length=1024)
     city = models.CharField(max_length=64)
     province_state = models.ForeignKey(ProvinceState, on_delete=models.PROTECT, related_name="addresses")
