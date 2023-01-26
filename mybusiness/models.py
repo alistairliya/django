@@ -66,8 +66,8 @@ class Address(models.Model):
     description = models.CharField(max_length=1024, null=True)
 
 class ClientAddress(models.Model):
-    address = models.ForeignKey(Address, on_delete=models.PROTECT)
-    client = models.ForeignKey(Client, on_delete=models.DO_NOTHING)
+    address = models.ForeignKey(Address, on_delete=models.PROTECT,related_name='client_addresses')
+    client = models.ForeignKey(Client, on_delete=models.DO_NOTHING, related_name='address_clients')
     description = models.CharField(max_length=1024, null=True)
 
 # checked

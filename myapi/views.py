@@ -134,3 +134,7 @@ class AddressTypeViewSet(viewsets.ModelViewSet):
     queryset = AddressType.objects.all()
     serializer_class = AddressTypeSerializer
 
+class ClientAddressViewSet(viewsets.ModelViewSet):
+    queryset = ClientAddress.objects.all()
+    serializer_class = ClientAddressSerializer
+

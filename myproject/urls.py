@@ -47,6 +47,7 @@ router.register(r'addresss', views.AddressViewSet)
 router.register(r'country', views.CountryViewSet)
 router.register(r'province_state', views.ProvinceStateViewSet)
 router.register(r'addresstype', views.AddressTypeViewSet)
+router.register(r'clientaddress', views.ClientAddressViewSet)
 urlpatterns = [
     path('', include("users.urls")),
     path('admin/', admin.site.urls ),

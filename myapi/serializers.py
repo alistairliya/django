@@ -23,6 +23,36 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = MyUser
         fields = ['first_name','last_name','url', 'username', 'email', 'groups','created_businesses','my_businesses']
         #fields = '__all__'
+
+class ProvinceStateSerializer(serializers.HyperlinkedModelSerializer):
+    #country = CountrySerializer(read_only=True)
+    class Meta:
+        model = ProvinceState
+        fields = ['province_state_name', 'province_state_code', 'country']
+
+class CountrySerializer(serializers.HyperlinkedModelSerializer):
+    # provinces_states has to be a related_name in the ProvinceState model's country foreingn key field.
+    provinces_states = ProvinceStateSerializer(many=True, read_only=True)
+    #provinces_states = serializers.StringRelatedField(many=True, read_only=True)
+    class Meta:
+        model = Country
+        fields = ['country_name', 'country_code','provinces_states']
+
+class AddressSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Address
+        fields = ['id', 'street_address','city','province_state','country','postal_code','address_type','description']
+
+
+class AddressTypeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = AddressType
+        fields = ['id', 'address_type_name', 'description']
+
+class ClientAddressSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ClientAddress
+        fields = ['id', 'address','client', 'description']
 # >>> print(repr(serializer))
 # ClientSerializer():
 #     id = IntegerField(label='ID', read_only=True)
@@ -138,28 +168,3 @@ class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = MyBusiness 
         fields = ['id','business_type','product','client','status','projected_FYC','settled_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance','related_users'] 
-
-class ProvinceStateSerializer(serializers.HyperlinkedModelSerializer):
-    #country = CountrySerializer(read_only=True)
-    class Meta:
-        model = ProvinceState
-        fields = ['province_state_name', 'province_state_code', 'country']
-
-class CountrySerializer(serializers.HyperlinkedModelSerializer):
-    # provinces_states has to be a related_name in the ProvinceState model's country foreingn key field.
-    provinces_states = ProvinceStateSerializer(many=True, read_only=True)
-    #provinces_states = serializers.StringRelatedField(many=True, read_only=True)
-    class Meta:
-        model = Country
-        fields = ['country_name', 'country_code','provinces_states']
-
-class AddressSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Address
-        fields = ['id', 'street_address','city','province_state','country','postal_code','address_type','description']
-
-
-class AddressTypeSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = AddressType
-        fields = ['id', 'address_type_name', 'description']
