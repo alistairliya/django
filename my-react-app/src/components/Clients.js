@@ -11,7 +11,7 @@ const Clients = ({clients, client, setClient, onNextClicked}) => {
 
     const clientOptions = clients.map(
         (client)=>({
-            value:client.id,
+            value:client,//client.id,
             label: client.last_name + ', '+client.first_name+' (SIN:'+client.sin+')'
         })
     )
@@ -22,13 +22,14 @@ const Clients = ({clients, client, setClient, onNextClicked}) => {
     const buttonClicked = ()=>{
         console.log(clientId)
         
-        setClient({clientId:clientId})
+        //setClient({clientId:clientId})
         onNextClicked()
     }
     const handleSelection = (selected)=>{
         console.log('handleSelection')
         console.log(selected)
         setClientId(selected.value)
+        setClient(selected.value)
     }
 
   return (
