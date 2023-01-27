@@ -8,6 +8,7 @@ const NewClient = ({client, onNextClicked, setClient, disabled}) => {
   const [middleName, setMiddleName] = useState('')
   const [birthDate, setBirthDate] = useState("2000-01-01")
   const [sin, setSin] = useState('')
+  const [gender, setGender] = useState()
 
   useEffect(()=>{
     console.log('NewClient.js')
@@ -18,7 +19,9 @@ const NewClient = ({client, onNextClicked, setClient, disabled}) => {
 
   const onSubmit = (e) =>{
       e.preventDefault() // avoiding submitting to a page.
-      setClient({last_name:lastName, first_name:firstName, middle_name:middleName, sin:sin, birthdate:birthDate})
+      //client = {gender:gender, last_name:lastName, first_name:firstName, middle_name:middleName, sin:sin, birthdate:birthDate}
+      //setClient(client)
+      setClient({last_name:lastName, first_name:firstName, middle_name:middleName, gender:gender, sin:sin, birthdate:birthDate})
       onNextClicked()
 
       //onAdd({lastName, firstName})
@@ -50,7 +53,7 @@ const NewClient = ({client, onNextClicked, setClient, disabled}) => {
         </div>
         <div className="form-control">
         <label>Gender</label>
-          <Select options={[{value:'M',label:'Male'},{vvalue:'F', label:'Female'}]} />
+          <Select options={[{value:'M',label:'Male'},{value:'F', label:'Female'}]} onChange={(e)=>{setGender(e.value)}} />
         </div>
         <input type='submit' value='Next' className='btn btn-block' />
     </form>
