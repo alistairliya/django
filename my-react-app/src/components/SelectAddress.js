@@ -28,9 +28,6 @@ const SelectAddress = ({addresses, setAddress}) => {
         console.log(selectedAddress)
     }
 
-    const buttonClicked = ()=>{
-        console.log('Clicked')    
-    }
 
     return (
         <div>
@@ -40,7 +37,6 @@ const SelectAddress = ({addresses, setAddress}) => {
                 disabled={true}
                 onChange={handleSelection}
             />
-            <Button text = 'Next' color='steelblue' onClick={buttonClicked} />
         </div>
     )
 }
