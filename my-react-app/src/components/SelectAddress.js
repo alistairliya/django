@@ -24,8 +24,8 @@ const SelectAddress = ({addresses, setAddress}) => {
 
     const handleSelection = (selected)=>{
         console.log('handleSelection')
-        console.log(selected)
         setSelectedAddress(selected.value)
+        console.log(selectedAddress)
     }
 
     const buttonClicked = ()=>{
@@ -34,7 +34,7 @@ const SelectAddress = ({addresses, setAddress}) => {
 
     return (
         <div>
-            <label>Select from existing clients:</label>
+            <label>Select an address:</label>
             <Select 
                 options={addressOptions} 
                 disabled={true}

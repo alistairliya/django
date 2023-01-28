@@ -22,7 +22,7 @@ const NBF3 = ({client}) => {
     // Create new address for new client.
     // Optional for existing client.
     <div>
-      NBF3 {client.firstName}
+        <h2>New Business Form - Client Address</h2>
       {existingAddresses.length > 0? 
         (<SelectAddress addresses={existingAddresses} setAddress={setAddress}/>):
         ('')
