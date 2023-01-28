@@ -43,7 +43,7 @@ class AddressSerializer(serializers.HyperlinkedModelSerializer):
     country = CountrySerializer(read_only=True)
     class Meta:
         model = Address
-        fields = ['id', 'street_address','city','province_state','country','postal_code','address_type','description']
+        fields = ['id','unit_number', 'street_address','city','province_state','country','postal_code','address_type','description']
 
 
 class AddressTypeSerializer(serializers.HyperlinkedModelSerializer):
