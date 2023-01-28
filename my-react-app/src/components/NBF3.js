@@ -1,3 +1,4 @@
+
 import SelectAddress from './SelectAddress'
 import {useState, useEffect} from 'react'
 
@@ -20,7 +21,14 @@ const NBF3 = ({client}) => {
   return (
     // Create new address for new client.
     // Optional for existing client.
-    <div>NBF3 {client.firstName}</div>
+    <div>
+      NBF3 {client.firstName}
+      {existingAddresses.length > 0? 
+        (<SelectAddress addresses={existingAddresses} setAddress={setAddress}/>):
+        ('')
+      }
+    
+    </div>
   )
 }
 

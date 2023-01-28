@@ -1,23 +1,47 @@
 
+import Button from './Button'
+import Select from 'react-select' // https://react-select.com/home
 import {useState, useEffect} from 'react'
 
-const SelectAddress = (addresses, setAddress) => {
+const SelectAddress = ({addresses, setAddress}) => {
     const [clientAddresses, setClientAddresses] = useState(addresses)
-/*
-    const addressOptions = addresses.map(
-        (address) =>(
+    const [selectedAddress, setSelectedAddress] = useState()
+   
+    
+    const addressOptions = clientAddresses.map(
+        (clientAddress) =>(
             {
-                value:address,
-                label:''
+                value:clientAddress,
+                label:clientAddress.address.street_address+' '+clientAddress.address.city
             }
         )
     )
-*/
+    
     useEffect(()=>{
+        console.log('Client Addresses')
         console.log(clientAddresses)
     },[])
+
+    const handleSelection = (selected)=>{
+        console.log('handleSelection')
+        console.log(selected)
+        setSelectedAddress(selected.value)
+    }
+
+    const buttonClicked = ()=>{
+        console.log('Clicked')    
+    }
+
     return (
-       <div>SelectAddress</div>
+        <div>
+            <label>Select from existing clients:</label>
+            <Select 
+                options={addressOptions} 
+                disabled={true}
+                onChange={handleSelection}
+            />
+            <Button text = 'Next' color='steelblue' onClick={buttonClicked} />
+        </div>
     )
 }
 
