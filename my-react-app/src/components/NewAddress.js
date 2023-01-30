@@ -22,6 +22,7 @@ const NewAddress = ({onNextClicked, setAddress}) => {
             street_address: streetAddress,
             city: city,
             postal_code: postalCode,
+            province: selectedProvince,
             country: selecteddCountry
         })
         
@@ -91,6 +92,9 @@ const NewAddress = ({onNextClicked, setAddress}) => {
             )
         )
     }
+    const handleProvinceSelection=(selected)=>{
+        setSelectedProvince(selected.value)
+    }
 
   return (
     <div>
@@ -110,6 +114,7 @@ const NewAddress = ({onNextClicked, setAddress}) => {
             <label>Province</label>
             <Select
                 options={provinceOptions}
+                onChange={handleProvinceSelection}
             />
         </div>
         <div className="form-contorl">
@@ -118,6 +123,10 @@ const NewAddress = ({onNextClicked, setAddress}) => {
                 options={countryOptions}
                 onChange={handleCountrySelection}
             />
+        </div>
+        <div className="form-control">
+            <label>Postal Code</label>
+            <input type='text' placeholder="Postal Code" value={postalCode} onChange={(e)=>setPostalCode(e.target.value)} />
         </div>
         <form className="add-form" onSubmit={onSubmit}>
             <input type='submit' value='Next' className='btn btn-block' />
