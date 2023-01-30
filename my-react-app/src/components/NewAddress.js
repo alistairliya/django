@@ -47,7 +47,6 @@ const NewAddress = ({onNextClicked, setAddress}) => {
 
   return (
     <div>
-    <form className="add-form" onSubmit={onSubmit}>
         <div className="form-control">
             <label>Unit Number:</label>
             <input type='text' placeholder="Unit Number" value={unitNumber} onChange={(e)=> setUnitNumber(e.target.value)} />
@@ -60,8 +59,9 @@ const NewAddress = ({onNextClicked, setAddress}) => {
             <label>City</label>
             <input type='text' placeholder="City" value={city} onChange={(e)=>setCity(e.target.value)} />
         </div>
-        <input type='submit' value='Next' className='btn btn-block' />
-    </form>
+        <form className="add-form" onSubmit={onSubmit}>
+            <input type='submit' value='Next' className='btn btn-block' />
+        </form>
     </div>
   )
 }
