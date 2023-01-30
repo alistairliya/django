@@ -11,6 +11,9 @@ const NewAddress = ({onNextClicked, setAddress}) => {
     const [countryList, setCountryList] = useState([])
     const [countryOptions, setCountryOptions] = useState([])
     const [selecteddCountry, setSelectedCountry] = useState({})
+    const [provinceOptions, setProvinceOptions] = useState([])
+    const [selectedProvince, setSelectedProvince] = useState([])
+
 
     const onSubmit = (e) =>{
         e.preventDefault()
@@ -64,6 +67,14 @@ const NewAddress = ({onNextClicked, setAddress}) => {
 
     const handleCountrySelection=(selected)=>{
         setSelectedCountry(selected.value)
+        setProvinceOptions(
+            selected.value.provinces_states.map(
+                (province)=>({
+                    value:province,
+                    label:province.province_state_name
+                })
+            )
+        )
     }
 
   return (
@@ -85,6 +96,12 @@ const NewAddress = ({onNextClicked, setAddress}) => {
             <Select
                 options={countryOptions}
                 onChange={handleCountrySelection}
+            />
+        </div>
+        <div>
+            <label>Province</label>
+            <Select
+                options={provinceOptions}
             />
         </div>
         <form className="add-form" onSubmit={onSubmit}>
