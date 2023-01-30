@@ -8,7 +8,6 @@ const NewAddress = ({onNextClicked, setAddress}) => {
     const [streetAddress, setStreetAddress] = useState('')
     const [city, setCity] = useState('')
     const [postalCode, setPostalCode] = useState('') 
-    const [countryList, setCountryList] = useState([])
     const [countryOptions, setCountryOptions] = useState([])
     const [selecteddCountry, setSelectedCountry] = useState({})
     const [provinceOptions, setProvinceOptions] = useState([])
@@ -49,7 +48,6 @@ const NewAddress = ({onNextClicked, setAddress}) => {
             const theCountryList = await fetchSomeList('country')
             console.log("The Country List:")
             console.log(theCountryList)
-            await setCountryList(theCountryList)
             setCountryOptions(
                 theCountryList.map(
                     (country)=>(
@@ -64,6 +62,21 @@ const NewAddress = ({onNextClicked, setAddress}) => {
             console.log("The country options:")
             console.log(countryOptions)
         }
+        const getProvinceList = async () => {
+            const theProvinceList = await fetchSomeList('province_state')
+            setProvinceOptions(
+               theProvinceList.map(
+                (province)=>(
+                    {
+                        value:province,
+                        label:province.province_state_name
+                    }
+                )
+               ) 
+            )
+
+        }
+        getProvinceList()
         getCountryList()
     },[])
 
@@ -93,17 +106,17 @@ const NewAddress = ({onNextClicked, setAddress}) => {
             <label>City</label>
             <input type='text' placeholder="City" value={city} onChange={(e)=>setCity(e.target.value)} />
         </div>
+        <div className="form-control">
+            <label>Province</label>
+            <Select
+                options={provinceOptions}
+            />
+        </div>
         <div className="form-contorl">
             <label>Country</label>
             <Select
                 options={countryOptions}
                 onChange={handleCountrySelection}
-            />
-        </div>
-        <div className="form-control">
-            <label>Province</label>
-            <Select
-                options={provinceOptions}
             />
         </div>
         <form className="add-form" onSubmit={onSubmit}>
