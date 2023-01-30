@@ -7,6 +7,7 @@ import { useState} from 'react'
 const NewBusiness = ({onAdd}) => {
     const [client, setClient] = useState()
     const [index, setIndex] = useState(0)
+    const [appicantAddress, setApplicantAddress] = useState()
     const onNextClicked = () => {
         console.log("Clicked Next from index "+index)
         setIndex(index+1)
@@ -15,7 +16,7 @@ const NewBusiness = ({onAdd}) => {
     const nbfs = [
         <NBF1 setClient={setClient} onNextClicked = {onNextClicked}/>, 
         <NBF2 setClient={setClient} onNextClicked = {onNextClicked} client={client}  />,
-        <NBF3 onNextClicked = {onNextClicked} client={client}/>
+        <NBF3 setApplicantAddress={setApplicantAddress} onNextClicked = {onNextClicked} client={client}/>
     ] 
     return( 
         <div className="container">{nbfs[index]}</div>

@@ -3,13 +3,13 @@ import SelectAddress from './SelectAddress'
 import NewAddress from './NewAddress'
 import {useState, useEffect} from 'react'
 
-const NBF3 = ({client,onNextClicked}) => {
+const NBF3 = ({setApplicantAddress, onNextClicked, client}) => {
   const [address, setAddress] = useState({})
   const [existingAddresses, setExistingAddresses] = useState(client.client_addresses)
   const [checked, setChecked] = useState(false) 
   useEffect(()=>{
     console.log('NBF3')
-    console.log(client)
+    console.log(existingAddresses)
     //if(client.client_addresses != null && client.client_addresses.length>0){
     if(existingAddresses && existingAddresses.length > 0){
       console.log('Existing client with existing addresses:')
