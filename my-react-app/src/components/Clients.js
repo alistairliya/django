@@ -25,6 +25,12 @@ const Clients = ({clients, client, setClient, onNextClicked}) => {
         //setClient({clientId:clientId})
         onNextClicked()
     }
+
+    const onSubmit = (e) =>{
+        e.preventDefault()
+        onNextClicked()
+    }
+
     const handleSelection = (selected)=>{
         console.log('handleSelection')
         console.log(selected)
@@ -42,7 +48,9 @@ const Clients = ({clients, client, setClient, onNextClicked}) => {
                 disabled={true}
                 onChange={handleSelection}
             />
-            <Button text = 'Next' color='steelblue' onClick={buttonClicked} disabled={checked} />
+            <form onSubmit={onSubmit}>
+            <input type='submit' value='Next' className='btn btn-block' />  
+            </form>
         </div>
         )}
         {checked && <div><NewClient setClient={setClient} onNextClicked={onNextClicked} client={client}></NewClient></div>}

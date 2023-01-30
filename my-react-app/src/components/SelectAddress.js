@@ -25,7 +25,6 @@ const SelectAddress = ({addresses, setAddress, onNextClicked}) => {
     const handleSelection = (selected)=>{
         console.log('handleSelection')
         setSelectedAddress(selected.value)
-        console.log(selectedAddress)
     }
 
 
