@@ -12,6 +12,8 @@ const NewClient = ({client, onNextClicked, setClient, disabled}) => {
 
   useEffect(()=>{
     console.log('NewClient.js')
+    console.log('NewClinet onNextClicked:')
+    console.log(onNextClicked)
     console.log(client)
     //console.log(onNextClicked)
     //console.log(setClient)

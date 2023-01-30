@@ -9,6 +9,8 @@ const NBF2 = ({client,setClient, onNextClicked}) => {
     const { user } = useAuth()
     useEffect(()=>{
         console.log('NBF2')
+        console.log('NBF2 onNextClicked:')
+        console.log(onNextClicked)
         console.log(client)
         const getClients = async() =>{
             console.log(client)

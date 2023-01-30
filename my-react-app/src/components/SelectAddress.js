@@ -32,7 +32,7 @@ const SelectAddress = ({addresses, setAddress, onNextClicked}) => {
     const onSubmit = (e) =>{
         e.preventDefault()
         console.log('Next pressed')
-        setAddress(SelectAddress)
+        setAddress(selectedAddress)
         onNextClicked()
     }
 

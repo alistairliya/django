@@ -1,23 +1,25 @@
 import { useState, useEffect } from "react"
 import { useAuth } from "../hooks/useAuth"
 
-const NewAddress = ({setAddress, onNextClicked}) => {
+const NewAddress = ({onNextClicked}) => {
     const {user} = useAuth()
-    const [unitNumber, setUnitNumber] = useState()
-    const [streetAddress, setStreetAddress] = useState()
-    const [city, setCity] = useState()
-    const [postalCode, setPostalCode] = useState() 
-    const [countryList, setCountryList] = useState()
+    const [unitNumber, setUnitNumber] = useState('')
+    const [streetAddress, setStreetAddress] = useState('')
+    const [city, setCity] = useState('')
+    const [postalCode, setPostalCode] = useState('') 
+    const [countryList, setCountryList] = useState([])
 
     const onSubmit = (e) =>{
-        e.preventDDefault()
-        setAddress({
+        e.preventDefault()
+        /*
+        setApplicantAddress({
             unit_number:unitNumber,
             street_address: streetAddress,
             city: city,
             postal_code: postalCode,
         })
-        onNextClicked()
+        */
+        //onNextClicked()
     }
 
     const fetchCountryList = async()=>{
@@ -34,6 +36,11 @@ const NewAddress = ({setAddress, onNextClicked}) => {
     }
 
     useEffect(()=>{
+        console.log('NewAddress...')
+        //console.log('setApplicantAddress:')
+        //console.log(setApplicantAddress)
+        console.log('OnNextClicked:')
+        console.log(onNextClicked)
         const getCountryList = async () =>{
             const theCountryList = await fetchCountryList()
             console.log("The Country List:")

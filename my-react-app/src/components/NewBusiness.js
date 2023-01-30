@@ -2,6 +2,7 @@
 import NBF1 from './NBF1'
 import NBF2 from './NBF2'
 import NBF3 from './NBF3'
+import NBF4 from './NBF4'
 import { useState} from 'react'
 //import { useRadioGroup } from '@mui/material'
 const NewBusiness = ({onAdd}) => {
@@ -16,7 +17,7 @@ const NewBusiness = ({onAdd}) => {
     const nbfs = [
         <NBF1 setClient={setClient} onNextClicked = {onNextClicked}/>, 
         <NBF2 setClient={setClient} onNextClicked = {onNextClicked} client={client}  />,
-        <NBF3 setApplicantAddress={setApplicantAddress} onNextClicked = {onNextClicked} client={client}/>
+        <NBF3 onNextClicked = {onNextClicked} client={client}/>
     ] 
     return( 
         <div className="container">{nbfs[index]}</div>

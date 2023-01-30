@@ -53,6 +53,6 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => {
-    console.log("Check Point 1...")
+    console.log("useAuth...")
     return useContext(AuthContext);
 };
