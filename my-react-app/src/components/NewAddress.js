@@ -36,13 +36,6 @@ const NewAddress = ({onNextClicked, setAddress}) => {
     }
 
     useEffect(()=>{
-        console.log('NewAddress...')
-        //console.log('setApplicantAddress:')
-        //console.log(setApplicantAddress)
-        console.log('OnNextClicked:')
-        console.log(onNextClicked)
-        console.log('setAddress:')
-        console.log(setAddress)
         const getCountryList = async () =>{
             const theCountryList = await fetchCountryList()
             console.log("The Country List:")
@@ -50,8 +43,6 @@ const NewAddress = ({onNextClicked, setAddress}) => {
             setCountryList(theCountryList)
         }
         getCountryList()
-        console.log('Countries:')
-        console.log(countryList) 
     },[])
 
   return (
