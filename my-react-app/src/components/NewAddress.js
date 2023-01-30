@@ -1,3 +1,4 @@
+import Select from 'react-select' // https://react-select.com/home
 import { useState, useEffect } from "react"
 import { useAuth } from "../hooks/useAuth"
 
@@ -8,6 +9,8 @@ const NewAddress = ({onNextClicked, setAddress}) => {
     const [city, setCity] = useState('')
     const [postalCode, setPostalCode] = useState('') 
     const [countryList, setCountryList] = useState([])
+    const [countryOptions, setCountryOptions] = useState([])
+    const [selecteddCountry, setSelectedCountry] = useState({})
 
     const onSubmit = (e) =>{
         e.preventDefault()
@@ -17,6 +20,7 @@ const NewAddress = ({onNextClicked, setAddress}) => {
             street_address: streetAddress,
             city: city,
             postal_code: postalCode,
+            country: selecteddCountry
         })
         
         onNextClicked()
@@ -40,10 +44,27 @@ const NewAddress = ({onNextClicked, setAddress}) => {
             const theCountryList = await fetchCountryList()
             console.log("The Country List:")
             console.log(theCountryList)
-            setCountryList(theCountryList)
+            await setCountryList(theCountryList)
+            setCountryOptions(
+                theCountryList.map(
+                    (country)=>(
+                        {
+                            value:country,
+                            label:country.country_name
+                        }
+                    )
+                    
+                )
+            )
+            console.log("The country options:")
+            console.log(countryOptions)
         }
         getCountryList()
     },[])
+
+    const handleCountrySelection=(selected)=>{
+        setSelectedCountry(selected.value)
+    }
 
   return (
     <div>
@@ -58,6 +79,13 @@ const NewAddress = ({onNextClicked, setAddress}) => {
         <div className="form-control">
             <label>City</label>
             <input type='text' placeholder="City" value={city} onChange={(e)=>setCity(e.target.value)} />
+        </div>
+        <div>
+            <label>Country</label>
+            <Select
+                options={countryOptions}
+                onChange={handleCountrySelection}
+            />
         </div>
         <form className="add-form" onSubmit={onSubmit}>
             <input type='submit' value='Next' className='btn btn-block' />
