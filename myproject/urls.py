@@ -48,6 +48,10 @@ router.register(r'country', views.CountryViewSet)
 router.register(r'province_state', views.ProvinceStateViewSet)
 router.register(r'addresstype', views.AddressTypeViewSet)
 router.register(r'clientaddress', views.ClientAddressViewSet)
+router.register(r'phonetype', views.PhoneTypeViewSet)
+router.register(r'phone', views.PhoneViewSet)
+
+
 urlpatterns = [
     path('', include("users.urls")),
     path('admin/', admin.site.urls ),

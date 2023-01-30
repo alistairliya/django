@@ -12,6 +12,15 @@ from mybusiness.models import *
 # https://www.youtube.com/watch?v=NAQEj-c2CI8
 # https://stackoverflow.com/questions/60500597/what-is-the-purpose-of-the-class-meta-in-django
 
+class PhoneTypeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = PhoneType
+        fields =['phone_type_name','description']
+
+class PhoneSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Phone
+        fields = ['client', 'area_code','phone_number','phone_type','is_primary','is_active','is_archived','notes']
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     # corresponds to related_name in MyUser model.

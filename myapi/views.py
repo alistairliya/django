@@ -138,3 +138,11 @@ class ClientAddressViewSet(viewsets.ModelViewSet):
     queryset = ClientAddress.objects.all()
     serializer_class = ClientAddressSerializer
 
+class PhoneTypeViewSet(viewsets.ModelViewSet):
+    queryset = PhoneType.objects.all()
+    serializer_class = PhoneTypeSerializer
+
+class PhoneViewSet(viewsets.ModelViewSet):
+    queryset = Phone.objects.all()
+    serializer_class = PhoneSerializer
+
