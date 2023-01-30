@@ -29,22 +29,24 @@ const NewAddress = ({onNextClicked, setAddress}) => {
         onNextClicked()
     }
 
-    const fetchCountryList = async()=>{
-        console.log('start fetchCountryList')
+
+    const fetchSomeList = async(what) =>{
+        console.log('start fetchSomeList')
         let headers = new Headers()
         const token = user['token']
         const auth_str = 'Token '+token
         headers.set('Authorization', auth_str)
-        let url = 'http://localhost:8000/api/country/'
+        let url = 'http://localhost:8000/api/'+what+'/'
         const res = await fetch(url, {headers:headers})
         const data = await res.json()
-        console.log('done fetchCountryList')
+        console.log('done fetchSomeList')
         return data
+
     }
 
     useEffect(()=>{
         const getCountryList = async () =>{
-            const theCountryList = await fetchCountryList()
+            const theCountryList = await fetchSomeList('country')
             console.log("The Country List:")
             console.log(theCountryList)
             await setCountryList(theCountryList)
@@ -91,14 +93,14 @@ const NewAddress = ({onNextClicked, setAddress}) => {
             <label>City</label>
             <input type='text' placeholder="City" value={city} onChange={(e)=>setCity(e.target.value)} />
         </div>
-        <div>
+        <div className="form-contorl">
             <label>Country</label>
             <Select
                 options={countryOptions}
                 onChange={handleCountrySelection}
             />
         </div>
-        <div>
+        <div className="form-control">
             <label>Province</label>
             <Select
                 options={provinceOptions}
