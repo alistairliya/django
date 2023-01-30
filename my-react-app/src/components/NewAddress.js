@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useAuth } from "../hooks/useAuth"
 
-const NewAddress = ({onNextClicked}) => {
+const NewAddress = ({onNextClicked, setAddress}) => {
     const {user} = useAuth()
     const [unitNumber, setUnitNumber] = useState('')
     const [streetAddress, setStreetAddress] = useState('')
@@ -41,6 +41,8 @@ const NewAddress = ({onNextClicked}) => {
         //console.log(setApplicantAddress)
         console.log('OnNextClicked:')
         console.log(onNextClicked)
+        console.log('setAddress:')
+        console.log(setAddress)
         const getCountryList = async () =>{
             const theCountryList = await fetchCountryList()
             console.log("The Country List:")
