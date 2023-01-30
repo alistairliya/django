@@ -11,15 +11,15 @@ const NewAddress = ({onNextClicked, setAddress}) => {
 
     const onSubmit = (e) =>{
         e.preventDefault()
-        /*
-        setApplicantAddress({
+        
+        setAddress({
             unit_number:unitNumber,
             street_address: streetAddress,
             city: city,
             postal_code: postalCode,
         })
-        */
-        //onNextClicked()
+        
+        onNextClicked()
     }
 
     const fetchCountryList = async()=>{
