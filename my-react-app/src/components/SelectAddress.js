@@ -3,7 +3,7 @@ import Button from './Button'
 import Select from 'react-select' // https://react-select.com/home
 import {useState, useEffect} from 'react'
 
-const SelectAddress = ({addresses, setAddress}) => {
+const SelectAddress = ({addresses, setAddress, onNextClicked}) => {
     const [clientAddresses, setClientAddresses] = useState(addresses)
     const [selectedAddress, setSelectedAddress] = useState()
    
@@ -29,6 +29,13 @@ const SelectAddress = ({addresses, setAddress}) => {
     }
 
 
+    const onSubmit = (e) =>{
+        e.preventDefault()
+        console.log('Next pressed')
+        setAddress(SelectAddress)
+        onNextClicked()
+    }
+
     return (
         <div>
             <label>Select an address:</label>
@@ -37,6 +44,9 @@ const SelectAddress = ({addresses, setAddress}) => {
                 disabled={true}
                 onChange={handleSelection}
             />
+            <form onSubmit={onSubmit}>
+            <input type='submit' value='Next' className='btn btn-block' />  
+            </form>
         </div>
     )
 }

@@ -3,7 +3,7 @@ import SelectAddress from './SelectAddress'
 import NewAddress from './NewAddress'
 import {useState, useEffect} from 'react'
 
-const NBF3 = ({client}) => {
+const NBF3 = ({client,onNextClicked}) => {
   const [address, setAddress] = useState({})
   const [existingAddresses, setExistingAddresses] = useState(client.client_addresses)
   const [checked, setChecked] = useState(false) 
@@ -40,13 +40,13 @@ const NBF3 = ({client}) => {
         ( 
           
         <div>
-            <SelectAddress addresses={existingAddresses} setAddress={setAddress}/>
+            <SelectAddress onNextClicked={onNextClicked} addresses={existingAddresses} setAddress={setAddress}/>
             {checkBox}
         </div>
         ):
         (<div>
           {existingAddresses && existingAddresses.length > 0 ?
-          <div><NewAddress/>{checkBox}</div>:<NewAddress/>}
+          <div><NewAddress onNextClicked={onNextClicked} setAddress={setAddress}/>{checkBox}</div>:<NewAddress/>}
         </div>
         )
       }
