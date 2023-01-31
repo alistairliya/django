@@ -61,6 +61,16 @@ class GenderSerializer(serializers.ModelSerializer):
         model = Gender
         fields = ['id', 'gender_name', 'gender_code', 'description']
 
+class PhoneTypeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = PhoneType
+        fields =['phone_type_name','description']
+
+class PhoneSerializer(serializers.HyperlinkedModelSerializer):
+    phone_type = PhoneTypeSerializer()
+    class Meta:
+        model = Phone
+        fields = ['client', 'area_code','phone_number','phone_type','is_primary','is_active','is_archived','notes']
 # >>> print(repr(serializer))
 # ClientSerializer():
 #     id = IntegerField(label='ID', read_only=True)
@@ -90,20 +100,13 @@ class GenderSerializer(serializers.ModelSerializer):
 class ClientSerializer(serializers.HyperlinkedModelSerializer):
     #client_addresses = ClientAddressSerializer(many=True, read_only=True)
     client_addresses = ClientAddressSerializer(many=True, read_only=True)
-    gender = GenderSerializer()
+    gender = GenderSerializer(),
+    phones = PhoneSerializer(many=True),
+
     class Meta:
         model = Client
-        fields = ['id' ,'first_name', 'middle_name','birthdate', 'last_name','sin','gender','client_addresses','created_by','created_date','modified_date']
+        fields = ['id' ,'first_name', 'middle_name','birthdate', 'last_name','sin','gender','client_addresses','phones','created_by','created_date','modified_date']
 
-class PhoneTypeSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = PhoneType
-        fields =['phone_type_name','description']
-
-class PhoneSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Phone
-        fields = ['client', 'area_code','phone_number','phone_type','is_primary','is_active','is_archived','notes']
 
 class BusinessTypeSerializer(serializers.ModelSerializer):
     class Meta:
