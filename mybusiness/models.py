@@ -101,7 +101,6 @@ class Email(models.Model):
     email_type = models.ForeignKey(EmailType, on_delete=models.PROTECT, related_name="emails")
     is_primary = models.BooleanField()
     is_active = models.BooleanField()
-    is_primary = models.BooleanField()
     notes = models.CharField(max_length=1024, null=True)
 
 # checked

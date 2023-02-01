@@ -150,3 +150,7 @@ class EmailTypeViewSet(viewsets.ModelViewSet):
     queryset = EmailType.objects.all()
     serializer_class = EmailTypeSerializer
 
+class EmailViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Email.objects.all()
+    serializer_class = EmailSerializer
+

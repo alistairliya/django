@@ -65,6 +65,11 @@ class EmailTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = EmailType
         fields = ['email_type_name','description']
+        
+class EmailSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Email
+        fields = ['clients','email','email_type','is_primary','is_active','notes']
 
 class PhoneTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
