@@ -78,7 +78,8 @@ class PhoneType(models.Model):
 
 # checked
 class Phone(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name="phones")
+    #client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name="phones")
+    clients = models.ManyToManyField(Client)
     area_code = models.CharField(max_length=64)
     phone_number = models.CharField(max_length=64)
     phone_type = models.ForeignKey(PhoneType, on_delete=models.PROTECT, related_name="phones")

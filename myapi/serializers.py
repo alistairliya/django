@@ -70,7 +70,7 @@ class PhoneSerializer(serializers.HyperlinkedModelSerializer):
     phone_type = PhoneTypeSerializer()
     class Meta:
         model = Phone
-        fields = ['client', 'area_code','phone_number','phone_type','is_primary','is_active','is_archived','notes']
+        fields = ['clients', 'area_code','phone_number','phone_type','is_primary','is_active','is_archived','notes']
 # >>> print(repr(serializer))
 # ClientSerializer():
 #     id = IntegerField(label='ID', read_only=True)
