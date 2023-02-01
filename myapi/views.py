@@ -146,3 +146,7 @@ class PhoneViewSet(viewsets.ModelViewSet):
     queryset = Phone.objects.all()
     serializer_class = PhoneSerializer
 
+class EmailTypeViewSet(viewsets.ModelViewSet):
+    queryset = EmailType.objects.all()
+    serializer_class = EmailTypeSerializer
+

@@ -61,6 +61,11 @@ class GenderSerializer(serializers.ModelSerializer):
         model = Gender
         fields = ['id', 'gender_name', 'gender_code', 'description']
 
+class EmailTypeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = EmailType
+        fields = ['email_type_name','description']
+
 class PhoneTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PhoneType
