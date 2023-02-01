@@ -95,7 +95,8 @@ class EmailType(models.Model):
 
 # checked
 class Email(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name="emails")
+    #client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name="emails")
+    clients = models.ManyToManyField(Client)
     email = models.CharField(max_length=1024)
     email_type = models.ForeignKey(EmailType, on_delete=models.PROTECT, related_name="emails")
     is_primary = models.BooleanField()
