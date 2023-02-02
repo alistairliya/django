@@ -19,7 +19,7 @@ const NewBusiness = ({onAdd}) => {
         <NBF1 setClient={setClient} onNextClicked = {onNextClicked}/>, 
         <NBF2 setClient={setClient} onNextClicked = {onNextClicked} client={client}  />,
         <NBF3 setApplicantAddress= {setApplicantAddress} onNextClicked = {onNextClicked} client={client}/>,
-        <NBF4 client = {client} applicantAddress = {applicantAddress}/>
+        <NBF4 setApplicantContacts = {setApplicantContacts} client = {client} />
     ] 
     return( 
         <div className="container">{nbfs[index]}</div>
