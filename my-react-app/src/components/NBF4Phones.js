@@ -14,9 +14,15 @@ const Phones = ({setPhones, existingPhones}) => {
         setPhoneElementList([<Phone addPhone = {addPhone} existingPhones = {existingPhones}/>])
     },[])
 
+
+
     return (
     <div>
-        {phoneElementList[0]}
+        {phoneElementList.map(
+            (phoneElement)=>{
+                return phoneElement
+            }
+        )}
     </div>
   )
 }
