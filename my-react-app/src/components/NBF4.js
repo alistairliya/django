@@ -1,18 +1,16 @@
-import Phone from './NBF4PhonesPhone.js'
-import Email from './NBF4Emails'
+import Phones from './NBF4Phones.js'
 
 import {useState, useEffect} from 'react'
 const NBF4 = ({setApplicantContacts, client}) => {
-    const [phone, setPhone] = useState({})
-    const [email, setEmail] = useState({})
+    const [phones, setPhones] = useState({})
+    const [emails, setEmails] = useState({})
     useEffect(()=>{
         console.log(client)
     })
     return (
     <div>
       <h2>New Business Form - Client Contacts</h2>
-      <Phone setPhone = {setPhone} existingPhone = {client.phone_list}/>
-      <Email setEmail = {setEmail}/>
+      <Phones setPhones = {setPhones} existingPhones = {client.phone_list}/>
     </div>
   )
 }

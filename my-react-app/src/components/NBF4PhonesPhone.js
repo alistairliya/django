@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 
-const Phone = ({setPhone, existingPhone}) => {
+const Phone = ({setPhone, existingPhones}) => {
   
     const [checked, setChecked] = useState(false)
     const checkBox = ( 
@@ -18,7 +18,7 @@ const Phone = ({setPhone, existingPhone}) => {
     return (
         <div>Phone
         {    
-            existingPhone && existingPhone.length > 0? 
+            existingPhones && existingPhones.length > 0? 
              ( 
                  // User may select from exisiting number or create one  
                  !checked?(
