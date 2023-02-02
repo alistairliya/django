@@ -79,10 +79,10 @@ class PhoneType(models.Model):
 # checked
 class Phone(models.Model):
     #client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name="phones")
-    clients = models.ManyToManyField(Client)
+    clients = models.ManyToManyField(Client, related_name='phone_list')
     area_code = models.CharField(max_length=64)
     phone_number = models.CharField(max_length=64)
-    phone_type = models.ForeignKey(PhoneType, on_delete=models.PROTECT, related_name="phones")
+    phone_type = models.ForeignKey(PhoneType, on_delete=models.PROTECT,null=True, related_name="phones")
     is_primary = models.BooleanField()
     is_active = models.BooleanField()
     is_archived = models.BooleanField()

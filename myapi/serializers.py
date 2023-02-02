@@ -77,7 +77,9 @@ class PhoneTypeSerializer(serializers.HyperlinkedModelSerializer):
         fields =['phone_type_name','description']
 
 class PhoneSerializer(serializers.HyperlinkedModelSerializer):
-    phone_type = PhoneTypeSerializer()
+    # https://stackoverflow.com/questions/33182092/django-rest-framework-serializing-many-to-many-field
+    #clients = serializers.PrimaryKeyRelatedField(queryset=Client.objects.all(), many=True)
+    phone_type = PhoneTypeSerializer(read_only=True)
     class Meta:
         model = Phone
         fields = ['clients', 'area_code','phone_number','phone_type','is_primary','is_active','is_archived','notes']
@@ -110,12 +112,12 @@ class PhoneSerializer(serializers.HyperlinkedModelSerializer):
 class ClientSerializer(serializers.HyperlinkedModelSerializer):
     #client_addresses = ClientAddressSerializer(many=True, read_only=True)
     client_addresses = ClientAddressSerializer(many=True, read_only=True)
-    gender = GenderSerializer(),
-    phones = PhoneSerializer(many=True),
+    gender = GenderSerializer(read_only=True)
+    phone_list = PhoneSerializer(read_only=True, many=True)
 
     class Meta:
         model = Client
-        fields = ['id' ,'first_name', 'middle_name','birthdate', 'last_name','sin','gender','client_addresses','phones','created_by','created_date','modified_date']
+        fields = ['phone_list','id' ,'first_name', 'middle_name','birthdate', 'last_name','sin','gender','client_addresses','created_by','created_date','modified_date']
 
 
 class BusinessTypeSerializer(serializers.ModelSerializer):

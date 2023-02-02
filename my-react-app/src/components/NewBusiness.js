@@ -9,6 +9,7 @@ const NewBusiness = ({onAdd}) => {
     const [client, setClient] = useState()
     const [index, setIndex] = useState(0)
     const [applicantAddress, setApplicantAddress] = useState()
+    const [applicantContacts, setApplicantContacts] = useState()
     const onNextClicked = () => {
         console.log("Clicked Next from index "+index)
         setIndex(index+1)
