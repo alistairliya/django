@@ -18,8 +18,8 @@ const SelectAddress = ({addresses, setAddress, onNextClicked}) => {
     )
     
     useEffect(()=>{
-        console.log('Client Addresses')
-        console.log(clientAddresses)
+        //console.log('Client Addresses')
+        //console.log(clientAddresses)
     },[])
 
     const handleSelection = (selected)=>{
