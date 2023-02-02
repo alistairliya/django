@@ -1,5 +1,5 @@
-import Phone from './Phone'
-import Email from './Email'
+import Phone from './NBF4PhonesPhone.js'
+import Email from './NBF4Emails'
 
 import {useState, useEffect} from 'react'
 const NBF4 = ({setApplicantContacts, client}) => {
