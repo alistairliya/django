@@ -2,11 +2,15 @@ import Phone from './NBF4PhonesPhone.js'
 import {useState} from 'react'
 
 const Phones = ({setPhones, existingPhones}) => {
-    const [phone, setPhone] = useState({})
+    const [applicationPhones, setApplicationPhones] = useState([])
+
+    const addPhone = (phone) => {
+        setApplicationPhones(applicationPhones.append(phone))
+    }
 
     return (
     <div>
-        <Phone setPhone = {setPhone} existingPhones = {existingPhones}/>
+        <Phone addPhone = {addPhone} existingPhones = {existingPhones}/>
     </div>
   )
 }

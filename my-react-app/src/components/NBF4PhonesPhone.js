@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 
-const Phone = ({setPhone, existingPhones}) => {
+const Phone = ({addPhone, existingPhones}) => {
   
     const [checked, setChecked] = useState(false)
     const checkBox = ( 
