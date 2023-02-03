@@ -1,7 +1,8 @@
 import {useState, useEffect} from 'react'
+import Select from 'react-select' // https://react-select.com/home
 
 const Phone = ({addPhone, existingPhones}) => {
-  
+    const [selectedPhone, setSelectedPhone] = useState({})
     const [checked, setChecked] = useState(false)
     const checkBox = ( 
            <label>
@@ -15,6 +16,12 @@ const Phone = ({addPhone, existingPhones}) => {
     )
   
   
+    const phoneOptions = existingPhones.map(
+        (existingPhone)=>({
+            value:existingPhone,
+            label: existingPhone.area_code+' '+existingPhone.phone_number
+        })
+    )
     return (
         <div>Phone
         {    
@@ -24,7 +31,12 @@ const Phone = ({addPhone, existingPhones}) => {
                  !checked?(
                      // User select from existing phone
                      <div>
-                     <h2>User select from existing phone</h2>
+                     <label>Select from existing:</label>
+                     <Select
+                        options={phoneOptions}
+                        onchange={setSelectedPhone}     
+                     />
+                
                      {checkBox}
                      </div>
                  ):(
