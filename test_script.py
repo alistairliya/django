@@ -26,3 +26,20 @@ plan.save()
 
 insuranceprovider = InsuranceProvider(insurance_provider_name='Canada Life',description='Test Provider')
 insuranceprovider.save()
+
+
+# Adding a user to a business
+from mybusiness.models import *
+businesses = MyBusiness.objects.all()
+test_business = businesses[4]
+users = MyUser.objects.all()
+chris = users[7]
+creator = users[0]
+import datetime
+now = datetime.datetime.now()
+roles = BusinessUserRole.objects.all()
+role = roles[0]
+bu = Business_User(business=test_business, user = chris, split=50, user_role = role, notes = 'test', created_by = creator, created_date = now, modified_date = now)
+bu.save()
+
+
