@@ -32,7 +32,7 @@ const NBF3 = ({onNextClicked, client, setApplicantAddress}) => {
                     checked={checked}
                     onChange={handleChange}
                 />
-                Create new client
+                Create new address
             </label>
   )
   return (
