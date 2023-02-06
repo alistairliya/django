@@ -9,6 +9,8 @@ from django.db import models
 # https://learndjango.com/tutorials/django-custom-user-model
 # Reset Migration:
 # https://raturi.in/blog/how-reset-django-migrations/
+# Many-to-Many Relationships:
+# https://docs.djangoproject.com/en/4.1/topics/db/examples/many_to_many/
 
 # Cusstom User Based on: 
 # https://learndjango.com/tutorials/django-custom-user-model
