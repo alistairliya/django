@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import Select from 'react-select' // https://react-select.com/home
 
-const Phone = ({addPhone, existingPhones}) => {
+const Phone = ({addPhone, existingPhones, phoneTypes}) => {
     const [selectedPhone, setSelectedPhone] = useState({})
     const [checked, setChecked] = useState(false)
     
@@ -13,7 +13,13 @@ const Phone = ({addPhone, existingPhones}) => {
     const [isActive, setIsActive] = useState(true)
     const [isArchived, setIsArchived] = useState(false)
     const [notes, setNotes] = useState("")
-    
+   
+    useEffect(
+        ()=>{
+            console.log(phoneTypes)
+        }
+    )
+
     const checkBox = ( 
            <label>
                <input 
