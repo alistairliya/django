@@ -47,8 +47,8 @@ const Phone = ({addPhone, existingPhones, phoneTypes, removeFromElementList=null
 
     return (
         <div className="container">
-        {    
-            existingPhones && existingPhones.length > 0? 
+        {isPrimary?(<h3>Primary Phone Number</h3>):(<h3>Additional Phone Number</h3>)}
+        {               existingPhones && existingPhones.length > 0? 
              ( 
                  // User may select from exisiting number or create one  
                  !checked?(

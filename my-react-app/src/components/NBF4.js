@@ -7,10 +7,21 @@ const NBF4 = ({setApplicantContacts, client}) => {
     useEffect(()=>{
         console.log(client)
     })
+    const onSubmit = (e) =>{
+        e.preventDefault()
+        console.log('Next pressed')
+    }
+
     return (
     <div>
       <h2>New Business Form - Client Phone Contacts</h2>
+      <div>      
       <Phones setPhones = {setPhones} existingPhones = {client.phone_list}/>
+      </div>
+
+      <form className="add-form" onSubmit={onSubmit}>
+            <input type='submit' value='Next' className='btn btn-block' />
+      </form>
     </div>
   )
 }

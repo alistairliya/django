@@ -64,8 +64,8 @@ const Phones = ({setPhones, existingPhones}) => {
         )
         }
             <Button 
-                text='Add another' 
-                color='steelblue' 
+                text='Add another phone' 
+                color='red' 
                 onClick={addAnotherPhone} 
             />
     </div>
