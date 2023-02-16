@@ -1,7 +1,8 @@
 import {useState, useEffect} from 'react'
 import Select from 'react-select' // https://react-select.com/home
+import Button from './Button'
 
-const Phone = ({addPhone, existingPhones, phoneTypes}) => {
+const Phone = ({addPhone, existingPhones, phoneTypes, removeFromElementList=null, isPrimary=false}) => {
     const [selectedPhone, setSelectedPhone] = useState({})
     const [checked, setChecked] = useState(false)
     
@@ -9,7 +10,6 @@ const Phone = ({addPhone, existingPhones, phoneTypes}) => {
     const [areaCode, setAreaCode] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const [phoneType, setPhoneType] = useState({})
-    const [isPrimary, setIsPrimary] = useState(true)
     const [isActive, setIsActive] = useState(true)
     const [isArchived, setIsArchived] = useState(false)
     const [notes, setNotes] = useState("")
@@ -21,14 +21,15 @@ const Phone = ({addPhone, existingPhones, phoneTypes}) => {
     )
 
     const checkBox = ( 
-           <label>
+           <div>
                <input 
                    type="checkbox"
                    checked={checked}
                    onChange={()=>setChecked(!checked)}
+                   label="Create new phone number"
                />
-               Create new phone number
-           </label>
+               <label>Create new phone number</label>
+           </div>
     )
   
   
@@ -58,7 +59,6 @@ const Phone = ({addPhone, existingPhones, phoneTypes}) => {
                         options={phoneOptions}
                         onchange={setSelectedPhone}     
                      /> 
-                     {checkBox}
                      </div>
                  ):(
                      // User create new phonne
@@ -79,7 +79,6 @@ const Phone = ({addPhone, existingPhones, phoneTypes}) => {
                         />
                     </div>
                     </div>
-                     {checkBox}
                      </div>
                  )
              ):
@@ -88,6 +87,8 @@ const Phone = ({addPhone, existingPhones, phoneTypes}) => {
                  <h2>user must create a new number</h2>
              ) 
         }
+        <div>{checkBox}</div>
+        <div><Button/></div>
         </div>
     )
 }

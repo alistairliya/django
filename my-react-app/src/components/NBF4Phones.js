@@ -21,6 +21,10 @@ const Phones = ({setPhones, existingPhones}) => {
         setKey(key+1)
     }
 
+    const removePhoneElement = (phoneElement) =>{
+        setPhoneElementList(phoneElementList.filter((element)=>element!==phoneElement))
+    }
+
     const fetchPhoneTypes = async() =>{
         let headers = new Headers()
         const token = user['token']
@@ -29,7 +33,7 @@ const Phones = ({setPhones, existingPhones}) => {
 
         const res = await fetch('http://localhost:8000/api/phonetype/', {headers:headers})
         const data = await res.json()
-        setPhoneElementList([<Phone key='x' addPhone = {addPhone} existingPhones = {existingPhones} phoneTypes={data}/>])
+        //setPhoneElementList([<Phone key='x' addPhone = {addPhone} existingPhones = {existingPhones} phoneTypes={data}/>])
         return data
     } 
 
@@ -41,6 +45,7 @@ const Phones = ({setPhones, existingPhones}) => {
             console.log("The Phone Types:")
             console.log(thePhoneTypes)
             setPhoneTypes(thePhoneTypes)
+            setPhoneElementList([<Phone key='x' addPhone = {addPhone} existingPhones = {existingPhones} phoneTypes={thePhoneTypes} isPrimary = {true}/>])
         }
         getPhoneTypes()
 
