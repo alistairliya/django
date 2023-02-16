@@ -88,7 +88,11 @@ const Phone = ({addPhone, existingPhones, phoneTypes, removeFromElementList=null
              ) 
         }
         <div>{checkBox}</div>
-        <div><Button/></div>
+        <div>{!isPrimary? <Button
+            text='Remove'
+            color='red'
+            onClick={()=>removeFromElementList(this)}
+        />:""}</div>
         </div>
     )
 }

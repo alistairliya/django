@@ -17,7 +17,7 @@ const Phones = ({setPhones, existingPhones}) => {
 
     const addAnotherPhone = ()=>{
         console.log(phoneElementList)
-        setPhoneElementList([...phoneElementList, <Phone key = {key.toString()} addPhone = {addPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes}/>])
+        setPhoneElementList([...phoneElementList, <Phone key = {key.toString()} addPhone = {addPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>])
         setKey(key+1)
     }
 
