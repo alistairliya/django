@@ -45,7 +45,7 @@ const Phone = ({addPhone, existingPhones, phoneTypes}) => {
         }))
 
     return (
-        <div>Phone
+        <div className="container">
         {    
             existingPhones && existingPhones.length > 0? 
              ( 
@@ -53,12 +53,11 @@ const Phone = ({addPhone, existingPhones, phoneTypes}) => {
                  !checked?(
                      // User select from existing phone
                      <div>
-                     <label>Select from existing:</label>
+                     <label>Select from existing phones:</label>
                      <Select
                         options={phoneOptions}
                         onchange={setSelectedPhone}     
-                     />
-                
+                     /> 
                      {checkBox}
                      </div>
                  ):(

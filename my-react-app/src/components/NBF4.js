@@ -9,7 +9,7 @@ const NBF4 = ({setApplicantContacts, client}) => {
     })
     return (
     <div>
-      <h2>New Business Form - Client Contacts</h2>
+      <h2>New Business Form - Client Phone Contacts</h2>
       <Phones setPhones = {setPhones} existingPhones = {client.phone_list}/>
     </div>
   )
