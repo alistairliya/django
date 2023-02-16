@@ -13,9 +13,9 @@ const Phone = ({addPhone, existingPhones, phoneTypes}) => {
     const [isActive, setIsActive] = useState(true)
     const [isArchived, setIsArchived] = useState(false)
     const [notes, setNotes] = useState("")
-   
     useEffect(
         ()=>{
+            console.log('PhonesPhone useEffect')
             console.log(phoneTypes)
         }
     )
@@ -38,6 +38,12 @@ const Phone = ({addPhone, existingPhones, phoneTypes}) => {
             label: existingPhone.area_code+' '+existingPhone.phone_number
         })
     )
+    const phoneTypeOptions = phoneTypes.map(
+        (phoneType)=>({
+            value:phoneType,
+            label: phoneType.phone_type_name
+        }))
+
     return (
         <div>Phone
         {    
@@ -65,6 +71,13 @@ const Phone = ({addPhone, existingPhones, phoneTypes}) => {
                      <div className="form-control">
                         <label>Phone Number:</label>
                         <input type='text' placeholder="Phone Number" value={phoneNumber} onChange={(e)=>setPhoneNumber(e.target.value)} />
+                    </div>
+                    <div className="form-control">
+                        <label>Phone Type:</label>
+                        <Select
+                            options={phoneTypeOptions} 
+                            onChange={setPhoneType}
+                        />
                     </div>
                     </div>
                      {checkBox}

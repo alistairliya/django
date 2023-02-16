@@ -21,40 +21,32 @@ const Phones = ({setPhones, existingPhones}) => {
         setKey(key+1)
     }
 
-    const getAndSetPhoneTypes = async() =>{
+    const fetchPhoneTypes = async() =>{
         let headers = new Headers()
         const token = user['token']
         const auth_str = 'Token '+token
         headers.set('Authorization', auth_str)
-        const url = 'http://localhost:8000/api/phonetype/'
-        const res = await fetch(url)
+
+        const res = await fetch('http://localhost:8000/api/phonetype/', {headers:headers})
         const data = await res.json()
-        console.log('data: ')
-        console.log(data)
-        await setPhoneTypes(data)
-        console.log('Set phone types:')
-        console.log(phoneTypes)
+        setPhoneElementList([<Phone key='x' addPhone = {addPhone} existingPhones = {existingPhones} phoneTypes={data}/>])
         return data
     } 
 
     // https://stackoverflow.com/questions/54069253/the-usestate-set-method-is-not-reflecting-a-change-immediately
     useEffect(()=>{
+        console.log('useEffect')
         const getPhoneTypes = async () =>{
-            const thePhoneTypes = await getAndSetPhoneTypes()
-            setPhoneElementList([<Phone key='x' addPhone = {addPhone} existingPhones = {existingPhones} phoneTypes = {phoneTypes}/>])
-            console.log('Phone types were set:')
-            console.log(phoneTypes)
-            console.log('thePhoneTypes:')
+            const thePhoneTypes = await fetchPhoneTypes()
+            console.log("The Phone Types:")
             console.log(thePhoneTypes)
             setPhoneTypes(thePhoneTypes)
-            console.log('After set')
-            console.log(phoneTypes)
         }
         getPhoneTypes()
 
         //addAnotherPhone() // cant do this because useEffect is called after the UI is rendered. phoneElementList need to be already constructed.
         //setPhoneElementList([<Phone key='x' addPhone = {addPhone} existingPhones = {existingPhones}/>])
-    },[phoneTypes])
+    },[])
 
 
     return (
