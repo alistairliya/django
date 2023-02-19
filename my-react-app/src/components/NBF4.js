@@ -2,10 +2,9 @@ import Phones from './NBF4Phones.js'
 
 import {useState, useEffect} from 'react'
 const NBF4 = ({setApplicantContacts, client}) => {
-    const [phones, setPhones] = useState({})
-    const [emails, setEmails] = useState({})
-    const [phonesElement, setPhonesElement] = useState([<Phones setPhones = {setPhones} existingPhones = {client.phone_list}/>])
-
+    const [applicationPhones, setApplicationPhones] = useState([])
+    const [phonesElement, setPhonesElement] = useState([<Phones applicationPhones = {applicationPhones} setApplicationPhones = {setApplicationPhones} existingPhones = {client.phone_list}/>])
+    
     useEffect(()=>{
         console.log(client)
     },[])
@@ -13,7 +12,8 @@ const NBF4 = ({setApplicantContacts, client}) => {
     const onSubmit = (e) =>{
         e.preventDefault()
         console.log('Next pressed')
-        console.log(phonesElement[0]['phoneElementList'])
+        //console.log(phonesElement[0]['phoneElementList'])
+        console.log(applicationPhones)
     }
 
     return (

@@ -3,15 +3,16 @@ import {useState, useEffect} from 'react'
 import Button from './Button'
 import { useAuth } from "../hooks/useAuth"
 
-const Phones = ({setPhones, existingPhones}) => {
+const Phones = ({applicationPhones, setApplicationPhones, existingPhones}) => {
     const {user} = useAuth()
-    const [applicationPhones, setApplicationPhones] = useState([])  
+    //const [applicationPhones, setApplicationPhones] = useState([])  
     const [phoneElementList, setPhoneElementList] = useState([])
     const [phoneTypes, setPhoneTypes] = useState([])
 //<Phone addPhone = {addPhone} existingPhones = {existingPhones}/>
     const [key, setKey] = useState(0)
+
     const addPhone = (phone) => {
-        setApplicationPhones(applicationPhones.append(phone))
+        setApplicationPhones(applicationPhones.concat(phone))
     }
 
 
@@ -40,6 +41,8 @@ const Phones = ({setPhones, existingPhones}) => {
     // https://stackoverflow.com/questions/54069253/the-usestate-set-method-is-not-reflecting-a-change-immediately
     useEffect(()=>{
         console.log('useEffect')
+        console.log('applicationPhones:')
+        console.log(applicationPhones)
         const getPhoneTypes = async () =>{
             const thePhoneTypes = await fetchPhoneTypes()
             console.log("The Phone Types:")

@@ -13,10 +13,21 @@ const Phone = ({addPhone, existingPhones, phoneTypes, removeFromElementList=null
     const [isActive, setIsActive] = useState(true)
     const [isArchived, setIsArchived] = useState(false)
     const [notes, setNotes] = useState("")
+
+    const [phoneObj, setPhoneObj] = useState({
+        area_code:areaCode,
+        phone_number:phoneNumber,
+        phone_type:phoneType,
+        is_active:isActive,
+        is_archived:isArchived,
+        notes:notes
+    })
+
     useEffect(
         ()=>{
             console.log('PhonesPhone useEffect')
             console.log(phoneTypes)
+            addPhone(phoneObj)
         }
     )
 
@@ -45,6 +56,10 @@ const Phone = ({addPhone, existingPhones, phoneTypes, removeFromElementList=null
             label: phoneType.phone_type_name
         }))
 
+    const handleSelection = (selected)=>{
+        setPhoneObj(selected.value)
+    }
+
     return (
         <div className="container">
         {isPrimary?(<h3>Primary Phone Number</h3>):(<h3>Additional Phone Number</h3>)}
@@ -57,7 +72,7 @@ const Phone = ({addPhone, existingPhones, phoneTypes, removeFromElementList=null
                      <label>Select from existing phones:</label>
                      <Select
                         options={phoneOptions}
-                        onchange={setSelectedPhone}     
+                        onchange={handleSelection}//{setSelectedPhone}     
                      /> 
                      </div>
                  ):(
