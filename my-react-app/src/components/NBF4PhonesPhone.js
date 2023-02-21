@@ -2,13 +2,13 @@ import {useState, useEffect} from 'react'
 import Select from 'react-select' // https://react-select.com/home
 import Button from './Button'
 
-const Phone = ({addPhone, existingPhones, phoneTypes, removeFromElementList=null, isPrimary=false}) => {
+const Phone = ({addApplicationPhone, existingPhones, phoneTypes, removeFromElementList=null, isPrimary=false}) => {
     const [selectedPhone, setSelectedPhone] = useState({})
     const [checked, setChecked] = useState(false)
     
     // For creatong new phone
-    const [areaCode, setAreaCode] = useState("")
-    const [phoneNumber, setPhoneNumber] = useState("")
+    const [areaCode, setAreaCode] = useState("000")
+    const [phoneNumber, setPhoneNumber] = useState("0000000")
     const [phoneType, setPhoneType] = useState({})
     const [isActive, setIsActive] = useState(true)
     const [isArchived, setIsArchived] = useState(false)
@@ -25,9 +25,9 @@ const Phone = ({addPhone, existingPhones, phoneTypes, removeFromElementList=null
 
     useEffect(
         ()=>{
-            console.log('PhonesPhone useEffect')
-            console.log(phoneTypes)
-            addPhone(phoneObj)
+            console.log('useEffect in NBF4PhonesPhone.js')
+            //console.log(phoneTypes)
+            addApplicationPhone(phoneObj)
         }
     )
 
@@ -57,6 +57,7 @@ const Phone = ({addPhone, existingPhones, phoneTypes, removeFromElementList=null
         }))
 
     const handleSelection = (selected)=>{
+        console.log('handleSelection')
         setPhoneObj(selected.value)
     }
 
