@@ -22,19 +22,6 @@ const Phones = ({addApplicationPhone, existingPhones}) => {
     const removePhoneElement = (phoneElement) =>{
         setPhoneElementList(phoneElementList.filter((element)=>element!==phoneElement))
     }
-/*
-    const fetchPhoneTypes = async() =>{
-        let headers = new Headers()
-        const token = user['token']
-        const auth_str = 'Token '+token
-        headers.set('Authorization', auth_str)
-
-        const res = await fetch('http://localhost:8000/api/phonetype/', {headers:headers})
-        const data = await res.json()
-        //setPhoneElementList([<Phone key='x' addPhone = {addPhone} existingPhones = {existingPhones} phoneTypes={data}/>])
-        return data
-    } 
-*/
     // https://stackoverflow.com/questions/54069253/the-usestate-set-method-is-not-reflecting-a-change-immediately
     useEffect(()=>{
         const fetchPhoneTypes = async() =>{
@@ -42,7 +29,7 @@ const Phones = ({addApplicationPhone, existingPhones}) => {
             const token = user['token']
             const auth_str = 'Token '+token
             headers.set('Authorization', auth_str)
-        
+
             const res = await fetch('http://localhost:8000/api/phonetype/', {headers:headers})
             const data = await res.json()
             //setPhoneElementList([<Phone key='x' addPhone = {addPhone} existingPhones = {existingPhones} phoneTypes={data}/>])
