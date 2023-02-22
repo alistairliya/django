@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react'
 import Button from './Button'
 import { useAuth } from "../hooks/useAuth"
 
-const Phones = ({addApplicationPhone, existingPhones}) => {
+const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
     //const [applicationPhones, setApplicationPhones] = useState([])  
     const [phoneElementList, setPhoneElementList] = useState([])
     const [phoneTypes, setPhoneTypes] = useState([])
@@ -11,7 +11,9 @@ const Phones = ({addApplicationPhone, existingPhones}) => {
     const [key, setKey] = useState(0)
     const {user} = useAuth()
 
-
+    const log = () => {
+        console.log("call from parent");
+      };
 
     const addAnotherPhone = ()=>{
         console.log("addAnotherPhone Pressed")
@@ -49,6 +51,12 @@ const Phones = ({addApplicationPhone, existingPhones}) => {
         //setPhoneElementList([<Phone key='x' addPhone = {addPhone} existingPhones = {existingPhones}/>])
     },[addApplicationPhone, existingPhones,user])
 
+    useEffect(()=>{
+        console.log('useEffect for trigger in NBF4Phones.js')
+        if(trigger){
+            log()
+        }
+    },[trigger])
 
     return (
     <div>

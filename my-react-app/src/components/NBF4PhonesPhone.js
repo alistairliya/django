@@ -27,7 +27,7 @@ const Phone = ({addApplicationPhone, existingPhones, phoneTypes, removeFromEleme
         ()=>{
             console.log('useEffect in NBF4PhonesPhone.js')
             //console.log(phoneTypes)
-            addApplicationPhone(phoneObj)
+            //addApplicationPhone(phoneObj)
         },[addApplicationPhone, phoneObj]
     )
 
