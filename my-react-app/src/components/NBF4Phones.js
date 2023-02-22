@@ -12,7 +12,7 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
     const {user} = useAuth()
 
     const log = () => {
-        console.log("call from parent");
+        console.log("call from parent, NBF4");
       };
 
     const addAnotherPhone = ()=>{

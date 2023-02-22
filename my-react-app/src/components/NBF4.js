@@ -1,5 +1,4 @@
 import Phones from './NBF4Phones.js'
-import Child from './Child.js'
 
 import {useState, useEffect} from 'react'
 const NBF4 = ({setApplicantContacts, client}) => {
@@ -16,7 +15,7 @@ const NBF4 = ({setApplicantContacts, client}) => {
         console.log(applicationPhones)
     }
 
-    const [phonesElement, setPhonesElement] = useState([<Phones trigger = {trigger} addApplicationPhone={addApplicationPhone}   existingPhones = {client.phone_list}/>])
+    //const [phonesElement, setPhonesElement] = useState([<Phones trigger = {trigger} addApplicationPhone={addApplicationPhone}   existingPhones = {client.phone_list}/>])
     
     useEffect(()=>{
         console.log('useEffect in NBF4.js')
@@ -44,12 +43,6 @@ const NBF4 = ({setApplicantContacts, client}) => {
       <form className="add-form" onSubmit={onSubmit}>
             <input type='submit' value='Next' className='btn btn-block' />
       </form>
-      <button
-        onClick = {() => {
-          setTrigger((trigger) => trigger + 1);
-        }}
-      >click</button>
-      <Child trigger={trigger} />
     </div>
   )
 }
