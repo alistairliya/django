@@ -3,7 +3,7 @@ import Phones from './NBF4Phones.js'
 import {useState, useEffect} from 'react'
 const NBF4 = ({setApplicantContacts, client}) => {
     const [applicationPhones, setApplicationPhones] = useState([])
-    const [trigger, setTrigger] = useState(0)
+    const [trigger, setTrigger] = useState(0) // https://timmousk.com/blog/react-call-function-in-child-component/
     //const [phonesElement, setPhonesElement] = useState([<Phones applicationPhones = {applicationPhones} setApplicationPhones = {setApplicationPhones} existingPhones = {client.phone_list}/>])
     //const [phonesElement, setPhonesElement] = useState([])    
 
