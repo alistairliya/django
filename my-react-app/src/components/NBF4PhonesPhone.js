@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import Select from 'react-select' // https://react-select.com/home
 import Button from './Button'
 
-const Phone = ({addApplicationPhone, existingPhones, phoneTypes, removeFromElementList=null, isPrimary=false}) => {
+const Phone = ({trigger, addApplicationPhone, existingPhones, phoneTypes, removeFromElementList=null, isPrimary=false}) => {
     const [selectedPhone, setSelectedPhone] = useState({})
     const [checked, setChecked] = useState(false)
     
@@ -23,13 +23,15 @@ const Phone = ({addApplicationPhone, existingPhones, phoneTypes, removeFromEleme
         notes:notes
     })
 
-    useEffect(
-        ()=>{
-            console.log('useEffect in NBF4PhonesPhone.js')
-            //console.log(phoneTypes)
-            //addApplicationPhone(phoneObj)
-        },[addApplicationPhone, phoneObj]
-    )
+
+    // Adding phone to application when NEXT is pressed in grand parent.
+    useEffect(()=>{
+        if(trigger){
+            console.log('NBF4PhonePhones Triggered')
+        }   
+    }, [trigger])
+
+   
 
     const checkBox = ( 
            <div>

@@ -11,14 +11,11 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
     const [key, setKey] = useState(0)
     const {user} = useAuth()
 
-    const log = () => {
-        console.log("call from parent, NBF4");
-      };
 
     const addAnotherPhone = ()=>{
         console.log("addAnotherPhone Pressed")
         //setPhoneElementList([...phoneElementList, <Phone key = {key.toString()} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>])
-        setPhoneElementList(old => [...old, <Phone key = {key.toString()} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>] )
+        setPhoneElementList(old => [...old, <Phone key = {key.toString()} trigger={trigger} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>] )
         setKey(key+1)
     }
 
@@ -41,10 +38,8 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
         console.log('useEffect in NBF4Phones.js')
         const getPhoneTypes = async () =>{
             const thePhoneTypes = await fetchPhoneTypes()
-            console.log("The Phone Types:")
-            console.log(thePhoneTypes)
             setPhoneTypes(thePhoneTypes)
-            setPhoneElementList([<Phone key='x' addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={thePhoneTypes} isPrimary = {true}/>])
+            setPhoneElementList([<Phone key='x' trigger={trigger} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={thePhoneTypes} isPrimary = {true}/>])
         }
         getPhoneTypes()
 
@@ -53,9 +48,9 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
     },[addApplicationPhone, existingPhones,user])
 
     useEffect(()=>{
-        console.log('useEffect for trigger in NBF4Phones.js')
+        console.log('useEffect 2 in NBF4Phones.js')
         if(trigger){
-            log()
+            console.log('NBF4Phones Triggered')
         }
     },[trigger])
 
