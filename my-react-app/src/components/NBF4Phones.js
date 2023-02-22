@@ -17,7 +17,8 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
 
     const addAnotherPhone = ()=>{
         console.log("addAnotherPhone Pressed")
-        setPhoneElementList([...phoneElementList, <Phone key = {key.toString()} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>])
+        //setPhoneElementList([...phoneElementList, <Phone key = {key.toString()} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>])
+        setPhoneElementList(old => [...old, <Phone key = {key.toString()} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>] )
         setKey(key+1)
     }
 
