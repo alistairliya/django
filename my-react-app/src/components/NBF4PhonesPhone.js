@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import Select from 'react-select' // https://react-select.com/home
 import Button from './Button'
 
-const Phone = ({trigger, addApplicationPhone, existingPhones, phoneTypes, removeFromElementList=null, isPrimary=false}) => {
+const Phone = ({id, trigger, addApplicationPhone, existingPhones, phoneTypes, removeFromElementList=null, isPrimary=false}) => {
     const [selectedPhone, setSelectedPhone] = useState({})
     const [checked, setChecked] = useState(false)
     
@@ -26,12 +26,19 @@ const Phone = ({trigger, addApplicationPhone, existingPhones, phoneTypes, remove
 
     // Adding phone to application when NEXT is pressed in grand parent.
     useEffect(()=>{
-        if(trigger){
-            console.log('NBF4PhonePhones Triggered')
-        }   
-    }, [trigger])
+        console.log('useEffect for NBF4PhonesPhone ID: '+id)
+        if(trigger > 0){
+            // NEXT button is clicked. Add phone to application
+            console.log('NBF4PhonePhones Triggered. Next pressed. Add '+JSON.stringify(phoneObj)+' to application')
+            //addApplicationPhone(phoneObj)
 
-   
+        }   
+    }, [trigger, id, phoneObj])
+
+    const upddateAreaCode = (areaCode)=>{
+        setAreaCode(areaCode)
+        setPhoneObj({...phoneObj, area_code:areaCode})
+    }
 
     const checkBox = ( 
            <div>
@@ -84,7 +91,7 @@ const Phone = ({trigger, addApplicationPhone, existingPhones, phoneTypes, remove
                      <h2>User creates new phone</h2>
                      <div className="form-control">
                         <label>Area Code:</label>
-                        <input type='text' placeholder="Area Code:" value={areaCode} onChange={(e)=>setAreaCode(e.target.value)} />
+                        <input type='text' placeholder="Area Code:" value={areaCode} onChange={(e)=> upddateAreaCode(e.target.value)} />
                      <div className="form-control">
                         <label>Phone Number:</label>
                         <input type='text' placeholder="Phone Number" value={phoneNumber} onChange={(e)=>setPhoneNumber(e.target.value)} />
