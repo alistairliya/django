@@ -8,6 +8,7 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
     //const [applicationPhones, setApplicationPhones] = useState([])  
     const [phoneElementList, setPhoneElementList] = useState([])
     const [phoneTypes, setPhoneTypes] = useState([])
+    const [trigger2, setTrigger2] = useState(0)
 //<Phone addPhone = {addPhone} existingPhones = {existingPhones}/>
     const [key, setKey] = useState(0)
     const {user} = useAuth()
@@ -17,7 +18,7 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
         console.log("addAnotherPhone Pressed")
         //setPhoneElementList([...phoneElementList, <Phone key = {key.toString()} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>])
         //setPhoneElementList(old => [...old, <Phone key = {key.toString()} id={key.toString()} trigger={trigger} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>] )
-        setPhoneElementList(old => React.Children.toArray([...old, <Phone key = {key.toString()} id={key.toString()} trigger={trigger} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>]))
+        setPhoneElementList(old => React.Children.toArray([...old, <Phone key = {key.toString()} id={key.toString()} trigger={trigger2} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>]))
         setKey(key+1)
     }
 
@@ -37,14 +38,14 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
             //setPhoneElementList([<Phone key='x' addPhone = {addPhone} existingPhones = {existingPhones} phoneTypes={data}/>])
             return data
         } 
-        console.log('useEffect in NBF4Phones.js')
+        console.log('useEffect 1 in NBF4Phones.js')
         const getPhoneTypes = async () =>{
             const thePhoneTypes = await fetchPhoneTypes()
             setPhoneTypes(thePhoneTypes)
             // set the first phone element
             //setPhoneElementList(()=>[<Phone key='x' id='x' trigger={trigger} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={thePhoneTypes} isPrimary = {true}/>])
             if(phoneElementList.length === 0)
-                setPhoneElementList(()=>React.Children.toArray(<Phone key='x' id='x' trigger={trigger} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={thePhoneTypes} isPrimary = {true}/>))
+                setPhoneElementList(()=>React.Children.toArray(<Phone key='x' id='x' trigger={trigger2} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={thePhoneTypes} isPrimary = {true}/>))
         }
         getPhoneTypes()
 
@@ -57,6 +58,7 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
         console.log("Key: "+key+" Trigger: "+trigger.toString())
         console.log("Phone Element Length: "+phoneElementList.length.toString())
         console.log(phoneElementList)
+        setTrigger2(trigger)
         if(trigger){
             console.log('NBF4Phones Triggered')
             //console.log(phoneElementList)

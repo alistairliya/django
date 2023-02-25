@@ -27,13 +27,14 @@ const Phone = ({id, trigger, addApplicationPhone, existingPhones, phoneTypes, re
     // Adding phone to application when NEXT is pressed in grand parent.
     useEffect(()=>{
         console.log('useEffect for NBF4PhonesPhone ID: '+id)
-        if(trigger > 0){
+        //if(trigger > 0){
             // NEXT button is clicked. Add phone to application
-            console.log('NBF4PhonePhones Triggered. Next pressed. Add '+JSON.stringify(phoneObj)+' to application')
+            //console.log('NBF4PhonePhones Triggered. Next pressed. Add '+JSON.stringify(phoneObj)+' to application')
             //addApplicationPhone(phoneObj)
 
-        }   
-    }, [trigger, id, phoneObj])
+        //}   
+    //}, [trigger, id, phoneObj])
+    }, [])
 
     const upddateAreaCode = (areaCode)=>{
         setAreaCode(areaCode)
