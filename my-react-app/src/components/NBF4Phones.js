@@ -7,7 +7,6 @@ import React from 'react'
 const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
     //const [applicationPhones, setApplicationPhones] = useState([])  
     const [phoneElementList, setPhoneElementList] = useState([])
-    const [testArray, setTestArray] = useState([])
     const [phoneTypes, setPhoneTypes] = useState([])
 //<Phone addPhone = {addPhone} existingPhones = {existingPhones}/>
     const [key, setKey] = useState(0)
@@ -20,7 +19,6 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
         //setPhoneElementList(old => [...old, <Phone key = {key.toString()} id={key.toString()} trigger={trigger} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>] )
         setPhoneElementList(old => React.Children.toArray([...old, <Phone key = {key.toString()} id={key.toString()} trigger={trigger} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>]))
         setKey(key+1)
-        setTestArray(old=>[...old, key.toString()])
     }
 
     const removePhoneElement = (phoneElement) =>{
@@ -47,26 +45,23 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
             //setPhoneElementList(()=>[<Phone key='x' id='x' trigger={trigger} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={thePhoneTypes} isPrimary = {true}/>])
             if(phoneElementList.length === 0)
                 setPhoneElementList(()=>React.Children.toArray(<Phone key='x' id='x' trigger={trigger} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={thePhoneTypes} isPrimary = {true}/>))
-            setTestArray(old=>[...old, 'x'])
         }
         getPhoneTypes()
 
         //addAnotherPhone() // cant do this because useEffect is called after the UI is rendered. phoneElementList need to be already constructed.
         //setPhoneElementList([<Phone key='x' addPhone = {addPhone} existingPhones = {existingPhones}/>])
-    },[ trigger,addApplicationPhone, existingPhones,user])
+    },[ phoneElementList, trigger,addApplicationPhone, existingPhones,user])
 
     useEffect(()=>{
         console.log('useEffect 2 in NBF4Phones.js')
         console.log("Key: "+key+" Trigger: "+trigger.toString())
         console.log("Phone Element Length: "+phoneElementList.length.toString())
         console.log(phoneElementList)
-        console.log("Test Array Length: "+testArray.length.toString())
-        console.log(testArray)
         if(trigger){
             console.log('NBF4Phones Triggered')
             //console.log(phoneElementList)
         }
-    },[trigger,key, phoneElementList, testArray])
+    },[trigger,key, phoneElementList])
 
     return (
     <div>
