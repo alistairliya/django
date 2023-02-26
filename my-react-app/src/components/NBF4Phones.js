@@ -4,6 +4,13 @@ import Button from './Button'
 import { useAuth } from "../hooks/useAuth"
 import React from 'react'
 
+/**
+ * Two problems:
+ * 1. Adding new phone number wipes out previous seleciton.
+ * 2. Two phoneObj's are created. 
+ * 
+ */
+
 const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
     //const [applicationPhones, setApplicationPhones] = useState([])  
     const [phoneElementList, setPhoneElementList] = useState([])
