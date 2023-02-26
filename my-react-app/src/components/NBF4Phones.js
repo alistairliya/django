@@ -7,7 +7,9 @@ import React from 'react'
 /**
  * Two problems:
  * 1. Adding new phone number wipes out previous seleciton.
- * 2. Two phoneObj's are created. 
+ * 2. Two phoneObj's are created.
+ * 
+ * Feb 22 to Feb 23 broke the part about adding new phone number wipes out previous. 
  * 
  */
 
