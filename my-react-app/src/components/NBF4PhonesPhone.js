@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import Select from 'react-select' // https://react-select.com/home
 import Button from './Button'
 
-const Phone = ({id, trigger, addApplicationPhone, existingPhones, phoneTypes, removeFromElementList=null, isPrimary=false}) => {
+const Phone = ({phoneObj, id, trigger, addApplicationPhone, existingPhones, phoneTypes, removeFromElementList=null, isPrimary=false}) => {
     const [selectedPhone, setSelectedPhone] = useState({})
     const [checked, setChecked] = useState(false)
     
@@ -14,6 +14,7 @@ const Phone = ({id, trigger, addApplicationPhone, existingPhones, phoneTypes, re
     const [isArchived, setIsArchived] = useState(false)
     const [notes, setNotes] = useState("")
 
+    /*
     const [phoneObj, setPhoneObj] = useState({
         area_code:areaCode,
         phone_number:phoneNumber,
@@ -21,7 +22,7 @@ const Phone = ({id, trigger, addApplicationPhone, existingPhones, phoneTypes, re
         is_active:isActive,
         is_archived:isArchived,
         notes:notes
-    })
+    })*/
 
 
     // Adding phone to application when NEXT is pressed in grand parent.
@@ -38,7 +39,7 @@ const Phone = ({id, trigger, addApplicationPhone, existingPhones, phoneTypes, re
 
     const upddateAreaCode = (areaCode)=>{
         setAreaCode(areaCode)
-        setPhoneObj({...phoneObj, area_code:areaCode})
+        //setPhoneObj({...phoneObj, area_code:areaCode})
     }
 
     const checkBox = ( 
@@ -68,7 +69,9 @@ const Phone = ({id, trigger, addApplicationPhone, existingPhones, phoneTypes, re
 
     const handleSelection = (selected)=>{
         console.log('handleSelection')
-        setPhoneObj(selected.value)
+        //setPhoneObj(selected.value)
+        phoneObj['selection'] = selected.value
+        console.log(phoneObj)
     }
 
     return (
@@ -83,7 +86,7 @@ const Phone = ({id, trigger, addApplicationPhone, existingPhones, phoneTypes, re
                      <label>Select from existing phones:</label>
                      <Select
                         options={phoneOptions}
-                        onchange={handleSelection}//{setSelectedPhone}     
+                        onChange={handleSelection}//{setSelectedPhone}     
                      /> 
                      </div>
                  ):(

@@ -11,14 +11,18 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
     const [trigger2, setTrigger2] = useState(0)
 //<Phone addPhone = {addPhone} existingPhones = {existingPhones}/>
     const [key, setKey] = useState(0)
+    const [phoneObjs, setPhonesObjs] = useState([])
     const {user} = useAuth()
+    
 
 
     const addAnotherPhone = ()=>{
         console.log("addAnotherPhone Pressed")
         //setPhoneElementList([...phoneElementList, <Phone key = {key.toString()} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>])
         //setPhoneElementList(old => [...old, <Phone key = {key.toString()} id={key.toString()} trigger={trigger} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>] )
-        setPhoneElementList(old => React.Children.toArray([...old, <Phone key = {key.toString()} id={key.toString()} trigger={trigger2} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>]))
+        let phoneObj = {}
+        setPhoneElementList(old => React.Children.toArray([...old, <Phone phoneObj={phoneObj} key = {key.toString()} id={key.toString()} trigger={trigger2} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>]))
+        setPhonesObjs(old => [...old, phoneObj])
         setKey(key+1)
     }
 
@@ -43,9 +47,15 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
             const thePhoneTypes = await fetchPhoneTypes()
             setPhoneTypes(thePhoneTypes)
             // set the first phone element
-            //setPhoneElementList(()=>[<Phone key='x' id='x' trigger={trigger} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={thePhoneTypes} isPrimary = {true}/>])
-            if(phoneElementList.length === 0)
-                setPhoneElementList(()=>React.Children.toArray(<Phone key='x' id='x' trigger={trigger2} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={thePhoneTypes} isPrimary = {true}/>))
+            if(phoneElementList.length === 0 && phoneObjs.length === 0){
+                console.log('Adding the first phoneObj to phoneObjs')
+                let phoneObj = {}
+                setPhoneElementList(()=>React.Children.toArray(<Phone phoneObj = {phoneObj} key='x' id='x' trigger={trigger2} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={thePhoneTypes} isPrimary = {true}/>))
+                setPhonesObjs(old => [...old, phoneObj])
+            }else{
+                console.log('phoneObjs: ')
+                console.log(phoneObjs)
+            }
         }
         getPhoneTypes()
 
