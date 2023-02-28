@@ -30,7 +30,8 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
         //setPhoneElementList([...phoneElementList, <Phone key = {key.toString()} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>])
         //setPhoneElementList(old => [...old, <Phone key = {key.toString()} id={key.toString()} trigger={trigger} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>] )
         let phoneObj = {}
-        setPhoneElementList(old => React.Children.toArray([...old, <Phone phoneObj={phoneObj} key = {key.toString()} id={key.toString()} trigger={trigger2} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>]))
+        //setPhoneElementList(old => React.Children.toArray([...old, <Phone phoneObj={phoneObj} key = {key.toString()} id={key.toString()} trigger={trigger2} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>]))
+        setPhoneElementList(old => [...old, <Phone phoneObj={phoneObj} key = {key.toString()} id={key.toString()} trigger={trigger2} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>])
         setPhonesObjs(old => [...old, phoneObj])
         setKey(key+1)
     }
