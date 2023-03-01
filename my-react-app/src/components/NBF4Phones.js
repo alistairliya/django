@@ -22,9 +22,27 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
     const [key, setKey] = useState(0)
     const [phoneObjs, setPhonesObjs] = useState([])
     const {user} = useAuth()
+    const [testCounter, setTestCounter] = useState(0)
     
+    const test=()=>{
+        console.log('test, before:'+testCounter.toString())
+        setTestCounter(old=>old+1)
+        console.log('test, after:'+testCounter.toString())
+        console.log(phoneElementList)
+    }
 
-
+    const removePhoneElement = (phoneElement) =>{
+        console.log('removePhoneElement')
+        console.log('test counter:'+testCounter.toString())
+        console.log(phoneElement)
+        console.log(phoneElementList)
+        //const newArray = phoneElementList.filter((element)=>element!==phoneElement)
+        //console.log(newArray)
+        //setPhoneElementList(newArray)
+        //setPhoneElementList(phoneElementList.filter((element)=>element!==phoneElement))
+        //setPhoneElementList(old => old.filter((element)=>element!==phoneElement))
+    }
+    
     const addAnotherPhone = ()=>{
         console.log("addAnotherPhone Pressed")
         //setPhoneElementList([...phoneElementList, <Phone key = {key.toString()} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>])
@@ -32,12 +50,9 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
         let phoneObj = {}
         //setPhoneElementList(old => React.Children.toArray([...old, <Phone phoneObj={phoneObj} key = {key.toString()} id={key.toString()} trigger={trigger2} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>]))
         setPhoneElementList(old => [...old, <Phone phoneObj={phoneObj} key = {key.toString()} id={key.toString()} trigger={trigger2} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={phoneTypes} removeFromElementList={removePhoneElement}/>])
+        console.log(phoneElementList)
         setPhonesObjs(old => [...old, phoneObj])
         setKey(key+1)
-    }
-
-    const removePhoneElement = (phoneElement) =>{
-        setPhoneElementList(phoneElementList.filter((element)=>element!==phoneElement))
     }
     // https://stackoverflow.com/questions/54069253/the-usestate-set-method-is-not-reflecting-a-change-immediately
     useEffect(()=>{
@@ -98,6 +113,11 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
                 text='Add another phone' 
                 color='red' 
                 onClick={addAnotherPhone} 
+            />
+            <Button 
+                text='TEST'
+                onClick={test}
+
             />
     </div>
   )

@@ -74,6 +74,12 @@ const Phone = ({phoneObj, id, trigger, addApplicationPhone, existingPhones, phon
         console.log(phoneObj)
     }
 
+    const removeMe = ()=>{
+        console.log('removeMe')
+        console.log(this)
+        removeFromElementList(this)
+    }
+
     return (
         <div className="container">
         {isPrimary?(<h3>Primary Phone Number</h3>):(<h3>Additional Phone Number</h3>)}
@@ -120,7 +126,9 @@ const Phone = ({phoneObj, id, trigger, addApplicationPhone, existingPhones, phon
         <div>{!isPrimary? <Button
             text='Remove'
             color='red'
-            onClick={()=>removeFromElementList(this)}
+            //onClick={()=>removeFromElementList(this)}
+            //onClick={removeFromElementList(this)}
+            onClick={removeMe}
         />:""}</div>
         </div>
     )
