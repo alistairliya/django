@@ -43,6 +43,11 @@ const Phone = ({phoneObj, id, trigger, addApplicationPhone, existingPhones, phon
         phoneObj['area_code'] = areaCode
     }
 
+    const updatePhoneNumber = (phoneNumber)=>{
+        setPhoneNumber(phoneNumber)
+        phoneObj['phone_number'] = phoneNumber
+    }
+
     const checkBox = ( 
            <div>
                <input 
@@ -67,6 +72,10 @@ const Phone = ({phoneObj, id, trigger, addApplicationPhone, existingPhones, phon
             value:phoneType,
             label: phoneType.phone_type_name
         }))
+
+    const handlePhoneTypeSelection = (selected)=>{
+        phoneObj['phone_type'] = selected.value
+    }
 
     const handleSelection = (selected)=>{
         console.log('handleSelection')
@@ -105,13 +114,13 @@ const Phone = ({phoneObj, id, trigger, addApplicationPhone, existingPhones, phon
                         <input type='text' placeholder="Area Code:" value={areaCode} onChange={(e)=> upddateAreaCode(e.target.value)} />
                      <div className="form-control">
                         <label>Phone Number:</label>
-                        <input type='text' placeholder="Phone Number" value={phoneNumber} onChange={(e)=>setPhoneNumber(e.target.value)} />
+                        <input type='text' placeholder="Phone Number" value={phoneNumber} onChange={(e)=>updatePhoneNumber(e.target.value)} />
                     </div>
                     <div className="form-control">
                         <label>Phone Type:</label>
                         <Select
                             options={phoneTypeOptions} 
-                            onChange={setPhoneType}
+                            onChange={handlePhoneTypeSelection}
                         />
                     </div>
                     </div>
