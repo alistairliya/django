@@ -75,8 +75,10 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
             if(phoneElementList.length === 0 && phoneObjs.length === 0){
                 console.log('Adding the first phoneObj to phoneObjs')
                 let phoneObj = {}
-                setPhoneElementList(()=>React.Children.toArray(<Phone phoneObj = {phoneObj} key='x' id='x' trigger={trigger2} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={thePhoneTypes} isPrimary = {true}/>))
-                setPhonesObjs(old => [...old, phoneObj])
+                //setPhoneElementList(()=>React.Children.toArray(<Phone phoneObj = {phoneObj} key='x' id='x' trigger={trigger2} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={thePhoneTypes} isPrimary = {true}/>))
+                setPhoneElementList([<Phone phoneObj = {phoneObj} key='x' id='x' trigger={trigger2} addApplicationPhone = {addApplicationPhone} existingPhones = {existingPhones} phoneTypes={thePhoneTypes} isPrimary = {true}/>])
+                //setPhonesObjs(old => [...old, phoneObj])
+                setPhonesObjs([phoneObj])
             }else{
                 console.log('phoneObjs: ')
                 console.log(phoneObjs)
@@ -90,9 +92,6 @@ const Phones = ({trigger, addApplicationPhone, existingPhones}) => {
 
     useEffect(()=>{
         console.log('useEffect 2 in NBF4Phones.js')
-        console.log("Key: "+key+" Trigger: "+trigger.toString())
-        console.log("Phone Element Length: "+phoneElementList.length.toString())
-        console.log(phoneElementList)
         setTrigger2(trigger)
         if(trigger){
             console.log('NBF4Phones Triggered')

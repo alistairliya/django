@@ -40,6 +40,7 @@ const Phone = ({phoneObj, id, trigger, addApplicationPhone, existingPhones, phon
     const upddateAreaCode = (areaCode)=>{
         setAreaCode(areaCode)
         //setPhoneObj({...phoneObj, area_code:areaCode})
+        phoneObj['area_code'] = areaCode
     }
 
     const checkBox = ( 

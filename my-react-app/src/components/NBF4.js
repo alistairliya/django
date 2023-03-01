@@ -19,7 +19,7 @@ const NBF4 = ({setApplicantContacts, client}) => {
     
     useEffect(()=>{
         console.log('useEffect in NBF4.js')
-        console.log(applicationPhones)
+        //console.log(applicationPhones)
         //setPhonesElement([<Phones addApplicationPhone={addApplicationPhone}   existingPhones = {client.phone_list}/>])
         setTrigger(0)
     })
