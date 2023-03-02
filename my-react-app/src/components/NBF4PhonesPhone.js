@@ -6,8 +6,8 @@ const Phone = ({phoneObj, id,  existingPhones, phoneTypes, isPrimary=false}) => 
     const [checked, setChecked] = useState(false)
     
     // For creatong new phone
-    const [areaCode, setAreaCode] = useState("000")
-    const [phoneNumber, setPhoneNumber] = useState("0000000")
+    const [areaCode, setAreaCode] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
 
 
 
