@@ -19,6 +19,7 @@ const NewBusiness = ({onAdd}) => {
     useEffect(()=>{
         console.log('useEffect in NewBusiness.js')
         console.log(applicantPhones)
+        console.log(applicantAddress)
     })
 
     const nbfs = [

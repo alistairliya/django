@@ -27,3 +27,6 @@ const NBF4 = ({onNextClicked, setApplicantPhones, client}) => {
 }
 
 export default NBF4
+
+// Next Up: Insurnace Information
+// Provider, plan type, ...etc
