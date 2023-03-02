@@ -4,13 +4,8 @@ import Button from './Button'
 
 const Phone = ({phoneObj, id,  existingPhones, phoneTypes, isPrimary=false}) => {
     const [checked, setChecked] = useState(false)
-    
-    // For creatong new phone
-    const [areaCode, setAreaCode] = useState("")
-    const [phoneNumber, setPhoneNumber] = useState("")
-
-
-
+    const [areaCode, setAreaCode] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
     // Adding phone to application when NEXT is pressed in grand parent.
     useEffect(()=>{
         console.log('useEffect for NBF4PhonesPhone ID: '+id)
@@ -52,17 +47,24 @@ const Phone = ({phoneObj, id,  existingPhones, phoneTypes, isPrimary=false}) => 
         //setPhoneObj(selected.value)
         phoneObj['selection'] = selected.value
         console.log(phoneObj)
+
+        // clear out other fields
+        phoneObj['area_code'] = null
+        phoneObj['phone_number'] = null
+        phoneObj['phone_type'] = null
+        
     }
     
     const upddateAreaCode = (areaCode)=>{
-        setAreaCode(areaCode)
-        //setPhoneObj({...phoneObj, area_code:areaCode})
         phoneObj['area_code'] = areaCode
+        setAreaCode(areaCode)
+        phoneObj['selection'] = null
     }
 
     const updatePhoneNumber = (phoneNumber)=>{
-        setPhoneNumber(phoneNumber)
         phoneObj['phone_number'] = phoneNumber
+        setPhoneNumber(phoneNumber)
+        phoneObj['selection'] = null
     }
 /*
     // Not being used right now, but may need it later
