@@ -1,3 +1,4 @@
+// Addresses
 
 import SelectAddress from './SelectAddress'
 import NewAddress from './NewAddress'
