@@ -61,12 +61,13 @@ const Phone = ({phoneObj, id, trigger,  existingPhones, phoneTypes, removeFromEl
     )
   
   
-    const phoneOptions = existingPhones.map(
+    const phoneOptions = existingPhones? existingPhones.map(
         (existingPhone)=>({
             value:existingPhone,
             label: existingPhone.area_code+' '+existingPhone.phone_number
         })
-    )
+    ):null
+
     const phoneTypeOptions = phoneTypes.map(
         (phoneType)=>({
             value:phoneType,
