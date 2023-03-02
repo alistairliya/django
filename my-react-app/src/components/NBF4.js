@@ -1,8 +1,7 @@
 import Phones from './NBF4Phones.js'
 
 import {useState, useEffect} from 'react'
-const NBF4 = ({setApplicantContacts, client}) => {
-    const [applicationPhones, setApplicationPhones] = useState([])
+const NBF4 = ({onNextClicked, setApplicantPhones, client}) => {
     const [trigger, setTrigger] = useState(0) // https://timmousk.com/blog/react-call-function-in-child-component/
     //const [phonesElement, setPhonesElement] = useState([<Phones applicationPhones = {applicationPhones} setApplicationPhones = {setApplicationPhones} existingPhones = {client.phone_list}/>])
     //const [phonesElement, setPhonesElement] = useState([])    
@@ -29,9 +28,9 @@ const NBF4 = ({setApplicantContacts, client}) => {
         e.preventDefault()
         console.log('Next pressed')
         //console.log(phonesElement[0]['phoneElementList'])
-        console.log(applicationPhones)
         setTrigger((trigger) => trigger + 1)
         console.log(trigger)
+        onNextClicked()
     }
 /*
       <div>
@@ -41,7 +40,7 @@ const NBF4 = ({setApplicantContacts, client}) => {
     return (
     <div>
       <h2>New Business Form - Client Phone Contacts</h2>
-      <Phones trigger = {trigger}  existingPhones = {client.phone_list}/>
+      <Phones setApplicantPhones={setApplicantPhones} trigger = {trigger}  existingPhones = {client.phone_list}/>
       <form className="add-form" onSubmit={onSubmit}>
             <input type='submit' value='Next' className='btn btn-block' />
       </form>

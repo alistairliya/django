@@ -3,23 +3,29 @@ import NBF1 from './NBF1'
 import NBF2 from './NBF2'
 import NBF3 from './NBF3'
 import NBF4 from './NBF4'
-import { useState} from 'react'
+import { useState, useEffect} from 'react'
 //import { useRadioGroup } from '@mui/material'
 const NewBusiness = ({onAdd}) => {
     const [client, setClient] = useState()
     const [index, setIndex] = useState(0)
     const [applicantAddress, setApplicantAddress] = useState()
-    const [applicantContacts, setApplicantContacts] = useState()
+    const [applicantPhones, setApplicantPhones] = useState()
     const onNextClicked = () => {
         console.log("Clicked Next from index "+index)
         setIndex(index+1)
+        console.log(applicantPhones)
     }
+
+    useEffect(()=>{
+        console.log('useEffect in NewBusiness.js')
+        console.log(applicantPhones)
+    })
 
     const nbfs = [
         <NBF1 setClient={setClient} onNextClicked = {onNextClicked}/>, 
         <NBF2 setClient={setClient} onNextClicked = {onNextClicked} client={client}  />,
         <NBF3 setApplicantAddress= {setApplicantAddress} onNextClicked = {onNextClicked} client={client}/>,
-        <NBF4 setApplicantContacts = {setApplicantContacts} client = {client} />
+        <NBF4 onNextClicked = {onNextClicked} setApplicantPhones = {setApplicantPhones} client = {client} />
     ] 
     return( 
         <div className="container">{nbfs[index]}</div>

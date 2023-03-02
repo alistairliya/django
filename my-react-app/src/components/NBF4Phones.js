@@ -13,7 +13,7 @@ import React from 'react'
  * 
  */
 
-const Phones = ({trigger, existingPhones}) => {
+const Phones = ({setApplicantPhones, trigger, existingPhones}) => {
     //const [applicationPhones, setApplicationPhones] = useState([])  
     const [phoneElementList, setPhoneElementList] = useState([])
     const [phoneTypes, setPhoneTypes] = useState([])
@@ -82,6 +82,8 @@ const Phones = ({trigger, existingPhones}) => {
             }else{
                 console.log('phoneObjs: ')
                 console.log(phoneObjs)
+                // When the user clicks on Next button.
+                setApplicantPhones(phoneObjs)
             }
         }
         getPhoneTypes()
