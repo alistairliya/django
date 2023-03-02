@@ -7,7 +7,7 @@ const NBF4 = ({onNextClicked, setApplicantPhones, client}) => {
     useEffect(()=>{
         console.log('useEffect in NBF4.js')
         setTrigger(0)
-    })
+    },[setTrigger])
 
     const onSubmit = (e) =>{
         e.preventDefault()
