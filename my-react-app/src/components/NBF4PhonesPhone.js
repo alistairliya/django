@@ -105,6 +105,7 @@ const Phone = ({phoneObj, id, trigger,  existingPhones, phoneTypes, removeFromEl
                         options={phoneOptions}
                         onChange={handleSelection}//{setSelectedPhone}     
                      /> 
+                        <div>{checkBox}</div>
                      </div>
                  ):(
                      // User create new phonne
@@ -125,6 +126,7 @@ const Phone = ({phoneObj, id, trigger,  existingPhones, phoneTypes, removeFromEl
                         />
                     </div>
                     </div>
+                        <div>{checkBox}</div>
                      </div>
                  )
              ):
@@ -150,7 +152,6 @@ const Phone = ({phoneObj, id, trigger,  existingPhones, phoneTypes, removeFromEl
                      </div>
              ) 
         }
-        <div>{checkBox}</div>
         <div>{!isPrimary? <Button
             text='Remove'
             color='red'
