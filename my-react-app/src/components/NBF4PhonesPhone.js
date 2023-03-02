@@ -132,11 +132,19 @@ const Phone = ({phoneObj, id,  existingPhones, phoneTypes, isPrimary=false}) => 
                      </div>
              ) 
         }
-        <div>{!isPrimary? <Button
+        <div>
+        {
+        /* May need it for the future    
+        !isPrimary? 
+        <Button
             text='Remove'
             color='red'
             //onClick={removeMe}
-        />:""}</div>
+        />
+        :
+        ""
+        */
+        }</div>
         </div>
     )
 }
