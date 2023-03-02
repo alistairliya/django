@@ -2,40 +2,19 @@ import {useState, useEffect} from 'react'
 import Select from 'react-select' // https://react-select.com/home
 import Button from './Button'
 
-const Phone = ({phoneObj, id, trigger,  existingPhones, phoneTypes, removeFromElementList=null, isPrimary=false}) => {
-    const [selectedPhone, setSelectedPhone] = useState({})
+const Phone = ({phoneObj, id,  existingPhones, phoneTypes, isPrimary=false}) => {
     const [checked, setChecked] = useState(false)
     
     // For creatong new phone
     const [areaCode, setAreaCode] = useState("000")
     const [phoneNumber, setPhoneNumber] = useState("0000000")
-    const [phoneType, setPhoneType] = useState({})
-    const [isActive, setIsActive] = useState(true)
-    const [isArchived, setIsArchived] = useState(false)
-    const [notes, setNotes] = useState("")
 
-    /*
-    const [phoneObj, setPhoneObj] = useState({
-        area_code:areaCode,
-        phone_number:phoneNumber,
-        phone_type:phoneType,
-        is_active:isActive,
-        is_archived:isArchived,
-        notes:notes
-    })*/
 
 
     // Adding phone to application when NEXT is pressed in grand parent.
     useEffect(()=>{
         console.log('useEffect for NBF4PhonesPhone ID: '+id)
-        //if(trigger > 0){
-            // NEXT button is clicked. Add phone to application
-            //console.log('NBF4PhonePhones Triggered. Next pressed. Add '+JSON.stringify(phoneObj)+' to application')
-            //addApplicationPhone(phoneObj)
-
-        //}   
-    //}, [trigger, id, phoneObj])
-    }, [])
+    })
 
     const upddateAreaCode = (areaCode)=>{
         setAreaCode(areaCode)
@@ -84,13 +63,14 @@ const Phone = ({phoneObj, id, trigger,  existingPhones, phoneTypes, removeFromEl
         phoneObj['selection'] = selected.value
         console.log(phoneObj)
     }
-
+/*
+    // Not being used right now, but may need it later
     const removeMe = ()=>{
         console.log('removeMe')
         console.log(this)
-        removeFromElementList(this)
+        removeFromElementList(this) // function passed in as parameter
     }
-
+*/
     return (
         <div className="container">
         {isPrimary?(<h3>Primary Phone Number</h3>):(<h3>Additional Phone Number</h3>)}
@@ -155,9 +135,7 @@ const Phone = ({phoneObj, id, trigger,  existingPhones, phoneTypes, removeFromEl
         <div>{!isPrimary? <Button
             text='Remove'
             color='red'
-            //onClick={()=>removeFromElementList(this)}
-            //onClick={removeFromElementList(this)}
-            onClick={removeMe}
+            //onClick={removeMe}
         />:""}</div>
         </div>
     )
