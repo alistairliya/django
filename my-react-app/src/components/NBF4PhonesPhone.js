@@ -16,16 +16,6 @@ const Phone = ({phoneObj, id,  existingPhones, phoneTypes, isPrimary=false}) => 
         console.log('useEffect for NBF4PhonesPhone ID: '+id)
     })
 
-    const upddateAreaCode = (areaCode)=>{
-        setAreaCode(areaCode)
-        //setPhoneObj({...phoneObj, area_code:areaCode})
-        phoneObj['area_code'] = areaCode
-    }
-
-    const updatePhoneNumber = (phoneNumber)=>{
-        setPhoneNumber(phoneNumber)
-        phoneObj['phone_number'] = phoneNumber
-    }
 
     const checkBox = ( 
            <div>
@@ -62,6 +52,17 @@ const Phone = ({phoneObj, id,  existingPhones, phoneTypes, isPrimary=false}) => 
         //setPhoneObj(selected.value)
         phoneObj['selection'] = selected.value
         console.log(phoneObj)
+    }
+    
+    const upddateAreaCode = (areaCode)=>{
+        setAreaCode(areaCode)
+        //setPhoneObj({...phoneObj, area_code:areaCode})
+        phoneObj['area_code'] = areaCode
+    }
+
+    const updatePhoneNumber = (phoneNumber)=>{
+        setPhoneNumber(phoneNumber)
+        phoneObj['phone_number'] = phoneNumber
     }
 /*
     // Not being used right now, but may need it later
