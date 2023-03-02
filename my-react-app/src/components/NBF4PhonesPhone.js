@@ -130,7 +130,24 @@ const Phone = ({phoneObj, id, trigger,  existingPhones, phoneTypes, removeFromEl
              ):
              (
                  // user must create a new number
-                 <h2>user must create a new number</h2>
+                     <div>
+                     <h2>User creates new phone</h2>
+                     <div className="form-control">
+                        <label>Area Code:</label>
+                        <input type='text' placeholder="Area Code:" value={areaCode} onChange={(e)=> upddateAreaCode(e.target.value)} />
+                     <div className="form-control">
+                        <label>Phone Number:</label>
+                        <input type='text' placeholder="Phone Number" value={phoneNumber} onChange={(e)=>updatePhoneNumber(e.target.value)} />
+                    </div>
+                    <div className="form-control">
+                        <label>Phone Type:</label>
+                        <Select
+                            options={phoneTypeOptions} 
+                            onChange={handlePhoneTypeSelection}
+                        />
+                    </div>
+                    </div>
+                     </div>
              ) 
         }
         <div>{checkBox}</div>
