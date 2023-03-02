@@ -7,13 +7,14 @@ const NBF4 = ({setApplicantContacts, client}) => {
     //const [phonesElement, setPhonesElement] = useState([<Phones applicationPhones = {applicationPhones} setApplicationPhones = {setApplicationPhones} existingPhones = {client.phone_list}/>])
     //const [phonesElement, setPhonesElement] = useState([])    
 
+    /*
     const addApplicationPhone = (phone) =>{
         console.log('addApplicationPhones...')
         console.log(applicationPhones)
         console.log(phone)
         setApplicationPhones(old => [...old, phone])
         console.log(applicationPhones)
-    }
+    }*/
 
     //const [phonesElement, setPhonesElement] = useState([<Phones trigger = {trigger} addApplicationPhone={addApplicationPhone}   existingPhones = {client.phone_list}/>])
     
@@ -40,7 +41,7 @@ const NBF4 = ({setApplicantContacts, client}) => {
     return (
     <div>
       <h2>New Business Form - Client Phone Contacts</h2>
-      <Phones trigger = {trigger} addApplicationPhone={addApplicationPhone}   existingPhones = {client.phone_list}/>
+      <Phones trigger = {trigger}  existingPhones = {client.phone_list}/>
       <form className="add-form" onSubmit={onSubmit}>
             <input type='submit' value='Next' className='btn btn-block' />
       </form>

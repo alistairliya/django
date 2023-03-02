@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import Select from 'react-select' // https://react-select.com/home
 import Button from './Button'
 
-const Phone = ({phoneObj, id, trigger, addApplicationPhone, existingPhones, phoneTypes, removeFromElementList=null, isPrimary=false}) => {
+const Phone = ({phoneObj, id, trigger,  existingPhones, phoneTypes, removeFromElementList=null, isPrimary=false}) => {
     const [selectedPhone, setSelectedPhone] = useState({})
     const [checked, setChecked] = useState(false)
     
