@@ -11,6 +11,8 @@ const NewBusiness = ({onAdd}) => {
     const [index, setIndex] = useState(0)
     const [applicantAddress, setApplicantAddress] = useState()
     const [applicantPhones, setApplicantPhones] = useState()
+    const [applicantInsurance, setApplicantInsurance] = useState()
+
     const onNextClicked = () => {
         console.log("Clicked Next from index "+index)
         setIndex(index+1)
@@ -21,6 +23,7 @@ const NewBusiness = ({onAdd}) => {
         console.log('useEffect in NewBusiness.js')
         console.log(applicantPhones)
         console.log(applicantAddress)
+        console.log(applicantInsurance)
     })
 
     const nbfs = [
@@ -28,7 +31,7 @@ const NewBusiness = ({onAdd}) => {
         <NBF2 setClient={setClient} onNextClicked = {onNextClicked} client={client}  />,
         <NBF3 setApplicantAddress= {setApplicantAddress} onNextClicked = {onNextClicked} client={client}/>,
         <NBF4 onNextClicked = {onNextClicked} setApplicantPhones = {setApplicantPhones} client = {client} />,
-        <NBF5 onNextClicked = {onNextClicked} client = {client} applicantAddress = {applicantAddress} applicantPhones = {applicantPhones} />
+        <NBF5 onNextClicked = {onNextClicked} setInsuranceInfo={setApplicantInsurance}/>
     ] 
     return( 
         <div className="container">{nbfs[index]}</div>

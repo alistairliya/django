@@ -10,7 +10,7 @@ import { useAuth } from "../hooks/useAuth"
 import {useState, useEffect} from 'react'
 import Select from "react-select"
 
-const NBF5 = ({setInsuranceInfo}) => {
+const NBF5 = ({setInsuranceInfo, onNextClicked}) => {
 
 
     const { user } = useAuth()
@@ -76,6 +76,11 @@ const NBF5 = ({setInsuranceInfo}) => {
         e.preventDefault()
         console.log('onSubmit')
         setInsuranceInfo({
+            insurance_provider: insuranceProviders,
+            insurance_plan_type: insurancePlanTypes,
+            insurance_plan: insurancePlans,
+            face_amount: faceAmount,
+            planned_premium: plannedPremium
         })
     }
 
@@ -84,17 +89,17 @@ const NBF5 = ({setInsuranceInfo}) => {
         <label>Select Plan Type:</label>
         <Select
             options={planTypeOptions}
-            onChange = {e => console.log(e)}
+            onChange = {e => setInsurancePlanTypes(e.value)}
         />
         <label>Select Insurnace Provider:</label>
         <Select
             options={insuranceProviderOptions}
-            onChange = {e => console.log(e)}
+            onChange = {e => setInsuranceProviders(e.value)}
         />
         <label>Select Insurance Plan:</label>
         <Select
             options={insurancePlanOptions}
-            onChange = {e => console.log(e)}
+            onChange = {e => setInsurancePlans(e.value)}
         />
         <div className="form-control">
             <label>Face Amount:</label>
