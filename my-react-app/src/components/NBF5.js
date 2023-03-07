@@ -1,5 +1,5 @@
 // Insurance Information:
-// Insurance Provider - selection
+// x Insurance Provider - selection
 // x Insurance Plan Type - selection
 // Insurancce Plan - selection
 // Face Amount - text box
@@ -51,11 +51,21 @@ const NBF5 = () => {
     label: planType.insurnace_plan_type_name
    }))
 
+   const insuranceProviderOptions = insuranceProviders.map((provider) => (
+    {value: provider,
+    label: provider.insurance_provider_name
+    }))
+
   return (
     <div>
         <label>Select Plan Type:</label>
         <Select
             options={planTypeOptions}
+            onChange = {e => console.log(e)}
+        />
+        <label>Select Insurnace Provider:</label>
+        <Select
+            options={insuranceProviderOptions}
             onChange = {e => console.log(e)}
         />
     </div>
