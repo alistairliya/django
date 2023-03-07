@@ -19,7 +19,7 @@ const NBF5 = ({setInsuranceInfo, onNextClicked}) => {
     const [insurancePlans, setInsurancePlans] = useState([])
     const [faceAmount, setFaceAmount] = useState('')   
     const [plannedPremium, setPlannedPremium] = useState('')
-    
+    const [insObj, setInsObj] = useState({})    
 
    useEffect(()=>{
         console.log('NBF5')
@@ -75,13 +75,8 @@ const NBF5 = ({setInsuranceInfo, onNextClicked}) => {
     const onSubmit = (e) =>{
         e.preventDefault()
         console.log('onSubmit')
-        setInsuranceInfo({
-            insurance_provider: insuranceProviders,
-            insurance_plan_type: insurancePlanTypes,
-            insurance_plan: insurancePlans,
-            face_amount: faceAmount,
-            planned_premium: plannedPremium
-        })
+        setInsuranceInfo(insObj)
+        onNextClicked()
     }
 
   return (
@@ -89,31 +84,31 @@ const NBF5 = ({setInsuranceInfo, onNextClicked}) => {
         <label>Select Plan Type:</label>
         <Select
             options={planTypeOptions}
-            onChange = {e => setInsurancePlanTypes(e.value)}
+            onChange = {e => setInsObj({...insObj, insurance_plan_type: e.value})}
         />
         <label>Select Insurnace Provider:</label>
         <Select
             options={insuranceProviderOptions}
-            onChange = {e => setInsuranceProviders(e.value)}
+            onChange = {e => setInsObj({...insObj, insurance_provider: e.value})}
         />
         <label>Select Insurance Plan:</label>
         <Select
             options={insurancePlanOptions}
-            onChange = {e => setInsurancePlans(e.value)}
+            onChange = {e => setInsObj({...insObj, insurance_plan: e.value})}
         />
         <div className="form-control">
             <label>Face Amount:</label>
             <input type='text' 
                     placeholder="Face Amount" 
-                    value={faceAmount} 
-                    onChange={(e)=> setFaceAmount(e.target.value)} />
+                    value={insObj.face_amount} 
+                    onChange = {e => setInsObj({...insObj, face_amount: e.target.value})} />
         </div>
         <div className="form-control">
             <label>Planned Premium:</label>
             <input type='text' 
                     placeholder="Planned Premium" 
-                    value={plannedPremium} 
-                    onChange={(e)=> setPlannedPremium(e.target.value)} />
+                    value={insObj.planned_premium} 
+                    onChange = {e => setInsObj({...insObj, planned_premium: e.target.value})} />
         </div>
         <form className="add-form" onSubmit={onSubmit}>
             <input type='submit' value='Next' className='btn btn-block' />
