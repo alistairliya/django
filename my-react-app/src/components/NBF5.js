@@ -10,14 +10,15 @@ import { useAuth } from "../hooks/useAuth"
 import {useState, useEffect} from 'react'
 import Select from "react-select"
 
-const NBF5 = () => {
+const NBF5 = ({setInsuranceInfo}) => {
 
 
     const { user } = useAuth()
     const [insuranceProviders, setInsuranceProviders] = useState([])
     const [insurancePlanTypes, setInsurancePlanTypes] = useState([])
     const [insurancePlans, setInsurancePlans] = useState([])
-
+    const [faceAmount, setFaceAmount] = useState('')   
+    const [plannedPremium, setPlannedPremium] = useState('')
     
 
    useEffect(()=>{
@@ -71,6 +72,13 @@ const NBF5 = () => {
         label: plan.insurance_plan_name
     }))
 
+    const onSubmit = (e) =>{
+        e.preventDefault()
+        console.log('onSubmit')
+        setInsuranceInfo({
+        })
+    }
+
   return (
     <div>
         <label>Select Plan Type:</label>
@@ -88,6 +96,23 @@ const NBF5 = () => {
             options={insurancePlanOptions}
             onChange = {e => console.log(e)}
         />
+        <div className="form-control">
+            <label>Face Amount:</label>
+            <input type='text' 
+                    placeholder="Face Amount" 
+                    value={faceAmount} 
+                    onChange={(e)=> setFaceAmount(e.target.value)} />
+        </div>
+        <div className="form-control">
+            <label>Planned Premium:</label>
+            <input type='text' 
+                    placeholder="Planned Premium" 
+                    value={plannedPremium} 
+                    onChange={(e)=> setPlannedPremium(e.target.value)} />
+        </div>
+        <form className="add-form" onSubmit={onSubmit}>
+            <input type='submit' value='Next' className='btn btn-block' />
+        </form>
     </div>
   )
 }
