@@ -81,6 +81,7 @@ const NBF5 = ({setInsuranceInfo, onNextClicked}) => {
 
   return (
     <div>
+        <h2>New Business Form - Insurance Information</h2> 
         <label>Select Plan Type:</label>
         <Select
             options={planTypeOptions}
@@ -104,7 +105,7 @@ const NBF5 = ({setInsuranceInfo, onNextClicked}) => {
                     onChange = {e => setInsObj({...insObj, face_amount: e.target.value})} />
         </div>
         <div className="form-control">
-            <label>Planned Premium:</label>
+            <label>Planned Monthly Premium:</label>
             <input type='text' 
                     placeholder="Planned Premium" 
                     value={insObj.planned_premium} 
