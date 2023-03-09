@@ -23,6 +23,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['first_name','last_name','url', 'username', 'email', 'groups','created_businesses','my_businesses']
         #fields = '__all__'
 
+class StatusSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Status
+        fields = ['status_name', 'description']
+
 class ProvinceStateSerializer(serializers.HyperlinkedModelSerializer):
     #country = CountrySerializer(read_only=True)
     class Meta:

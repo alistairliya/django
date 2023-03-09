@@ -52,6 +52,7 @@ router.register(r'phonetype', views.PhoneTypeViewSet)
 router.register(r'phone', views.PhoneViewSet)
 router.register(r'emailtype', views.EmailTypeViewSet)
 router.register(r'email',views.EmailViewSet)
+router.register(r'status', views.StatusViewSet)
 
 
 urlpatterns = [

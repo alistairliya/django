@@ -46,6 +46,10 @@ class MyBusinessView(viewsets.ModelViewSet):
         qs |= self.queryset.filter(pk__in = owner_businesses)
         return qs
     
+class StatusViewSet(viewsets.ModelViewSet):
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 class UserViewSet(viewsets.ModelViewSet):
     """

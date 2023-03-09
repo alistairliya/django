@@ -12,6 +12,11 @@ from django.db import models
 # Many-to-Many Relationships:
 # https://docs.djangoproject.com/en/4.1/topics/db/examples/many_to_many/
 
+# General Status
+class Status(models.Model):
+    status_name = models.CharField(max_length=64)
+    description = models.CharField(max_length=1024, null=True)
+
 # Cusstom User Based on: 
 # https://learndjango.com/tutorials/django-custom-user-model
 class MyUser(AbstractUser):
@@ -233,6 +238,9 @@ class Medical(models.Model):
 class InsuranceApplication_Medical(models.Model):
     insurance_application = models.ForeignKey(InsuranceApplication, on_delete=models.CASCADE, related_name="insurance_applications")
     medical = models.ForeignKey(Medical, on_delete=models.PROTECT, related_name="insurance_applications")
+    notes = models.CharField(max_length=1024, null=True)
+    status = models.ForeignKey(Status, on_delete=models.PROTECT, related_name="insurance_applications", null=True)
+
 
 # Checked
 class ActivityLog(models.Model):
