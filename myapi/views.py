@@ -114,6 +114,10 @@ class InsurancePlanTypeViewSet(viewsets.ModelViewSet):
     queryset = InsurancePlanType.objects.all()
     serializer_class = InsurancePlaneTypeSerializer
 
+class MedicalViewSet(viewsets.ModelViewSet):
+    queryset = Medical.objects.all()
+    serializer_class = MedicalSerializer
+
 class InsuranceApplicationViewSet(viewsets.ModelViewSet):
     queryset = InsuranceApplication.objects.all()
     serializer_class = InsuranceApplicationSerializer

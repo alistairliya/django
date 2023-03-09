@@ -53,7 +53,7 @@ router.register(r'phone', views.PhoneViewSet)
 router.register(r'emailtype', views.EmailTypeViewSet)
 router.register(r'email',views.EmailViewSet)
 router.register(r'status', views.StatusViewSet)
-
+router.register(r'medical', views.MedicalViewSet)
 
 urlpatterns = [
     path('', include("users.urls")),
