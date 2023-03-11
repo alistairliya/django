@@ -20,11 +20,15 @@ const NBF6 = () => {
             const res = await fetch(url,{headers:headers})
             const data = await res.json()
             setAvailableMedicals(data)
-            console.log(data)
             return data
         }
-        fetchResource('medical')
-    },[])
+        if (availableMedicals.length === 0){
+            console.log('fetching medicals')
+            fetchResource('medical')
+            
+        }
+        console.log(availableMedicals)
+    },[availableMedicals, user])
 
   return (
     <div>NBF6</div>
