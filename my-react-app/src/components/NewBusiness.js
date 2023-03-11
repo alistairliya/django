@@ -17,7 +17,7 @@ const NewBusiness = ({onAdd}) => {
     const onNextClicked = () => {
         console.log("Clicked Next from index "+index)
         setIndex(index+1)
-        console.log(applicantPhones)
+        //console.log(applicantPhones)
     }
 
     useEffect(()=>{
