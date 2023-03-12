@@ -3,6 +3,7 @@
 
 import { useEffect,useState } from "react"
 import { useAuth } from "../hooks/useAuth"
+import NBF6CheckBoxes from './NBF6CheckBoxes'
 
 // Select ones that apply
 const NBF6 = () => {
@@ -27,11 +28,14 @@ const NBF6 = () => {
             fetchResource('medical')
             
         }
+        console.log('NBF6 useEffect availableMedicals:')
         console.log(availableMedicals)
     },[availableMedicals, user])
 
   return (
-    <div>NBF6</div>
+    <div>NBF6
+        <NBF6CheckBoxes items={availableMedicals}/>
+    </div>
   )
 }
 
