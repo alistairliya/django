@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import Tooltip from "@mui/material/Tooltip"
 const NBF6CheckBoxes = ({item}) => {
   useEffect(()=>{
     console.log('NBF6CheckBoxes useEffect')
@@ -9,10 +10,9 @@ const NBF6CheckBoxes = ({item}) => {
     return (
     <div>
         {
-            
-            
+            <Tooltip title={item.description}>
                 <label>{item.medical_name}</label>
-            
+            </Tooltip>
         }
     </div>
   )
