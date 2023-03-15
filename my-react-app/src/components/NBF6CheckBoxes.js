@@ -1,20 +1,18 @@
 import { useEffect } from "react"
-const NBF6CheckBoxes = ({items}) => {
+const NBF6CheckBoxes = ({item}) => {
   useEffect(()=>{
     console.log('NBF6CheckBoxes useEffect')
-    console.log(items)
-   } ,[items])
+    console.log(item)
+   } ,[item])
 
 
     return (
     <div>
         {
             
-        items.map((item)=>(
             
                 <label>{item.medical_name}</label>
             
-        ))
         }
     </div>
   )

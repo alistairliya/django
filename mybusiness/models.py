@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+import uuid
 
 # Referencing User Model:
 # https://docs.djangoproject.com/en/4.0/topics/auth/customizing/#referencing-the-user-model
@@ -231,6 +232,7 @@ class InsuranceApplication(models.Model):
 
 # Checked
 class Medical(models.Model):
+    #id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     medical_name = models.CharField(max_length=64)
     description = models.CharField(max_length=1024, null=True)
 

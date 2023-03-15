@@ -179,7 +179,7 @@ class InsurancePlaneTypeSerializer(serializers.HyperlinkedModelSerializer):
 class MedicalSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Medical
-        fields = ['medical_name', 'description']
+        fields = ['id', 'medical_name', 'description']
 
 class InsuranceApplicationSerializer(serializers.HyperlinkedModelSerializer):
     provider = InsuranceProviderSerializer()
