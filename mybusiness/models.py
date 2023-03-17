@@ -191,7 +191,6 @@ class Business_ComplianceEntity(models.Model):
 
 # Checked
 class Document(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.DO_NOTHING, related_name="document")
     document_name = models.CharField(max_length=64)
     description = models.CharField(max_length=1024, null=True)
 
