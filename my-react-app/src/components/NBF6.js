@@ -48,7 +48,7 @@ const NBF6 = ({onNextClicked, setMedicals}) => {
 
   return (
     <div>
-        <h2>New Business Form - Insurance Information: Medicals</h2> 
+        <h2>New Business Form - Insurance Information: Order Medicals</h2> 
     {
         availableMedicals.map((item)=>(<Medical key={item.id} id={item.id} item={item} collect = {collect}/>))
     }   
