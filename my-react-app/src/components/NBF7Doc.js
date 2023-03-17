@@ -1,7 +1,7 @@
 
-const NBF7Doc = () => {
+const NBF7Doc = ({id, item, collect}) => {
   return (
-    <div>NBF7Doc</div>
+    <div>{item.document_name}</div>
   )
 }
 

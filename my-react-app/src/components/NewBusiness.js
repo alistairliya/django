@@ -16,6 +16,7 @@ const NewBusiness = ({onAdd}) => {
     const [applicantPhones, setApplicantPhones] = useState()
     const [applicantInsurance, setApplicantInsurance] = useState()
     const [medicals, setMedicals] = useState()
+    const [documents, setDocuments] = useState()
 
     const onNextClicked = () => {
         console.log("Clicked Next from index "+index)
@@ -37,7 +38,7 @@ const NewBusiness = ({onAdd}) => {
         <NBF4 onNextClicked = {onNextClicked} setApplicantPhones = {setApplicantPhones} client = {client} />,
         <NBF5 onNextClicked = {onNextClicked} setInsuranceInfo={setApplicantInsurance}/>,
         <NBF6 onNextClicked={onNextClicked} setMedicals= {setMedicals}/>,
-        <NBF7 onNextClicked={onNextClicked} />  
+        <NBF7 onNextClicked={onNextClicked} setDocuments={setDocuments} />  
     
     ] 
     return( 
