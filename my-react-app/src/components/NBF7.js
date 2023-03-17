@@ -1,6 +1,8 @@
 // Documents
 import { useAuth } from "../hooks/useAuth"
 import { useEffect, useState } from "react"
+import Document from './NBF7Doc.js'
+
 const NBF7 = () => {
     
     const [availableDocuments, setAvailableDocuments] = useState([])
@@ -21,7 +23,7 @@ const NBF7 = () => {
             return data
         }
         if (availableDocuments.length === 0){
-            console.log('fetching medicals')
+            console.log('fetching documents')
             fetchResource('documents')
             
         }
