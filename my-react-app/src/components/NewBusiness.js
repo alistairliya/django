@@ -5,6 +5,8 @@ import NBF3 from './NBF3'
 import NBF4 from './NBF4'
 import NBF5 from './NBF5'
 import NBF6 from './NBF6'
+import NBF7 from './NBF7'
+
 import { useState, useEffect} from 'react'
 //import { useRadioGroup } from '@mui/material'
 const NewBusiness = ({onAdd}) => {
@@ -23,9 +25,9 @@ const NewBusiness = ({onAdd}) => {
 
     useEffect(()=>{
         console.log('useEffect in NewBusiness.js')
-        console.log(applicantPhones)
-        console.log(applicantAddress)
-        console.log(applicantInsurance)
+        //console.log(applicantPhones)
+        //console.log(applicantAddress)
+        //console.log(applicantInsurance)
     })
 
     const nbfs = [
@@ -34,7 +36,8 @@ const NewBusiness = ({onAdd}) => {
         <NBF3 setApplicantAddress= {setApplicantAddress} onNextClicked = {onNextClicked} client={client}/>,
         <NBF4 onNextClicked = {onNextClicked} setApplicantPhones = {setApplicantPhones} client = {client} />,
         <NBF5 onNextClicked = {onNextClicked} setInsuranceInfo={setApplicantInsurance}/>,
-        <NBF6 onNextClicked={onNextClicked} setMedicals= {setMedicals}/>
+        <NBF6 onNextClicked={onNextClicked} setMedicals= {setMedicals}/>,
+        <NBF7 onNextClicked={onNextClicked} />  
     
     ] 
     return( 
