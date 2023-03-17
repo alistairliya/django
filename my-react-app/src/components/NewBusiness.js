@@ -13,11 +13,12 @@ const NewBusiness = ({onAdd}) => {
     const [applicantAddress, setApplicantAddress] = useState()
     const [applicantPhones, setApplicantPhones] = useState()
     const [applicantInsurance, setApplicantInsurance] = useState()
+    const [medicals, setMedicals] = useState()
 
     const onNextClicked = () => {
         console.log("Clicked Next from index "+index)
         setIndex(index+1)
-        //console.log(applicantPhones)
+        console.log(medicals)
     }
 
     useEffect(()=>{
@@ -33,7 +34,7 @@ const NewBusiness = ({onAdd}) => {
         <NBF3 setApplicantAddress= {setApplicantAddress} onNextClicked = {onNextClicked} client={client}/>,
         <NBF4 onNextClicked = {onNextClicked} setApplicantPhones = {setApplicantPhones} client = {client} />,
         <NBF5 onNextClicked = {onNextClicked} setInsuranceInfo={setApplicantInsurance}/>,
-        <NBF6 />
+        <NBF6 onNextClicked={onNextClicked} setMedicals= {setMedicals}/>
     
     ] 
     return( 
