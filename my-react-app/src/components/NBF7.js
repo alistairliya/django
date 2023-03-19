@@ -41,6 +41,7 @@ const NBF7 = ({onNextClicked, setDocuments}) => {
         // [] inside your object definition to specify a property with dynamic name.
         // https://react.dev/learn/updating-objects-in-state
         setSelectedDocuments({...selectedDocuments, [key]: value})
+        console.log(JSON.stringify(selectedDocuments))
     }
 
   return (
