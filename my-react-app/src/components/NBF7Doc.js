@@ -1,7 +1,7 @@
 // Purpose: Display a single document from the NBF7 collection
 // checkbox for submitted - Done
-// textbox for notes, such as where the doc is stored.
-// allows user to upload a document
+// textbox for notes, such as where the doc is stored. - Done
+// allows user to upload a document - will come back to it!
 
 
 import { useEffect, useState } from "react"
