@@ -34,7 +34,7 @@ const NBF7 = ({onNextClicked, setDocuments}) => {
         console.log('NBF6 Next pressed')
         console.log(JSON.stringify(selectedDocuments))
         setDocuments(selectedDocuments)
-        //onNextClicked()
+        onNextClicked()
     }
 
     const collect = (key, value) =>{
