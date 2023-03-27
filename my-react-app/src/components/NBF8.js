@@ -56,12 +56,21 @@ const NBF8 = ({onNextClicked}) => {
         setKey(key+1)
     }
 
+    const removevAdvisor = (key)=>{
+        console.log('removevAdvisor building function for key: '+key.toString())
+        return ()=>{
+            const newAdvisors = {...advisors}
+            delete newAdvisors[key]
+            setAdvisors(newAdvisors)
+        }
+    }
+
     return (
         <div>
             <h2>New Business Form: Advisor Information</h2>
             {Object.keys(advisors).map((key, index)=>{
                 //return <NBF8Advisor key={index} />
-                return (<div><NBF8Advisor/> <h2>{key}</h2></div>)
+                return (<div><NBF8Advisor id={key}/> <Button text='Remove' onClick={removevAdvisor(key)} /></div>)
             })}
             <Button 
                 text='Add Advisor' 
