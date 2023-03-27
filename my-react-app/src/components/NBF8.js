@@ -13,7 +13,8 @@ const NBF8 = ({onNextClicked}) => {
     const {user} = useAuth()
     const [users, setUsers] = useState([])
     const [roles, setRoles] = useState([])
-    const [advisors, setAdvisors] = useState([])
+    const [advisors, setAdvisors] = useState({})
+    const [key, setKey] = useState(0)
 
     useEffect(
         ()=>{
@@ -46,20 +47,21 @@ const NBF8 = ({onNextClicked}) => {
                 console.log('roles:')
                 console.log(roles)
             }
-
-        },[users, roles]
+            console.log(advisors)
+        },[users, roles, advisors]
     )    
 
     const addAdvisor = ()=>{
-        setAdvisors(old => [...old, {key:old.length, users:users, roles:roles }])
+        setAdvisors({...advisors, [key]:{} })
+        setKey(key+1)
     }
 
     return (
         <div>
             <h2>New Business Form: Advisor Information</h2>
-            {advisors.map((advisor, index)=>{
+            {Object.keys(advisors).map((key, index)=>{
                 //return <NBF8Advisor key={index} />
-                return (<div><NBF8Advisor key={advisor.key}/> <h2>test</h2></div>)
+                return (<div><NBF8Advisor/> <h2>{key}</h2></div>)
             })}
             <Button 
                 text='Add Advisor' 
