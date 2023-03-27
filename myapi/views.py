@@ -58,6 +58,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = MyUser.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
 
 class ClientViewSet(viewsets.ModelViewSet):
     queryset = Client.objects.all()
