@@ -6,6 +6,7 @@ import Select from 'react-select' // https://react-select.com/home
 const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors}) => {
     const [role, setRole] = useState({})
     const [advisor, setAdvisor] = useState({})
+    const [collaboratorStatus, setCollaboratorStatus] = useState({})
 
     const roleOptions = roles.map(
         (role)=>({

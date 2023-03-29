@@ -14,6 +14,7 @@ const NBF8 = ({onNextClicked}) => {
     const [users, setUsers] = useState([])
     const [roles, setRoles] = useState([])
     const [advisors, setAdvisors] = useState({})
+    const [collaboratorStatuses, setCollaboratorStatuses] = useState([])
     const [key, setKey] = useState(0)
 
     useEffect(
@@ -29,7 +30,7 @@ const NBF8 = ({onNextClicked}) => {
                 const data = await res.json()
                 return data
             }
-            if(users.length === 0 && roles.length === 0){
+            if(users.length === 0 && roles.length === 0 && collaboratorStatuses.length === 0){
                 const getUsers = async ()=>{
                     const theUsers = await fetchResource('users')
                     setUsers(theUsers)
@@ -38,14 +39,21 @@ const NBF8 = ({onNextClicked}) => {
                     const theRoles = await fetchResource('businessuserrole')
                     setRoles(theRoles)
                 }
+                const getCollaboratorStatuses = async ()=>{
+                    const theCollaboratorStatuses = await fetchResource('collaboratorstatus')
+                    setCollaboratorStatuses(theCollaboratorStatuses)
+                }
                 getUsers()
                 getRoles()
+                getCollaboratorStatuses()
             }
             console.log('users:')
             console.log(users)
             console.log('advisors:')
             console.log(advisors)
-        },[users, roles, advisors]
+            console.log('collaboratorStatuses')
+            console.log(collaboratorStatuses)
+        },[users, roles, advisors, collaboratorStatuses]
     )    
 
     const addAdvisor = ()=>{
