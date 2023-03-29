@@ -41,12 +41,9 @@ const NBF8 = ({onNextClicked}) => {
                 getUsers()
                 getRoles()
             }
-            if(users.length > 0 || roles.length > 0){
-                console.log('users:')
-                console.log(users)
-                console.log('roles:')
-                console.log(roles)
-            }
+            console.log('users:')
+            console.log(users)
+            console.log('advisors:')
             console.log(advisors)
         },[users, roles, advisors]
     )    
@@ -56,6 +53,8 @@ const NBF8 = ({onNextClicked}) => {
         setKey(key+1)
     }
 
+    // returns a function that removes the advisor
+    // Used by JSX below to create a function for each remove button
     const removevAdvisor = (key)=>{
         console.log('removevAdvisor building function for key: '+key.toString())
         return ()=>{
@@ -65,12 +64,21 @@ const NBF8 = ({onNextClicked}) => {
         }
     }
 
+    const updateAdvisor = (key, value)=>{
+        console.log('updateAdvisor')
+        console.log(key)
+        console.log(value)
+        const newAdvisors = {...advisors}
+        newAdvisors[key] = value
+        setAdvisors(newAdvisors)
+    }
+
     return (
         <div>
             <h2>New Business Form: Advisor Information</h2>
             {Object.keys(advisors).map((key, index)=>{
                 //return <NBF8Advisor key={index} />
-                return (<div><NBF8Advisor id={key}/> <Button text='Remove' onClick={removevAdvisor(key)} /></div>)
+                return (<div className='container'><NBF8Advisor id={key} users={users} roles={roles} updateAdvisor = {updateAdvisor} selectedAdvisors = {advisors} /> <Button text='Remove' onClick={removevAdvisor(key)} /></div>)
             })}
             <Button 
                 text='Add Advisor' 
