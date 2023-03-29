@@ -47,8 +47,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors}) => {
     })
   
     return (
-    <div>NBF8Advisor {id}
-    <div>{role.user_role_name}</div>
+    <div>
     <Select
         options={advisorOptions}
         placeholder={selectedAdvisors[id] && selectedAdvisors[id].advisor? selectedAdvisors[id].advisor.first_name+' '+selectedAdvisors[id].advisor.last_name:'Select Advisor'}//'Select Advisor'
