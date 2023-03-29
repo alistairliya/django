@@ -103,6 +103,10 @@ class BusinessUserViewSet(viewsets.ModelViewSet):
     queryset = Business_User.objects.all()
     serializer_class = BusinessUserSerializer
 
+class CollaboratorStatusViewSet(viewsets.ModelViewSet):
+    queryset = CollaboratorStatus.objects.all()
+    serializer_class = CollaboratorStatusSerializer
+
 class InsurancePlanViewSet(viewsets.ModelViewSet):
     queryset = InsurancePlan.objects.all()
     serializer_class = InsurancePlanSerializer

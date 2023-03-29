@@ -157,6 +157,16 @@ class BusinessUserRole(models.Model):
     description = models.CharField(max_length=1024, null=True)
     default_split = models.IntegerField(null=True) # 0 to 10000, with two implied decimals
 
+# On the NBF, each collaborator can have a status such as:
+# QT - Qualified Trainer
+# Independent - Independent Advisor
+# Supervisor
+# ... etc
+class CollaboratorStatus(models.Model):
+    status_name = models.CharField(max_length=64)
+    description = models.CharField(max_length=1024, null=True) 
+
+
 # Checked
 # M-2-M Association
 class Business_User(models.Model):
