@@ -78,7 +78,7 @@ const NBF8 = ({onNextClicked}) => {
             <h2>New Business Form: Advisor Information</h2>
             {Object.keys(advisors).map((key, index)=>{
                 //return <NBF8Advisor key={index} />
-                return (<div className='container'><NBF8Advisor id={key} users={users} roles={roles} updateAdvisor = {updateAdvisor} selectedAdvisors = {advisors} /> <Button text='Remove' onClick={removevAdvisor(key)} /></div>)
+                return (<div className='container'><NBF8Advisor key={key}  id={key} users={users} roles={roles} updateAdvisor = {updateAdvisor} selectedAdvisors = {advisors} /> <Button text='Remove' onClick={removevAdvisor(key)} /></div>)
             })}
             <Button 
                 text='Add Advisor' 

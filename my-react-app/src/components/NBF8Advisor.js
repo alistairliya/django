@@ -10,33 +10,60 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors}) => {
     const roleOptions = roles.map(
         (role)=>({
             value:role,
-            label: role.user_role_name 
+            label: role.user_role_name
         })
     )
-
     const advisorOptions = users.map(
         (user)=>({
             value:user,
             label: user.first_name+' '+user.last_name
+            
         })
     )
+
+    useEffect(()=>{
+        console.log('useEffect for NBF8Advisor ID: '+id)
+        console.log('selectedAdvisors:')
+        console.log(selectedAdvisors)
+        if(selectedAdvisors[id]){
+            console.log('selectedAdvisors[id]')
+            console.log(selectedAdvisors[id])
+            if(selectedAdvisors[id].role){
+                console.log('selectedAdvisors[id].role')
+                console.log(selectedAdvisors[id].role)
+                setRole(selectedAdvisors[id].role)
+            }
+            if(selectedAdvisors[id].advisor){
+                console.log('selectedAdvisors[id].advisor')
+                console.log(selectedAdvisors[id].advisor)
+                setAdvisor(selectedAdvisors[id].advisor)
+            }
+        }
+        ///console.log(selectedAdvisors)
+        //console.log(roleOptions)
+        console.log('useEffect, updated role and advisor:')
+        console.log(role)
+        console.log(advisor)
+    })
   
     return (
     <div>NBF8Advisor {id}
-    <Select 
+    <div>{role.user_role_name}</div>
+    <Select
         options={advisorOptions}
-        placeholder='Select Advisor'
+        placeholder={selectedAdvisors[id] && selectedAdvisors[id].advisor? selectedAdvisors[id].advisor.first_name+' '+selectedAdvisors[id].advisor.last_name:'Select Advisor'}//'Select Advisor'
         onChange={(selectedOption)=>{
             console.log('selectedOption')
             console.log(selectedOption)
             setAdvisor(selectedOption.value)
             updateAdvisor(id, {advisor: selectedOption.value, role: role})
         }
+        
     }
     />
     <Select 
         options={roleOptions}
-        placeholder='Select Role'
+        placeholder={selectedAdvisors[id] && selectedAdvisors[id].role? selectedAdvisors[id].role.user_role_name:'Select Role'}
         onChange={(selectedOption)=>{
             console.log('selectedOption')
             console.log(selectedOption)
