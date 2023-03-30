@@ -94,7 +94,7 @@ const NBF8 = ({onNextClicked, setCollaborators}) => {
         console.log('NBF8 Next pressed')
         console.log(advisors)
         setCollaborators(advisors)
-        //onNextClicked()
+        onNextClicked()
     }
 
     return (

@@ -7,6 +7,7 @@ import NBF5 from './NBF5'
 import NBF6 from './NBF6'
 import NBF7 from './NBF7'
 import NBF8 from './NBF8'
+import NBF9 from './NBF9'
 
 import { useState, useEffect} from 'react'
 //import { useRadioGroup } from '@mui/material'
@@ -19,6 +20,7 @@ const NewBusiness = ({onAdd}) => {
     const [medicals, setMedicals] = useState()
     const [documents, setDocuments] = useState()
     const [collaborators, setCollaborators] = useState()
+    const [complianceEntities, setComplianceEntities] = useState()
 
     const onNextClicked = () => {
         console.log("Clicked Next from index "+index)
@@ -41,7 +43,8 @@ const NewBusiness = ({onAdd}) => {
         <NBF5 onNextClicked = {onNextClicked} setInsuranceInfo={setApplicantInsurance}/>,
         <NBF6 onNextClicked={onNextClicked} setMedicals= {setMedicals}/>,
         <NBF7 onNextClicked={onNextClicked} setDocuments={setDocuments} />,
-        <NBF8 onNextClicked={onNextClicked} setCollaborators={setCollaborators} />
+        <NBF8 onNextClicked={onNextClicked} setCollaborators={setCollaborators} />,
+        <NBF9 onNextClicked={onNextClicked} setComplianceEntities={setComplianceEntities} />
     
     ] 
     return( 

@@ -91,10 +91,11 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
     <div className="form-control">
         <input
             type="text"
-            placeholder="CFC Code"
+            placeholder={selectedAdvisors[id] && selectedAdvisors[id].cfcCode? selectedAdvisors[id].cfcCode:'CFC Code'}
             onChange = {(e)=>{
                 console.log('e.target.value')
                 console.log(e.target.value)
+                setCfcCode(e.target.value)
                 updateAdvisor(id, {advisor: advisor, role: role, cfcCode: e.target.value,collaboratorStatus:collaboratorStatus, collaboratorPosition: collaboratorPosition })
             }}
         />

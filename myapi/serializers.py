@@ -153,6 +153,11 @@ class BusinessUserRoleSerializer(serializers.ModelSerializer):
         model = BusinessUserRole
         fields = ['id', 'user_role_name', 'description']
 
+class ComplianceEntitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ComplianceEntity
+        fields = ['id', 'compliance_entity_name', 'description']
+
 class CollaboratorStatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = CollaboratorStatus
