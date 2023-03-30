@@ -8,6 +8,7 @@ import NBF6 from './NBF6'
 import NBF7 from './NBF7'
 import NBF8 from './NBF8'
 import NBF9 from './NBF9'
+import NBF10 from './NBF10'
 
 import { useState, useEffect} from 'react'
 //import { useRadioGroup } from '@mui/material'
@@ -28,6 +29,19 @@ const NewBusiness = ({onAdd}) => {
         console.log(medicals)
     }
 
+    const collect = () => {
+        return {
+            client:client,
+            applicantAddress:applicantAddress,
+            applicantPhones:applicantPhones,
+            applicantInsurance:applicantInsurance,
+            medicals:medicals,
+            documents:documents,
+            collaborators:collaborators,
+            complianceEntities:complianceEntities
+        }
+    }
+
     useEffect(()=>{
         console.log('useEffect in NewBusiness.js')
         //console.log(applicantPhones)
@@ -44,7 +58,8 @@ const NewBusiness = ({onAdd}) => {
         <NBF6 onNextClicked={onNextClicked} setMedicals= {setMedicals}/>,
         <NBF7 onNextClicked={onNextClicked} setDocuments={setDocuments} />,
         <NBF8 onNextClicked={onNextClicked} setCollaborators={setCollaborators} />,
-        <NBF9 onNextClicked={onNextClicked} setComplianceEntities={setComplianceEntities} />
+        <NBF9 onNextClicked={onNextClicked} setComplianceEntities={setComplianceEntities} />,
+        <NBF10 onNextClicked={onNextClicked} data = {collect()}/>
     
     ] 
     return( 

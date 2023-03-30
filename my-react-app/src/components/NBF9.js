@@ -45,7 +45,7 @@ const NBF9 = ({onNextClicked, setComplianceEntities}) => {
         console.log('NBF9 Next pressed')
         console.log(selectedComplianceEntities)
         setComplianceEntities(selectedComplianceEntities)
-        //onNextClicked()
+        onNextClicked()
     }
 
 
