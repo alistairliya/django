@@ -3,10 +3,11 @@
 import {useState, useEffect} from 'react'
 import Select from 'react-select' // https://react-select.com/home
 
-const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collaboratorStatuses}) => {
+const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collaboratorStatuses, collaboratorPositions}) => {
     const [role, setRole] = useState({})
     const [advisor, setAdvisor] = useState({})
     const [collaboratorStatus, setCollaboratorStatus] = useState({})
+    const [collaboratorPosition, setCollaboratorPosition] = useState({})
 
     const roleOptions = roles.map(
         (role)=>({
@@ -26,6 +27,13 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
         (collaboratorStatus)=>({
             value:collaboratorStatus,
             label: collaboratorStatus.status_name
+        })
+    )
+
+    const collaboratorPositionOptions = collaboratorPositions.map(
+        (collaboratorPosition)=>({
+            value:collaboratorPosition,
+            label: collaboratorPosition.position_name
         })
     )
 
@@ -51,6 +59,11 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                 console.log(selectedAdvisors[id].collaboratorStatus)
                 setCollaboratorStatus(selectedAdvisors[id].collaboratorStatus)
             }
+            if(selectedAdvisors[id].collaboratorPosition){
+                console.log('selectedAdvisors[id].collaboratorPosition')
+                console.log(selectedAdvisors[id].collaboratorPosition)
+                setCollaboratorPosition(selectedAdvisors[id].collaboratorPosition)
+            }
         }
         ///console.log(selectedAdvisors)
         //console.log(roleOptions)
@@ -61,6 +74,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
   
     return (
     <div>
+    <h3>Debug {id}</h3>
     <Select
         options={advisorOptions}
         placeholder={selectedAdvisors[id] && selectedAdvisors[id].advisor? selectedAdvisors[id].advisor.first_name+' '+selectedAdvisors[id].advisor.last_name:'Select Advisor'}//'Select Advisor'
@@ -83,6 +97,18 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
             updateAdvisor(id, {advisor: advisor,role: selectedOption.value})
             
         }}
+    />
+    <Select
+        options={collaboratorPositionOptions}
+        placeholder={selectedAdvisors[id] && selectedAdvisors[id].collaboratorPosition? selectedAdvisors[id].collaboratorPosition.position_name:'Select Position'} 
+        onChange={
+            (selectedOption)=>{
+                console.log('selectedOption')
+                console.log(selectedOption)
+                setCollaboratorPosition(selectedOption.value)
+                updateAdvisor(id, {advisor: advisor, role: role,colaboratorStatus:collaboratorStatus, collaboratorPosition: selectedOption.value})
+            }
+        }
     />
     <Select 
         options = {collaboratorStatusOptions}

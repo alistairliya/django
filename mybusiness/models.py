@@ -166,6 +166,10 @@ class CollaboratorStatus(models.Model):
     status_name = models.CharField(max_length=64)
     description = models.CharField(max_length=1024, null=True) 
 
+class CollaboratorPosition(models.Model):
+    position_name = models.CharField(max_length=64)
+    description = models.CharField(max_length=1024, null=True)
+
 
 # Checked
 # M-2-M Association

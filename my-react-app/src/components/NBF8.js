@@ -15,6 +15,7 @@ const NBF8 = ({onNextClicked}) => {
     const [roles, setRoles] = useState([])
     const [advisors, setAdvisors] = useState({})
     const [collaboratorStatuses, setCollaboratorStatuses] = useState([])
+    const [collaboratorPositions, setCollaboratorPositions] = useState([])
     const [key, setKey] = useState(0)
 
     useEffect(
@@ -43,9 +44,14 @@ const NBF8 = ({onNextClicked}) => {
                     const theCollaboratorStatuses = await fetchResource('collaboratorstatus')
                     setCollaboratorStatuses(theCollaboratorStatuses)
                 }
+                const getCollaboratorPositiono = async ()=>{
+                    const theCollaboratorPositions = await fetchResource('collaboratorposition')
+                    setCollaboratorPositions(theCollaboratorPositions)
+                }
                 getUsers()
                 getRoles()
                 getCollaboratorStatuses()
+                getCollaboratorPositiono()
             }
             console.log('users:')
             console.log(users)
@@ -53,7 +59,9 @@ const NBF8 = ({onNextClicked}) => {
             console.log(advisors)
             console.log('collaboratorStatuses')
             console.log(collaboratorStatuses)
-        },[users, roles, advisors, collaboratorStatuses]
+            console.log('collaboratorPositions')
+            console.log(collaboratorPositions)
+        },[users, roles, advisors, collaboratorStatuses, collaboratorPositions]
     )    
 
     const addAdvisor = ()=>{
@@ -86,7 +94,7 @@ const NBF8 = ({onNextClicked}) => {
             <h2>New Business Form: Advisor Information</h2>
             {Object.keys(advisors).map((key, index)=>{
                 //return <NBF8Advisor key={index} />
-                return (<div className='container'><NBF8Advisor key={key}  id={key} users={users} roles={roles} updateAdvisor = {updateAdvisor} selectedAdvisors = {advisors} collaboratorStatuses = {collaboratorStatuses} /> <Button text='Remove' onClick={removevAdvisor(key)} /></div>)
+                return (<div className='container'><NBF8Advisor key={key}  id={key} users={users} roles={roles} updateAdvisor = {updateAdvisor} selectedAdvisors = {advisors} collaboratorStatuses = {collaboratorStatuses} collaboratorPositions ={collaboratorPositions} /> <Button text='Remove' onClick={removevAdvisor(key)} /></div>)
             })}
             <Button 
                 text='Add Advisor' 

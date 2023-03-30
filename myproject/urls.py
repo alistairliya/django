@@ -56,6 +56,7 @@ router.register(r'email',views.EmailViewSet)
 router.register(r'status', views.StatusViewSet)
 router.register(r'medical', views.MedicalViewSet)
 router.register(r'document', views.DocumentViewSet)
+router.register(r'collaboratorposition', views.CollaboratorPositionViewSet)
 
 urlpatterns = [
     path('', include("users.urls")),

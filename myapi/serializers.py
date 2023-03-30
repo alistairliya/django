@@ -158,6 +158,11 @@ class CollaboratorStatusSerializer(serializers.ModelSerializer):
         model = CollaboratorStatus
         fields = ['id', 'status_name', 'description']
 
+class CollaboratorPositionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CollaboratorPosition
+        fields = ['id', 'position_name', 'description']
+
 class BusinessUserSerializer(serializers.HyperlinkedModelSerializer):
     user = UserSerializer()
     user_role = BusinessUserRoleSerializer()
