@@ -3,7 +3,7 @@
 import {useState, useEffect} from 'react'
 import Select from 'react-select' // https://react-select.com/home
 
-const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors}) => {
+const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collaboratorStatuses}) => {
     const [role, setRole] = useState({})
     const [advisor, setAdvisor] = useState({})
     const [collaboratorStatus, setCollaboratorStatus] = useState({})
@@ -19,6 +19,13 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors}) => {
             value:user,
             label: user.first_name+' '+user.last_name
             
+        })
+    )
+
+    const collaboratorStatusOptions = collaboratorStatuses.map(
+        (collaboratorStatus)=>({
+            value:collaboratorStatus,
+            label: collaboratorStatus.status_name
         })
     )
 
@@ -38,6 +45,11 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors}) => {
                 console.log('selectedAdvisors[id].advisor')
                 console.log(selectedAdvisors[id].advisor)
                 setAdvisor(selectedAdvisors[id].advisor)
+            }
+            if(selectedAdvisors[id].collaboratorStatus){
+                console.log('selectedAdvisors[id].collaboratorStatus')
+                console.log(selectedAdvisors[id].collaboratorStatus)
+                setCollaboratorStatus(selectedAdvisors[id].collaboratorStatus)
             }
         }
         ///console.log(selectedAdvisors)
@@ -71,6 +83,18 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors}) => {
             updateAdvisor(id, {advisor: advisor,role: selectedOption.value})
             
         }}
+    />
+    <Select 
+        options = {collaboratorStatusOptions}
+        placeholder={selectedAdvisors[id] && selectedAdvisors[id].collaboratorStatus? selectedAdvisors[id].collaboratorStatus.status_name:'Select Status'}
+        onChange={
+            (selectedOption)=>{
+                console.log('selectedOption')
+                console.log(selectedOption)
+                setCollaboratorStatus(selectedOption.value)
+                updateAdvisor(id, {advisor: advisor, role: role, collaboratorStatus: selectedOption.value})
+            }
+        }
     />
     </div>
   )
