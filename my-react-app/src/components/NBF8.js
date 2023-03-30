@@ -9,7 +9,7 @@ import {useAuth} from '../hooks/useAuth'
 import NBF8Advisor from './NBF8Advisor'
 import Button from './Button'
 
-const NBF8 = ({onNextClicked}) => {
+const NBF8 = ({onNextClicked, setCollaborators}) => {
     const {user} = useAuth()
     const [users, setUsers] = useState([])
     const [roles, setRoles] = useState([])
@@ -89,6 +89,14 @@ const NBF8 = ({onNextClicked}) => {
         setAdvisors(newAdvisors)
     }
 
+    const onSubmit = (e) =>{
+        e.preventDefault()
+        console.log('NBF8 Next pressed')
+        console.log(advisors)
+        setCollaborators(advisors)
+        //onNextClicked()
+    }
+
     return (
         <div>
             <h2>New Business Form: Advisor Information</h2>
@@ -101,6 +109,9 @@ const NBF8 = ({onNextClicked}) => {
                 color='red' 
                 onClick={addAdvisor} 
             />
+            <form className="add-form" onSubmit={onSubmit}>
+                <input type='submit' value='Next' className='btn btn-block' />
+            </form>
         </div>
     )
 }

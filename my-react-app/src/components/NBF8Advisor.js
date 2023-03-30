@@ -8,6 +8,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
     const [advisor, setAdvisor] = useState({})
     const [collaboratorStatus, setCollaboratorStatus] = useState({})
     const [collaboratorPosition, setCollaboratorPosition] = useState({})
+    const [cfcCode, setCfcCode] = useState('')
 
     const roleOptions = roles.map(
         (role)=>({
@@ -82,11 +83,23 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
             console.log('selectedOption')
             console.log(selectedOption)
             setAdvisor(selectedOption.value)
-            updateAdvisor(id, {advisor: selectedOption.value, role: role})
+            updateAdvisor(id, {advisor: selectedOption.value, role: role, cfcCode: cfcCode, collaboratorStatus: collaboratorStatus, collaboratorPosition: collaboratorPosition})
         }
         
     }
     />
+    <div className="form-control">
+        <input
+            type="text"
+            placeholder="CFC Code"
+            onChange = {(e)=>{
+                console.log('e.target.value')
+                console.log(e.target.value)
+                updateAdvisor(id, {advisor: advisor, role: role, cfcCode: e.target.value,collaboratorStatus:collaboratorStatus, collaboratorPosition: collaboratorPosition })
+            }}
+        />
+
+    </div>
     <Select 
         options={roleOptions}
         placeholder={selectedAdvisors[id] && selectedAdvisors[id].role? selectedAdvisors[id].role.user_role_name:'Select Role'}
@@ -94,7 +107,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
             console.log('selectedOption')
             console.log(selectedOption)
             setRole(selectedOption.value)
-            updateAdvisor(id, {advisor: advisor,role: selectedOption.value})
+            updateAdvisor(id, {advisor: advisor,role: selectedOption.value, fcfCode: cfcCode, collaboratorStatus: collaboratorStatus, collaboratorPosition: collaboratorPosition})
             
         }}
     />
@@ -106,7 +119,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                 console.log('selectedOption')
                 console.log(selectedOption)
                 setCollaboratorPosition(selectedOption.value)
-                updateAdvisor(id, {advisor: advisor, role: role,colaboratorStatus:collaboratorStatus, collaboratorPosition: selectedOption.value})
+                updateAdvisor(id, {advisor: advisor, role: role, cfcCode:cfcCode, colaboratorStatus:collaboratorStatus, collaboratorPosition: selectedOption.value})
             }
         }
     />
@@ -118,7 +131,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                 console.log('selectedOption')
                 console.log(selectedOption)
                 setCollaboratorStatus(selectedOption.value)
-                updateAdvisor(id, {advisor: advisor, role: role, collaboratorStatus: selectedOption.value})
+                updateAdvisor(id, {advisor: advisor, role: role, cfcCode:cfcCode, collaboratorStatus: selectedOption.value, collaboratorPosition: collaboratorPosition})
             }
         }
     />
