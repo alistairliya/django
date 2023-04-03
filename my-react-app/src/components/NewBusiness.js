@@ -47,7 +47,8 @@ const NewBusiness = ({onAdd}) => {
         //console.log(applicantPhones)
         //console.log(applicantAddress)
         //console.log(applicantInsurance)
-        console.log(client)
+        if(applicantPhones!=null)
+            console.log(applicantPhones)
     })
 
     const nbfs = [

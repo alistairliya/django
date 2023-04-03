@@ -42,6 +42,11 @@ const NBF10 = ({data}) => {
         }
     }
 
+    const processPhone = () => {
+        console.log('NBF10 Process Phone')
+        // can prob. skip this
+    }
+
     const onSubmit = (e) =>{
         e.preventDefault()
         // take data and save to DB
