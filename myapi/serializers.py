@@ -87,7 +87,7 @@ class PhoneSerializer(serializers.HyperlinkedModelSerializer):
     phone_type = PhoneTypeSerializer(read_only=True)
     class Meta:
         model = Phone
-        fields = ['clients', 'area_code','phone_number','phone_type','is_primary','is_active','is_archived','notes']
+        fields = ['id','clients', 'area_code','phone_number','phone_type','is_primary','is_active','is_archived','notes']
 # >>> print(repr(serializer))
 # ClientSerializer():
 #     id = IntegerField(label='ID', read_only=True)
@@ -117,7 +117,7 @@ class PhoneSerializer(serializers.HyperlinkedModelSerializer):
 class ClientSerializer(serializers.HyperlinkedModelSerializer):
     #client_addresses = ClientAddressSerializer(many=True, read_only=True)
     client_addresses = ClientAddressSerializer(many=True, read_only=True)
-    gender = GenderSerializer(read_only=True)
+    #gender = GenderSerializer(read_only=True)
     phone_list = PhoneSerializer(read_only=True, many=True)
 
     class Meta:

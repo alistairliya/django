@@ -16,6 +16,7 @@ const NBF9 = ({onNextClicked, setComplianceEntities}) => {
         const fetchResource = async (resource) =>{
             let headers = new Headers()
             const token = user['token']
+            console.log('TOKEN: '+token)
             const auth_str = 'Token '+token
             headers.set('Authorization', auth_str)
             let url = 'http://localhost:8000/api/'+resource+'/'

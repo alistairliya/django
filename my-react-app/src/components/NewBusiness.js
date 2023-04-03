@@ -47,6 +47,7 @@ const NewBusiness = ({onAdd}) => {
         //console.log(applicantPhones)
         //console.log(applicantAddress)
         //console.log(applicantInsurance)
+        console.log(client)
     })
 
     const nbfs = [
@@ -119,4 +120,5 @@ const NewBusiness = ({onAdd}) => {
     </form>
   )
 }
+
 */

@@ -40,7 +40,8 @@ class Client(models.Model):
     last_name = models.CharField(max_length=64)
     birthdate = models.DateField()
     sin = models.CharField(max_length=64)
-    gender = models.ForeignKey(Gender, on_delete=models.PROTECT, related_name="clients")
+    #gender = models.ForeignKey(Gender, on_delete=models.PROTECT, related_name="clients")
+    gender = models.CharField(max_length=64, null = True)
     # Owner Datetime
     created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="created_clients")
     created_date = models.DateTimeField()

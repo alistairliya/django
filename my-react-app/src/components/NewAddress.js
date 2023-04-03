@@ -23,7 +23,8 @@ const NewAddress = ({onNextClicked, setAddress}) => {
             city: city,
             postal_code: postalCode,
             province: selectedProvince,
-            country: selecteddCountry
+            country: selecteddCountry,
+            is_new_address: true
         })
         
         onNextClicked()
