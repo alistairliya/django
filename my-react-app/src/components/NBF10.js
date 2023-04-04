@@ -13,6 +13,7 @@ const NBF10 = ({data}) => {
     useEffect(()=>{
         console.log('NBF10 useEffect')
         console.log(data)
+        processClient()
         if(clientId){
             console.log('NBF10 Client ID is set: '+clientId)
         }
@@ -58,11 +59,13 @@ const NBF10 = ({data}) => {
 // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00","client":"http://127.0.0.1:8000/api/clients/1/", "status":"http://127.0.0.1:8000/api/businessstatus/1/"}' http://127.0.0.1:8000/api/mybusiness/ 
     const createMyBusiness = () => {
         console.log('NBF10 Create My Business')
+        const clientUrl = "http://127.0.0.1:8000/api/clients/"+clientId+"/" 
+        console.log('NBF10 Client URL: '+clientUrl)
         const mybusiness = 
         {
             "created_date":"2023-04-02T00:00",
             "modified_date":"2023-04-01T00:00",
-            "client":"http://127.0.0.1:8000/api/clients/1/", 
+            "client":clientUrl, 
             "status":"http://127.0.0.1:8000/api/businessstatus/1/"
         }
         const postMyBusiness = async (business) =>{
