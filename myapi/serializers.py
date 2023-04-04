@@ -223,7 +223,12 @@ class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     # For some reason, setting many=False below gives error
     business_insurance = BusinessInsuranceSerializer(many=True, read_only=True)    #policy_number = business_insurance.policy_number
     status = BusinessStatusSerializer(read_only=True)
-    client = ClientSerializer(read_only=True)
+    #client = ClientSerializer(read_only=True)
+    # set above read_only will cause "NOT NULL constraint failed: mybusiness_mybusiness.client_id"
+    # having it in the serilaizer will require a dictionary for the field
+    # comment out it for now hopefully will allow posting with just a URL to the client resource.
+    # However, by commenting it out, the GET result will only display a URL for the client resource rather than the JSON.
+    # MyBusiness.js page uses it to display the cleint name. <- Need to fix this.
     related_users = BusinessUserSerializer(many=True, read_only=True) # Advisors
     business_type = BusinessTypeSerializer(read_only=True)
     product = ProductSerializer(read_only=True)
