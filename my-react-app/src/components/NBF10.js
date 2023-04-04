@@ -1,11 +1,15 @@
 // 1. A submit button to save the data
 import { useEffect, useState } from "react"
 
+import { useAuth } from "../hooks/useAuth"
+
 const NBF10 = ({data}) => {
 
     const [clientId, setClientId] = useState()
     const [addressId, setAddressId] = useState()
 
+    const { user } = useAuth()
+    
     useEffect(()=>{
         console.log('NBF10 useEffect')
         console.log(data)
@@ -51,13 +55,43 @@ const NBF10 = ({data}) => {
     // Based on NBF1 to NBF5, can create the My Business object.
     // The remaining requires MyBusiness to be foreign keys.
 // REST API TO POST TO MyBusiness?
-// curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00", "created_by":9,"client":"http://127.0.0.1:8000/api/clients/1/", "status":"http://127.0.0.1:8000/api/businessstatus/1/"}' http://127.0.0.1:8000/api/mybusiness/ 
+// curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00","client":"http://127.0.0.1:8000/api/clients/1/", "status":"http://127.0.0.1:8000/api/businessstatus/1/"}' http://127.0.0.1:8000/api/mybusiness/ 
+    const createMyBusiness = () => {
+        console.log('NBF10 Create My Business')
+        const mybusiness = 
+        {
+            "created_date":"2023-04-02T00:00",
+            "modified_date":"2023-04-01T00:00",
+            "client":"http://127.0.0.1:8000/api/clients/1/", 
+            "status":"http://127.0.0.1:8000/api/businessstatus/1/"
+        }
+        const postMyBusiness = async (business) =>{
+            let headers = new Headers()
+            const token = user['token']
+            console.log('TOKEN: '+token)
+            const auth_str = 'Token '+token
+            headers.set('Authorization', auth_str)
+            headers.set('Content-Type', 'application/json')
+
+            let url = 'http://localhost:8000/api/mybusiness/'
+            const res = await fetch(url,
+                {
+                    method:'POST',
+                    body:JSON.stringify(business),
+                    headers:headers
+                })
+            const data = await res.json()
+            return data
+        }
+        postMyBusiness(mybusiness)
+    }
+
 
     const onSubmit = (e) =>{
         e.preventDefault()
         // take data and save to DB
         console.log('NBF10 Submit pressed')
-        processClient()
+        createMyBusiness()
     }
     return (
     <div>{JSON.stringify(data, null, 4)}
