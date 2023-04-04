@@ -1,7 +1,9 @@
 // https://www.youtube.com/watch?v=w7ejDZ8SWv8
 // 47.07
 import React from 'react'
+import {useEffect, useState} from "react"
 import {AiFillTool} from "react-icons/ai" //https://react-icons.github.io/react-icons
+import { useAuth } from "../hooks/useAuth"
 /*
 const Business = ({business, onEdit, onToggle}) => {
   return (
@@ -15,7 +17,11 @@ const Business = ({business, onEdit, onToggle}) => {
   )
 }
 */
+
 const Business = ({business, onEdit, onToggle}) => {
+
+  const [client, setClient] = useState({})
+
   let advisor = business['created_by']
   console.log('----------------------') 
   if(business.related_users.length >0){ 
@@ -36,6 +42,31 @@ const Business = ({business, onEdit, onToggle}) => {
     }
     console.log('advisor name: '+advisor_name)
   }
+
+  const {user} = useAuth()
+  useEffect(()=>{
+    const url = business.client
+    const fetchResource = async () =>{
+        let headers = new Headers()
+        const token = user['token']
+        const auth_str = 'Token '+token
+        headers.set('Authorization', auth_str)
+        const res = await fetch(url,{headers:headers})
+        const data = await res.json()
+        console.log("\n***CLIENT: ")
+        console.log(data)
+        setClient(data)
+        return data
+    }
+    if (client.id === undefined){
+        console.log('fetching client')
+        fetchResource() 
+    }
+
+  },[client])
+
+
+
   return (
     <tbody className={`business ${business.highlighted? 'highlighted':''}`} onDoubleClick={()=>onToggle(business.id)}>
     <tr >
@@ -47,7 +78,7 @@ const Business = ({business, onEdit, onToggle}) => {
         <td>{business.business_insurance.length>0?business.business_insurance[0]['policy_number']:''}</td>
         <td>{business.status['status_name']}</td>
         <td>{business.business_insurance.length>0?business.business_insurance[0]['insurance_application']['provider']['insurance_provider_name']:''}</td>
-        <td>{business.client.first_name} {business.client.last_name}</td>
+        <td>{client.first_name} {client.last_name}</td>
         <td>{advisor_name}</td>
         <td>{business.projected_FYC}</td>
         <td>{business.settled_FYC}</td>
