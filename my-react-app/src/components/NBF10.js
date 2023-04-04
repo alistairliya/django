@@ -32,6 +32,7 @@ const NBF10 = ({data}) => {
         } 
     }
 
+    // Need this only for a newly created client?
     const processAddress = () => {
         console.log('NBF10 Process Address')
         if(data['address'].is_new_address != null){
@@ -42,9 +43,9 @@ const NBF10 = ({data}) => {
         }
     }
 
+    // Need this only for a newly created client?
     const processPhone = () => {
         console.log('NBF10 Process Phone')
-        // can prob. skip this
     }
 
     const onSubmit = (e) =>{

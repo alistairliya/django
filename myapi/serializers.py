@@ -178,18 +178,18 @@ class BusinessUserSerializer(serializers.HyperlinkedModelSerializer):
 class InsurancePlanSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = InsurancePlan
-        fields = ['insurance_plan_name','insurance_plan_code', 'description']
+        fields = ['id','insurance_plan_name','insurance_plan_code', 'description']
 
 class InsuranceProviderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = InsuranceProvider
-        fields = ['insurance_provider_name','description']
+        fields = ['id','insurance_provider_name','description']
 
 
 class InsurancePlaneTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = InsurancePlanType
-        fields = ['insurnace_plan_type_name','insurance_plan_type_code', 'description']
+        fields = ['id','insurnace_plan_type_name','insurance_plan_type_code', 'description']
 
 class DocumentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
