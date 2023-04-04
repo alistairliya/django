@@ -48,6 +48,11 @@ const NBF10 = ({data}) => {
         console.log('NBF10 Process Phone')
     }
 
+    // Based on NBF1 to NBF5, can create the My Business object.
+    // The remaining requires MyBusiness to be foreign keys.
+// REST API TO POST TO MyBusiness?
+// curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00", "created_by":9,"client":"http://127.0.0.1:8000/api/clients/1/", "status":"http://127.0.0.1:8000/api/businessstatus/1/"}' http://127.0.0.1:8000/api/mybusiness/ 
+
     const onSubmit = (e) =>{
         e.preventDefault()
         // take data and save to DB

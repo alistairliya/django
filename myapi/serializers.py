@@ -222,7 +222,8 @@ class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     #business_insurance = serializers.HyperlinkedRelatedField(view_name = 'businessinsurance-detail', many=True, read_only=True )
     # For some reason, setting many=False below gives error
     business_insurance = BusinessInsuranceSerializer(many=True, read_only=True)    #policy_number = business_insurance.policy_number
-    status = BusinessStatusSerializer(read_only=True)
+    #status = BusinessStatusSerializer(read_only=True)
+    #status = BusinessStatusSerializer() # NOT NULL constraint failed: mybusiness_mybusiness.status_id
     #client = ClientSerializer(read_only=True)
     # set above read_only will cause "NOT NULL constraint failed: mybusiness_mybusiness.client_id"
     # having it in the serilaizer will require a dictionary for the field
