@@ -1,4 +1,7 @@
 // 1. A submit button to save the data
+// - Save all the collected data somewhere
+// - - Save to InsuraceApplication object
+
 import { useEffect, useState } from "react"
 
 import { useAuth } from "../hooks/useAuth"
@@ -55,18 +58,28 @@ const NBF10 = ({data}) => {
 
     // Based on NBF1 to NBF5, can create the My Business object.
     // The remaining requires MyBusiness to be foreign keys.
-// REST API TO POST TO MyBusiness?
+// REST API TO POST TO MyBusiness
 // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00","client":"http://127.0.0.1:8000/api/clients/1/", "status":"http://127.0.0.1:8000/api/businessstatus/1/"}' http://127.0.0.1:8000/api/mybusiness/ 
-    const createMyBusiness = () => {
+// REST API TO POST TO InsurnaceApplication
+// curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"business":"http://127.0.0.1:8000/api/mybusiness/12/","product":"http://127.0.0.1:8000/api/product/1/", "plan_type":"http://127.0.0.1:8000/api/insuranceplantype/1/","plan":"http://127.0.0.1:8000/api/insuranceplan/1/","face_amount":1.0, "planned_premium":2.0,"provider":"http://127.0.0.1:8000/api/insuranceprovider/1/"}' http://127.0.0.1:8000/api/insuranceapplication/
+const createMyBusiness = () => {
         console.log('NBF10 Create My Business')
         const clientUrl = "http://127.0.0.1:8000/api/clients/"+clientId+"/" 
         console.log('NBF10 Client URL: '+clientUrl)
+        const statusUrl ="http://127.0.0.1:8000/api/businessstatus/1/" 
         const mybusiness = 
         {
+            // business_type. eg. Insurance <- not important at this time
+            // product. eg. Life 1. FK to Product Type
+            "client":clientUrl, 
+            "status":statusUrl,
+            // projeted_FYC
+            // application_date
+            // settled_date
+            // application_location
+            // created_by
             "created_date":"2023-04-02T00:00",
             "modified_date":"2023-04-01T00:00",
-            "client":clientUrl, 
-            "status":"http://127.0.0.1:8000/api/businessstatus/1/"
         }
         const postMyBusiness = async (business) =>{
             let headers = new Headers()
