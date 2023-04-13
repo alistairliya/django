@@ -62,44 +62,59 @@ const NBF10 = ({data}) => {
 // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00","client":"http://127.0.0.1:8000/api/clients/1/", "status":"http://127.0.0.1:8000/api/businessstatus/1/"}' http://127.0.0.1:8000/api/mybusiness/ 
 // REST API TO POST TO InsurnaceApplication
 // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"business":"http://127.0.0.1:8000/api/mybusiness/12/","product":"http://127.0.0.1:8000/api/product/1/", "plan_type":"http://127.0.0.1:8000/api/insuranceplantype/1/","plan":"http://127.0.0.1:8000/api/insuranceplan/1/","face_amount":1.0, "planned_premium":2.0,"provider":"http://127.0.0.1:8000/api/insuranceprovider/1/"}' http://127.0.0.1:8000/api/insuranceapplication/
-const createMyBusiness = () => {
+// From Doc: If the Product Type of a Product points to insurance, use this table for insurance specific data.
+const saveData = () => {
         console.log('NBF10 Create My Business')
-        const clientUrl = "http://127.0.0.1:8000/api/clients/"+clientId+"/" 
-        console.log('NBF10 Client URL: '+clientUrl)
-        const statusUrl ="http://127.0.0.1:8000/api/businessstatus/1/" 
-        const mybusiness = 
-        {
-            // business_type. eg. Insurance <- not important at this time
-            // product. eg. Life 1. FK to Product Type
-            "client":clientUrl, 
-            "status":statusUrl,
-            // projeted_FYC
-            // application_date
-            // settled_date
-            // application_location
-            // created_by
-            "created_date":"2023-04-02T00:00",
-            "modified_date":"2023-04-01T00:00",
-        }
-        const postMyBusiness = async (business) =>{
-            let headers = new Headers()
-            const token = user['token']
-            console.log('TOKEN: '+token)
-            const auth_str = 'Token '+token
-            headers.set('Authorization', auth_str)
-            headers.set('Content-Type', 'application/json')
+        let headers = new Headers()
+        const token = user['token']
+        console.log('TOKEN: '+token)
+        const auth_str = 'Token '+token
+        headers.set('Authorization', auth_str)
+        headers.set('Content-Type', 'application/json')
+        
+        const postMyBusiness = async () =>{
 
+            const clientUrl = "http://127.0.0.1:8000/api/clients/"+clientId+"/" 
+            console.log('NBF10 Client URL: '+clientUrl)
+            const statusUrl ="http://127.0.0.1:8000/api/businessstatus/1/" 
+            const mybusiness = 
+            {
+                // business_type. eg. Insurance <- not important at this time
+                // product. eg. Life 1. FK to Product Type
+                "client":clientUrl, 
+                "status":statusUrl,
+                // projeted_FYC
+                // application_date
+                // settled_date
+                // application_location
+                // created_by
+                "created_date":"2023-04-02T00:00",
+                "modified_date":"2023-04-01T00:00",
+            }
             let url = 'http://localhost:8000/api/mybusiness/'
             const res = await fetch(url,
                 {
                     method:'POST',
-                    body:JSON.stringify(business),
+                    body:JSON.stringify(mybusiness),
                     headers:headers
                 })
             const data = await res.json()
             return data
         }
-        postMyBusiness(mybusiness)
+
+        const postInsuranceApplication = async (businessId) =>{
+            console.log('NBF10 Post Insurance Application')
+        }
+
+        const saveData = async () =>{
+            const businessObj = await postMyBusiness()
+            // get the ID to mybusiness object
+            // with MyBusiness ID, post to InsuranceApplication
+            console.log(businessObj)
+            console.log('NBF10 MyBusiness ID: '+businessObj.id)
+            await postInsuranceApplication(businessObj.id)
+        }
+        saveData()
     }
 
 
@@ -107,7 +122,7 @@ const createMyBusiness = () => {
         e.preventDefault()
         // take data and save to DB
         console.log('NBF10 Submit pressed')
-        createMyBusiness()
+        saveData()
     }
     return (
     <div>{JSON.stringify(data, null, 4)}
