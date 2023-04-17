@@ -58,11 +58,6 @@ const NBF10 = ({data}) => {
 
     // Based on NBF1 to NBF5, can create the My Business object.
     // The remaining requires MyBusiness to be foreign keys.
-// REST API TO POST TO MyBusiness
-// curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00","client":"http://127.0.0.1:8000/api/clients/1/", "status":"http://127.0.0.1:8000/api/businessstatus/1/"}' http://127.0.0.1:8000/api/mybusiness/ 
-// REST API TO POST TO InsurnaceApplication
-// curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"business":"http://127.0.0.1:8000/api/mybusiness/12/","product":"http://127.0.0.1:8000/api/product/1/", "plan_type":"http://127.0.0.1:8000/api/insuranceplantype/1/","plan":"http://127.0.0.1:8000/api/insuranceplan/1/","face_amount":1.0, "planned_premium":2.0,"provider":"http://127.0.0.1:8000/api/insuranceprovider/1/"}' http://127.0.0.1:8000/api/insuranceapplication/
-// From Doc: If the Product Type of a Product points to insurance, use this table for insurance specific data.
 const saveData = () => {
         console.log('NBF10 Create My Business')
         let headers = new Headers()
@@ -72,6 +67,8 @@ const saveData = () => {
         headers.set('Authorization', auth_str)
         headers.set('Content-Type', 'application/json')
         
+        // REST API TO POST TO MyBusiness
+        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00","client":"http://127.0.0.1:8000/api/clients/1/", "status":"http://127.0.0.1:8000/api/businessstatus/1/"}' http://127.0.0.1:8000/api/mybusiness/ 
         const postMyBusiness = async () =>{
 
             const mybusiness = 
@@ -99,11 +96,15 @@ const saveData = () => {
             return data
         }
 
+        // WORKING ON THIS RIGHT NOW!!!!
+        // REST API TO POST TO InsurnaceApplication
+        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"business":"http://127.0.0.1:8000/api/mybusiness/12/","product":"http://127.0.0.1:8000/api/product/1/", "plan_type":"http://127.0.0.1:8000/api/insuranceplantype/1/","plan":"http://127.0.0.1:8000/api/insuranceplan/1/","face_amount":1.0, "planned_premium":2.0,"provider":"http://127.0.0.1:8000/api/insuranceprovider/1/"}' http://127.0.0.1:8000/api/insuranceapplication/
+        // From Doc: If the Product Type of a Product points to insurance, use this table for insurance specific data.
         const postInsuranceApplication = async (businessId) =>{
             console.log('NBF10 Post Insurance Application')
         }
 
-        const saveData = async () =>{
+        const save = async () =>{
             const businessObj = await postMyBusiness()
             // get the ID to mybusiness object
             // with MyBusiness ID, post to InsuranceApplication
@@ -111,7 +112,7 @@ const saveData = () => {
             console.log('NBF10 MyBusiness ID: '+businessObj.id)
             await postInsuranceApplication(businessObj.id)
         }
-        saveData()
+        save()
     }
 
 
