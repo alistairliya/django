@@ -74,15 +74,12 @@ const saveData = () => {
         
         const postMyBusiness = async () =>{
 
-            const clientUrl = "http://127.0.0.1:8000/api/clients/"+clientId+"/" 
-            console.log('NBF10 Client URL: '+clientUrl)
-            const statusUrl ="http://127.0.0.1:8000/api/businessstatus/1/" 
             const mybusiness = 
             {
                 // business_type. eg. Insurance <- not important at this time
                 // product. eg. Life 1. FK to Product Type
-                "client":clientUrl, 
-                "status":statusUrl,
+                "client":"http://127.0.0.1:8000/api/clients/"+clientId+"/", 
+                "status":"http://127.0.0.1:8000/api/businessstatus/1/",
                 // projeted_FYC
                 // application_date
                 // settled_date
