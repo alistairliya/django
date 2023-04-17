@@ -10,13 +10,22 @@ const NBF10 = ({data}) => {
 
     const [clientId, setClientId] = useState()
     const [addressId, setAddressId] = useState()
+    // From ApplicantInsurance Object
+    const [applicantInsuranceFaceAmount, setApplicantInsuranceFaceAmount] = useState()
+    const [applicantInsurancePlannedPremium, setApplicantInsurancePlannedPremium] = useState()
+    const [applicantInsurancePlanId, setApplicantInsurancePlanId] = useState()
+    const [applicantInsurancePlanTypeId, setApplicantInsurancePlanTypeId] = useState()
+    const [applicantInsuranceProviderId, setApplicantInsuranceProviderId] = useState()
 
+    
     const { user } = useAuth()
     
     useEffect(()=>{
         console.log('NBF10 useEffect')
         console.log(data)
         processClient()
+        //processAddress()
+        processApplicantInsurance()
         if(clientId){
             console.log('NBF10 Client ID is set: '+clientId)
         }
@@ -54,6 +63,21 @@ const NBF10 = ({data}) => {
     // Need this only for a newly created client?
     const processPhone = () => {
         console.log('NBF10 Process Phone')
+    }
+
+    // 
+    const processApplicantInsurance = () => {
+        console.log('NBF10 Process Applicant Insurance')
+        if(data.applicantInsurance.face_amount != null)
+            setApplicantInsuranceFaceAmount(data.applicantInsurance.face_amount)
+        if(data.applicantInsurance.planned_premium != null)
+            setApplicantInsurancePlannedPremium(data.applicantInsurance.planned_premium)
+        if(data.applicantInsurance.insurance_plan != null)
+            setApplicantInsurancePlanId(data.applicantInsurance.insurance_plan.id)
+        if(data.applicantInsurance.insurance_plan_type != null)
+            setApplicantInsurancePlanTypeId(data.applicantInsurance.insurance_plan_type.id)
+        if(data.applicantInsurance.insurance_provider != null)
+            setApplicantInsuranceProviderId(data.applicantInsurance.insurance_provider.id)
     }
 
     // Based on NBF1 to NBF5, can create the My Business object.
@@ -102,6 +126,33 @@ const saveData = () => {
         // From Doc: If the Product Type of a Product points to insurance, use this table for insurance specific data.
         const postInsuranceApplication = async (businessId) =>{
             console.log('NBF10 Post Insurance Application')
+            const insuranceApplication = {
+                // business
+                "business":"http://127.0.0.1:8000/api/mybusiness/"+businessId+"/",
+                // product
+                "product":"http://127.0.0.1:8000/api/product/1/", // <- hard coded for now
+                // plan_type
+                "plan_type":"http://127.0.0.1:8000/api/insuranceplantype/"+applicantInsurancePlanTypeId+"/",
+                // plan
+                "plan":"http://127.0.0.1:8000/api/insuranceplan/"+applicantInsurancePlanId+"/",
+                // face_amount
+                "face_amount":applicantInsuranceFaceAmount, 
+                // planned_premium
+                "planned_premium":applicantInsurancePlannedPremium,
+                // provider
+                "provider":"http://127.0.0.1:8000/api/insuranceprovider/"+applicantInsuranceProviderId+"/"
+            }
+            console.log(insuranceApplication)
+            let url = 'http://localhost:8000/api/insuranceapplication/'
+            const res = await fetch(url,
+                {
+                    method:'POST',
+                    body:JSON.stringify(insuranceApplication),
+                    headers:headers
+                })
+            const data = await res.json()
+            return data
+
         }
 
         const save = async () =>{
