@@ -191,7 +191,10 @@ class Business_User(models.Model):
     created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="created_businessusers")
     created_date = models.DateTimeField()
     modified_date = models.DateTimeField()
-
+    # Additional fields
+    collaborator_status = models.ForeignKey(CollaboratorStatus, on_delete=models.PROTECT, related_name="businessusers", null=True)
+    collaborator_position = models.ForeignKey(CollaboratorPosition, on_delete=models.PROTECT, related_name="businessusers", null=True)
+    cfc_code = models.CharField(max_length=64, null=True)
 # Checked
 class ComplianceEntity(models.Model):
     compliance_entity_name = models.CharField(max_length=64)

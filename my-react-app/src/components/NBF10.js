@@ -1,7 +1,12 @@
 // 1. A submit button to save the data
 // - Save all the collected data somewhere
 // - - Save to InsuraceApplication object
+// - Collaborators
 
+// Notes:
+// - Both MyBusiness and InsuranceApplication have reference to Product
+// - A client may have multiple addresses, but MyBusiness only makes reference to Client which then references to one or more addresses.
+// - - May need to make a field to associate a single address with the business.
 import { useEffect, useState } from "react"
 
 import { useAuth } from "../hooks/useAuth"
@@ -123,7 +128,7 @@ const saveData = () => {
         // WORKING ON THIS RIGHT NOW!!!!
         // REST API TO POST TO InsurnaceApplication
         // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"business":"http://127.0.0.1:8000/api/mybusiness/12/","product":"http://127.0.0.1:8000/api/product/1/", "plan_type":"http://127.0.0.1:8000/api/insuranceplantype/1/","plan":"http://127.0.0.1:8000/api/insuranceplan/1/","face_amount":1.0, "planned_premium":2.0,"provider":"http://127.0.0.1:8000/api/insuranceprovider/1/"}' http://127.0.0.1:8000/api/insuranceapplication/
-        // From Doc: If the Product Type of a Product points to insurance, use this table for insurance specific data.
+        // From Doc: If the Product Type of a Product points to insurance, use this table (InsuranceApplication) for insurance specific data.
         const postInsuranceApplication = async (businessId) =>{
             console.log('NBF10 Post Insurance Application')
             const insuranceApplication = {
