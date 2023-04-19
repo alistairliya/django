@@ -27,6 +27,7 @@ const NBF10 = ({data}) => {
     const [applicantInsurancePlanId, setApplicantInsurancePlanId] = useState()
     const [applicantInsurancePlanTypeId, setApplicantInsurancePlanTypeId] = useState()
     const [applicantInsuranceProviderId, setApplicantInsuranceProviderId] = useState()
+    const [collaborators, setCollaborators] = useState({})
 
     
     const { user } = useAuth()
@@ -40,6 +41,7 @@ const NBF10 = ({data}) => {
         if(clientId){
             console.log('NBF10 Client ID is set: '+clientId)
         }
+        processCollaborators()
     },[data, clientId])
 
     // New or existing client? Need to add only if new.
@@ -89,6 +91,14 @@ const NBF10 = ({data}) => {
             setApplicantInsurancePlanTypeId(data.applicantInsurance.insurance_plan_type.id)
         if(data.applicantInsurance.insurance_provider != null)
             setApplicantInsuranceProviderId(data.applicantInsurance.insurance_provider.id)
+    }
+
+    const processCollaborators = () => {
+        console.log('NBF10 Process Collaborators')
+        if(data.collaborators!=null){
+            setCollaborators(data.collaborators)
+        }
+        console.log(collaborators)
     }
 
 
@@ -171,18 +181,38 @@ const NBF10 = ({data}) => {
         // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"user":"http://127.0.0.1:8000/api/users/9/", "business":"http://127.0.0.1:8000/api/mybusiness/23/","user_role":"http://127.0.0.1:8000/api/businessuserrole/1/","created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00", "created_by":"http://127.0.0.1:8000/api/users/9/" }' http://127.0.0.1:8000/api/businessuser/ 
         const postBusinessUser = async (businessId) =>{
             console.log('NBF10 Post Business User')
-            const businessUser = {
-                // user
-                // business
-                // user_role
-                // created_date
-                // modified_date
-                // created_by
+            
+            for(let k in collaborators){
+                console.log('Iterate: '+k)
+                console.log(collaborators[k])
+                const businessUser = {
+                    // user
+                    "user":"http://127.0.0.1:8000/api/users/"+collaborators[k].advisor.id+"/",
+                    // business
+                    "business":"http://127.0.0.1:8000/api/mybusiness/"+businessId+"/",
+                    // user_role
+                    "user_role" : "http://127.0.0.1:8000/api/businessuserrole/"+collaborators[k].role.id+"/",
+                    // collaborator_status
+                    "collaborator_status" : "http://127.0.0.1:8000/api/collaboratorstatus/"+collaborators[k].collaboratorStatus.id+"/",
+                    // collaborator_position
+                    "collaborator_position" : "http://127.0.0.1:8000/api/collaboratorposition/" + collaborators[k].collaboratorPosition.id+"/",
+                    // cfc_code
+                    "cfc_code" : collaborators[k].cfcCode,
+                    
+                    // created_date
+                    // modified_date
+                    "created_date":"2023-04-02T00:00",
+                    "modified_date":"2023-04-01T00:00",
+                    // created_by
+                    "created_by":"http://127.0.0.1:8000/api/users/9/" // <- hard coded for now
+                }
+                console.log('NBF10 Business User')
+                console.log(businessUser)
+                console.log(JSON.stringify(businessUser))
+                let url = 'http://localhost:8000/api/businessuser/'
+                const data = await postToAPI(url, businessUser)
+
             }
-            console.log(businessUser)
-            let url = 'http://localhost:8000/api/businessuser/'
-            const data = await postToAPI(url, businessUser)
-            return data
         }
 
         const save = async () =>{

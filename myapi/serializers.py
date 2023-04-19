@@ -20,7 +20,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     my_businesses = serializers.HyperlinkedRelatedField(view_name='business_user-detail',read_only=True, many=True)
     class Meta:
         model = MyUser
-        fields = ['first_name','last_name','url', 'username', 'email', 'groups','created_businesses','my_businesses']
+        fields = ['id','first_name','last_name','url', 'username', 'email', 'groups','created_businesses','my_businesses']
         #fields = '__all__'
 
 class StatusSerializer(serializers.HyperlinkedModelSerializer):
@@ -178,7 +178,7 @@ class BusinessUserSerializer(serializers.HyperlinkedModelSerializer):
 class InsurancePlanSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = InsurancePlan
-        fields = ['id','insurance_plan_name','insurance_plan_code', 'description']
+        fields = ['id','insurance_plan_name','insurance_plan_code', 'description','collaborator_status', 'collaborator_position', 'cfc_code']
 
 class InsuranceProviderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
