@@ -260,12 +260,17 @@ class Medical(models.Model):
     description = models.CharField(max_length=1024, null=True)
 
 # Checked
-class InsuranceApplication_Medical(models.Model):
-    insurance_application = models.ForeignKey(InsuranceApplication, on_delete=models.CASCADE, related_name="insurance_applications")
-    medical = models.ForeignKey(Medical, on_delete=models.PROTECT, related_name="insurance_applications")
-    notes = models.CharField(max_length=1024, null=True)
-    status = models.ForeignKey(Status, on_delete=models.PROTECT, related_name="insurance_applications", null=True)
+#class InsuranceApplication_Medical(models.Model):
+#    insurance_application = models.ForeignKey(InsuranceApplication, on_delete=models.CASCADE, related_name="insurance_applications")
+#    medical = models.ForeignKey(Medical, on_delete=models.PROTECT, related_name="insurance_applications")
+#    notes = models.CharField(max_length=1024, null=True)
+#    status = models.ForeignKey(Status, on_delete=models.PROTECT, related_name="insurance_applications", null=True)
 
+class Business_Medical(models.Model):
+    business = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, related_name="business_medicals")
+    medical = models.ForeignKey(Medical, on_delete=models.PROTECT, related_name="business_medicals")
+    notes = models.CharField(max_length=1024, null=True, blank=True)
+    status = models.ForeignKey(Status, on_delete=models.PROTECT, related_name="business_medicals")
 
 # Checked
 class ActivityLog(models.Model):

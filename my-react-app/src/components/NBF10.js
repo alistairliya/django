@@ -9,8 +9,8 @@
 // - - - - CFC Code.
 // - - - Curl?
 // - CmplianceEntities <--- done
-// - Documents <---
-// - Medicals
+// - Documents <--- done
+// - Medicals <---
 
 // Notes:
 // - Both MyBusiness and InsuranceApplication have reference to Product
@@ -33,6 +33,7 @@ const NBF10 = ({data}) => {
     const [collaborators, setCollaborators] = useState({})
     const [complianceEntities, setComplianceEntities] = useState({})
     const [documents, setDocuments] = useState({})
+    const [medicals, setMedicals] = useState({})
 
     
     const { user } = useAuth()
@@ -49,6 +50,7 @@ const NBF10 = ({data}) => {
         processCollaborators()
         processComplianceEntities()
         processDocuments()
+        processMedicals()
     },[data, clientId])
 
     // New or existing client? Need to add only if new.
@@ -122,6 +124,14 @@ const NBF10 = ({data}) => {
             setDocuments(data.documents)
         }
         console.log(documents)
+    }
+
+    const processMedicals = () => {
+        console.log('NBF10 Process Medicals')
+        if(data.medicals!=null){
+            setMedicals(data.medicals)
+        }
+        console.log(medicals)
     }
 
 
@@ -275,6 +285,27 @@ const NBF10 = ({data}) => {
                 console.log(JSON.stringify(businessDocument))
                 await postToAPI(url, businessDocument)
             }
+        }   
+
+        const postBusinessMedical = async (businessId) =>{
+            console.log('NBF10 Post Business Medical')
+            for(let k in medicals){
+                console.log('Iterate: '+k)
+                console.log(medicals[k])
+                const businessMedical = {
+                    // business
+                    "business":"http://127.0.0.1:8000/api/mybusiness/"+businessId+"/",
+                    // medical
+                    "medical":"http://127.0.0.1:8000/api/medical/"+k+"/", // key is ID
+                    // notes
+                    "notes":medicals[k].notes,
+                    // status
+                    "status":"http://127.0.0.1:8000/api/status/2/" // <- hard coded for now
+                }
+                let url = "http://127.0.0.1:8000/api/businessmedical/"
+                console.log(JSON.stringify(businessMedical))
+                await postToAPI(url, businessMedical)
+            }
         }
 
         const save = async () =>{
@@ -287,6 +318,7 @@ const NBF10 = ({data}) => {
             await postBusinessUser(businessObj.id)
             await postBusinessCompliance(businessObj.id)
             await postBusinessDocument(businessObj.id)
+            await postBusinessMedical(businessObj.id)
         }
         save()
     }

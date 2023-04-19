@@ -26,7 +26,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class StatusSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Status
-        fields = ['status_name', 'description']
+        fields = ['id','status_name', 'description']
 
 class ProvinceStateSerializer(serializers.HyperlinkedModelSerializer):
     #country = CountrySerializer(read_only=True)
@@ -210,6 +210,11 @@ class MedicalSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Medical
         fields = ['id', 'medical_name', 'description']
+
+class BusinessMedicalSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Business_Medical
+        fields = ['id','business', 'medical', 'notes', 'status']
 
 class InsuranceApplicationSerializer(serializers.HyperlinkedModelSerializer):
     # provider = InsuranceProviderSerializer()

@@ -143,6 +143,10 @@ class MedicalViewSet(viewsets.ModelViewSet):
     queryset = Medical.objects.all()
     serializer_class = MedicalSerializer
 
+class BusinessMedicalViewSet(viewsets.ModelViewSet):
+    queryset = Business_Medical.objects.all()
+    serializer_class = BusinessMedicalSerializer
+
 class InsuranceApplicationViewSet(viewsets.ModelViewSet):
     queryset = InsuranceApplication.objects.all()
     serializer_class = InsuranceApplicationSerializer
