@@ -107,6 +107,10 @@ class ComplianceEntityViewSet(viewsets.ModelViewSet):
     queryset = ComplianceEntity.objects.all()
     serializer_class = ComplianceEntitySerializer
 
+class BusinessComplianceViewSet(viewsets.ModelViewSet):
+    queryset = Business_ComplianceEntity.objects.all()
+    serializer_class = BusinessComplianceSerializer
+
 class CollaboratorStatusViewSet(viewsets.ModelViewSet):
     queryset = CollaboratorStatus.objects.all()
     serializer_class = CollaboratorStatusSerializer
