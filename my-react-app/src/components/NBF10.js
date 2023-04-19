@@ -31,6 +31,7 @@ const NBF10 = ({data}) => {
     const [applicantInsurancePlanTypeId, setApplicantInsurancePlanTypeId] = useState()
     const [applicantInsuranceProviderId, setApplicantInsuranceProviderId] = useState()
     const [collaborators, setCollaborators] = useState({})
+    const [complianceEntities, setComplianceEntities] = useState({})
 
     
     const { user } = useAuth()
@@ -45,6 +46,7 @@ const NBF10 = ({data}) => {
             console.log('NBF10 Client ID is set: '+clientId)
         }
         processCollaborators()
+        processComplianceEntities()
     },[data, clientId])
 
     // New or existing client? Need to add only if new.
@@ -102,6 +104,14 @@ const NBF10 = ({data}) => {
             setCollaborators(data.collaborators)
         }
         console.log(collaborators)
+    }
+
+    const processComplianceEntities = () => {
+        console.log('NBF10 Process Compliance Entities')
+        if(data.complianceEntities!=null){
+            setComplianceEntities(data.complianceEntities)
+        }
+        console.log(complianceEntities)
     }
 
 
@@ -180,7 +190,6 @@ const NBF10 = ({data}) => {
             return data
 
         }
-
         // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"user":"http://127.0.0.1:8000/api/users/9/", "business":"http://127.0.0.1:8000/api/mybusiness/23/","user_role":"http://127.0.0.1:8000/api/businessuserrole/1/","created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00", "created_by":"http://127.0.0.1:8000/api/users/9/" }' http://127.0.0.1:8000/api/businessuser/ 
         const postBusinessUser = async (businessId) =>{
             console.log('NBF10 Post Business User')
@@ -213,8 +222,26 @@ const NBF10 = ({data}) => {
                 console.log(businessUser)
                 console.log(JSON.stringify(businessUser))
                 let url = 'http://localhost:8000/api/businessuser/'
-                const data = await postToAPI(url, businessUser)
-
+                await postToAPI(url, businessUser)
+            }
+        }
+        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d '{"business":"http://127.0.0.1:8000/api/mybusiness/37/", "compliance_entity":"http://127.0.0.1:8000/api/complianceentity/3/", "notes":"This is a test"}' http://127.0.0.1:8000/api/businesscompliance/
+        const postBusinessCompliance = async (businessId) =>{
+            console.log('NBF10 Post Business Compliance')
+            for(let k in complianceEntities){
+                console.log('Iterate: '+k)
+                console.log(complianceEntities[k])
+                const businessCompliance = {
+                    // business
+                    "business":"http://127.0.0.1:8000/api/mybusiness/"+businessId+"/",
+                    // compliance_entity
+                    "compliance_entity":"http://127.0.0.1:8000/api/complianceentity/"+k+"/", // key is ID
+                    // notes
+                    "notes":complianceEntities[k].notes
+                }
+                let url = "http://127.0.0.1:8000/api/businesscompliance/" 
+                console.log(JSON.stringify(businessCompliance))
+                await postToAPI(url, businessCompliance)    
             }
         }
 
@@ -226,6 +253,7 @@ const NBF10 = ({data}) => {
             console.log('NBF10 MyBusiness ID: '+businessObj.id)
             await postInsuranceApplication(businessObj.id)
             await postBusinessUser(businessObj.id)
+            await postBusinessCompliance(businessObj.id)
         }
         save()
     }

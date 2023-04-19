@@ -211,7 +211,7 @@ class ComplianceEntity(models.Model):
 class BusinessComplianceEntity(models.Model):
     business = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, related_name="businesscomplianceentities")
     compliance_entity = models.ForeignKey(ComplianceEntity, on_delete=models.PROTECT, related_name="businesscomplianceentities")
-    notes = models.CharField(max_length=1024, null=True)
+    notes = models.CharField(max_length=1024,blank=True, null=True)
 
 # Checked
 class Document(models.Model):
