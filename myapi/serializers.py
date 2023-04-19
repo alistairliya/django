@@ -178,7 +178,7 @@ class BusinessUserSerializer(serializers.HyperlinkedModelSerializer):
 class InsurancePlanSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = InsurancePlan
-        fields = ['id','insurance_plan_name','insurance_plan_code', 'description','collaborator_status', 'collaborator_position', 'cfc_code']
+        fields = ['id','insurance_plan_name','insurance_plan_code', 'description']
 
 class InsuranceProviderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
