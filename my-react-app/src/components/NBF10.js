@@ -91,9 +91,27 @@ const NBF10 = ({data}) => {
             setApplicantInsuranceProviderId(data.applicantInsurance.insurance_provider.id)
     }
 
+
+    const postToAPI = async (url, obj) => {
+        let headers = new Headers()
+        const token = user['token']
+        console.log('TOKEN: '+token)
+        const auth_str = 'Token '+token
+        headers.set('Authorization', auth_str)
+        headers.set('Content-Type', 'application/json')
+        const res = await fetch(url,
+            {
+                method:'POST',
+                body:JSON.stringify(obj),
+                headers:headers
+            })
+        const data = await res.json()
+        return data
+    }
+
     // Based on NBF1 to NBF5, can create the My Business object.
     // The remaining requires MyBusiness to be foreign keys.
-const saveData = () => {
+    const saveData = () => {
         console.log('NBF10 Create My Business')
         let headers = new Headers()
         const token = user['token']
@@ -130,6 +148,8 @@ const saveData = () => {
             const data = await res.json()
             return data
         }
+
+
 
         // WORKING ON THIS RIGHT NOW!!!!
         // REST API TO POST TO InsurnaceApplication
@@ -169,6 +189,24 @@ const saveData = () => {
         // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"user":"http://127.0.0.1:8000/api/users/9/", "business":"http://127.0.0.1:8000/api/mybusiness/23/","user_role":"http://127.0.0.1:8000/api/businessuserrole/1/","created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00", "created_by":"http://127.0.0.1:8000/api/users/9/" }' http://127.0.0.1:8000/api/businessuser/ 
         const postBusinessUser = async (businessId) =>{
             console.log('NBF10 Post Business User')
+            const businessUser = {
+                // user
+                // business
+                // user_role
+                // created_date
+                // modified_date
+                // created_by
+            }
+            console.log(businessUser)
+            let url = 'http://localhost:8000/api/businessuser/'
+            const res = await fetch(url,
+                {
+                    method:'POST',
+                    body:JSON.stringify(businessUser),
+                    headers:headers
+                })
+            const data = await res.json()
+            return data
         }
 
         const save = async () =>{
