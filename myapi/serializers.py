@@ -158,7 +158,7 @@ class ComplianceEntitySerializer(serializers.ModelSerializer):
         model = ComplianceEntity
         fields = ['id', 'compliance_entity_name', 'description']
 
-class BusinessComplianceSerializer(serializers.ModelSerializer):
+class BusinessComplianceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = BusinessComplianceEntity
         fields = ['id', 'compliance_entity', 'business', 'notes']

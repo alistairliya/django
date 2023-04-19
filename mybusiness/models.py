@@ -203,10 +203,10 @@ class ComplianceEntity(models.Model):
 # Checked
 # M-2-M Association
 # DO NOT USE THIS ANYMORE. THIS IS A BIT MESSED UP!
-class Business_ComplianceEntity(models.Model):
-    compliance_entity = models.ForeignKey(ComplianceEntity, on_delete=models.PROTECT, name="businesses")
-    businesss = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, name="complianceentities")
-    notes = models.CharField(max_length=1024, null=True)
+#class Business_ComplianceEntity(models.Model):
+#    compliance_entity = models.ForeignKey(ComplianceEntity, on_delete=models.PROTECT, name="businesses")
+#    businesss = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, name="complianceentities")
+#    notes = models.CharField(max_length=1024, null=True)
 
 class BusinessComplianceEntity(models.Model):
     business = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, related_name="businesscomplianceentities")

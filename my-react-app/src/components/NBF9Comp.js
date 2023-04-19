@@ -11,7 +11,7 @@ const NBF9Comp = ({id, item, collect}) => {
         console.log(event.target.checked)
         setChecked(event.target.checked);
         //collect()
-        collect(id, {'name' : item.compliance_entity_name, 'selected': event.target.checked, 'notes': notes})
+        collect(id, {'id':id,  'name' : item.compliance_entity_name, 'selected': event.target.checked, 'notes': notes})
     };
 
     const handleTextAreaChange = (event) => {
