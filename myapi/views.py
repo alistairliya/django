@@ -135,6 +135,10 @@ class DocumentViewSet(viewsets.ModelViewSet):
     queryset = Document.objects.all()
     serializer_class = DocumentSerializer
 
+class BusinessDocumentViewSet(viewsets.ModelViewSet):
+    queryset = Business_Document.objects.all()
+    serializer_class = BusinessDocumentSerializer
+
 class MedicalViewSet(viewsets.ModelViewSet):
     queryset = Medical.objects.all()
     serializer_class = MedicalSerializer

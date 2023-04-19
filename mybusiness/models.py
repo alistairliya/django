@@ -223,9 +223,9 @@ class Document(models.Model):
 class Business_Document(models.Model):
     business = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, related_name="documents")
     document = models.ForeignKey(Document, on_delete=models.PROTECT, related_name="mybusinesses")
-    is_submitted = models.BooleanField()
-    url = models.CharField(max_length=1024)
-
+    is_submitted = models.BooleanField(default=False)
+    url = models.CharField(max_length=1024, null=True, blank=True) # Location of the document
+    notes = models.CharField(max_length=1024, null=True, blank=True)
 # Checked
 class InsuranceProvider(models.Model):
     insurance_provider_name = models.CharField(max_length=64)

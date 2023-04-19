@@ -201,6 +201,10 @@ class DocumentSerializer(serializers.HyperlinkedModelSerializer):
         model = Document
         fields = ['id','document_name', 'description']
 
+class BusinessDocumentSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Business_Document
+        fields = ['id','business', 'document', 'notes', 'is_submitted','url']
 
 class MedicalSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

@@ -59,6 +59,7 @@ router.register(r'document', views.DocumentViewSet)
 router.register(r'collaboratorposition', views.CollaboratorPositionViewSet)
 router.register(r'complianceentity', views.ComplianceEntityViewSet)
 router.register(r'businesscompliance', views.BusinessComplianceViewSet)
+router.register(r'businessdocument', views.BusinessDocumentViewSet)
 
 urlpatterns = [
     path('', include("users.urls")),

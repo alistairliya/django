@@ -8,8 +8,8 @@
 // - - - -  CollaboratorPosition
 // - - - - CFC Code.
 // - - - Curl?
-// - CmplianceEntities <---
-// - Documents
+// - CmplianceEntities <--- done
+// - Documents <---
 // - Medicals
 
 // Notes:
@@ -32,6 +32,7 @@ const NBF10 = ({data}) => {
     const [applicantInsuranceProviderId, setApplicantInsuranceProviderId] = useState()
     const [collaborators, setCollaborators] = useState({})
     const [complianceEntities, setComplianceEntities] = useState({})
+    const [documents, setDocuments] = useState({})
 
     
     const { user } = useAuth()
@@ -47,6 +48,7 @@ const NBF10 = ({data}) => {
         }
         processCollaborators()
         processComplianceEntities()
+        processDocuments()
     },[data, clientId])
 
     // New or existing client? Need to add only if new.
@@ -112,6 +114,14 @@ const NBF10 = ({data}) => {
             setComplianceEntities(data.complianceEntities)
         }
         console.log(complianceEntities)
+    }
+
+    const processDocuments = () => {
+        console.log('NBF10 Process Documents')
+        if(data.documents!=null){
+            setDocuments(data.documents)
+        }
+        console.log(documents)
     }
 
 
@@ -245,6 +255,28 @@ const NBF10 = ({data}) => {
             }
         }
 
+
+
+        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d '{"business":"http://127.0.0.1:8000/api/mybusiness/37/", "document":"http://127.0.0.1:8000/api/document/3/", "notes":"This is a test" }' http://127.0.0.1:8000/api/businessdocument/
+        const postBusinessDocument = async (businessId) =>{
+            console.log('NBF10 Post Business Document')
+            for(let k in documents){
+                console.log('Iterate: '+k)
+                console.log(documents[k])
+                const businessDocument = {
+                    // business
+                    "business":"http://127.0.0.1:8000/api/mybusiness/"+businessId+"/",
+                    // document
+                    "document":"http://127.0.0.1:8000/api/document/"+k+"/", // key is ID
+                    // notes
+                    "notes":documents[k].notes
+                }
+                let url = "http://127.0.0.1:8000/api/businessdocument/"
+                console.log(JSON.stringify(businessDocument))
+                await postToAPI(url, businessDocument)
+            }
+        }
+
         const save = async () =>{
             const businessObj = await postMyBusiness()
             // get the ID to mybusiness object
@@ -254,6 +286,7 @@ const NBF10 = ({data}) => {
             await postInsuranceApplication(businessObj.id)
             await postBusinessUser(businessObj.id)
             await postBusinessCompliance(businessObj.id)
+            await postBusinessDocument(businessObj.id)
         }
         save()
     }
