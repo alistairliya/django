@@ -2,6 +2,12 @@
 // - Save all the collected data somewhere
 // - - Save to InsuraceApplication object
 // - Collaborators
+// - - BusinessUser
+// - - - need to reference:
+// - - - -  CollaboratorStatus
+// - - - -  CollaboratorPosition
+// - - - - CFC Code.
+// - - - Curl?
 
 // Notes:
 // - Both MyBusiness and InsuranceApplication have reference to Product
@@ -160,6 +166,11 @@ const saveData = () => {
 
         }
 
+        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"user":"http://127.0.0.1:8000/api/users/9/", "business":"http://127.0.0.1:8000/api/mybusiness/23/","user_role":"http://127.0.0.1:8000/api/businessuserrole/1/","created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00", "created_by":"http://127.0.0.1:8000/api/users/9/" }' http://127.0.0.1:8000/api/businessuser/ 
+        const postBusinessUser = async (businessId) =>{
+            console.log('NBF10 Post Business User')
+        }
+
         const save = async () =>{
             const businessObj = await postMyBusiness()
             // get the ID to mybusiness object
@@ -167,6 +178,7 @@ const saveData = () => {
             console.log(businessObj)
             console.log('NBF10 MyBusiness ID: '+businessObj.id)
             await postInsuranceApplication(businessObj.id)
+            await postBusinessUser(businessObj.id)
         }
         save()
     }

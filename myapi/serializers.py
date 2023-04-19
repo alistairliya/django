@@ -169,11 +169,11 @@ class CollaboratorPositionSerializer(serializers.ModelSerializer):
         fields = ['id', 'position_name', 'description']
 
 class BusinessUserSerializer(serializers.HyperlinkedModelSerializer):
-    user = UserSerializer()
-    user_role = BusinessUserRoleSerializer()
+    #user = UserSerializer()
+    #user_role = BusinessUserRoleSerializer()
     class Meta:
         model = Business_User
-        fields = ['business', 'user', 'split', 'user_role', 'notes', 'created_by', 'created_date', 'modified_date', 'collaborator_status', 'collaborator_position', 'cfc_code']
+        fields = ['id','business', 'user', 'split', 'user_role', 'notes', 'created_by', 'created_date', 'modified_date', 'collaborator_status', 'collaborator_position', 'cfc_code']
 
 class InsurancePlanSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
