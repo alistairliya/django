@@ -113,12 +113,6 @@ const NBF10 = ({data}) => {
     // The remaining requires MyBusiness to be foreign keys.
     const saveData = () => {
         console.log('NBF10 Create My Business')
-        let headers = new Headers()
-        const token = user['token']
-        console.log('TOKEN: '+token)
-        const auth_str = 'Token '+token
-        headers.set('Authorization', auth_str)
-        headers.set('Content-Type', 'application/json')
         
         // REST API TO POST TO MyBusiness
         // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00","client":"http://127.0.0.1:8000/api/clients/1/", "status":"http://127.0.0.1:8000/api/businessstatus/1/"}' http://127.0.0.1:8000/api/mybusiness/ 
@@ -139,13 +133,7 @@ const NBF10 = ({data}) => {
                 "modified_date":"2023-04-01T00:00",
             }
             let url = 'http://localhost:8000/api/mybusiness/'
-            const res = await fetch(url,
-                {
-                    method:'POST',
-                    body:JSON.stringify(mybusiness),
-                    headers:headers
-                })
-            const data = await res.json()
+            const data = await postToAPI(url, mybusiness)
             return data
         }
 
@@ -175,13 +163,7 @@ const NBF10 = ({data}) => {
             }
             console.log(insuranceApplication)
             let url = 'http://localhost:8000/api/insuranceapplication/'
-            const res = await fetch(url,
-                {
-                    method:'POST',
-                    body:JSON.stringify(insuranceApplication),
-                    headers:headers
-                })
-            const data = await res.json()
+            const data = await postToAPI(url, insuranceApplication)
             return data
 
         }
@@ -199,13 +181,7 @@ const NBF10 = ({data}) => {
             }
             console.log(businessUser)
             let url = 'http://localhost:8000/api/businessuser/'
-            const res = await fetch(url,
-                {
-                    method:'POST',
-                    body:JSON.stringify(businessUser),
-                    headers:headers
-                })
-            const data = await res.json()
+            const data = await postToAPI(url, businessUser)
             return data
         }
 
