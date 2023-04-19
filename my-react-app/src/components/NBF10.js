@@ -8,6 +8,9 @@
 // - - - -  CollaboratorPosition
 // - - - - CFC Code.
 // - - - Curl?
+// - CmplianceEntities <---
+// - Documents
+// - Medicals
 
 // Notes:
 // - Both MyBusiness and InsuranceApplication have reference to Product
