@@ -270,7 +270,7 @@ class Business_Medical(models.Model):
     business = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, related_name="business_medicals")
     medical = models.ForeignKey(Medical, on_delete=models.PROTECT, related_name="business_medicals")
     notes = models.CharField(max_length=1024, null=True, blank=True)
-    status = models.ForeignKey(Status, on_delete=models.PROTECT, related_name="business_medicals")
+    status = models.ForeignKey(Status, on_delete=models.PROTECT, related_name="business_medicals", null=True)
 
 # Checked
 class ActivityLog(models.Model):
