@@ -23,7 +23,7 @@ import { useAuth } from "../hooks/useAuth"
 const NBF10 = ({data}) => {
 
     const [clientId, setClientId] = useState()
-    const [addressId, setAddressId] = useState() // applicant address ID
+    //const [addressId, setAddressId] = useState() // applicant address ID
     // From ApplicantInsurance Object
     const [applicantInsuranceFaceAmount, setApplicantInsuranceFaceAmount] = useState()
     const [applicantInsurancePlannedPremium, setApplicantInsurancePlannedPremium] = useState()
@@ -42,7 +42,7 @@ const NBF10 = ({data}) => {
         console.log('NBF10 useEffect')
         console.log(data)
         processClient()
-        processAddress()
+        //processAddress()
         processApplicantInsurance()
         if(clientId){
             console.log('NBF10 Client ID is set: '+clientId)
@@ -71,8 +71,9 @@ const NBF10 = ({data}) => {
         } 
     }
 
+    /*
     // Need this only for a newly created client?
-    const processAddress = async () => {
+    const processAddressB = async () => {
         console.log('NBF10 Process Address')
         if(!dataProcessed && data['applicantAddress'].is_new_address != null){
             console.log('NBF10 Address is new. Store into DB and get adderss ID')
@@ -109,7 +110,7 @@ const NBF10 = ({data}) => {
             if(data.applicantAddress.id)
                 setAddressId(data.applicantAddress.id)
         }
-    }
+    }*/
 
     // Need this only for a newly created client?
     const processPhone = () => {
@@ -130,6 +131,7 @@ const NBF10 = ({data}) => {
         if(data.applicantInsurance.insurance_provider != null)
             setApplicantInsuranceProviderId(data.applicantInsurance.insurance_provider.id)
     }
+
 
     const processCollaborators = () => {
         console.log('NBF10 Process Collaborators')
@@ -210,12 +212,40 @@ const NBF10 = ({data}) => {
         }
 
 
+        const postAddress = async () => {
+            let addressId = null
+            if(data.applicantAddress.is_new_address){
+                const addressObj = {
+                    // unit_number
+                    "unit_number":data.applicantAddress.unit_number,
+                    // street_ address
+                    "street_address":data.applicantAddress.street_address,
+                    // city
+                    "city":data.applicantAddress.city,
+                    // province_state
+                    "province_state":"http://127.0.0.1:8000/api/province_state/"+data.applicantAddress.province.id+'/',
+                    // country
+                    "country":"http://127.0.0.1.8000/api/country/"+data.applicantAddress.country.id+'/',
+                    // postal_code
+                    "postal_code":data.applicantAddress.postal_code,
+                    // address_type
+                    "address_type":"http://127.0.0.1:8000/api/addresstype/1/", // Hardcode for now
+                    // description
+                }
+                const url = 'http://127.0.0.1:8000/api/addresss/'
+                const result = await postToAPI(url, addressObj)
+                addressId = result.id
+            }else{
+                addressId = data.applicantAddress.address.id
+            }
+            return addressId
+        }
 
         // WORKING ON THIS RIGHT NOW!!!!
         // REST API TO POST TO InsurnaceApplication
         // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"business":"http://127.0.0.1:8000/api/mybusiness/12/","product":"http://127.0.0.1:8000/api/product/1/", "plan_type":"http://127.0.0.1:8000/api/insuranceplantype/1/","plan":"http://127.0.0.1:8000/api/insuranceplan/1/","face_amount":1.0, "planned_premium":2.0,"provider":"http://127.0.0.1:8000/api/insuranceprovider/1/"}' http://127.0.0.1:8000/api/insuranceapplication/
         // From Doc: If the Product Type of a Product points to insurance, use this table (InsuranceApplication) for insurance specific data.
-        const postInsuranceApplication = async (businessId) =>{
+        const postInsuranceApplication = async (businessId, addressId) =>{
             console.log('NBF10 Post Insurance Application')
             const insuranceApplication = {
                 // business
@@ -234,7 +264,6 @@ const NBF10 = ({data}) => {
                 "provider":"http://127.0.0.1:8000/api/insuranceprovider/"+applicantInsuranceProviderId+"/",
                 // applicant_address
                 "applicant_address":"http://127.0.0.1:8000/api/addresss/"+addressId+"/",
-
             }
             console.log(insuranceApplication)
             let url = 'http://localhost:8000/api/insuranceapplication/'
@@ -346,7 +375,8 @@ const NBF10 = ({data}) => {
             // with MyBusiness ID, post to InsuranceApplication
             console.log(businessObj)
             console.log('NBF10 MyBusiness ID: '+businessObj.id)
-            await postInsuranceApplication(businessObj.id)
+            const addressId = await postAddress() 
+            await postInsuranceApplication(businessObj.id, addressId)
             await postBusinessUser(businessObj.id)
             await postBusinessCompliance(businessObj.id)
             await postBusinessDocument(businessObj.id)
