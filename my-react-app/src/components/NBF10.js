@@ -23,7 +23,7 @@ import { useAuth } from "../hooks/useAuth"
 const NBF10 = ({data}) => {
 
     const [clientId, setClientId] = useState()
-    const [addressId, setAddressId] = useState()
+    const [addressId, setAddressId] = useState() // applicant address ID
     // From ApplicantInsurance Object
     const [applicantInsuranceFaceAmount, setApplicantInsuranceFaceAmount] = useState()
     const [applicantInsurancePlannedPremium, setApplicantInsurancePlannedPremium] = useState()
@@ -34,7 +34,7 @@ const NBF10 = ({data}) => {
     const [complianceEntities, setComplianceEntities] = useState({})
     const [documents, setDocuments] = useState({})
     const [medicals, setMedicals] = useState({})
-
+    const [dataProcessed, setDataProcessed] = useState(false)
     
     const { user } = useAuth()
     
@@ -42,7 +42,7 @@ const NBF10 = ({data}) => {
         console.log('NBF10 useEffect')
         console.log(data)
         processClient()
-        //processAddress()
+        processAddress()
         processApplicantInsurance()
         if(clientId){
             console.log('NBF10 Client ID is set: '+clientId)
@@ -72,13 +72,42 @@ const NBF10 = ({data}) => {
     }
 
     // Need this only for a newly created client?
-    const processAddress = () => {
+    const processAddress = async () => {
         console.log('NBF10 Process Address')
-        if(data['address'].is_new_address != null){
-            console.log('NBF10 Address is new')
+        if(!dataProcessed && data['applicantAddress'].is_new_address != null){
+            console.log('NBF10 Address is new. Store into DB and get adderss ID')
+            setDataProcessed(true)
+            // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d '{"unit_number":"101","street_address":"11111 FooBarFoo Ave","city":"Big City","province_state":"http://127.0.0.1:8000/api/province_state/1/", "country":"http://127.0.0.1:8000/api/country/1/", "postal_code":"VXVSVS","address_type":"http://127.0.0.1:8000/api/addresstype/1/" }' http://127.0.0.1:8000/api/addresss/
+            const postAddress = async (mydata) => {
+                const addressObj = {
+                    // unit_number
+                    "unit_number":mydata.applicantAddress.unit_number,
+                    // street_ address
+                    "street_address":mydata.applicantAddress.street_address,
+                    // city
+                    "city":mydata.applicantAddress.city,
+                    // province_state
+                    "province_state":"http://127.0.0.1:8000/api/province_state/"+mydata.applicantAddress.province.id+'/',
+                    // country
+                    "country":"http://127.0.0.1.8000/api/country/"+mydata.applicantAddress.country.id+'/',
+                    // postal_code
+                    "postal_code":mydata.applicantAddress.postal_code,
+                    // address_type
+                    "address_type":"http://127.0.0.1:8000/api/addresstype/1/", // Hardcode for now
+                    // description
+                }
+                const url = 'http://127.0.0.1:8000/api/addresss/'
+                const data = await postToAPI(url, addressObj)
+                return data 
+            }
+            const result = await postAddress(data)
+            await setAddressId(result.id)
+            console.log("Setting new address ID: "+result.id)
+
         }else{
             console.log('NBF10 Address is not new')
-            setAddressId(data.address.id)
+            if(data.applicantAddress.id)
+                setAddressId(data.applicantAddress.id)
         }
     }
 
@@ -202,7 +231,10 @@ const NBF10 = ({data}) => {
                 // planned_premium
                 "planned_premium":applicantInsurancePlannedPremium,
                 // provider
-                "provider":"http://127.0.0.1:8000/api/insuranceprovider/"+applicantInsuranceProviderId+"/"
+                "provider":"http://127.0.0.1:8000/api/insuranceprovider/"+applicantInsuranceProviderId+"/",
+                // applicant_address
+                "applicant_address":"http://127.0.0.1:8000/api/addresss/"+addressId+"/",
+
             }
             console.log(insuranceApplication)
             let url = 'http://localhost:8000/api/insuranceapplication/'

@@ -252,6 +252,7 @@ class InsuranceApplication(models.Model):
     plan = models.ForeignKey(InsurancePlan, on_delete=models.PROTECT, related_name="insurance_applications")
     face_amount = models.FloatField(null=True)
     planned_premium = models.FloatField(null=True)
+    applicant_address = models.ForeignKey(Address, on_delete=models.PROTECT, related_name="insurance_applications", null=True)
 
 # Checked
 class Medical(models.Model):

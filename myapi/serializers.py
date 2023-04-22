@@ -32,7 +32,7 @@ class ProvinceStateSerializer(serializers.HyperlinkedModelSerializer):
     #country = CountrySerializer(read_only=True)
     class Meta:
         model = ProvinceState
-        fields = ['province_state_name', 'province_state_code', 'country']
+        fields = ['id','province_state_name', 'province_state_code', 'country']
 
 class CountrySerializer(serializers.HyperlinkedModelSerializer):
     # provinces_states has to be a related_name in the ProvinceState model's country foreingn key field.
@@ -40,11 +40,11 @@ class CountrySerializer(serializers.HyperlinkedModelSerializer):
     #provinces_states = serializers.StringRelatedField(many=True, read_only=True)
     class Meta:
         model = Country
-        fields = ['country_name', 'country_code','provinces_states']
+        fields = ['id','country_name', 'country_code','provinces_states']
 
 class AddressSerializer(serializers.HyperlinkedModelSerializer):
-    province_state = ProvinceStateSerializer(read_only=True)
-    country = CountrySerializer(read_only=True)
+    #province_state = ProvinceStateSerializer(read_only=True)
+    #country = CountrySerializer(read_only=True)
     class Meta:
         model = Address
         fields = ['id','unit_number', 'street_address','city','province_state','country','postal_code','address_type','description']
@@ -220,7 +220,7 @@ class InsuranceApplicationSerializer(serializers.HyperlinkedModelSerializer):
     # provider = InsuranceProviderSerializer()
     class Meta:
         model = InsuranceApplication
-        fields = ['business','product','provider','plan_type','plan','face_amount','planned_premium']
+        fields = ['business','product','provider','plan_type','plan','face_amount','planned_premium','applicant_address']
 
 class BusinessInsuranceSerializer(serializers.HyperlinkedModelSerializer):
     insurance_application = InsuranceApplicationSerializer()
