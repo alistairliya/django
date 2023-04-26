@@ -240,7 +240,7 @@ const NBF10 = ({data}) => {
             }
             return addressId
         }
-
+        // p225/60r17 1156 1307 230 20 10:30 
         // WORKING ON THIS RIGHT NOW!!!!
         // REST API TO POST TO InsurnaceApplication
         // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"business":"http://127.0.0.1:8000/api/mybusiness/12/","product":"http://127.0.0.1:8000/api/product/1/", "plan_type":"http://127.0.0.1:8000/api/insuranceplantype/1/","plan":"http://127.0.0.1:8000/api/insuranceplan/1/","face_amount":1.0, "planned_premium":2.0,"provider":"http://127.0.0.1:8000/api/insuranceprovider/1/"}' http://127.0.0.1:8000/api/insuranceapplication/
