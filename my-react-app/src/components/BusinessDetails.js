@@ -1,9 +1,16 @@
 import Button from './Button'
 
-const BusinessDetails = ({businessId, closeComponent}) => {
+import {useEffect, useState} from "react"
+
+const BusinessDetails = ({business, closeComponent}) => {
+useEffect(()=>{
+    console.log('BusinessDetails useEffect')
+    console.log(business)
+}, [business])
+
   return (
     <div className="container">
-    <div>BusinessDetails {businessId}</div>
+    <div>BusinessDetails {business.id}</div>
     <Button 
     text='Close' 
     color='red' 

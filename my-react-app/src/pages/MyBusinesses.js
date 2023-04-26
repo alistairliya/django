@@ -12,7 +12,7 @@ function MyBusinesses() {
 
     const { user } = useAuth();
   const [showAddBusiness, setShowAddBusiness] = useState(false)
-  const [businessId, setBusinessId] = useState(null) // for BusinessDetails
+  const [detailedBusiness, setDetailedBusiness] = useState(null) // for BusinessDetails
 
 
   const [businesses, setBusinesses] = useState(
@@ -81,14 +81,14 @@ function MyBusinesses() {
   }
   
   // from Delete Task in example, 52:31, deleteTask
-  const editBusiness = (id) =>{
-    console.log('edit '+id)
-    setBusinessId(id)
+  const editBusiness = (business) =>{
+    console.log('edit '+business.id)
+    setDetailedBusiness(business)
     //setBusinesses(businesses.filter((business)=>business.id!=id)) // example from deleting task 55:30
   }
 
   const closeBusinessDetailsComponent = () => {
-    setBusinessId(null)
+    setDetailedBusiness(null)
   }
 
   // Using toggleReminder in example 57:53
@@ -105,7 +105,7 @@ function MyBusinesses() {
         showAdd = {showAddBusiness}
       />
       {showAddBusiness && <NewBusiness onAdd={addBusiness} />}
-      {businessId && <BusinessDetails businessId={businessId} closeComponent={closeBusinessDetailsComponent} />}
+      {detailedBusiness && <BusinessDetails business={detailedBusiness} closeComponent={closeBusinessDetailsComponent} />}
       {businesses.length > 0?(
         <Businesses 
           businesses = {businesses} 

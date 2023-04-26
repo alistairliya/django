@@ -82,7 +82,7 @@ const Business = ({business, onEdit, onToggle}) => {
         <td>{advisor_name}</td>
         <td>{business.projected_FYC}</td>
         <td>{business.settled_FYC}</td>
-        <td><AiFillTool style={{color:'red', cursor:'pointer'}} onClick={()=>onEdit(business.id)}/></td>       
+        <td><AiFillTool style={{color:'red', cursor:'pointer'}} onClick={()=>onEdit(business)}/></td>       
   </tr>
   </tbody>
   )
