@@ -13,10 +13,11 @@ import Button from './Button'
 
 import {useEffect, useState} from "react"
 import { useAuth } from "../hooks/useAuth"
+import BusinessDetailsClient from './BusinessDetailsClient'
 
 
 const BusinessDetails = ({business, closeComponent}) => {
-    const [myClient, setMyClient] = useState({})
+    const [myClient, setMyClient] = useState(null)
     
     const { user } = useAuth()
     useEffect(()=>{
@@ -24,10 +25,11 @@ const BusinessDetails = ({business, closeComponent}) => {
         console.log('BusinessDetails useEffect')
         console.log(business.client)
         const getMyClient = async () => {
+            console.log('getMyClient')
             let c = await fetchObject(business.client)
-            await setMyClient(c)
-            console.log("My Clinet: "+JSON.stringify(myClient))
+            setMyClient(c)
         }
+
         getMyClient()
     }, [business])
 
@@ -41,13 +43,22 @@ const BusinessDetails = ({business, closeComponent}) => {
         return data
     }
 
+    const test = async() =>{
+        console.log("My Clinet: "+JSON.stringify(myClient))
+    }
+
     return (
         <div className="container">
         <div>BusinessDetails {business.id}</div>
+        <BusinessDetailsClient client={myClient}/>
         <Button 
         text='Close' 
         color='red' 
         onClick={closeComponent} 
+        />
+        <Button
+            text = 'test'
+            onClick = {test}
         />
         </div>
     )
