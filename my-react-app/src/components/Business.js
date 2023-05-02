@@ -23,7 +23,7 @@ const Business = ({business, onEdit, onToggle}) => {
   const [client, setClient] = useState({})
 
   let advisor = business['created_by']
-  console.log('----------------------') 
+  //console.log('----------------------') 
   if(business.related_users.length >0){ 
     for(let related_user of business.related_users){
       if(related_user['user_role']['user_role_name']==='owner'){
@@ -31,8 +31,8 @@ const Business = ({business, onEdit, onToggle}) => {
       }
     }
   }
-  console.log('advisor...:')
-  console.log(advisor)
+  //console.log('advisor...:')
+  //console.log(advisor)
   
   if(advisor){
     var advisor_name = advisor['username']
@@ -40,7 +40,7 @@ const Business = ({business, onEdit, onToggle}) => {
     if(advisor['first_name'] && advisor['last_name']&&(advisor['first_name'].trim()!==''||advisor['last_name'].trim()!=='')){
       advisor_name = advisor['first_name']+' '+advisor['last_name']
     }
-    console.log('advisor name: '+advisor_name)
+    //console.log('advisor name: '+advisor_name)
   }
 
   const {user} = useAuth()
@@ -53,13 +53,13 @@ const Business = ({business, onEdit, onToggle}) => {
         headers.set('Authorization', auth_str)
         const res = await fetch(url,{headers:headers})
         const data = await res.json()
-        console.log("\n***CLIENT: ")
-        console.log(data)
+        //console.log("\n***CLIENT: ")
+        //console.log(data)
         setClient(data)
         return data
     }
     if (client.id === undefined){
-        console.log('fetching client')
+        //console.log('fetching client')
         fetchResource() 
     }
 

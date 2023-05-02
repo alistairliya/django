@@ -22,16 +22,22 @@ const BusinessDetails = ({business, closeComponent}) => {
     const { user } = useAuth()
     useEffect(()=>{
 
-        console.log('BusinessDetails useEffect')
-        console.log(business.client)
         const getMyClient = async () => {
-            console.log('getMyClient')
+            //console.log('inside getMyClient')
             let c = await fetchObject(business.client)
+            //console.log("got client!")
+            //console.log('setting MyClinet')
             setMyClient(c)
+            //console.log('after set MyClinet')
         }
-
-        getMyClient()
-    }, [business])
+        console.log('>>> BusinessDetails useEffect')
+        console.log(business.client)
+        if(!myClient){
+            //console.log("^^^ Before calling getMyClient")
+            getMyClient()
+            //console.log("^^^ After calling getMyClient")
+        }
+    }, [])
 
     const fetchObject = async (url) =>{
         let headers = new Headers()

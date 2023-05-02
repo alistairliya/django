@@ -14,17 +14,23 @@ import Box from '@mui/material/Box'
 const BusinessDetailsClient = ({client}) => {
     const [editMode, setEditMode] = useState(false)
     const [myClient, setMyClient] = useState({})
-    const [myLastName , setMyLastName] = useState('bob')
+    const [myLastName , setMyLastName] = useState('Last')
+    const [myFirstName , setMyFirstName] = useState('First')
     useEffect(()=>{
-        console.log('BusinessDetailsClient useEffect')
-        console.log(client)
-        //setMyClient(client)
-        //setMyLastName(client.last_name)
-    },[myLastName, myClient])
+        //console.log('#######################################')
+        //console.log('### BusinessDetailsClient useEffect ###')
+        //console.log(client)
+        setMyClient(client)
+        if(client){
+          setMyLastName(client.last_name)
+          setMyFirstName(client.first_name)
+        }
+        //console.log("^^^ BusinessDetailsClient useEffect")
+        //console.log('#######################################')
+    },[myLastName, myClient, client])
     // https://mui.com/material-ui/react-text-field/
     return (
     <div className="container">
-        <h1>{myLastName}</h1>
         <h2>Client Information</h2>    
         <div>        
           <TextField 
@@ -32,6 +38,12 @@ const BusinessDetailsClient = ({client}) => {
             label="Last Name" 
             variant="standard" 
             value={myLastName}
+          /> 
+          <TextField 
+            id="standard-basic" 
+            label="First Name" 
+            variant="standard" 
+            value={myFirstName}
           /> 
         </div>
 
