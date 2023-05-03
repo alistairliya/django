@@ -18,8 +18,8 @@ const BusinessDetailsClient = ({client}) => {
     const [myFirstName , setMyFirstName] = useState('First')
     const [myMiddleName , setMyMiddleName] = useState('Middle')
     const [myBirthDate , setMyBirthDate] = useState('Birth Date')
-    const [myGender, setMyGender] = useState('Gender')
-    const [mySIN, setMySIN] = useState('SIN')
+    const [myGender, setMyGender] = useState('')
+    const [mySIN, setMySIN] = useState('')
     useEffect(()=>{
         //console.log('#######################################')
         //console.log('### BusinessDetailsClient useEffect ###')
@@ -30,7 +30,8 @@ const BusinessDetailsClient = ({client}) => {
           setMyFirstName(client.first_name)
           setMyMiddleName(client.middle_name)
           setMyBirthDate(client.birthdate)
-          setMyGender(client.gender)
+          if(client.gender)
+            setMyGender(client.gender)
           setMySIN(client.sin)
         }
         //console.log("^^^ BusinessDetailsClient useEffect")
