@@ -55,7 +55,7 @@ const BusinessDetails = ({business, closeComponent}) => {
 
     return (
         <div className="container">
-        <div>BusinessDetails {business.id}</div>
+        <div>Transaction ID: {business.id}</div>
         <BusinessDetailsClient client={myClient}/>
         <Button 
         text='Close' 
