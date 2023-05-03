@@ -23,21 +23,19 @@ const BusinessDetails = ({business, closeComponent}) => {
     useEffect(()=>{
 
         const getMyClient = async () => {
-            //console.log('inside getMyClient')
+            console.log('inside getMyClient')
             let c = await fetchObject(business.client)
             //console.log("got client!")
             //console.log('setting MyClinet')
             setMyClient(c)
             //console.log('after set MyClinet')
         }
-        console.log('>>> BusinessDetails useEffect')
-        console.log(business.client)
-        if(!myClient){
-            //console.log("^^^ Before calling getMyClient")
-            getMyClient()
-            //console.log("^^^ After calling getMyClient")
-        }
-    }, [])
+        //console.log('>>> BusinessDetails useEffect')
+        //console.log(business.client)
+        //console.log("^^^ Before calling getMyClient")
+        getMyClient()
+        //console.log("^^^ After calling getMyClient")
+    }, [business])
 
     const fetchObject = async (url) =>{
         let headers = new Headers()
