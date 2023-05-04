@@ -40,7 +40,7 @@ const BusinessDetailsClient = ({client}) => {
     // https://mui.com/material-ui/react-text-field/
     return (
     <div className="container">
-        <h2>Client Information</h2>   
+        <h2>Applicant Information</h2>   
         <Box
       component="form"
       sx={{

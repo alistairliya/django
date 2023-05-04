@@ -14,6 +14,7 @@ import Button from './Button'
 import {useEffect, useState} from "react"
 import { useAuth } from "../hooks/useAuth"
 import BusinessDetailsClient from './BusinessDetailsClient'
+import BusinessDetailsContact from './BusinessDetailsContact'
 
 
 const BusinessDetails = ({business, closeComponent}) => {
@@ -55,6 +56,7 @@ const BusinessDetails = ({business, closeComponent}) => {
         <div className="container">
         <div>Transaction ID: {business.id}</div>
         <BusinessDetailsClient client={myClient}/>
+        <BusinessDetailsContact />
         <Button 
         text='Close' 
         color='red' 
