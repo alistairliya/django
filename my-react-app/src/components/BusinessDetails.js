@@ -22,6 +22,8 @@ const BusinessDetails = ({business, closeComponent}) => {
     
     const { user } = useAuth()
     useEffect(()=>{
+        console.log('BusinessDetails useEffect()')
+        console.log(business)
 
         const getMyClient = async () => {
             console.log('inside getMyClient')
