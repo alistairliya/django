@@ -223,6 +223,16 @@ const NBF10 = ({data}) => {
                 phoneId = phone.selection.id
             }else{
                 // new phone
+                const phoneObj = {
+                    "clients": ["http://"],
+                    "area_code": phone.area_code,
+                    "phone_number": phone.phone_number,
+                    "phone_type": "http://",
+                    "is_primary": false,
+                    "is_active": false,
+                    "is_archived": false,
+                    "notes": null
+                }
             }
             return phoneId
         }

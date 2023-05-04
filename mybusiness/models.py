@@ -95,7 +95,7 @@ class Phone(models.Model):
     is_primary = models.BooleanField()
     is_active = models.BooleanField()
     is_archived = models.BooleanField()
-    notes = models.CharField(max_length=1024, null=True)
+    notes = models.CharField(max_length=1024, null=True, default = None)
 
 # checked
 class EmailType(models.Model):

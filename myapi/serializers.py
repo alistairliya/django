@@ -79,12 +79,12 @@ class EmailSerializer(serializers.HyperlinkedModelSerializer):
 class PhoneTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PhoneType
-        fields =['phone_type_name','description']
+        fields =['id','phone_type_name','description']
 
 class PhoneSerializer(serializers.HyperlinkedModelSerializer):
     # https://stackoverflow.com/questions/33182092/django-rest-framework-serializing-many-to-many-field
     #clients = serializers.PrimaryKeyRelatedField(queryset=Client.objects.all(), many=True)
-    phone_type = PhoneTypeSerializer(read_only=True)
+    #phone_type = PhoneTypeSerializer(read_only=True)
     class Meta:
         model = Phone
         fields = ['id','clients', 'area_code','phone_number','phone_type','is_primary','is_active','is_archived','notes']

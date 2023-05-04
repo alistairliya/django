@@ -9,6 +9,7 @@ const Phone = ({phoneObj, id,  existingPhones, phoneTypes, isPrimary=false}) => 
     // Adding phone to application when NEXT is pressed in grand parent.
     useEffect(()=>{
         console.log('useEffect for NBF4PhonesPhone ID: '+id)
+        console.log(phoneTypes)
     })
 
 
