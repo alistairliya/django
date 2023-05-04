@@ -87,11 +87,6 @@ const Phones = ({setApplicantPhones,  existingPhones}) => {
             }
         )
         }
-            <Button 
-                text='Add another phone' 
-                color='red' 
-                onClick={addAnotherPhone} 
-            />
     </div>
   )
 }

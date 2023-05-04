@@ -76,7 +76,7 @@ const Phone = ({phoneObj, id,  existingPhones, phoneTypes, isPrimary=false}) => 
 */
     return (
         <div className="container">
-        {isPrimary?(<h3>Primary Phone Number</h3>):(<h3>Additional Phone Number</h3>)}
+        {isPrimary?(<h3>Applicant Phone Number</h3>):(<h3>Additional Phone Number</h3>)}
         {               existingPhones && existingPhones.length > 0? 
              ( 
                  // User may select from exisiting number or create one  
@@ -93,7 +93,7 @@ const Phone = ({phoneObj, id,  existingPhones, phoneTypes, isPrimary=false}) => 
                  ):(
                      // User create new phonne
                      <div>
-                     <h2>User creates new phone</h2>
+                     <label>Create new phone</label>
                      <div className="form-control">
                         <label>Area Code:</label>
                         <input type='text' placeholder="Area Code:" value={areaCode} onChange={(e)=> upddateAreaCode(e.target.value)} />
