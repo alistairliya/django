@@ -211,6 +211,21 @@ const NBF10 = ({data}) => {
             return data
         }
 
+        const postPhone = async () =>{
+            let phoneId = null
+            // data.applicantPhones is an array. But there should only be at most 1.
+            const phones = data.applicantPhones
+            if(phones.length == 0)
+                return null
+            const phone = phones[0]
+            if (phone.selection != null){
+                // existing phone
+                phoneId = phone.selection.id
+            }else{
+                // new phone
+            }
+            return phoneId
+        }
 
         const postAddress = async () => {
             let addressId = null
@@ -245,7 +260,7 @@ const NBF10 = ({data}) => {
         // REST API TO POST TO InsurnaceApplication
         // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"business":"http://127.0.0.1:8000/api/mybusiness/12/","product":"http://127.0.0.1:8000/api/product/1/", "plan_type":"http://127.0.0.1:8000/api/insuranceplantype/1/","plan":"http://127.0.0.1:8000/api/insuranceplan/1/","face_amount":1.0, "planned_premium":2.0,"provider":"http://127.0.0.1:8000/api/insuranceprovider/1/"}' http://127.0.0.1:8000/api/insuranceapplication/
         // From Doc: If the Product Type of a Product points to insurance, use this table (InsuranceApplication) for insurance specific data.
-        const postInsuranceApplication = async (businessId, addressId) =>{
+        const postInsuranceApplication = async (businessId, addressId, phoneId) =>{
             console.log('NBF10 Post Insurance Application')
             const insuranceApplication = {
                 // business
@@ -264,6 +279,9 @@ const NBF10 = ({data}) => {
                 "provider":"http://127.0.0.1:8000/api/insuranceprovider/"+applicantInsuranceProviderId+"/",
                 // applicant_address
                 "applicant_address":"http://127.0.0.1:8000/api/addresss/"+addressId+"/",
+                // applicant_phone
+                "applicant_phone":"http://127.0.0.1:8000/api/phone/"+phoneId+"/",
+            
             }
             console.log(insuranceApplication)
             let url = 'http://localhost:8000/api/insuranceapplication/'
@@ -376,7 +394,9 @@ const NBF10 = ({data}) => {
             console.log(businessObj)
             console.log('NBF10 MyBusiness ID: '+businessObj.id)
             const addressId = await postAddress() 
-            await postInsuranceApplication(businessObj.id, addressId)
+            const phoneId = await postPhone()
+            console.log("Phone ID: "+phoneId)
+            await postInsuranceApplication(businessObj.id, addressId, phoneId)
             await postBusinessUser(businessObj.id)
             await postBusinessCompliance(businessObj.id)
             await postBusinessDocument(businessObj.id)
