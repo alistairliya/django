@@ -77,6 +77,7 @@ class Address(models.Model):
 
 class ClientAddress(models.Model):
     address = models.ForeignKey(Address, on_delete=models.PROTECT)
+    # Link to ClientSerializer's client_addresses
     client = models.ForeignKey(Client, on_delete=models.DO_NOTHING, related_name='client_addresses')
     description = models.CharField(max_length=1024, null=True)
 

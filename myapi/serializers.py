@@ -247,6 +247,8 @@ class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     related_users = BusinessUserSerializer(many=True, read_only=True) # Advisors
     business_type = BusinessTypeSerializer(read_only=True)
     product = ProductSerializer(read_only=True)
+    #Uncomment below to allow deserialize to an object rather than just a URL to the object
+    #insurance_application = InsuranceApplicationSerializer(many=True, read_only=True)
     class Meta:
         model = MyBusiness 
-        fields = ['id','business_type','product','client','status','projected_FYC','settled_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance','related_users'] 
+        fields = ['insurance_application','id','business_type','product','client','status','projected_FYC','settled_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance','related_users'] 
