@@ -223,16 +223,21 @@ const NBF10 = ({data}) => {
                 phoneId = phone.selection.id
             }else{
                 // new phone
+                
                 const phoneObj = {
-                    "clients": ["http://"],
+                    "clients": ["http://127.0.0.1:8000/api/clients/"+clientId+"/"],
                     "area_code": phone.area_code,
                     "phone_number": phone.phone_number,
-                    "phone_type": "http://",
+                    "phone_type": "http://127.0.0.1:8000/api/phonetype/"+phone.phone_type.id+"/",
                     "is_primary": false,
-                    "is_active": false,
+                    "is_active": true,
                     "is_archived": false,
                     "notes": null
                 }
+                const url = 'http://127.0.0.1:8000/api/phone/'
+                const result = await postToAPI(url, phoneObj)
+                phoneId = result.id
+                console.log("Successfully posted to phone: "+phoneId)
             }
             return phoneId
         }
