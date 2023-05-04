@@ -226,7 +226,7 @@ class BusinessInsuranceSerializer(serializers.HyperlinkedModelSerializer):
     insurance_application = InsuranceApplicationSerializer()
     class Meta:
         model = BusinessInsurance
-        fields = ['business','insurance_plan','insurance_application', 'policy_number', 'notes','created_by','created_date','modified_date']
+        fields = ['id','business','insurance_plan','insurance_application', 'policy_number', 'notes','created_by','created_date','modified_date']
 
 class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     # Need to display policy number from related BusinessInsurance if available.
