@@ -253,8 +253,10 @@ class InsuranceApplication(models.Model):
     face_amount = models.FloatField(null=True)
     planned_premium = models.FloatField(null=True)
     # application address and phone use charfield to allow overwriting with client's address and phone
-    applicant_address = models.CharField(max_length=1024, null=True) 
-    applicant_phone = models.CharField(max_length=64, null=True)
+    # applicant_address = models.CharField(max_length=1024, null=True) 
+    applicant_address = models.ForeignKey(Address, on_delete=models.PROTECT, related_name="insurance_applications", null=True)
+    #applicant_phone = models.CharField(max_length=64, null=True)
+    applicant_phone = models.ForeignKey(Phone, on_delete=models.PROTECT, related_name="insurance_applications", null=True)
 
 # Checked
 class Medical(models.Model):

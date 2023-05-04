@@ -1,7 +1,7 @@
 // Data from:
 // Client <- WORKING ON FETCHING
 // MyBusiness <- already passed down by caller
-// Address
+// Address and Phone <- Applicant Phone and Applicant Address
 // InsuranceApplication
 // BusinessUser
 // BusinessCompliance
