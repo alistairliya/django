@@ -218,6 +218,8 @@ class BusinessMedicalSerializer(serializers.HyperlinkedModelSerializer):
 
 class InsuranceApplicationSerializer(serializers.HyperlinkedModelSerializer):
     # provider = InsuranceProviderSerializer()
+    applicant_address = AddressSerializer()
+    applicant_phone = PhoneSerializer()
     class Meta:
         model = InsuranceApplication
         fields = ['id', 'business','product','provider','plan_type','plan','face_amount','planned_premium','applicant_address', 'applicant_phone']
@@ -248,7 +250,7 @@ class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     business_type = BusinessTypeSerializer(read_only=True)
     product = ProductSerializer(read_only=True)
     #Uncomment below to allow deserialize to an object rather than just a URL to the object
-    #insurance_application = InsuranceApplicationSerializer(many=True, read_only=True)
+    insurance_application = InsuranceApplicationSerializer(many=True, read_only=True)
     class Meta:
         model = MyBusiness 
         fields = ['insurance_application','id','business_type','product','client','status','projected_FYC','settled_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance','related_users'] 

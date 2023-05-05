@@ -54,11 +54,28 @@ const BusinessDetails = ({business, closeComponent}) => {
         console.log("My Clinet: "+JSON.stringify(myClient))
     }
 
+    const extractAddress = () =>{
+        const app = business.insurance_application // an array
+        if (app.length > 0 && app[0].applicant_address){
+            return app[0].applicant_address
+        }
+        return null
+    }
+    
+    const extractPhone = () =>{
+        const app = business.insurance_application // an array
+        if (app.length > 0 && app[0].applicant_phone){
+            return app[0].applicant_phone
+        }
+        return null
+    }
+
+
     return (
         <div className="container">
         <div>Transaction ID: {business.id}</div>
         <BusinessDetailsClient client={myClient}/>
-        <BusinessDetailsContact />
+        <BusinessDetailsContact address={extractAddress()} phone={extractPhone()} />
         <Button 
         text='Close' 
         color='red' 
