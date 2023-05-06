@@ -2,14 +2,65 @@
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import {useEffect, useState} from "react"
-
+import { useAuth } from "../hooks/useAuth"
+// address and phone are urls
 const BusinessDetailsContact = ({address, phone}) => {
+    const { user } = useAuth()
+    const [myAddress, setMyAddress] = useState(null)
+    const [myPhone, setMyPhone] = useState(null)
 
     useEffect(()=>{
         console.log('BusinessDetailsContact useEffect()')
         console.log(address)
         console.log(phone)
-    }, [address, phone])
+
+        const getAddress = async () => {
+            console.log('inside getAddress')
+            let a = await fetchObject(address)
+            console.log("got address!")
+            console.log(a)
+            a.province_state = await fetchObject(a.province_state)
+            a.country = await fetchObject(a.country)
+            console.log(a)
+            return a
+        }
+        const getPhone = async () => {
+            console.log('inside getPhone')
+            let p = await fetchObject(phone)
+            console.log("got phone!")
+            console.log(p)
+            return p
+        }
+
+        if(myAddress == null){
+            getAddress().then((a)=>{
+                console.log('setting MyAddress')
+                setMyAddress(a)
+                console.log(a)
+                console.log('after set MyAddress')
+            })
+        }
+        if(myPhone == null){
+            getPhone().then((p)=>{
+                console.log('setting MyPhone')
+                setMyPhone(p)
+                console.log(p)
+                console.log('after set MyPhone')
+            })
+        }
+        
+
+    }, [address, phone, myAddress, myPhone])
+
+    const fetchObject = async (url) =>{
+        let headers = new Headers()
+        const token = user['token']
+        const auth_str = 'Token '+token
+        headers.set('Authorization', auth_str)
+        const res = await fetch(url,{headers:headers})
+        const data = await res.json()
+        return data
+    }
 
     return (
     <div className="container">
@@ -25,47 +76,48 @@ const BusinessDetailsContact = ({address, phone}) => {
         <div>        
           <TextField 
             id="standard-basic" 
-            label="First Name" 
+            label="Street Address" 
             variant="standard" 
-            value={'TEST'}
+            value={myAddress ? myAddress.street_address : ''}
           /> 
           <TextField 
             id="standard-basic" 
-            label="Middle Name" 
+            label="Unit" 
             variant="standard" 
-            value={'TEST'}
+            value={myAddress ? (myAddress.unit?myAddress.unit:"") : ''}
           /> 
           <TextField 
             id="standard-basic" 
-            label="Last Name" 
+            label="City" 
             variant="standard" 
-            value={'test'}
+            value={myAddress ? myAddress.city : ''}
+          /> 
+          <TextField 
+            id="standard-basic" 
+            label="Province/State" 
+            variant="standard" 
+            value={myAddress ? myAddress.province_state.province_state_name : ''}
           /> 
         </div>
+          <TextField 
+            id="standard-basic" 
+            label="Country" 
+            variant="standard" 
+            value={myAddress ? myAddress.country.country_name : ''}
+          /> 
         <div>
           <TextField 
             id="standard-basic" 
-            label="Birth Date" 
+            label="Area Code" 
             variant="standard" 
-            value={'test'}
+            value={myPhone ? myPhone.area_code : ''}
           /> 
-        </div>
-        <div>
           <TextField 
             id="standard-basic" 
-            label="SIN" 
+            label="Phone Number" 
             variant="standard" 
-            value={'test'}
+            value={myPhone? myPhone.phone_number : ''}
           /> 
-        </div>
-        <div>
-          <TextField 
-            id="standard-basic" 
-            label="Gender" 
-            variant="standard" 
-            value={'test'}
-          /> 
-
         </div>
         </Box>
 
