@@ -32,25 +32,27 @@ const BusinessDetailsContact = ({address, phone}) => {
             return p
         }
 
-        if(myAddress == null){
+        //if(myAddress == null){
             getAddress().then((a)=>{
                 console.log('setting MyAddress')
                 setMyAddress(a)
                 console.log(a)
                 console.log('after set MyAddress')
             })
-        }
-        if(myPhone == null){
+        //}else{
+        //    console.log('myAddress is not null')
+        //}
+        //if(myPhone == null){
             getPhone().then((p)=>{
                 console.log('setting MyPhone')
                 setMyPhone(p)
                 console.log(p)
                 console.log('after set MyPhone')
             })
-        }
+        //}
         
 
-    }, [address, phone, myAddress, myPhone])
+    }, [address, phone])
 
     const fetchObject = async (url) =>{
         let headers = new Headers()
