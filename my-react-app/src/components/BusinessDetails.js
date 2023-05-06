@@ -71,13 +71,20 @@ const BusinessDetails = ({business, closeComponent}) => {
         return null
     }
 
+    const extractInsurance = () =>{
+        console.log("extractInsurance")
+
+        const insurance =  business.insurance_application? business.insurance_application.length > 0? business.insurance_application[0]: null : null // from an array
+        //console.log(insurance)
+        return insurance
+    }
 
     return (
         <div className="container">
         <div>Transaction ID: {business.id}</div>
         <BusinessDetailsClient client={myClient}/>
         <BusinessDetailsContact address={extractAddress()} phone={extractPhone()} />
-        <BusinessDetailsInsurance />
+        <BusinessDetailsInsurance insurance={extractInsurance()} />
         <Button 
         text='Close' 
         color='red' 

@@ -11,38 +11,38 @@ const BusinessDetailsContact = ({address, phone}) => {
 
     useEffect(()=>{
         console.log('BusinessDetailsContact useEffect()')
-        console.log(address)
-        console.log(phone)
+        //console.log(address)
+        //console.log(phone)
 
         const getAddress = async () => {
             console.log('inside getAddress')
             let a = await fetchObject(address)
-            console.log("got address!")
-            console.log(a)
+            //console.log("got address!")
+            //console.log(a)
             a.province_state = await fetchObject(a.province_state)
             a.country = await fetchObject(a.country)
-            console.log(a)
+            //console.log(a)
             return a
         }
         const getPhone = async () => {
             console.log('inside getPhone')
             let p = await fetchObject(phone)
-            console.log("got phone!")
-            console.log(p)
+            //console.log("got phone!")
+            //console.log(p)
             return p
         }
 
         getAddress().then((a)=>{
             console.log('setting MyAddress')
             setMyAddress(a)
-            console.log(a)
-            console.log('after set MyAddress')
+            //console.log(a)
+            //console.log('after set MyAddress')
         })
         getPhone().then((p)=>{
             console.log('setting MyPhone')
             setMyPhone(p)
-            console.log(p)
-            console.log('after set MyPhone')
+            //console.log(p)
+            //console.log('after set MyPhone')
         })
         
 
