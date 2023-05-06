@@ -15,6 +15,7 @@ import {useEffect, useState} from "react"
 import { useAuth } from "../hooks/useAuth"
 import BusinessDetailsClient from './BusinessDetailsClient'
 import BusinessDetailsContact from './BusinessDetailsContact'
+import BusinessDetailsInsurance from './BusinessDetailsInsurance'
 
 
 const BusinessDetails = ({business, closeComponent}) => {
@@ -76,6 +77,7 @@ const BusinessDetails = ({business, closeComponent}) => {
         <div>Transaction ID: {business.id}</div>
         <BusinessDetailsClient client={myClient}/>
         <BusinessDetailsContact address={extractAddress()} phone={extractPhone()} />
+        <BusinessDetailsInsurance />
         <Button 
         text='Close' 
         color='red' 
