@@ -32,24 +32,18 @@ const BusinessDetailsContact = ({address, phone}) => {
             return p
         }
 
-        //if(myAddress == null){
-            getAddress().then((a)=>{
-                console.log('setting MyAddress')
-                setMyAddress(a)
-                console.log(a)
-                console.log('after set MyAddress')
-            })
-        //}else{
-        //    console.log('myAddress is not null')
-        //}
-        //if(myPhone == null){
-            getPhone().then((p)=>{
-                console.log('setting MyPhone')
-                setMyPhone(p)
-                console.log(p)
-                console.log('after set MyPhone')
-            })
-        //}
+        getAddress().then((a)=>{
+            console.log('setting MyAddress')
+            setMyAddress(a)
+            console.log(a)
+            console.log('after set MyAddress')
+        })
+        getPhone().then((p)=>{
+            console.log('setting MyPhone')
+            setMyPhone(p)
+            console.log(p)
+            console.log('after set MyPhone')
+        })
         
 
     }, [address, phone])
