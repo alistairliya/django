@@ -51,7 +51,7 @@ function MyBusinesses() {
   useEffect(()=>{
     const getBusinesses = async() => {
       const businessesFromServer = await fetchBusiness()
-      setBusinesses(businessesFromServer)      
+      setBusinesses(businessesFromServer.reverse())      
     }
     getBusinesses()
   }, [])
