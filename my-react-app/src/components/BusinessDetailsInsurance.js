@@ -80,7 +80,13 @@ const BusinessDetailsInsurance = ({insurance}) => {
                 id="standard-basic" 
                 label="Face Amount" 
                 variant="standard" 
-                value={myInsurance ? myInsurance.face_amount : ''}
+                value={myInsurance ? "$"+myInsurance.face_amount : ''}
+                /> 
+                <TextField 
+                id="standard-basic" 
+                label="Planned Premium" 
+                variant="standard" 
+                value={myInsurance ? "$"+myInsurance.planned_premium : ''}
                 /> 
             </div>
             </Box>
