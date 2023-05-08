@@ -8,19 +8,22 @@ const BusinessDetailsInsurance = ({insurance}) => {
     const [myInsurance, setMyInsurance] = useState(null)
     const [myPlan, setMyPlan] = useState(null)
     const [myPlanType, setMyPlanType] = useState(null)
+    const [myProvider, setMyProvider] = useState(null)
     useEffect(()=>{
         console.log('BusinessDetailsInsurance useEffect()')
         //console.log(insurance)
         const getPlan = async () => {
             console.log('inside getPlan')
             console.log(insurance)
-            const p = await fetchObject(insurance.plan)
-            const t = await fetchObject(insurance.plan_type)
+            const plan = await fetchObject(insurance.plan)
+            const type = await fetchObject(insurance.plan_type)
+            const provider = await fetchObject(insurance.provider)
             console.log("got plan")
             console.log(insurance)
             setMyInsurance(insurance)
-            setMyPlan(p)
-            setMyPlanType(t)
+            setMyPlan(plan)
+            setMyPlanType(type)
+            setMyProvider(provider)
         }
         getPlan().then((p)=>{
                 console.log("myInsurance, myPlan, myPlanType")
@@ -53,6 +56,12 @@ const BusinessDetailsInsurance = ({insurance}) => {
             autoComplete="off"
             > 
             <div>
+                <TextField 
+                id="standard-basic" 
+                label="Provider" 
+                variant="standard" 
+                value={myProvider ? myProvider.insurance_provider_name : ''}
+                />
                 <TextField 
                 id="standard-basic" 
                 label="Plan" 
