@@ -39,24 +39,29 @@ const NBF10 = ({data}) => {
     const { user } = useAuth()
     
     useEffect(()=>{
-        console.log('NBF10 useEffect')
-        console.log(data)
-        processClient()
-        //processAddress()
-        processApplicantInsurance()
-        if(clientId){
-            console.log('NBF10 Client ID is set: '+clientId)
+
+
+        const processData = async () => {
+            console.log('NBF10 useEffect')
+            console.log(data)
+            await processClient()
+            //processAddress()
+            await processApplicantInsurance()
+            if(clientId){
+                console.log('NBF10 Client ID is set: '+clientId)
+            }
+            await processCollaborators()
+            await processComplianceEntities()
+            await processDocuments()
+            await processMedicals()
         }
-        processCollaborators()
-        processComplianceEntities()
-        processDocuments()
-        processMedicals()
-    },[data, clientId])
+        processData()
+    },[data])
 
     // New or existing client? Need to add only if new.
     // If exisitng client, get the ID and URL
     // If new client, create the client, and get ID and URL
-    const processClient = () => {
+    const processClient = async () => {
         console.log('NBF10 Create Client')
         if(data['client'].is_new_client != null){
             console.log('NBF10 Client is new')
@@ -64,6 +69,27 @@ const NBF10 = ({data}) => {
             // POST new client
             // Example:
             // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"first_name":"A", "last_name":"Americano","birthdate":"1999-12-09","sin":"123456789","created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00", "created_by":"http://127.0.0.1:8000/api/users/9/","gender":"M"}' http://127.0.0.1:8000/api/clients/   
+            
+            const client = data['client']
+            const clientObj = {
+                    "first_name":client.first_name,
+                    "last_name":client.last_name,
+                    "middle_name":client.middle_name,
+                    "birthdate":client.birthdate,
+                    "sin":client.sin,
+                    "gender":client.gender,
+                    "created_date":"2023-04-02T00:00",
+                    "modified_date":"2023-04-02T00:00",
+                    "created_by":"http://127.0.0.1:8000/api/users/9/"
+            }
+            console.log("Ready to post to clients!")
+            console.log(clientObj)
+            
+            const result = await postToAPI('http://127.0.0.1:8000/api/clients/', clientObj)
+            
+            setClientId(result.id)
+            console.log('NBF10 Client ID: '+result.id)
+
 
         }else{
             console.log('NBF10 Client is not new')
@@ -113,12 +139,12 @@ const NBF10 = ({data}) => {
     }*/
 
     // Need this only for a newly created client?
-    const processPhone = () => {
+    const processPhone = async () => {
         console.log('NBF10 Process Phone')
     }
 
     // 
-    const processApplicantInsurance = () => {
+    const processApplicantInsurance = async () => {
         console.log('NBF10 Process Applicant Insurance')
         if(data.applicantInsurance.face_amount != null)
             setApplicantInsuranceFaceAmount(data.applicantInsurance.face_amount)
@@ -133,7 +159,7 @@ const NBF10 = ({data}) => {
     }
 
 
-    const processCollaborators = () => {
+    const processCollaborators = async () => {
         console.log('NBF10 Process Collaborators')
         if(data.collaborators!=null){
             setCollaborators(data.collaborators)
@@ -141,7 +167,7 @@ const NBF10 = ({data}) => {
         console.log(collaborators)
     }
 
-    const processComplianceEntities = () => {
+    const processComplianceEntities = async () => {
         console.log('NBF10 Process Compliance Entities')
         if(data.complianceEntities!=null){
             setComplianceEntities(data.complianceEntities)
@@ -149,7 +175,7 @@ const NBF10 = ({data}) => {
         console.log(complianceEntities)
     }
 
-    const processDocuments = () => {
+    const processDocuments = async () => {
         console.log('NBF10 Process Documents')
         if(data.documents!=null){
             setDocuments(data.documents)
@@ -157,7 +183,7 @@ const NBF10 = ({data}) => {
         console.log(documents)
     }
 
-    const processMedicals = () => {
+    const processMedicals = async () => {
         console.log('NBF10 Process Medicals')
         if(data.medicals!=null){
             setMedicals(data.medicals)
@@ -167,6 +193,9 @@ const NBF10 = ({data}) => {
 
 
     const postToAPI = async (url, obj) => {
+        console.log('NBF10 Post to API '+url)
+        //console.log(url)
+        console.log(obj)
         let headers = new Headers()
         const token = user['token']
         console.log('TOKEN: '+token)
@@ -242,6 +271,7 @@ const NBF10 = ({data}) => {
             return phoneId
         }
 
+        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d '{"unit_number":"","street_address":"1237 Red Sox Ave.","city":"Boston","province_state":"http://127.0.0.1:8000/api/province_state/3/","country":"http://127.0.0.1.8000/api/country/2/","postal_code":"123512","address_type":"http://127.0.0.1:8000/api/addresstype/1/"}' http://127.0.0.1:8000/api/addresss/
         const postAddress = async () => {
             let addressId = null
             if(data.applicantAddress.is_new_address){
@@ -403,6 +433,7 @@ const NBF10 = ({data}) => {
         }
 
         const save = async () =>{
+            console.log('NBF10 Save')
             const businessObj = await postMyBusiness()
             // get the ID to mybusiness object
             // with MyBusiness ID, post to InsuranceApplication
@@ -421,11 +452,30 @@ const NBF10 = ({data}) => {
     }
 
 
-    const onSubmit = (e) =>{
+
+    const processMyData = async () => {
+        console.log('NBF10 processMyData')
+        console.log(data)
+        await processClient()
+        //processAddress()
+        
+        await processApplicantInsurance()
+        if(clientId){
+            console.log('NBF10 Client ID is set: '+clientId)
+        }
+        await processCollaborators()
+        await processComplianceEntities()
+        await processDocuments()
+        await processMedicals()
+    }
+
+
+
+    const onSubmit = async (e) =>{
         e.preventDefault()
         // take data and save to DB
         console.log('NBF10 Submit pressed')
-        saveData()
+        await saveData()
     }
     return (
     <div>{JSON.stringify(data, null, 4)}
