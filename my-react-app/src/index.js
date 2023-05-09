@@ -13,6 +13,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from "./hooks/useAuth";
 import MyBusinesses from './pages/MyBusinesses';
+import MyApprovingBusinesses from './pages/MyApprovingBusinesses';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -57,7 +58,18 @@ const router = createBrowserRouter([
                 element:<About/>
               }
             ]
-          }        ]
+          },
+          {
+            path:'approve',
+            element:<MyApprovingBusinesses/>,
+            children:[
+              {
+                path:"about",
+                element:<About/>
+              }
+            ]
+          }
+                ]
       }
     ]
   },

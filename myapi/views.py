@@ -198,7 +198,9 @@ class BusinessSupervisorViewSet(viewsets.ModelViewSet):
 
 class BusinessApprovalViewSet(viewsets.ModelViewSet):
     queryset = MyBusiness.objects.all()
-    serializer_class = MyBusinessSerializer
+    serializer_class = BusinessApprovalSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication] 
 
     def get_queryset(self):
         #pass
