@@ -12,7 +12,7 @@ import NBF10 from './NBF10'
 
 import { useState, useEffect} from 'react'
 //import { useRadioGroup } from '@mui/material'
-const NewBusiness = ({onAdd}) => {
+const NewBusiness = ({onAdd, close}) => {
     const [client, setClient] = useState()
     const [index, setIndex] = useState(0)
     const [applicantAddress, setApplicantAddress] = useState()
@@ -64,7 +64,7 @@ const NewBusiness = ({onAdd}) => {
         <NBF7 onNextClicked={onNextClicked} setDocuments={setDocuments} />,
         <NBF8 onNextClicked={onNextClicked} setCollaborators={setCollaborators} />,
         <NBF9 onNextClicked={onNextClicked} setComplianceEntities={setComplianceEntities} />,
-        <NBF10 onNextClicked={onNextClicked} data = {collect()}/>
+        <NBF10 onNextClicked={onNextClicked} data = {collect()} close={close}/>
     
     ] 
     return( 

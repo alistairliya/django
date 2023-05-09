@@ -99,6 +99,10 @@ function MyBusinesses() {
     setBusinesses(businesses.map((business)=>business.id === id? {...business, highlighted: !business.highlighted }: business))
   }
 
+  const closeAddBusinessComponent = () => {
+    setShowAddBusiness(false)
+  }
+
   return (
     <div className="container">
       <Booga 
@@ -106,7 +110,7 @@ function MyBusinesses() {
         onAdd={()=>setShowAddBusiness(!showAddBusiness)}
         showAdd = {showAddBusiness}
       />
-      {showAddBusiness && <NewBusiness onAdd={addBusiness} />}
+      {showAddBusiness && <NewBusiness onAdd={addBusiness} close={closeAddBusinessComponent} />}
       {detailedBusiness && <BusinessDetails business={detailedBusiness} closeComponent={closeBusinessDetailsComponent} />}
       {businesses.length > 0?(
         <Businesses 

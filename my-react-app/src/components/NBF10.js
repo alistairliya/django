@@ -21,7 +21,7 @@ import { useEffect, useState } from "react"
 import { useAuth } from "../hooks/useAuth"
 
 import Select from 'react-select' // https://react-select.com/home
-const NBF10 = ({data}) => {
+const NBF10 = ({data, close}) => {
 
     const [clientId, setClientId] = useState()
     //const [addressId, setAddressId] = useState() // applicant address ID
@@ -272,7 +272,7 @@ const NBF10 = ({data}) => {
             let phoneId = null
             // data.applicantPhones is an array. But there should only be at most 1.
             const phones = data.applicantPhones
-            if(phones.length == 0)
+            if(phones.length === 0)
                 return null
             const phone = phones[0]
             if (phone.selection != null){
@@ -521,6 +521,8 @@ const NBF10 = ({data}) => {
         // take data and save to DB
         console.log('NBF10 Submit pressed')
         await saveData()
+        close()
+        //window.location.reload(true);
     }
     return (
     <div>

@@ -21,7 +21,7 @@ export const ProtectedLayout = () => {
             >Logout
           </Button>
         (protected layout)
-        Hi {user.name} 
+        {user.token} 
       {outlet}
     </div>
   );
