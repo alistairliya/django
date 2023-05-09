@@ -74,8 +74,9 @@ const NBF10 = ({data}) => {
         }
         getSystemUsers()
         processData()
+        console.log('Supervisor: '+JSON.stringify(supervisor))
 
-    },[data])
+    },[data, supervisor])
 
     const supervisorOptions = systemUsers.map(
         (user)=>({
