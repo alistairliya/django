@@ -20,6 +20,7 @@ import BusinessDetailsInsurance from './BusinessDetailsInsurance'
 
 const BusinessDetails = ({business, closeComponent}) => {
     const [myClient, setMyClient] = useState(null)
+    const [myStatus, setMyStatus] = useState(null)
     
     const { user } = useAuth()
     useEffect(()=>{
@@ -37,7 +38,13 @@ const BusinessDetails = ({business, closeComponent}) => {
         //console.log('>>> BusinessDetails useEffect')
         //console.log(business.client)
         //console.log("^^^ Before calling getMyClient")
+        const getStatus = async () => {
+            console.log('inside getStatus')
+            let s = await fetchObject(business.status)
+            setMyStatus(s)
+        }
         getMyClient()
+        getStatus()
         //console.log("^^^ After calling getMyClient")
     }, [business])
 
@@ -82,6 +89,7 @@ const BusinessDetails = ({business, closeComponent}) => {
     return (
         <div className="container">
         <div>Transaction ID: {business.id}</div>
+        <div>Status: {myStatus?myStatus.status_name:""}</div>
         <BusinessDetailsClient client={myClient}/>
         <BusinessDetailsContact address={extractAddress()} phone={extractPhone()} />
         <BusinessDetailsInsurance insurance={extractInsurance()} />
