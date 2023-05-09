@@ -14,12 +14,14 @@ export const ProtectedLayout = () => {
 
   return (
     <div>
-                      <Button
-                key={"logout"}
-                onClick={logout}
-                sx={{ my: 2, color: "blue", display: "block" }}
-              >Logout</Button>
-        protected layout
+          <Button
+            key={"logout"}
+            onClick={logout}
+            sx={{ my: 2, color: "blue", display: "block" }}
+            >Logout
+          </Button>
+        (protected layout)
+        Hi {user.name} 
       {outlet}
     </div>
   );

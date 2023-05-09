@@ -54,6 +54,8 @@ function MyBusinesses() {
       setBusinesses(businessesFromServer.reverse())      
     }
     getBusinesses()
+    console.log("user:")
+    console.log(user)
   }, [])
 
   const fetchBusiness = async()=>{
