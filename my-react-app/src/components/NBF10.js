@@ -20,6 +20,7 @@ import { useEffect, useState } from "react"
 
 import { useAuth } from "../hooks/useAuth"
 
+import Select from 'react-select' // https://react-select.com/home
 const NBF10 = ({data}) => {
 
     const [clientId, setClientId] = useState()
@@ -35,11 +36,27 @@ const NBF10 = ({data}) => {
     const [documents, setDocuments] = useState({})
     const [medicals, setMedicals] = useState({})
     const [dataProcessed, setDataProcessed] = useState(false)
-    
+    const [systemUsers, setSystemUsers] = useState([])
+    const [supervisor, setSupervisor] = useState({})
     const { user } = useAuth()
     
     useEffect(()=>{
 
+        const fetchResource = async(resource)=>{
+            let headers = new Headers()
+            const token = user['token']
+            const auth_str = 'Token '+token
+            console.log(auth_str)
+            headers.set('Authorization', auth_str)
+            const res = await fetch('http://localhost:8000/api/'+resource+'/', {headers:headers})
+            const data = await res.json()
+            return data
+        }
+
+        const getSystemUsers = async () => {
+            const theSystemUsers = await fetchResource('users')
+            setSystemUsers(theSystemUsers)
+        }
 
         const processData = async () => {
             console.log('NBF10 useEffect')
@@ -55,8 +72,18 @@ const NBF10 = ({data}) => {
             await processDocuments()
             await processMedicals()
         }
+        getSystemUsers()
         processData()
+
     },[data])
+
+    const supervisorOptions = systemUsers.map(
+        (user)=>({
+            value:user,
+            label:user.first_name.trim()!==''&&!user.last_name.trim()!==''? user.first_name+' '+user.last_name:user.username
+            
+        })
+    )
 
     // New or existing client? Need to add only if new.
     // If exisitng client, get the ID and URL
@@ -478,7 +505,20 @@ const NBF10 = ({data}) => {
         await saveData()
     }
     return (
-    <div>{JSON.stringify(data, null, 4)}
+    <div>
+        <h3>Select an approver:</h3>
+        <Select
+            options={supervisorOptions}
+            onChange={(selectedOption)=>{
+                    console.log('selectedOption')
+                    console.log(selectedOption)
+                    setSupervisor(selectedOption.value)
+                }
+            }
+        />    
+        <div className='container'>
+         {JSON.stringify(data, null, 4)}
+        </div>
     
       <form className="add-form" onSubmit={onSubmit}>
             <input type='submit' value='Submit' className='btn btn-block' />
