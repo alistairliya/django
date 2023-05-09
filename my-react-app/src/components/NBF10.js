@@ -74,7 +74,7 @@ const NBF10 = ({data}) => {
         }
         getSystemUsers()
         processData()
-        console.log('Supervisor: '+JSON.stringify(supervisor))
+        console.log('Supervisor: '+JSON.stringify(supervisor.id))
 
     },[data, supervisor])
 
@@ -460,6 +460,22 @@ const NBF10 = ({data}) => {
             }
         }
 
+
+        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d '{"business":"http://127.0.0.1:8000/api/mybusiness/71/","user":"http://127.0.0.1:8000/api/users/1/","notes":"test"}' "http://127.0.0.1:8000/api/businessssupervisor/"
+        const postBusinessSupervisor = async (businessId, userId) =>{
+            console.log('NBF10 Post Business Supervisor')
+            const businessSupervisor = {
+                // business
+                "business":"http://127.0.0.1:8000/api/mybusiness/"+businessId+"/",
+                // user
+                "supervisor":"http://127.0.0.1:8000/api/users/"+userId+"/",
+                "notes":""
+            }
+            let url = "http://127.0.0.1:8000/api/businessssupervisor/"
+            console.log(JSON.stringify(businessSupervisor))
+            await postToAPI(url, businessSupervisor)
+        }
+
         const save = async () =>{
             console.log('NBF10 Save')
             const businessObj = await postMyBusiness()
@@ -475,6 +491,7 @@ const NBF10 = ({data}) => {
             await postBusinessCompliance(businessObj.id)
             await postBusinessDocument(businessObj.id)
             await postBusinessMedical(businessObj.id)
+            await postBusinessSupervisor(businessObj.id, supervisor.id)
         }
         save()
     }
@@ -518,7 +535,9 @@ const NBF10 = ({data}) => {
             }
         />    
         <div className='container'>
-         {JSON.stringify(data, null, 4)}
+         {
+            //JSON.stringify(data, null, 4)
+         }
         </div>
     
       <form className="add-form" onSubmit={onSubmit}>
