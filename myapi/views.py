@@ -199,3 +199,11 @@ class BusinessSupervisorViewSet(viewsets.ModelViewSet):
 class BusinessApprovalViewSet(viewsets.ModelViewSet):
     queryset = MyBusiness.objects.all()
     serializer_class = MyBusinessSerializer
+
+    def get_queryset(self):
+        #pass
+        # A list of businesssupervisor that the user is the supervisor of
+        request_user = self.request.user 
+        approving_businesses = list(BusinessSupervisor.objects.filter(supervisor = self.request.user.id).values_list('business', flat=True))
+        qs = self.queryset.filter(pk__in = approving_businesses)
+        return qs
