@@ -19,7 +19,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
     const advisorOptions = users.map(
         (user)=>({
             value:user,
-            label: user.first_name+' '+user.last_name
+            label: user.first_name.trim()!==''&&user.last_name.trim()!==''?user.first_name+' '+user.last_name: user.username
             
         })
     )
