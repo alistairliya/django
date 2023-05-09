@@ -194,3 +194,8 @@ class EmailViewSet(viewsets.ReadOnlyModelViewSet):
 class BusinessSupervisorViewSet(viewsets.ModelViewSet):
     queryset = BusinessSupervisor.objects.all()
     serializer_class = BusinessSupervisorSerializer
+
+
+class BusinessApprovalViewSet(viewsets.ModelViewSet):
+    queryset = MyBusiness.objects.all()
+    serializer_class = MyBusinessSerializer

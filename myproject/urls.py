@@ -62,6 +62,7 @@ router.register(r'businesscompliance', views.BusinessComplianceViewSet)
 router.register(r'businessdocument', views.BusinessDocumentViewSet)
 router.register(r'businessmedical', views.BusinessMedicalViewSet)
 router.register(r'businessssupervisor', views.BusinessSupervisorViewSet)
+router.register(r'businessapproval', views.BusinessApprovalViewSet)
 
 urlpatterns = [
     path('', include("users.urls")),
