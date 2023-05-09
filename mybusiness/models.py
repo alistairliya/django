@@ -298,3 +298,9 @@ class BusinessInsurance(models.Model):
     modified_date = models.DateTimeField()
 
 
+class BusinessSupervisor(models.Model):
+    business = models.ForeignKey(MyBusiness, on_delete=models.PROTECT, related_name="business_supervisor")
+    supervisor = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="business_supervisor")
+    notes = models.CharField(blank=True, max_length=1024, null=True)
+
+
