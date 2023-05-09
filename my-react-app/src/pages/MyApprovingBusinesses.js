@@ -70,11 +70,9 @@ function MyApprovingBusinesses() {
 
   return (
     <div className="container">
-      <Booga 
-        title='My Approving Businesses'
-        onAdd={()=>setShowAddBusiness(!showAddBusiness)}
-        showAdd = {showAddBusiness}
-      />
+              <header className='header'>
+            <h2>Businesses submitted for my approval</h2>
+        </header>
       {detailedBusiness && <BusinessDetails business={detailedBusiness} closeComponent={closeBusinessDetailsComponent} />}
       {businesses.length > 0?(
         <Businesses 
