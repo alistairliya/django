@@ -56,7 +56,7 @@ function MyBusinesses() {
     getBusinesses()
     console.log("user:")
     console.log(user)
-  }, [])
+  }, [showAddBusiness])
 
   const fetchBusiness = async()=>{
     let headers = new Headers()
