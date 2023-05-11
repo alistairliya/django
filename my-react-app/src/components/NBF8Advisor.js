@@ -9,6 +9,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
     const [collaboratorStatus, setCollaboratorStatus] = useState({})
     const [collaboratorPosition, setCollaboratorPosition] = useState({})
     const [cfcCode, setCfcCode] = useState('')
+    const [split, setSplit] = useState(0)
 
     const roleOptions = roles.map(
         (role)=>({
@@ -147,6 +148,19 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                             updateAdvisor(id, {advisor: advisor, role: role, cfcCode:cfcCode, collaboratorStatus: selectedOption.value, collaboratorPosition: collaboratorPosition})
                         }
                     }
+                />
+            </div>
+            <div className="form-control">
+                <label>Split:</label>
+                <input
+                    type="text"
+                    placeholder={selectedAdvisors[id] && selectedAdvisors[id].split? selectedAdvisors[id].split:'Enter Split'}
+                    onChange = {(e)=>{
+                        console.log('e.target.value')
+                        console.log(e.target.value)
+                        setSplit(e.target.value)
+                        updateAdvisor(id, {advisor: advisor, role: role, cfcCode: e.target.value,collaboratorStatus:collaboratorStatus, collaboratorPosition: collaboratorPosition })
+                    }}
                 />
             </div>
         </div>
