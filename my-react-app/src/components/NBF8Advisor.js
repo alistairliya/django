@@ -77,10 +77,11 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
         <div>
             <h3>{/*"Debug "+id */}</h3>
             <div className="form-control">
+                <label>Advisor:</label>
                 <Select
                     label="test"
                     options={advisorOptions}
-                    placeholder={selectedAdvisors[id] && selectedAdvisors[id].advisor && selectedAdvisors[id].advisor.first_name && selectedAdvisors[id].advisor.last_name? selectedAdvisors[id].advisor.first_name+' '+selectedAdvisors[id].advisor.last_name:'Select Advisor'}//'Select Advisor'
+                    placeholder={selectedAdvisors[id] && selectedAdvisors[id].advisor && selectedAdvisors[id].advisor.first_name && selectedAdvisors[id].advisor.last_name? selectedAdvisors[id].advisor.first_name+' '+selectedAdvisors[id].advisor.last_name:'Advisor'}//'Select Advisor'
                     onChange={(selectedOption)=>{
                         console.log('selectedOption')
                         console.log(selectedOption)
@@ -92,9 +93,10 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                 />
             </div>
             <div className="form-control">
+                <label>CFC Code:</label>
                 <input
                     type="text"
-                    placeholder={selectedAdvisors[id] && selectedAdvisors[id].cfcCode? selectedAdvisors[id].cfcCode:'CFC Code'}
+                    placeholder={selectedAdvisors[id] && selectedAdvisors[id].cfcCode? selectedAdvisors[id].cfcCode:'Enter CFC Code'}
                     onChange = {(e)=>{
                         console.log('e.target.value')
                         console.log(e.target.value)
@@ -104,9 +106,10 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                 />
             </div>
             <div className="form-control">
+                <label>Role:</label>
                 <Select 
                     options={roleOptions}
-                    placeholder={selectedAdvisors[id] && selectedAdvisors[id].role? selectedAdvisors[id].role.user_role_name:'Select Role'}
+                    placeholder={selectedAdvisors[id] && selectedAdvisors[id].role? selectedAdvisors[id].role.user_role_name:'Role'}
                     onChange={(selectedOption)=>{
                         console.log('selectedOption')
                         console.log(selectedOption)
@@ -117,9 +120,10 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                 />
             </div>
             <div className="form-control">
+                <label>Position:</label>
                 <Select
                     options={collaboratorPositionOptions}
-                    placeholder={selectedAdvisors[id] && selectedAdvisors[id].collaboratorPosition? selectedAdvisors[id].collaboratorPosition.position_name:'Select Position'} 
+                    placeholder={selectedAdvisors[id] && selectedAdvisors[id].collaboratorPosition? selectedAdvisors[id].collaboratorPosition.position_name:'Position'} 
                     onChange={
                         (selectedOption)=>{
                             console.log('selectedOption')
@@ -131,9 +135,10 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                 />
             </div>
             <div className="form-control">
+                <label>Status:</label>
                 <Select 
                     options = {collaboratorStatusOptions}
-                    placeholder={selectedAdvisors[id] && selectedAdvisors[id].collaboratorStatus? selectedAdvisors[id].collaboratorStatus.status_name:'Select Status'}
+                    placeholder={selectedAdvisors[id] && selectedAdvisors[id].collaboratorStatus? selectedAdvisors[id].collaboratorStatus.status_name:'Status'}
                     onChange={
                         (selectedOption)=>{
                             console.log('selectedOption')
