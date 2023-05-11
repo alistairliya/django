@@ -76,18 +76,21 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
     return (
     <div>
     <h3>{/*"Debug "+id */}</h3>
-    <Select
-        options={advisorOptions}
-        placeholder={selectedAdvisors[id] && selectedAdvisors[id].advisor? selectedAdvisors[id].advisor.first_name+' '+selectedAdvisors[id].advisor.last_name:'Select Advisor'}//'Select Advisor'
-        onChange={(selectedOption)=>{
-            console.log('selectedOption')
-            console.log(selectedOption)
-            setAdvisor(selectedOption.value)
-            updateAdvisor(id, {advisor: selectedOption.value, role: role, cfcCode: cfcCode, collaboratorStatus: collaboratorStatus, collaboratorPosition: collaboratorPosition})
+    <div className="form-control">
+        <Select
+            label="test"
+            options={advisorOptions}
+            placeholder={selectedAdvisors[id] && selectedAdvisors[id].advisor && selectedAdvisors[id].advisor.first_name && selectedAdvisors[id].advisor.last_name? selectedAdvisors[id].advisor.first_name+' '+selectedAdvisors[id].advisor.last_name:'Select Advisor'}//'Select Advisor'
+            onChange={(selectedOption)=>{
+                console.log('selectedOption')
+                console.log(selectedOption)
+                setAdvisor(selectedOption.value)
+                updateAdvisor(id, {advisor: selectedOption.value, role: role, cfcCode: cfcCode, collaboratorStatus: collaboratorStatus, collaboratorPosition: collaboratorPosition})
+            }
+            
         }
-        
-    }
-    />
+        />
+    </div>
     <div className="form-control">
         <input
             type="text"
@@ -99,43 +102,48 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                 updateAdvisor(id, {advisor: advisor, role: role, cfcCode: e.target.value,collaboratorStatus:collaboratorStatus, collaboratorPosition: collaboratorPosition })
             }}
         />
-
     </div>
-    <Select 
-        options={roleOptions}
-        placeholder={selectedAdvisors[id] && selectedAdvisors[id].role? selectedAdvisors[id].role.user_role_name:'Select Role'}
-        onChange={(selectedOption)=>{
-            console.log('selectedOption')
-            console.log(selectedOption)
-            setRole(selectedOption.value)
-            updateAdvisor(id, {advisor: advisor,role: selectedOption.value, fcfCode: cfcCode, collaboratorStatus: collaboratorStatus, collaboratorPosition: collaboratorPosition})
-            
-        }}
-    />
-    <Select
-        options={collaboratorPositionOptions}
-        placeholder={selectedAdvisors[id] && selectedAdvisors[id].collaboratorPosition? selectedAdvisors[id].collaboratorPosition.position_name:'Select Position'} 
-        onChange={
-            (selectedOption)=>{
+    <div className="form-control">
+        <Select 
+            options={roleOptions}
+            placeholder={selectedAdvisors[id] && selectedAdvisors[id].role? selectedAdvisors[id].role.user_role_name:'Select Role'}
+            onChange={(selectedOption)=>{
                 console.log('selectedOption')
                 console.log(selectedOption)
-                setCollaboratorPosition(selectedOption.value)
-                updateAdvisor(id, {advisor: advisor, role: role, cfcCode:cfcCode, colaboratorStatus:collaboratorStatus, collaboratorPosition: selectedOption.value})
+                setRole(selectedOption.value)
+                updateAdvisor(id, {advisor: advisor,role: selectedOption.value, fcfCode: cfcCode, collaboratorStatus: collaboratorStatus, collaboratorPosition: collaboratorPosition})
+                
+            }}
+        />
+    </div>
+    <div className="form-control">
+        <Select
+            options={collaboratorPositionOptions}
+            placeholder={selectedAdvisors[id] && selectedAdvisors[id].collaboratorPosition? selectedAdvisors[id].collaboratorPosition.position_name:'Select Position'} 
+            onChange={
+                (selectedOption)=>{
+                    console.log('selectedOption')
+                    console.log(selectedOption)
+                    setCollaboratorPosition(selectedOption.value)
+                    updateAdvisor(id, {advisor: advisor, role: role, cfcCode:cfcCode, colaboratorStatus:collaboratorStatus, collaboratorPosition: selectedOption.value})
+                }
             }
-        }
-    />
-    <Select 
-        options = {collaboratorStatusOptions}
-        placeholder={selectedAdvisors[id] && selectedAdvisors[id].collaboratorStatus? selectedAdvisors[id].collaboratorStatus.status_name:'Select Status'}
-        onChange={
-            (selectedOption)=>{
-                console.log('selectedOption')
-                console.log(selectedOption)
-                setCollaboratorStatus(selectedOption.value)
-                updateAdvisor(id, {advisor: advisor, role: role, cfcCode:cfcCode, collaboratorStatus: selectedOption.value, collaboratorPosition: collaboratorPosition})
+        />
+    </div>
+    <div className="form-control">
+        <Select 
+            options = {collaboratorStatusOptions}
+            placeholder={selectedAdvisors[id] && selectedAdvisors[id].collaboratorStatus? selectedAdvisors[id].collaboratorStatus.status_name:'Select Status'}
+            onChange={
+                (selectedOption)=>{
+                    console.log('selectedOption')
+                    console.log(selectedOption)
+                    setCollaboratorStatus(selectedOption.value)
+                    updateAdvisor(id, {advisor: advisor, role: role, cfcCode:cfcCode, collaboratorStatus: selectedOption.value, collaboratorPosition: collaboratorPosition})
+                }
             }
-        }
-    />
+        />
+    </div>
     </div>
   )
 }
