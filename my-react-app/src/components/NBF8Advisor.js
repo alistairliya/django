@@ -87,7 +87,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                         console.log('selectedOption')
                         console.log(selectedOption)
                         setAdvisor(selectedOption.value)
-                        updateAdvisor(id, {advisor: selectedOption.value, role: role, cfcCode: cfcCode, collaboratorStatus: collaboratorStatus, collaboratorPosition: collaboratorPosition})
+                        updateAdvisor(id, {advisor: selectedOption.value, role: role, cfcCode: cfcCode, collaboratorStatus: collaboratorStatus, collaboratorPosition: collaboratorPosition, split:split})
                     }
                     
                 }
@@ -102,7 +102,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                         console.log('e.target.value')
                         console.log(e.target.value)
                         setCfcCode(e.target.value)
-                        updateAdvisor(id, {advisor: advisor, role: role, cfcCode: e.target.value,collaboratorStatus:collaboratorStatus, collaboratorPosition: collaboratorPosition })
+                        updateAdvisor(id, {advisor: advisor, role: role, cfcCode: e.target.value,collaboratorStatus:collaboratorStatus, collaboratorPosition: collaboratorPosition, split:split })
                     }}
                 />
             </div>
@@ -115,7 +115,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                         console.log('selectedOption')
                         console.log(selectedOption)
                         setRole(selectedOption.value)
-                        updateAdvisor(id, {advisor: advisor,role: selectedOption.value, fcfCode: cfcCode, collaboratorStatus: collaboratorStatus, collaboratorPosition: collaboratorPosition})
+                        updateAdvisor(id, {advisor: advisor,role: selectedOption.value, fcfCode: cfcCode, collaboratorStatus: collaboratorStatus, collaboratorPosition: collaboratorPosition, split:split})
                         
                     }}
                 />
@@ -130,7 +130,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                             console.log('selectedOption')
                             console.log(selectedOption)
                             setCollaboratorPosition(selectedOption.value)
-                            updateAdvisor(id, {advisor: advisor, role: role, cfcCode:cfcCode, colaboratorStatus:collaboratorStatus, collaboratorPosition: selectedOption.value})
+                            updateAdvisor(id, {advisor: advisor, role: role, cfcCode:cfcCode, colaboratorStatus:collaboratorStatus, collaboratorPosition: selectedOption.value, split:split})
                         }
                     }
                 />
@@ -145,7 +145,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                             console.log('selectedOption')
                             console.log(selectedOption)
                             setCollaboratorStatus(selectedOption.value)
-                            updateAdvisor(id, {advisor: advisor, role: role, cfcCode:cfcCode, collaboratorStatus: selectedOption.value, collaboratorPosition: collaboratorPosition})
+                            updateAdvisor(id, {advisor: advisor, role: role, cfcCode:cfcCode, collaboratorStatus: selectedOption.value, collaboratorPosition: collaboratorPosition, split:split})
                         }
                     }
                 />
@@ -159,7 +159,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                         console.log('e.target.value')
                         console.log(e.target.value)
                         setSplit(e.target.value)
-                        updateAdvisor(id, {advisor: advisor, role: role, cfcCode: e.target.value,collaboratorStatus:collaboratorStatus, collaboratorPosition: collaboratorPosition })
+                        updateAdvisor(id, {advisor: advisor, role: role, cfcCode: cfcCode,collaboratorStatus:collaboratorStatus, collaboratorPosition: collaboratorPosition, split: e.target.value })
                     }}
                 />
             </div>
