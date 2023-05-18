@@ -224,12 +224,3 @@ class NewBusinessViewSet(viewsets.ViewSet):
     @action(detail=False, methods=['post'])
     def create_new_business(self, request, pk=None):
         return Response()
-
-import datetime 
-from django.http import HttpResponse
-from django.shortcuts import render
-def test(request):
-    queryset = MyBusiness.objects.all()
-    now = datetime.datetime.now()
-    html = "<html><body>It is now %s.</body></html>" % now
-    return HttpResponse(html)
