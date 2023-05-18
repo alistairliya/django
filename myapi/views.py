@@ -209,3 +209,14 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
         approving_businesses = list(BusinessSupervisor.objects.filter(supervisor = self.request.user.id).values_list('business', flat=True))
         qs = self.queryset.filter(pk__in = approving_businesses)
         return qs
+
+
+
+import datetime 
+from django.http import HttpResponse
+from django.shortcuts import render
+def test(request):
+    queryset = MyBusiness.objects.all()
+    now = datetime.datetime.now()
+    html = "<html><body>It is now %s.</body></html>" % now
+    return HttpResponse(html)
