@@ -221,6 +221,16 @@ class NewBusinessViewSet(viewsets.ViewSet):
         #return Response(serializer.data)
         return Response()
 
+    # curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' http://127.0.0.1:8000/api/newbusiness/create_new_business/
     @action(detail=False, methods=['post'])
     def create_new_business(self, request, pk=None):
+        # 1. Post to business
+        # 2. Post to address
+        # 3. Post to phone
+        # 4. Post to Insurance Application
+        # 5. Post to Business User
+        # 6. Post to Business Compliance
+        # 7. Post to Business Document
+        # 8. Post to Business Medical
+        # 9. Post to Business Supervisor
         return Response()
