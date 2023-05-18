@@ -210,7 +210,20 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
         qs = self.queryset.filter(pk__in = approving_businesses)
         return qs
 
+from rest_framework.decorators import action
+class NewBusinessViewSet(viewsets.ViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication] 
 
+    def list(self, request):
+        #queryset = MyBusiness.objects.all()
+        #serializer = BusinessApprovalSerializer(queryset, many=True)
+        #return Response(serializer.data)
+        return Response()
+
+    @action(detail=False, methods=['post'])
+    def create_new_business(self, request, pk=None):
+        return Response()
 
 import datetime 
 from django.http import HttpResponse
