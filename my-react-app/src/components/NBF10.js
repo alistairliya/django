@@ -223,19 +223,24 @@ const NBF10 = ({data, close}) => {
     const postToAPI = async (url, obj) => {
         console.log('NBF10 Post to API '+url)
         //console.log(url)
-        console.log(obj)
+        //console.log(obj)
         let headers = new Headers()
         const token = user['token']
         console.log('TOKEN: '+token)
         const auth_str = 'Token '+token
         headers.set('Authorization', auth_str)
         headers.set('Content-Type', 'application/json')
+        //console.log("before fetch")
+        const strObj = JSON.stringify(obj)
+        //console.log("after sstringify")
+        //console.log("strObj: "+strObj)
         const res = await fetch(url,
             {
                 method:'POST',
-                body:JSON.stringify(obj),
+                body:strObj, //JSON.stringify(obj),
                 headers:headers
             })
+        console.log(res)
         const data = await res.json()
         return data
     }
@@ -496,6 +501,13 @@ const NBF10 = ({data, close}) => {
         save()
     }
 
+    const sendDataToAPI = async () => {
+        const url = "http://127.0.0.1:8000/api/newbusiness/create_new_business/"
+        console.log("sendDataToAPI")
+        console.log(data)
+        await postToAPI(url, data)
+    }
+
 
 
     const processMyData = async () => {
@@ -520,9 +532,12 @@ const NBF10 = ({data, close}) => {
         e.preventDefault()
         // take data and save to DB
         console.log('NBF10 Submit pressed')
+        /*
         await saveData()
         close()
         //window.location.reload(true);
+        */
+       await sendDataToAPI()
     }
     return (
     <div>

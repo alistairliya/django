@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from myapi.permissions import IsOwnerOrReadOnly, IsOwnerOrCreator
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication, BasicAuthentication
-
+import json, datetime
 # Create your views here.
 class MyBusinessView(viewsets.ModelViewSet):
     
@@ -224,7 +224,26 @@ class NewBusinessViewSet(viewsets.ViewSet):
     # curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' http://127.0.0.1:8000/api/newbusiness/create_new_business/
     @action(detail=False, methods=['post'])
     def create_new_business(self, request, pk=None):
+        data = json.loads(request.body)
         # 1. Post to business
+        # create client if new client. Else just get client ID
+        client = None
+        if data['client'].get('is_new_client'):
+            # create new client
+            # first_name
+            # last_name
+            # middle_name
+            # birthdate
+            # sin
+            # gender
+            # created_by
+            pass
+        else:
+            client = Client.objects.all().filter(id=data['client']['id'])[0]
+        status = BusinessStatus.objects.all().filter(id=1)[0]
+        new_bus = MyBusiness(client = client, status = status, created_by = self.request.user)
+        new_bus.save()
+        print(new_bus.id)
         # 2. Post to address
         # 3. Post to phone
         # 4. Post to Insurance Application
@@ -233,4 +252,4 @@ class NewBusinessViewSet(viewsets.ViewSet):
         # 7. Post to Business Document
         # 8. Post to Business Medical
         # 9. Post to Business Supervisor
-        return Response()
+        return Response({'status':'Looking good!'})

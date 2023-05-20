@@ -44,8 +44,8 @@ class Client(models.Model):
     gender = models.CharField(max_length=64, null = True)
     # Owner Datetime
     created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="created_clients")
-    created_date = models.DateTimeField()
-    modified_date = models.DateTimeField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
 
 # checked
 class Country(models.Model):
@@ -148,9 +148,9 @@ class MyBusiness(models.Model):
     # Owner Datetime
     # The related name in created_by, my_businesses, corresponds to the my_businesses field in UserSerializer
     # This is so that the User json from API will display a list of related mybusiness created by the user.
-    created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="created_businesses")
-    created_date = models.DateTimeField()
-    modified_date = models.DateTimeField()
+    created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="created_businesses", null=True, blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
     highlighted = models.BooleanField(default=False)
 
 # Checked
