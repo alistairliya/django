@@ -237,7 +237,10 @@ class NewBusinessViewSet(viewsets.ViewSet):
             # sin
             # gender
             # created_by
-            pass
+            print('creating new client')
+            c_data = data['client']
+            client = Client(first_name=c_data['first_name'], last_name=c_data['last_name'], middle_name=c_data['middle_name'], birthdate=c_data['birthdate'], sin=c_data['sin'], gender=c_data['gender'], created_by=self.request.user)
+            client.save()
         else:
             client = Client.objects.all().filter(id=data['client']['id'])[0]
         status = BusinessStatus.objects.all().filter(id=1)[0]
