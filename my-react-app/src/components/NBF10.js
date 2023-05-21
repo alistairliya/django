@@ -73,7 +73,7 @@ const NBF10 = ({data, close}) => {
             await processMedicals()
         }
         getSystemUsers()
-        processData()
+        // processData() // No longer need this. We send raw dada to server to process.
         console.log('Supervisor: '+JSON.stringify(supervisor.id))
 
     },[data, supervisor])
