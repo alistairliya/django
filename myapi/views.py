@@ -247,7 +247,7 @@ class NewBusinessViewSet(viewsets.ViewSet):
         status = BusinessStatus.objects.get(id=1)# Default to ID 1 of BusinessStatus
         new_bus = MyBusiness(client = client, status = status, created_by = self.request.user)
         new_bus.save()
-        print(new_bus.id)
+        print(f"Business: {new_bus.id}")
         
         # 2. Post to address
         address = None # Default, when Address Data not provided
@@ -298,7 +298,6 @@ class NewBusinessViewSet(viewsets.ViewSet):
             phone.clients.add(client)
             phone.save()
         print(f"phone: {phone.id}")
-
 
         # 4. Post to Insurance Application
         # 5. Post to Business User
