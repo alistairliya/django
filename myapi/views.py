@@ -300,6 +300,15 @@ class NewBusinessViewSet(viewsets.ViewSet):
         print(f"phone: {phone.id}")
 
         # 4. Post to Insurance Application
+        insuranceApplication = None
+        # Need to make suer that
+        ins_app_data = data.get('applicantInsurance')
+        if ins_app_data and ins_app_data.get('insurance_plan') and ins_app_data.get('insurance_plan_type') and ins_app_data.get('insurance_provider'):
+            amount = ins_app_data.get('face_amount') if ins_app_data.get('face_amount') else 0
+            planned_premium = ins_app_data.get('planned_premium') if ins_app_data.get('planned_premium') else 0
+            insurance_plan = InsurancePlan.objects.get(id=ins_app_data.get('insurance_plan').get('id'))             
+            insurance_plan_type = InsurancePlanType.objects.get(id=ins_app_data.get('insurance_plan_type').get('id')) 
+            insurance_provider = InsuranceProvider.objects.get(id=ins_app_data.get('insurance_provider').get('id')) 
         # 5. Post to Business User
         # 6. Post to Business Compliance
         # 7. Post to Business Document
