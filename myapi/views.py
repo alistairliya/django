@@ -228,46 +228,78 @@ class NewBusinessViewSet(viewsets.ViewSet):
         # 1. Post to business
         # create client if new client. Else just get client ID
         client = None
-        if data['client'].get('is_new_client'):
-            # create new client
-            # first_name
-            # last_name
-            # middle_name
-            # birthdate
-            # sin
-            # gender
-            # created_by
+        client_data = data.get('client')
+        if client_data and client_data.get('is_new_client'):
             print('creating new client')
-            c_data = data['client']
-            client = Client(first_name=c_data['first_name'], last_name=c_data['last_name'], middle_name=c_data['middle_name'], birthdate=c_data['birthdate'], sin=c_data['sin'], gender=c_data['gender'], created_by=self.request.user)
+            client = Client(
+                first_name=client_data.get('first_name'), 
+                last_name=client_data.get('last_name'), 
+                middle_name=client_data.get('middle_name'), 
+                birthdate=client_data.get('birthdate'), 
+                sin=client_data.get('sin'), 
+                gender=client_data.get('gender'), 
+                created_by=self.request.user)
             client.save()
-        else:
-            client = Client.objects.all().filter(id=data['client']['id'])[0]
-        status = BusinessStatus.objects.all().filter(id=1)[0]
+        elif client_data:
+            #client = Client.objects.all().filter(id=client_data.get('id'))[0]
+            client = Client.objects.get(id=client_data.get('id'))
+        #status = BusinessStatus.objects.all().filter(id=1)[0] # Default to ID 1 of BusinessStatus
+        status = BusinessStatus.objects.get(id=1)# Default to ID 1 of BusinessStatus
         new_bus = MyBusiness(client = client, status = status, created_by = self.request.user)
         new_bus.save()
         print(new_bus.id)
+        
         # 2. Post to address
-        address_data = data['applicantAddress']
-        address = Address(
-            # unit_number
-            unit_number = address_data['unit_number'],
-            # street_address
-            street_address = address_data['street_address'],
-            # city
-            city = address_data['city'],
-            # province_state
-            province_state = ProvinceState.objects.all().filter(id=address_data['province']['id'])[0],
-            # country
-            country = Country.objects.all().filter(id=address_data['country']['id'])[0],
-            # postal_code
-            postal_code = address_data['postal_code'],
-        )
-        address.save()
-
-
-
+        address = None # Default, when Address Data not provided
+        address_data = data.get('applicantAddress')
+        if address_data and address_data.get('is_new_address'):
+            address = Address(
+                # unit_number
+                unit_number = address_data['unit_number'],
+                # street_address
+                street_address = address_data['street_address'],
+                # city
+                city = address_data['city'],
+                # province_state
+                province_state = ProvinceState.objects.all().filter(id=address_data['province']['id'])[0],
+                # country
+                country = Country.objects.all().filter(id=address_data['country']['id'])[0],
+                # postal_code
+                postal_code = address_data['postal_code'],
+            )
+            address.save()
+        elif address_data:
+            #address = Address.objects.all().filter(id=address_data.get('id'))[0]
+            address = Address.objects.get(id=address_data.get('id'))
+        print(f"address: {address.id}")
         # 3. Post to phone
+        phone = None
+        phones_data = data.get('applicantPhones')
+        if phones_data and len(phones_data) > 0 and phones_data[0].get('selection'):
+            phone = Phone.objects.get(id=phones_data[0].get('selection').get('id'))
+        elif phones_data and len(phones_data) > 0:
+            phone_data = phones_data[0]
+            phone = Phone(
+                # clients, add later
+                # area_code
+                area_code = phone_data['area_code'],
+                # phone_number
+                phone_number = phone_data['phone_number'],
+                # phone_type
+                phone_type = PhoneType.objects.get(id=phone_data.get('phone_type').get('id')) if phone_data.get('phone_type') else PhoneType.objects.get(id=1),
+                # is_primary
+                is_primary = False,
+                # is_active
+                is_active = True,
+                # is_archived
+                is_archived = False,
+            )
+            phone.save()
+            phone.clients.add(client)
+            phone.save()
+        print(f"phone: {phone.id}")
+
+
         # 4. Post to Insurance Application
         # 5. Post to Business User
         # 6. Post to Business Compliance
