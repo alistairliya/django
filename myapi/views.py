@@ -248,6 +248,25 @@ class NewBusinessViewSet(viewsets.ViewSet):
         new_bus.save()
         print(new_bus.id)
         # 2. Post to address
+        address_data = data['applicantAddress']
+        address = Address(
+            # unit_number
+            unit_number = address_data['unit_number'],
+            # street_address
+            street_address = address_data['street_address'],
+            # city
+            city = address_data['city'],
+            # province_state
+            province_state = ProvinceState.objects.all().filter(id=address_data['province']['id'])[0],
+            # country
+            country = Country.objects.all().filter(id=address_data['country']['id'])[0],
+            # postal_code
+            postal_code = address_data['postal_code'],
+        )
+        address.save()
+
+
+
         # 3. Post to phone
         # 4. Post to Insurance Application
         # 5. Post to Business User

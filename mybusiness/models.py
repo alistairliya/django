@@ -72,8 +72,8 @@ class Address(models.Model):
     province_state = models.ForeignKey(ProvinceState, on_delete=models.PROTECT, related_name="addresses")
     country = models.ForeignKey(Country, on_delete=models.PROTECT, related_name="addressess")
     postal_code = models.CharField(max_length=64)
-    address_type = models.ForeignKey(AddressType, on_delete=models.PROTECT, related_name="addresses")
-    description = models.CharField(max_length=1024, null=True)
+    address_type = models.ForeignKey(AddressType, on_delete=models.PROTECT,null=True,blank=True, related_name="addresses")
+    description = models.CharField(max_length=1024, null=True, blank=True)
 
 class ClientAddress(models.Model):
     address = models.ForeignKey(Address, on_delete=models.PROTECT)
