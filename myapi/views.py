@@ -308,7 +308,29 @@ class NewBusinessViewSet(viewsets.ViewSet):
             planned_premium = ins_app_data.get('planned_premium') if ins_app_data.get('planned_premium') else 0
             insurance_plan = InsurancePlan.objects.get(id=ins_app_data.get('insurance_plan').get('id'))             
             insurance_plan_type = InsurancePlanType.objects.get(id=ins_app_data.get('insurance_plan_type').get('id')) 
-            insurance_provider = InsuranceProvider.objects.get(id=ins_app_data.get('insurance_provider').get('id')) 
+            insurance_provider = InsuranceProvider.objects.get(id=ins_app_data.get('insurance_provider').get('id'))
+            insuranceApplication = InsuranceApplication(
+                # business
+                business = new_bus,
+                # product
+                product = Product.objects.get(id=1), # Hardcode, default to ID 1 of Product 
+                # provider
+                provider = insurance_provider,
+                # plan_type
+                plan_type = insurance_plan_type,
+                # plan
+                plan = insurance_plan,
+                # face_amount
+                face_amount = amount, 
+                # planned_premium
+                planned_premium = planned_premium,
+                # applicant_address
+                applicant_address = address,
+                # applicant_phone
+                applicant_phone = phone
+            ) 
+            insuranceApplication.save()
+            print(f"insuranceApplication: {insuranceApplication.id}")
         # 5. Post to Business User
         # 6. Post to Business Compliance
         # 7. Post to Business Document
