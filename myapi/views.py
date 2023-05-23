@@ -332,6 +332,35 @@ class NewBusinessViewSet(viewsets.ViewSet):
             insuranceApplication.save()
             print(f"insuranceApplication: {insuranceApplication.id}")
         # 5. Post to Business User
+            # add current user as owner?   
+        business_user = None
+        collaborators_data = data.get('collaborators')
+        if collaborators_data:
+            for collaborator_key in collaborators_data:
+                collaborator_data = collaborators_data[collaborator_key]
+                advisor_data = collaborator_data.get('advisor')
+                user_role_data = collaborator_data.get('role')
+                collaborator_status_data = collaborator_data.get('collaboratorStatus')
+                collaborator_position_data = collaborator_data.get('collaboratorPosition')
+                if advisor_data and user_role_data and advisor_data.get('id') and user_role_data.get('id') and collaborator_status_data and collaborator_position_data:
+                    user = MyUser.objects.get(id=advisor_data.get('id'))
+                    user_role = BusinessUserRole.objects.get(id=user_role_data.get('id'))
+                    collaborator_status = CollaboratorStatus.objects.get(id = collaborator_status_data.get('id'))
+                    collaborator_position = CollaboratorPosition.objects.get(id = collaborator_position_data.get('id'))
+                    business_user = Business_User(
+                        business = new_bus,
+                        user = user,
+                        split = int(collaborator_data.get('split')),
+                        user_role = user_role,
+                        notes = "",
+                        created_by = self.request.user,
+                        collaborator_status = collaborator_status,
+                        collaborator_position = collaborator_position,
+                        cfc_code = collaborator_data.get('cfc_code'),
+                    )
+                    business_user.save()
+                    print(f"business_user: {business_user.id}")
+
         # 6. Post to Business Compliance
         # 7. Post to Business Document
         # 8. Post to Business Medical

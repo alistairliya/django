@@ -190,8 +190,8 @@ class Business_User(models.Model):
     notes = models.CharField(max_length=1024, null=True)
     # Owner Datetime
     created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="created_businessusers")
-    created_date = models.DateTimeField()
-    modified_date = models.DateTimeField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
     # Additional fields
     collaborator_status = models.ForeignKey(CollaboratorStatus, on_delete=models.PROTECT, related_name="businessusers", null=True)
     collaborator_position = models.ForeignKey(CollaboratorPosition, on_delete=models.PROTECT, related_name="businessusers", null=True)
