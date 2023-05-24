@@ -379,9 +379,20 @@ class NewBusinessViewSet(viewsets.ViewSet):
                         business_compliance.save()
                         print(f"business_compliance: {business_compliance.id}")
                                     
-
-
         # 7. Post to Business Document
+        documents_data = data.get('documents')
+        if documents_data:
+            for document_key in documents_data:
+                document = Document.objects.get(id=document_key)
+                document_data = documents_data[document_key]
+                if document:
+                    business_document = Business_Document(
+                        business = new_bus,
+                        document = document,
+                        notes = document_data.get('notes',"")
+                    )
+                    business_document.save()
+                    print(f"business_document: {business_document.id}")
         # 8. Post to Business Medical
         # 9. Post to Business Supervisor
         return Response({'status':'Looking good!'})
