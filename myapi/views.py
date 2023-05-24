@@ -394,5 +394,19 @@ class NewBusinessViewSet(viewsets.ViewSet):
                     business_document.save()
                     print(f"business_document: {business_document.id}")
         # 8. Post to Business Medical
+        medicals_data = data.get('medicals')
+        if medicals_data:
+            for medical_key in medicals_data:
+                medical = Medical.objects.get(id=medical_key)
+                medical_data = medicals_data[medical_key]
+                if medical:
+                    business_medical = Business_Medical(
+                        business = new_bus,
+                        medical = medical,
+                        notes = medical_data.get('notes',""),
+                        status = Status.objects.get(id=1) # Hardcode
+                    )
+                    business_medical.save()
+                    print(f"business_medical: {business_medical.id}")
         # 9. Post to Business Supervisor
         return Response({'status':'Looking good!'})
