@@ -333,10 +333,10 @@ class NewBusinessViewSet(viewsets.ViewSet):
             print(f"insuranceApplication: {insuranceApplication.id}")
         # 5. Post to Business User
             # add current user as owner?   
-        business_user = None
         collaborators_data = data.get('collaborators')
         if collaborators_data:
             for collaborator_key in collaborators_data:
+                business_user = None
                 collaborator_data = collaborators_data[collaborator_key]
                 advisor_data = collaborator_data.get('advisor')
                 user_role_data = collaborator_data.get('role')
@@ -362,6 +362,25 @@ class NewBusinessViewSet(viewsets.ViewSet):
                     print(f"business_user: {business_user.id}")
 
         # 6. Post to Business Compliance
+        compliance_entities_data = data.get('complianceEntities')
+        if compliance_entities_data:
+            for compliance_key in compliance_entities_data:
+                business_compliance = None
+                compliance_data = compliance_entities_data[compliance_key]
+                if compliance_data and compliance_data.get('id'):
+                    compliance_entity = ComplianceEntity.objects.get(id=compliance_data.get('id'))
+                    if compliance_entity:
+                        notes = compliance_data.get('notes',"")
+                        business_compliance = BusinessComplianceEntity(
+                            business = new_bus,
+                            compliance_entity = compliance_entity,
+                            notes = notes
+                        )
+                        business_compliance.save()
+                        print(f"business_compliance: {business_compliance.id}")
+                                    
+
+
         # 7. Post to Business Document
         # 8. Post to Business Medical
         # 9. Post to Business Supervisor
