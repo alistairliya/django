@@ -537,6 +537,8 @@ const NBF10 = ({data, close}) => {
         close()
         //window.location.reload(true);
         */
+       console.log('Adding supervisor')
+       data['supervisor'] = supervisor // add supervisor to data
        await sendDataToAPI()
     }
     return (

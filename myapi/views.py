@@ -409,4 +409,15 @@ class NewBusinessViewSet(viewsets.ViewSet):
                     business_medical.save()
                     print(f"business_medical: {business_medical.id}")
         # 9. Post to Business Supervisor
+        supervisor_data = data.get('supervisor')
+        if supervisor_data:
+            supervisor_user = MyUser.objects.get(id=supervisor_data.get('id'))
+            if supervisor_user:
+                business_supervisor = BusinessSupervisor(
+                    business = new_bus,
+                    supervisor = supervisor_user,
+                    notes = ""
+                )
+                business_supervisor.save()
+                print(f"business_supervisor: {business_supervisor.id}")
         return Response({'status':'Looking good!'})
