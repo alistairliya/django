@@ -16,6 +16,7 @@ import { useAuth } from "../hooks/useAuth"
 import BusinessDetailsClient from './BusinessDetailsClient'
 import BusinessDetailsContact from './BusinessDetailsContact'
 import BusinessDetailsInsurance from './BusinessDetailsInsurance'
+import BusinessDetailsFP from './BusinessDetailsFP'
 
 
 const BusinessDetails = ({business, closeComponent}) => {
@@ -90,6 +91,7 @@ const BusinessDetails = ({business, closeComponent}) => {
         <div className="container">
         <div>Transaction ID: {business.id}</div>
         <div>Status: {myStatus?myStatus.status_name:""}</div>
+        <BusinessDetailsFP />
         <BusinessDetailsClient client={myClient}/>
         <BusinessDetailsContact address={extractAddress()} phone={extractPhone()} />
         <BusinessDetailsInsurance insurance={extractInsurance()} />
