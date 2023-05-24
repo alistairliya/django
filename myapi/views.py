@@ -12,6 +12,12 @@ from rest_framework import status
 from myapi.permissions import IsOwnerOrReadOnly, IsOwnerOrCreator
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication, BasicAuthentication
 import json, datetime
+
+# For File Upload
+from rest_framework.views import APIView
+from rest_framework.parsers import MultiPartParser, FormParser
+from .serializers import FileSerializer
+
 # Create your views here.
 class MyBusinessView(viewsets.ModelViewSet):
     
@@ -421,3 +427,15 @@ class NewBusinessViewSet(viewsets.ViewSet):
                 business_supervisor.save()
                 print(f"business_supervisor: {business_supervisor.id}")
         return Response({'status':'Looking good!'})
+
+# https://blog.vivekshukla.xyz/uploading-file-using-api-django-rest-framework/ 
+class FileView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+
+    def post(self, request, *args, **kwargs):
+        file_serializer = FileSerializer(data=request.data)
+        if file_serializer.is_valid():
+            file_serializer.save()
+            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

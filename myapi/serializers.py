@@ -265,3 +265,15 @@ class BusinessApprovalSerializer(MyBusinessSerializer):
     class Meta:
         model = MyBusiness
         fields = ['insurance_application','id','business_type','product','client','status','projected_FYC','settled_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance','related_users'] 
+
+
+
+# Serializer for File Upload
+# based on https://blog.vivekshukla.xyz/uploading-file-using-api-django-rest-framework/
+# curl -X POST -F "file=@/Users/eugenelin/mylog.txt" -F "remark=foobar" http://127.0.0.1:8000/file/upload/ > result.html
+from .models import File
+
+class FileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = File
+        fields = ('id', 'file','remark','timestamp')

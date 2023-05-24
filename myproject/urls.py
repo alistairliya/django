@@ -18,6 +18,7 @@ from django.urls import include, path
 from rest_framework import routers
 from myapi import views
 
+
 # https://docs.djangoproject.com/en/4.1/ref/contrib/admin/
 # https://adiramadhan17.medium.com/modify-title-and-header-django-admin-interface-a6ad6e470d92
 # https://www.dothedev.com/blog/django-admin-change-color/ # for color 
@@ -81,4 +82,8 @@ urlpatterns = [
 from rest_framework.authtoken import views
 urlpatterns += [
     path('api-token-auth/', views.obtain_auth_token)
+]
+
+urlpatterns += [
+    path('file/', include('myapi.urls')),
 ]
