@@ -20,7 +20,7 @@ const BusinessDetailsFP = () => {
         }
     }
 
-    const handleUpload = (event) =>{
+    const handleUpload = async (event) =>{
         // Sample Upload:
         // curl -X POST -F "file=@/Users/eugenelin/dev_insure/myproject/readme.txt" -F "remark=foobar2" http://127.0.0.1:8000/file/upload/
         const postToFileUpload = async () =>{
@@ -32,9 +32,12 @@ const BusinessDetailsFP = () => {
             })
             const data = await res.json()
             console.log(data)
+            return data
         }
-        postToFileUpload()
-        
+        const uploadResult = await postToFileUpload()
+        if(uploadResult['id']){
+            console.log('uploadResult id is '+uploadResult['id'])
+        } 
     }
 
 
