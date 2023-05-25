@@ -9,5 +9,5 @@ from django.conf.urls import url
 
 app_name = "myapi"
 urlpatterns = [
-    url(r'^upload/$', views.FileView.as_view(), name='file-upload'), #r'^upload/$' is a regular expression pattern enclosed within the r prefix, indicating a raw string. 
+    url(r'^upload/$', views.UploadFileView.as_view(), name='file-upload'), #r'^upload/$' is a regular expression pattern enclosed within the r prefix, indicating a raw string. 
 ]

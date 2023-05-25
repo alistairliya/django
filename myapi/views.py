@@ -217,6 +217,12 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
         qs = self.queryset.filter(pk__in = approving_businesses)
         return qs
 
+class FileViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication] 
+    queryset = File.objects.all()
+    serializer_class = FileSerializer
+
 from rest_framework.decorators import action
 class NewBusinessViewSet(viewsets.ViewSet):
     permission_classes = [permissions.IsAuthenticated]
@@ -430,7 +436,7 @@ class NewBusinessViewSet(viewsets.ViewSet):
         return Response({'status':'Looking good!'})
 
 # https://blog.vivekshukla.xyz/uploading-file-using-api-django-rest-framework/ 
-class FileView(APIView):
+class UploadFileView(APIView):
     parser_classes = (MultiPartParser, FormParser)
     
     permission_classes = [permissions.IsAuthenticated]
