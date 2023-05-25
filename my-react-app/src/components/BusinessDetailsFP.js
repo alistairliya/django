@@ -5,6 +5,7 @@ import { useAuth } from "../hooks/useAuth"
 
 const BusinessDetailsFP = () => {
     const [file, setFile] = useState(null)
+    const [fileUploadResult, setFileUploadResult] = useState(null)
     
     useEffect(()=>{
         console.log('BusinessDetailsFP useEffect()')
@@ -34,9 +35,11 @@ const BusinessDetailsFP = () => {
             console.log(data)
             return data
         }
+        setFileUploadResult('Uploading...')
         const uploadResult = await postToFileUpload()
         if(uploadResult['id']){
             console.log('uploadResult id is '+uploadResult['id'])
+            setFileUploadResult('Upload Success')
         } 
     }
 
@@ -49,6 +52,7 @@ const BusinessDetailsFP = () => {
         <input type="file" onChange={handleFileChange} />
         <div>{file && `${file.name} - ${file.type}`}</div>
         <button onClick={handleUpload}>Upload</button>
+        {fileUploadResult && <div>{fileUploadResult}</div>}
     </div>
   )
 }
