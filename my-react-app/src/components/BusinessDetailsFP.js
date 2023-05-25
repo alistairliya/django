@@ -7,6 +7,8 @@ const BusinessDetailsFP = () => {
     const [file, setFile] = useState(null)
     const [fileUploadResult, setFileUploadResult] = useState(null)
     
+    const { user } = useAuth()
+    
     useEffect(()=>{
         console.log('BusinessDetailsFP useEffect()')
         console.log(file)
@@ -25,11 +27,19 @@ const BusinessDetailsFP = () => {
         // Sample Upload:
         // curl -X POST -F "file=@/Users/eugenelin/dev_insure/myproject/readme.txt" -F "remark=foobar2" http://127.0.0.1:8000/file/upload/
         const postToFileUpload = async () =>{
+            
+            let headers = new Headers()
+            const token = user['token']
+            console.log('TOKEN: '+token)
+            const auth_str = 'Token '+token
+            headers.set('Authorization', auth_str)
+
             const formData = new FormData()
             formData.append('file', file)
             const res = await fetch('http://localhost:8000/file/upload/',{
                 method:'POST',
-                body: formData
+                body: formData,
+                headers: headers
             })
             const data = await res.json()
             console.log(data)
