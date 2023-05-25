@@ -32,8 +32,9 @@ const BusinessDetailsFP = () => {
             const token = user['token']
             console.log('TOKEN: '+token)
             const auth_str = 'Token '+token
+            console.log('auth_str: '+auth_str)
             headers.set('Authorization', auth_str)
-
+            //headers.set('Content-Type', 'application/json')
             const formData = new FormData()
             formData.append('file', file)
             const res = await fetch('http://localhost:8000/file/upload/',{

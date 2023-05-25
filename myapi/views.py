@@ -40,7 +40,8 @@ class MyBusinessView(viewsets.ModelViewSet):
         # Business_User related to the request user
         # somehow append the business attribute into queryset
         
-        request_user = self.request.user 
+        request_user = self.request.user
+        print(f'******* request_user: {request_user}') 
         # User is the creator of:
         qs = self.queryset.filter(created_by = request_user.id)
         # User is the owner of:
@@ -431,11 +432,17 @@ class NewBusinessViewSet(viewsets.ViewSet):
 # https://blog.vivekshukla.xyz/uploading-file-using-api-django-rest-framework/ 
 class FileView(APIView):
     parser_classes = (MultiPartParser, FormParser)
+    
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication] 
 
     def post(self, request, *args, **kwargs):
         file_serializer = FileSerializer(data=request.data)
+        my_user = MyUser.objects.get(id=request.user.id)
+        print(f"my_user: {request.user}")
+
         if file_serializer.is_valid():
-            file_serializer.save()
+            file_serializer.save(user=my_user)
             return Response(file_serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
