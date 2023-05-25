@@ -5,5 +5,5 @@ from django.db import models
 # https://blog.vivekshukla.xyz/uploading-file-using-api-django-rest-framework/
 class File(models.Model):
     file = models.FileField(blank=False, null=False)
-    remark = models.CharField(max_length=255)
+    remark = models.CharField(max_length=255, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True) 
