@@ -447,10 +447,16 @@ class UploadFileView(APIView):
         file_serializer = FileSerializer(data=request.data)
         my_user = MyUser.objects.get(id=request.user.id)
         print(f"my_user: {request.user}")
-        print(f"data: {request.data.get('file')}")
+
+        for key, value in request.data.items():
+            print(f'{key}: {value}')
+
+        remark = request.data.get('remark')
+        if remark == None:
+            remark = ""
         original_filename = request.data.get('file')
         if file_serializer.is_valid():
-            file_serializer.save(user=my_user, original_filename = original_filename)
+            file_serializer.save(user=my_user, original_filename = original_filename, remark = remark)
             return Response(file_serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

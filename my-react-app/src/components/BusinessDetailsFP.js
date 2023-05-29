@@ -37,6 +37,7 @@ const BusinessDetailsFP = () => {
             //headers.set('Content-Type', 'application/json')
             const formData = new FormData()
             formData.append('file', file)
+            formData.append('remark', 'foobar2')
             const res = await fetch('http://localhost:8000/file/upload/',{
                 method:'POST',
                 body: formData,
