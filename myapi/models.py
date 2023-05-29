@@ -9,3 +9,4 @@ class File(models.Model):
     remark = models.CharField(max_length=255, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True) 
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE, blank=True, null=True)
+    original_filename = models.CharField(max_length=255, blank=True, null=True)
