@@ -167,5 +167,5 @@ REST_FRAMEWORK = {
 }
 
 # for file upload
-#MEDIA_URL = '/upload/'
+MEDIA_URL = '/upload/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "file_upload")

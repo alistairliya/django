@@ -436,6 +436,7 @@ class NewBusinessViewSet(viewsets.ViewSet):
         return Response({'status':'Looking good!'})
 
 # https://blog.vivekshukla.xyz/uploading-file-using-api-django-rest-framework/ 
+# https://testdriven.io/blog/django-static-files/#:~:text=Unfortunately%2C%20the%20Django%20development%20server,in%20your%20project%2Dlevel%20URLs.
 class UploadFileView(APIView):
     parser_classes = (MultiPartParser, FormParser)
     
