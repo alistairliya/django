@@ -89,3 +89,10 @@ urlpatterns += [
     path('file/', include('myapi.urls')),
 ]
 
+# Media Files in Development Mode:
+# https://testdriven.io/blog/django-static-files/#:~:text=Unfortunately%2C%20the%20Django%20development%20server,in%20your%20project%2Dlevel%20URLs.
+from django.conf.urls.static import static
+from django.conf import settings
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
