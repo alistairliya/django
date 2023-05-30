@@ -39,7 +39,8 @@ const BusinessDetailsFP = ({businessId}) => {
             formData.append('file', file)
             formData.append('remark', 'foobar2')
             formData.append('businessId', businessId)
-            const res = await fetch('http://localhost:8000/file/upload/',{
+            //const res = await fetch('http://localhost:8000/file/upload/',{
+            const res = await fetch('http://localhost:8000/api/files/upload_file/',{
                 method:'POST',
                 body: formData,
                 headers: headers

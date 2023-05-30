@@ -2,7 +2,11 @@
 # This file is for views that cannot be registered.
 # https://stackoverflow.com/questions/70377923/attributeerror-type-object-has-no-attribute-get-extra-actions
 # Cannot add generic Views in routers.
-# We add the views here.
+# We add the view into url here.
+
+# While this is still functional, we are no longer using this url.
+# File upload is now done thru FileViewSet and the URL is configured thru the router in the project urls.py
+
 from django.urls import path
 from . import views
 from django.conf.urls import url

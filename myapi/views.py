@@ -17,6 +17,7 @@ import json, datetime
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from .serializers import FileSerializer
+from rest_framework.decorators import action
 
 # Create your views here.
 class MyBusinessView(viewsets.ModelViewSet):
@@ -222,8 +223,28 @@ class FileViewSet(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication] 
     queryset = File.objects.all()
     serializer_class = FileSerializer
+    
+    @action(detail=False, methods=['post'])
+    def upload_file(self, request, pk=None):
+        file_serializer = FileSerializer(context = {'request' :request}, data=request.data)
+        my_user = MyUser.objects.get(id=request.user.id)
+        print(f"my_user: {request.user}")
 
-from rest_framework.decorators import action
+        for key, value in request.data.items():
+            print(f'{key}: {value}')
+
+        remark = request.data.get('remark')
+        businessId = request.data.get('businessId')
+        my_business = MyBusiness.objects.get(id=businessId)
+        if remark == None:
+            remark = ""
+        original_filename = request.data.get('file')
+        if file_serializer.is_valid():
+            file_serializer.save(user=my_user, original_filename = original_filename, remark = remark, business=my_business)
+            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class NewBusinessViewSet(viewsets.ViewSet):
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication] 
@@ -437,6 +458,7 @@ class NewBusinessViewSet(viewsets.ViewSet):
 
 # https://blog.vivekshukla.xyz/uploading-file-using-api-django-rest-framework/ 
 # https://testdriven.io/blog/django-static-files/#:~:text=Unfortunately%2C%20the%20Django%20development%20server,in%20your%20project%2Dlevel%20URLs.
+# No longer using this class. Use FileViewSet class instead
 class UploadFileView(APIView):
     parser_classes = (MultiPartParser, FormParser)
     
@@ -444,7 +466,7 @@ class UploadFileView(APIView):
     authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication] 
 
     def post(self, request, *args, **kwargs):
-        file_serializer = FileSerializer(data=request.data)
+        file_serializer = FileSerializer(context = {'request' :request}, data=request.data)
         my_user = MyUser.objects.get(id=request.user.id)
         print(f"my_user: {request.user}")
 
