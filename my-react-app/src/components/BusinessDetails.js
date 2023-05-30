@@ -91,7 +91,7 @@ const BusinessDetails = ({business, closeComponent}) => {
         <div className="container">
         <div>Transaction ID: {business.id}</div>
         <div>Status: {myStatus?myStatus.status_name:""}</div>
-        <BusinessDetailsFP />
+        <BusinessDetailsFP businessId = {business.id}/>
         <BusinessDetailsClient client={myClient}/>
         <BusinessDetailsContact address={extractAddress()} phone={extractPhone()} />
         <BusinessDetailsInsurance insurance={extractInsurance()} />

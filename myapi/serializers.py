@@ -273,7 +273,7 @@ class BusinessApprovalSerializer(MyBusinessSerializer):
 # curl -X POST -F "file=@/Users/eugenelin/mylog.txt" -F "remark=foobar" http://127.0.0.1:8000/file/upload/ > result.html
 from .models import File
 
-class FileSerializer(serializers.ModelSerializer):
+class FileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = File
-        fields = ('id', 'file','remark','timestamp','user','original_filename')
+        fields = ('id', 'file','remark','timestamp','user','original_filename', 'business')

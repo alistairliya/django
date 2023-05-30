@@ -3,7 +3,7 @@ import {useEffect, useState} from "react"
 import { useAuth } from "../hooks/useAuth"
 
 
-const BusinessDetailsFP = () => {
+const BusinessDetailsFP = ({businessId}) => {
     const [file, setFile] = useState(null)
     const [fileUploadResult, setFileUploadResult] = useState(null)
     
@@ -38,6 +38,7 @@ const BusinessDetailsFP = () => {
             const formData = new FormData()
             formData.append('file', file)
             formData.append('remark', 'foobar2')
+            formData.append('businessId', businessId)
             const res = await fetch('http://localhost:8000/file/upload/',{
                 method:'POST',
                 body: formData,
