@@ -8,10 +8,22 @@ const BusinessDetailsFP = ({businessId}) => {
     const [fileUploadResult, setFileUploadResult] = useState(null)
     
     const { user } = useAuth()
-    
+
+    const fetchFromAPI = async(resource) =>{
+        let headers = new Headers()
+        const token = user['token']
+        const auth_str = 'Token '+token
+        headers.set('Authorization', auth_str)
+        const res = await fetch('http://localhost:8000/api/'+resource+'/', {headers:headers})
+        const data = await res.json()
+        return data
+    }
+
     useEffect(()=>{
         console.log('BusinessDetailsFP useEffect()')
         console.log(file)
+    
+
     }, [file])
 
     const handleFileChange = (event) => {

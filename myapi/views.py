@@ -223,6 +223,12 @@ class FileViewSet(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication] 
     queryset = File.objects.all()
     serializer_class = FileSerializer
+
+    def get_queryset(self):
+        print('get_queryset')
+        request_user = self.request.user
+        files = File.objects.filter(user = request_user.id).order_by('-timestamp')[:1]
+        return files
     
     @action(detail=False, methods=['post'])
     def upload_file(self, request, pk=None):
