@@ -6,6 +6,7 @@ import { useAuth } from "../hooks/useAuth"
 const BusinessDetailsFP = ({businessId}) => {
     const [file, setFile] = useState(null)
     const [fileUploadResult, setFileUploadResult] = useState(null)
+    const [fileData, setFileData] = useState(null)
     
     const { user } = useAuth()
 
@@ -14,16 +15,26 @@ const BusinessDetailsFP = ({businessId}) => {
         const token = user['token']
         const auth_str = 'Token '+token
         headers.set('Authorization', auth_str)
-        const res = await fetch('http://localhost:8000/api/'+resource+'/', {headers:headers})
+        const url = 'http://localhost:8000/api/'+resource+'/' 
+        console.log('fetchFromAPI() url: '+url)
+        const res = await fetch(url, {headers:headers})
         const data = await res.json()
         return data
     }
+        const getFileData = async () =>{
+            console.log('BusinessDetailsFP -> getFileData()')
+            const fileData = await fetchFromAPI('files')
+            console.log('File Data: ')
+            console.log(fileData)
+            setFileData(fileData)
+        }
 
     useEffect(()=>{
         console.log('BusinessDetailsFP useEffect()')
         console.log(file)
-    
 
+        getFileData()
+    
     }, [file])
 
     const handleFileChange = (event) => {
@@ -66,6 +77,7 @@ const BusinessDetailsFP = ({businessId}) => {
         if(uploadResult['id']){
             console.log('uploadResult id is '+uploadResult['id'])
             setFileUploadResult('Upload Success')
+            getFileData()
         } 
     }
 
@@ -75,6 +87,7 @@ const BusinessDetailsFP = ({businessId}) => {
   return (
     <div className='container'>
         <h2>First Page</h2>
+        {fileData?JSON.stringify(fileData):""}
         <input type="file" onChange={handleFileChange} />
         <div>{file && `${file.name} - ${file.type}`}</div>
         <button onClick={handleUpload}>Upload</button>
