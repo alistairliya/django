@@ -1,6 +1,7 @@
 
 import {useEffect, useState} from "react"
 import { useAuth } from "../hooks/useAuth"
+import Button from './Button'
 
 
 const BusinessDetailsFP = ({businessId}) => {
@@ -81,16 +82,40 @@ const BusinessDetailsFP = ({businessId}) => {
         } 
     }
 
-
+    const showFileDetails = () =>{
+        const filename = fileData[0].original_filename
+        const url = fileData[0].file
+        const viewFP = () =>{
+            console.log("viewFP()")
+            window.open(url, '_blank', 'fullscreen=yes')
+        }
+        const result = 
+        <div>
+            <Button 
+                text='View FP' 
+                color='steelblue'
+                onClick={viewFP} 
+            />
+        </div>
+        return result 
+    }
 
 
   return (
     <div className='container'>
         <h2>First Page</h2>
-        {fileData?JSON.stringify(fileData):""}
+        {fileData?showFileDetails():""}
+<br/>
+        <h3>Upload:</h3>
         <input type="file" onChange={handleFileChange} />
         <div>{file && `${file.name} - ${file.type}`}</div>
-        <button onClick={handleUpload}>Upload</button>
+        <Button
+            text='Upload FP'
+            color='steelblue'
+            onClick={handleUpload}
+        />
+
+
         {fileUploadResult && <div>{fileUploadResult}</div>}
     </div>
   )
