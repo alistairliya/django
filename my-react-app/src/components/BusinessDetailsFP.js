@@ -39,10 +39,15 @@ const BusinessDetailsFP = ({businessId}) => {
     }, [file])
 
     const handleFileChange = (event) => {
+        //event.preventDefault()
         const files = event.target.files;
 
-        
-        if(files){
+        if(files && files[0] && files[0].type !== 'application/pdf'){
+            alert('Only PDF files are allowed')
+            setFile(null)
+            return
+        }else if(files){
+            console.log('setting file')
             setFile(files[0])
         }
     }
@@ -108,12 +113,14 @@ const BusinessDetailsFP = ({businessId}) => {
 <br/>
         <h3>Upload:</h3>
         <input type="file" onChange={handleFileChange} />
-        <div>{file && `${file.name} - ${file.type}`}</div>
+        <div>
+        {file && 
         <Button
             text='Upload FP'
             color='steelblue'
             onClick={handleUpload}
         />
+        }</div>
 
 
         {fileUploadResult && <div>{fileUploadResult}</div>}
