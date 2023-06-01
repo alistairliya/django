@@ -227,7 +227,8 @@ class FileViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         print('get_queryset')
         request_user = self.request.user
-        files = File.objects.filter(user = request_user.id).order_by('-timestamp')[:1]
+        #files = File.objects.filter(user = request_user.id).order_by('-timestamp')[:1]
+        files = File.objects.filter(user = request_user.id).order_by('-timestamp')
         return files
     
     @action(detail=False, methods=['post'])

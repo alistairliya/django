@@ -10,4 +10,4 @@ class File(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True) 
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE, blank=True, null=True)
     original_filename = models.CharField(max_length=255, blank=True, null=True)
-    business = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, blank=True, null=True)
+    business = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, blank=True, null=True, related_name='files')

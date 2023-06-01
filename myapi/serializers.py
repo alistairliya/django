@@ -231,6 +231,16 @@ class BusinessInsuranceSerializer(serializers.HyperlinkedModelSerializer):
         model = BusinessInsurance
         fields = ['id','business','insurance_plan','insurance_application', 'policy_number', 'notes','created_by','created_date','modified_date']
 
+# Serializer for File Upload
+# based on https://blog.vivekshukla.xyz/uploading-file-using-api-django-rest-framework/
+# curl -X POST -F "file=@/Users/eugenelin/mylog.txt" -F "remark=foobar" http://127.0.0.1:8000/file/upload/ > result.html
+from .models import File
+
+class FileSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = File
+        fields = ('id', 'file','remark','timestamp','user','original_filename', 'business')
+
 class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     # Need to display policy number from related BusinessInsurance if available.
     #created_by = serializers.ReadOnlyField(source='created_by.username')
@@ -252,9 +262,10 @@ class MyBusinessSerializer(serializers.HyperlinkedModelSerializer):
     product = ProductSerializer(read_only=True)
     #Uncomment below to allow deserialize to an object rather than just a URL to the object
     insurance_application = InsuranceApplicationSerializer(many=True, read_only=True)
+    files = FileSerializer(many=True, read_only=True)
     class Meta:
         model = MyBusiness 
-        fields = ['insurance_application','id','business_type','product','client','status','projected_FYC','settled_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance','related_users'] 
+        fields = ['id','files','insurance_application','id','business_type','product','client','status','projected_FYC','settled_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance','related_users'] 
 
 class BusinessSupervisorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -267,13 +278,3 @@ class BusinessApprovalSerializer(MyBusinessSerializer):
         fields = ['insurance_application','id','business_type','product','client','status','projected_FYC','settled_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance','related_users'] 
 
 
-
-# Serializer for File Upload
-# based on https://blog.vivekshukla.xyz/uploading-file-using-api-django-rest-framework/
-# curl -X POST -F "file=@/Users/eugenelin/mylog.txt" -F "remark=foobar" http://127.0.0.1:8000/file/upload/ > result.html
-from .models import File
-
-class FileSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = File
-        fields = ('id', 'file','remark','timestamp','user','original_filename', 'business')
