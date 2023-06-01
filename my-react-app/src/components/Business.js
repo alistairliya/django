@@ -66,10 +66,19 @@ const Business = ({business, onEdit, onToggle}) => {
   },[client])
 
   const showPdfLink = () =>{
+    
     if(business.files.length>0){
-      return <AiOutlineFilePdf />
+      const url = business.files[business.files.length - 1].file
+      const onClick = () =>{
+        window.open(url, '_blank', 'fullscreen=yes')
+      }
+
+
+
+      return <AiOutlineFilePdf onClick={onClick}/>
     }else{
-      return <AiOutlineUpload />
+      //return <AiOutlineUpload />
+      return null
     }
   }
 
