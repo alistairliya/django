@@ -2,7 +2,7 @@
 // 47.07
 import React from 'react'
 import {useEffect, useState} from "react"
-import {AiFillTool} from "react-icons/ai" //https://react-icons.github.io/react-icons
+import {AiFillTool, AiOutlineFilePdf, AiOutlineUpload} from "react-icons/ai" //https://react-icons.github.io/react-icons
 import { useAuth } from "../hooks/useAuth"
 /*
 const Business = ({business, onEdit, onToggle}) => {
@@ -65,7 +65,13 @@ const Business = ({business, onEdit, onToggle}) => {
 
   },[client])
 
-
+  const showPdfLink = () =>{
+    if(business.files.length>0){
+      return <AiOutlineFilePdf />
+    }else{
+      return <AiOutlineUpload />
+    }
+  }
 
   return (
     <tbody className={`business ${business.highlighted? 'highlighted':''}`} onDoubleClick={()=>onToggle(business.id)}>
@@ -82,7 +88,10 @@ const Business = ({business, onEdit, onToggle}) => {
         <td>{advisor_name}</td>
         <td>{business.projected_FYC}</td>
         <td>{business.settled_FYC}</td>
-        <td><AiFillTool style={{color:'red', cursor:'pointer'}} onClick={()=>onEdit(business)}/></td>       
+        <td>
+          <AiFillTool style={{color:'red', cursor:'pointer'}} onClick={()=>onEdit(business)}/>
+          {showPdfLink()}
+        </td>       
   </tr>
   </tbody>
   )
