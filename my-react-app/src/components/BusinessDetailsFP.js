@@ -1,15 +1,16 @@
 
-import {useEffect, useState} from "react"
+import {useEffect, useState, useRef} from "react"
 import { useAuth } from "../hooks/useAuth"
 import Button from './Button'
 
 
 const BusinessDetailsFP = ({business}) => {
-    const [file, setFile] = useState(null)
+    const [file, setFile] = useState(null) // file ready for upload
     const [fileUploadResult, setFileUploadResult] = useState(null)
-    const [fileData, setFileData] = useState(null)
+    const [fileData, setFileData] = useState(null)// uploaded files for the business
     
     const { user } = useAuth()
+    const fileInputRef = useRef(null);
 
     
     const fetchFromAPI = async(resource) =>{
@@ -91,11 +92,15 @@ const BusinessDetailsFP = ({business}) => {
             console.log('uploadResult id is '+uploadResult['id'])
             setFileUploadResult('Upload Success')
             getFileData()
+            fileInputRef.current.value = ''
         } 
     }
 
     const showFileDetails = () =>{
-        const filename = fileData[0].original_filename
+        const original_filename = fileData[fileData.length - 1].original_filename
+        const utcString = fileData[fileData.length - 1].timestamp
+        const localDateTimeString = new Date(utcString).toLocaleString();
+        
         const url = fileData[fileData.length - 1].file
         const viewFP = () =>{
             console.log("viewFP()")
@@ -103,6 +108,8 @@ const BusinessDetailsFP = ({business}) => {
         }
         const result = 
         <div>
+            <div>Latest Uploaded File: {original_filename}</div>
+            <div>Updloaded on: {localDateTimeString}</div>
             <Button 
                 text='View FP' 
                 color='steelblue'
@@ -116,10 +123,10 @@ const BusinessDetailsFP = ({business}) => {
   return (
     <div className='container'>
         <h2>First Page</h2>
-        {fileData&&fileData.length > 0?showFileDetails():""}
+        {fileData&&fileData.length > 0?showFileDetails():"No Uploaded FP"}
 <br/>
         <h3>Upload:</h3>
-        <input type="file" onChange={handleFileChange} />
+        <input type="file" onChange={handleFileChange} className='btn' ref={fileInputRef} />
         <div>
         {file && 
         <Button
