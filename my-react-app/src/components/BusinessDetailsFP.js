@@ -4,13 +4,14 @@ import { useAuth } from "../hooks/useAuth"
 import Button from './Button'
 
 
-const BusinessDetailsFP = ({businessId}) => {
+const BusinessDetailsFP = ({business}) => {
     const [file, setFile] = useState(null)
     const [fileUploadResult, setFileUploadResult] = useState(null)
     const [fileData, setFileData] = useState(null)
     
     const { user } = useAuth()
 
+    
     const fetchFromAPI = async(resource) =>{
         let headers = new Headers()
         const token = user['token']
@@ -24,19 +25,25 @@ const BusinessDetailsFP = ({businessId}) => {
     }
         const getFileData = async () =>{
             console.log('BusinessDetailsFP -> getFileData()')
-            const fileData = await fetchFromAPI('files')
+            const businessData = await fetchFromAPI('mybusiness/'+business.id)
+            const fileData = businessData['files']
             console.log('File Data: ')
             console.log(fileData)
             setFileData(fileData)
+            business.files = fileData
         }
 
     useEffect(()=>{
         console.log('BusinessDetailsFP useEffect()')
         console.log(file)
 
-        getFileData()
+        //getFileData()
+        setFileData(business.files)
+        //if(file) // reset if file has a value
+        //    setFile(null)
+        setFileUploadResult("")
     
-    }, [file])
+    }, [file, business])
 
     const handleFileChange = (event) => {
         //event.preventDefault()
@@ -67,7 +74,7 @@ const BusinessDetailsFP = ({businessId}) => {
             const formData = new FormData()
             formData.append('file', file)
             formData.append('remark', 'foobar2')
-            formData.append('businessId', businessId)
+            formData.append('businessId', business.id)
             //const res = await fetch('http://localhost:8000/file/upload/',{
             const res = await fetch('http://localhost:8000/api/files/upload_file/',{
                 method:'POST',
@@ -89,7 +96,7 @@ const BusinessDetailsFP = ({businessId}) => {
 
     const showFileDetails = () =>{
         const filename = fileData[0].original_filename
-        const url = fileData[0].file
+        const url = fileData[fileData.length - 1].file
         const viewFP = () =>{
             console.log("viewFP()")
             window.open(url, '_blank', 'fullscreen=yes')
@@ -109,7 +116,7 @@ const BusinessDetailsFP = ({businessId}) => {
   return (
     <div className='container'>
         <h2>First Page</h2>
-        {fileData?showFileDetails():""}
+        {fileData&&fileData.length > 0?showFileDetails():""}
 <br/>
         <h3>Upload:</h3>
         <input type="file" onChange={handleFileChange} />
