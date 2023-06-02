@@ -96,6 +96,7 @@ const BusinessDetailsFP = ({business, refreshBusinesses}) => {
             getFileData()
             fileInputRef.current.value = ''
             console.log(refreshBusinesses)
+            setFile(null)
             refreshBusinesses()
         } 
     }
