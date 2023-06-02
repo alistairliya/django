@@ -4,7 +4,7 @@ import { useAuth } from "../hooks/useAuth"
 import Button from './Button'
 
 
-const BusinessDetailsFP = ({business}) => {
+const BusinessDetailsFP = ({business, refreshBusinesses}) => {
     const [file, setFile] = useState(null) // file ready for upload
     const [fileUploadResult, setFileUploadResult] = useState(null)
     const [fileData, setFileData] = useState(null)// uploaded files for the business
@@ -36,6 +36,8 @@ const BusinessDetailsFP = ({business}) => {
 
     useEffect(()=>{
         console.log('BusinessDetailsFP useEffect()')
+        console.log('refreshBusinesses')
+        console.log(refreshBusinesses)
         console.log(file)
 
         //getFileData()
@@ -93,6 +95,8 @@ const BusinessDetailsFP = ({business}) => {
             setFileUploadResult('Upload Success')
             getFileData()
             fileInputRef.current.value = ''
+            console.log(refreshBusinesses)
+            refreshBusinesses()
         } 
     }
 

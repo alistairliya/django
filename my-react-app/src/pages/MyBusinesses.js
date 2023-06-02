@@ -13,7 +13,7 @@ function MyBusinesses() {
     const { user } = useAuth();
   const [showAddBusiness, setShowAddBusiness] = useState(false)
   const [detailedBusiness, setDetailedBusiness] = useState(null) // for BusinessDetails
-
+  const [refreshTrigger , setRefreshTrigger] = useState(0)
 
   const [businesses, setBusinesses] = useState(
     [/*
@@ -56,7 +56,7 @@ function MyBusinesses() {
     getBusinesses()
     console.log("user:")
     console.log(user)
-  }, [showAddBusiness])
+  }, [showAddBusiness, refreshTrigger])
 
   const fetchBusiness = async()=>{
     let headers = new Headers()
@@ -103,6 +103,12 @@ function MyBusinesses() {
     setShowAddBusiness(false)
   }
 
+  // Triggers a refresh of this component.
+  const refreshBusinesses = () => {
+    console.log('refreshing...')
+    setRefreshTrigger(refreshTrigger+1)
+  }
+
   return (
     <div className="container">
       <Booga 
@@ -111,7 +117,7 @@ function MyBusinesses() {
         showAdd = {showAddBusiness}
       />
       {showAddBusiness && <NewBusiness onAdd={addBusiness} close={closeAddBusinessComponent} />}
-      {detailedBusiness && <BusinessDetails business={detailedBusiness} closeComponent={closeBusinessDetailsComponent} />}
+      {detailedBusiness && <BusinessDetails business={detailedBusiness} closeComponent={closeBusinessDetailsComponent} refreshBusinesses={refreshBusinesses} />}
       {businesses.length > 0?(
         <Businesses 
           businesses = {businesses} 

@@ -19,7 +19,7 @@ import BusinessDetailsInsurance from './BusinessDetailsInsurance'
 import BusinessDetailsFP from './BusinessDetailsFP'
 
 
-const BusinessDetails = ({business, closeComponent}) => {
+const BusinessDetails = ({business, closeComponent, refreshBusinesses}) => {
     const [myClient, setMyClient] = useState(null)
     const [myStatus, setMyStatus] = useState(null)
     
@@ -27,6 +27,8 @@ const BusinessDetails = ({business, closeComponent}) => {
     useEffect(()=>{
         console.log('BusinessDetails useEffect()')
         console.log(business)
+        console.log('refreshBusinesses')
+        console.log(refreshBusinesses)
 
         const getMyClient = async () => {
             console.log('inside getMyClient')
@@ -91,7 +93,7 @@ const BusinessDetails = ({business, closeComponent}) => {
         <div className="container">
         <div>Transaction ID: {business.id}</div>
         <div>Status: {myStatus?myStatus.status_name:""}</div>
-        <BusinessDetailsFP business = {business}/>
+        <BusinessDetailsFP business = {business} refreshBusinesses = {refreshBusinesses}/>
         <BusinessDetailsClient client={myClient}/>
         <BusinessDetailsContact address={extractAddress()} phone={extractPhone()} />
         <BusinessDetailsInsurance insurance={extractInsurance()} />
