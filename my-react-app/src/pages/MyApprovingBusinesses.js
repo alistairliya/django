@@ -14,7 +14,7 @@ function MyApprovingBusinesses() {
     const { user } = useAuth();
   const [showAddBusiness, setShowAddBusiness] = useState(false)
   const [detailedBusiness, setDetailedBusiness] = useState(null) // for BusinessDetails
-
+  const [refreshTrigger , setRefreshTrigger] = useState(0)
 
   const [businesses, setBusinesses] = useState([])
 
@@ -24,7 +24,7 @@ function MyApprovingBusinesses() {
       setBusinesses(businessesFromServer.reverse())      
     }
     getBusinesses()
-  }, [])
+  }, [refreshTrigger])
 
   // curl -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json' http://127.0.0.1:8000/api/businessapproval/
   const fetchBusiness = async()=>{
@@ -68,12 +68,18 @@ function MyApprovingBusinesses() {
     setBusinesses(businesses.map((business)=>business.id === id? {...business, highlighted: !business.highlighted }: business))
   }
 
+    // Triggers a refresh of this component.
+    const refreshBusinesses = () => {
+        console.log('refreshing...')
+        setRefreshTrigger(refreshTrigger+1)
+      }
+
   return (
     <div className="container">
               <header className='header'>
             <h2>Businesses submitted for my approval</h2>
         </header>
-      {detailedBusiness && <BusinessDetails business={detailedBusiness} closeComponent={closeBusinessDetailsComponent} />}
+      {detailedBusiness && <BusinessDetails business={detailedBusiness} closeComponent={closeBusinessDetailsComponent} refreshBusinesses={refreshBusinesses} />}
       {businesses.length > 0?(
         <Businesses 
           businesses = {businesses} 

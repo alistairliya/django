@@ -66,7 +66,7 @@ const Business = ({business, onEdit, onToggle}) => {
   },[client])
 
   const showPdfLink = () =>{
-    
+    console.log(business)
     if(business.files.length>0){
       const url = business.files[business.files.length - 1].file
       const onClick = () =>{

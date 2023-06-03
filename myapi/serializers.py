@@ -273,8 +273,10 @@ class BusinessSupervisorSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id','business','supervisor','notes']
 
 class BusinessApprovalSerializer(MyBusinessSerializer):
+
+    files = FileSerializer(many=True, read_only=True)
     class Meta:
         model = MyBusiness
-        fields = ['insurance_application','id','business_type','product','client','status','projected_FYC','settled_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance','related_users'] 
+        fields = ['insurance_application','id','files','business_type','product','client','status','projected_FYC','settled_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance','related_users'] 
 
 
