@@ -19,7 +19,7 @@ import BusinessDetailsInsurance from './BusinessDetailsInsurance'
 import BusinessDetailsFP from './BusinessDetailsFP'
 
 
-const BusinessDetails = ({business, closeComponent, refreshBusinesses}) => {
+const BusinessDetails = ({business, closeComponent, refreshBusinesses, approval=false}) => {
     const [myClient, setMyClient] = useState(null)
     const [myStatus, setMyStatus] = useState(null)
     
@@ -93,12 +93,15 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses}) => {
         <div className="container">
         <div>Transaction ID: {business.id}</div>
         <div>Status: {myStatus?myStatus.status_name:""}</div>
+        <div>
+            {approval?<Button text = 'Approve' color='green' />:null}
+        </div>
         <BusinessDetailsFP business = {business} refreshBusinesses = {refreshBusinesses}/>
         <BusinessDetailsClient client={myClient}/>
         <BusinessDetailsContact address={extractAddress()} phone={extractPhone()} />
         <BusinessDetailsInsurance insurance={extractInsurance()} />
         <Button 
-        text='Close' 
+        text='Close'
         color='red' 
         onClick={closeComponent} 
         />
