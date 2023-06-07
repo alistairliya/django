@@ -19,7 +19,9 @@ function MyApprovingBusinesses() {
   const [businesses, setBusinesses] = useState([])
 
   useEffect(()=>{
+    console.log('useEffect in MyApprovinngBusinesses.js')
     const getBusinesses = async() => {
+        console.log('getBusinesses in MyApprovingBusinesses.js useEffect')
       const businessesFromServer = await fetchBusiness()
       setBusinesses(businessesFromServer.reverse())      
     }

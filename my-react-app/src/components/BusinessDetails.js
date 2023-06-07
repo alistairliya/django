@@ -66,7 +66,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, approval=
     }
 
     const test = async() =>{
-        console.log("My Clinet: "+JSON.stringify(myClient))
+        //console.log("My Clinet: "+JSON.stringify(myClient))
+        refreshBusinesses()
     }
 
     const extractAddress = () =>{
@@ -121,6 +122,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, approval=
             business.status = updatedResult.status
             await getStatus()
             await refreshBusinesses()
+            console.log('after refreshBusinesses in approveClicked in BusinessDetails.js')
             return updatedResult
         }
 

@@ -1,8 +1,14 @@
 // from Tasks in example
 import Business from './Business'
+import {useEffect} from "react"
 
 
 const Businesses = ({businesses, onEdit, onToggle}) => {
+
+  useEffect(()=>{
+    console.log('useEffect for Businesses')
+  },[])
+
   return (
     <div className="container">
     <table>

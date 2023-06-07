@@ -21,6 +21,7 @@ const Business = ({business, onEdit, onToggle}) => {
 const Business = ({business, onEdit, onToggle}) => {
 
   const [client, setClient] = useState({})
+  const [status, setStatus] = useState({})
 
   let advisor = business['created_by']
   //console.log('----------------------') 
@@ -43,8 +44,29 @@ const Business = ({business, onEdit, onToggle}) => {
     //console.log('advisor name: '+advisor_name)
   }
 
+  const fetchObject = async (url) =>{
+    let headers = new Headers()
+    const token = user['token']
+    const auth_str = 'Token '+token
+    headers.set('Authorization', auth_str)
+    const res = await fetch(url,{headers:headers})
+    const data = await res.json()
+    return data
+}
+
+  // This is inefficient. A better way is to get all the statuses in the parent component and pass down a dictionary so we only need to do this once.
+  const getStatus = async () => {
+    console.log('inside getStatus in Business.js')
+    let s = await fetchObject(business.status)
+    console.log(s)
+    setStatus(s)
+    return s.status_name
+  }
+
   const {user} = useAuth()
   useEffect(()=>{
+    console.log('useEffect for Business ID: '+business.id)
+    console.log(business.status)
     const url = business.client
     const fetchResource = async () =>{
         let headers = new Headers()
@@ -62,8 +84,16 @@ const Business = ({business, onEdit, onToggle}) => {
         //console.log('fetching client')
         fetchResource() 
     }
+    getStatus()
 
-  },[client])
+  },[client, business])
+
+
+  const foo =()=>{
+    console.log('inside foo')
+    //getStatus()
+    return business.status
+  }
 
   const showPdfLink = () =>{
     console.log(business)
@@ -82,6 +112,7 @@ const Business = ({business, onEdit, onToggle}) => {
     }
   }
 
+
   return (
     <tbody className={`business ${business.highlighted? 'highlighted':''}`} onDoubleClick={()=>onToggle(business.id)}>
     <tr >
@@ -91,7 +122,7 @@ const Business = ({business, onEdit, onToggle}) => {
         <td>{business.settled_date}</td>
         <td>{business.id}</td>
         <td>{business.business_insurance.length>0?business.business_insurance[0]['policy_number']:''}</td>
-        <td>{business.status['status_name']}</td>
+        <td>{status.status_name}</td>
         <td>{business.business_insurance.length>0?business.business_insurance[0]['insurance_application']['provider']['insurance_provider_name']:''}</td>
         <td>{client.first_name} {client.last_name}</td>
         <td>{advisor_name}</td>
