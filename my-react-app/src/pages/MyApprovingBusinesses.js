@@ -87,6 +87,7 @@ function MyApprovingBusinesses() {
           businesses = {businesses} 
           onEdit = {editBusiness} 
           onToggle={toggleReminder}
+          showApproved = {false}
         /> 
       ):( 
         'No business to show'

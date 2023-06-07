@@ -1,13 +1,28 @@
 // from Tasks in example
 import Business from './Business'
-import {useEffect} from "react"
+import {useEffect, useState} from "react"
 
 
-const Businesses = ({businesses, onEdit, onToggle}) => {
+const Businesses = ({businesses, onEdit, onToggle, showApproved = true}) => { 
+
+  const [showApprovedBusinesses, setShowApprovedBusinessess] = useState(true)
 
   useEffect(()=>{
     console.log('useEffect for Businesses')
+    setShowApprovedBusinessess(showApproved)
   },[])
+
+  const isBusinessYetApproved = (business) => {
+    if(!showApprovedBusinesses && business.status === "http://localhost:8000/api/businessstatus/3/"){
+      // Do not show approvved and business is prroved
+      console.log('isBusinessYetApproved: false')
+      return false
+    }
+    console.log('isBusinessYetApproved: true')
+    console.log(showApproved)
+    console.log(business.status)
+    return true
+  }
 
   return (
     <div className="container">
@@ -27,7 +42,7 @@ const Businesses = ({businesses, onEdit, onToggle}) => {
         <td></td>
      </tr>
      </tbody>
-      {businesses.map((business)=>(
+      {businesses.filter(isBusinessYetApproved).map((business)=>(
         <Business key={business.id} business={business} onEdit={onEdit} onToggle={onToggle}/>
       ))}
     </table>
