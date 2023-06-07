@@ -89,12 +89,46 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, approval=
         return insurance
     }
 
+    const approveClicked = () =>{
+        console.log('approveClicked')
+        console.log(business)
+        // call the API to approve the business
+        // curl -X PATCH -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"status":"http://127.0.0.1:8000/api/businessstatus/3/"}' http://127.0.0.1:8000/api/mybusiness/1/
+        // Need ID of business and ID of status
+        // Hard code for now. Should be a constant somewhere.
+        const approve = async () =>{
+            const approvedStatus = 'http://127.0.0.1:8000/api/businessstatus/3/'
+            const url = 'http://127.0.0.1:8000/api/businessapproval/' + business.id+'/'
+            const data = {
+                status: approvedStatus
+            }
+            const token = user['token']
+            const auth_str = 'Token '+token
+            const headers = new Headers()
+            headers.set('Authorization', auth_str)
+            headers.set('Content-Type', 'application/json')
+            const options = {
+                method: 'PATCH',
+                headers: headers,
+                body: JSON.stringify(data)
+            }
+            const fetchResult = await fetch(url, options)
+            const updateResult = await fetchResult.json()
+            await refreshBusinesses()
+            return updateResult
+        }
+
+        approve()
+
+
+    }
+
     return (
         <div className="container">
         <div>Transaction ID: {business.id}</div>
         <div>Status: {myStatus?myStatus.status_name:""}</div>
         <div>
-            {approval?<Button text = 'Approve' color='green' />:null}
+            {approval?<Button text = 'Approve' color='green' onClick = {approveClicked} />:null}
         </div>
         <BusinessDetailsFP business = {business} refreshBusinesses = {refreshBusinesses}/>
         <BusinessDetailsClient client={myClient}/>
