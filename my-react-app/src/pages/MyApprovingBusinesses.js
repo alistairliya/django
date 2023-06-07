@@ -81,7 +81,7 @@ function MyApprovingBusinesses() {
               <header className='header'>
             <h2>Businesses submitted for my approval</h2>
         </header>
-      {detailedBusiness && <BusinessDetails business={detailedBusiness} closeComponent={closeBusinessDetailsComponent} refreshBusinesses={refreshBusinesses} approval={true}/>}
+      {detailedBusiness && <BusinessDetails business={detailedBusiness} closeComponent={closeBusinessDetailsComponent} refreshBusinesses={refreshBusinesses} forApproval={true}/>}
       {businesses.length > 0?(
         <Businesses 
           businesses = {businesses} 

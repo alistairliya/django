@@ -1,6 +1,7 @@
 // from Tasks in example
 import Business from './Business'
 import {useEffect, useState} from "react"
+import Button from './Button'
 
 
 const Businesses = ({businesses, onEdit, onToggle, showApproved = true}) => { 
@@ -26,6 +27,12 @@ const Businesses = ({businesses, onEdit, onToggle, showApproved = true}) => {
 
   return (
     <div className="container">
+      <div>
+        <Button 
+          text = {showApprovedBusinesses?'Hide Approved':'Show Approved'}
+          onClick = {() => setShowApprovedBusinessess(!showApprovedBusinesses)}
+        />
+      </div>
     <table>
       <tbody className='business'>
       <tr align="center">

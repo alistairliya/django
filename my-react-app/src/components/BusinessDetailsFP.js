@@ -4,7 +4,7 @@ import { useAuth } from "../hooks/useAuth"
 import Button from './Button'
 
 
-const BusinessDetailsFP = ({business, refreshBusinesses}) => {
+const BusinessDetailsFP = ({business, refreshBusinesses, forApproval=false}) => {
     const [file, setFile] = useState(null) // file ready for upload
     const [fileUploadResult, setFileUploadResult] = useState(null)
     const [fileData, setFileData] = useState(null)// uploaded files for the business
@@ -26,7 +26,14 @@ const BusinessDetailsFP = ({business, refreshBusinesses}) => {
     }
         const getFileData = async () =>{
             console.log('BusinessDetailsFP -> getFileData()')
-            const businessData = await fetchFromAPI('mybusiness/'+business.id)
+            let resource = ""
+            if(forApproval){
+                resource = 'businessapproval/'+business.id              
+            }else{
+                resource = 'mybusiness/'+business.id
+            }
+
+            const businessData = await fetchFromAPI(resource)
             const fileData = businessData['files']
             console.log('File Data: ')
             console.log(fileData)
