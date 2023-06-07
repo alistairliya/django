@@ -22,34 +22,38 @@ import BusinessDetailsFP from './BusinessDetailsFP'
 const BusinessDetails = ({business, closeComponent, refreshBusinesses, approval=false}) => {
     const [myClient, setMyClient] = useState(null)
     const [myStatus, setMyStatus] = useState(null)
+    const [updateCounter, setUpdateCounter] = useState(0)
     
     const { user } = useAuth()
+    const getMyClient = async () => {
+        console.log('inside getMyClient')
+        let c = await fetchObject(business.client)
+        //console.log("got client!")
+        //console.log('setting MyClinet')
+        setMyClient(c)
+        //console.log('after set MyClinet')
+    }
+   
+    //console.log('>>> BusinessDetails useEffect')
+    //console.log(business.client)
+    //console.log("^^^ Before calling getMyClient")
+    const getStatus = async () => {
+        console.log('inside getStatus')
+        let s = await fetchObject(business.status)
+        console.log(s)
+        setMyStatus(s)
+    }
+
     useEffect(()=>{
         console.log('BusinessDetails useEffect()')
         console.log(business)
         console.log('refreshBusinesses')
         console.log(refreshBusinesses)
 
-        const getMyClient = async () => {
-            console.log('inside getMyClient')
-            let c = await fetchObject(business.client)
-            //console.log("got client!")
-            //console.log('setting MyClinet')
-            setMyClient(c)
-            //console.log('after set MyClinet')
-        }
-        //console.log('>>> BusinessDetails useEffect')
-        //console.log(business.client)
-        //console.log("^^^ Before calling getMyClient")
-        const getStatus = async () => {
-            console.log('inside getStatus')
-            let s = await fetchObject(business.status)
-            setMyStatus(s)
-        }
         getMyClient()
         getStatus()
         //console.log("^^^ After calling getMyClient")
-    }, [business])
+    }, [business, updateCounter])
 
     const fetchObject = async (url) =>{
         let headers = new Headers()
@@ -93,7 +97,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, approval=
         console.log('approveClicked')
         console.log(business)
         // call the API to approve the business
-        // curl -X PATCH -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"status":"http://127.0.0.1:8000/api/businessstatus/3/"}' http://127.0.0.1:8000/api/mybusiness/1/
+        // curl -X PATCH -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"status":"http://127.0.0.1:8000/api/businessstatus/3/"}' http://127.0.0.1:8000/api/businessapproval/1/
         // Need ID of business and ID of status
         // Hard code for now. Should be a constant somewhere.
         const approve = async () =>{
@@ -113,9 +117,11 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, approval=
                 body: JSON.stringify(data)
             }
             const fetchResult = await fetch(url, options)
-            const updateResult = await fetchResult.json()
+            const updatedResult = await fetchResult.json()
+            business.status = updatedResult.status
+            await getStatus()
             await refreshBusinesses()
-            return updateResult
+            return updatedResult
         }
 
         approve()
