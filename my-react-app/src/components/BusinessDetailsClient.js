@@ -26,7 +26,7 @@ const BusinessDetailsClient = ({client}) => {
         console.log('### BusinessDetailsClient useEffect ###')
         console.log(client)
         setMyClient(client)
-        if(client){
+        if(client && !editMode){
           setMyLastName(client.last_name)
           setMyFirstName(client.first_name)
           setMyMiddleName(client.middle_name)
@@ -47,9 +47,22 @@ const BusinessDetailsClient = ({client}) => {
     const handleChange = (event) => {
       setEditMode(true)
       const { name } = event.target
+      console.log('handleChange')
+      console.log(event.target.value)
       console.log(name)
-      if(name === 'myFirstName')
+      /*
+      if(name === 'myFirstName'){
+        console.log('set MyFirstName')
         setMyFirstName(event.target.value);
+      }*/
+
+      switch(name){
+        case 'myFirstName':
+          setMyFirstName(event.target.value);
+          break
+        default:
+          console.log('default')
+      }
     }
     // https://mui.com/material-ui/react-text-field/
     return (
@@ -85,6 +98,8 @@ const BusinessDetailsClient = ({client}) => {
             label="Last Name" 
             variant="standard" 
             value={myLastName}
+            name="myLastName"
+            onChange={handleChange}
           /> 
         </div>
         <div>
@@ -93,6 +108,8 @@ const BusinessDetailsClient = ({client}) => {
             label="Birth Date" 
             variant="standard" 
             value={myBirthDate}
+            name="myBirthDate"
+            onChange={handleChange}
           /> 
         </div>
         <div>
@@ -101,6 +118,8 @@ const BusinessDetailsClient = ({client}) => {
             label="SIN" 
             variant="standard" 
             value={mySIN}
+            name="mySIN"
+            onChange={handleChange}
           /> 
         </div>
         <div>
@@ -109,6 +128,8 @@ const BusinessDetailsClient = ({client}) => {
             label="Gender" 
             variant="standard" 
             value={myGender}
+            name="myGender"
+            onChange={handleChange}
           /> 
 
         </div>
