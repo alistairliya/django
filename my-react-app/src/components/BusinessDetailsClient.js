@@ -15,14 +15,15 @@ const BusinessDetailsClient = ({client}) => {
     const [editMode, setEditMode] = useState(false)
     const [myClient, setMyClient] = useState({})
     const [myLastName , setMyLastName] = useState('Last')
-    const [myFirstName , setMyFirstName] = useState('First')
+    const [myFirstName , setMyFirstName] = useState(client?client.first_name:'First')
     const [myMiddleName , setMyMiddleName] = useState('Middle')
     const [myBirthDate , setMyBirthDate] = useState('Birth Date')
     const [myGender, setMyGender] = useState('')
     const [mySIN, setMySIN] = useState('')
+    const [backgroundColor, setBackgroundColor] = useState('white');
     useEffect(()=>{
         //console.log('#######################################')
-        //console.log('### BusinessDetailsClient useEffect ###')
+        console.log('### BusinessDetailsClient useEffect ###')
         console.log(client)
         setMyClient(client)
         if(client){
@@ -34,12 +35,25 @@ const BusinessDetailsClient = ({client}) => {
             setMyGender(client.gender)
           setMySIN(client.sin)
         }
+        if(editMode){
+          console.log('EDIT MODE')
+          setBackgroundColor('lightblue')
+        }
         //console.log("^^^ BusinessDetailsClient useEffect")
         //console.log('#######################################')
-    },[myLastName, myClient, client])
+    },[myLastName, myClient, client, editMode])
+
+
+    const handleChange = (event) => {
+      setEditMode(true)
+      const { name } = event.target
+      console.log(name)
+      if(name === 'myFirstName')
+        setMyFirstName(event.target.value);
+    }
     // https://mui.com/material-ui/react-text-field/
     return (
-    <div className="container">
+    <div className="container" style={{backgroundColor}}>
         <h2>Applicant Information</h2>   
         <Box
       component="form"
@@ -55,12 +69,16 @@ const BusinessDetailsClient = ({client}) => {
             label="First Name" 
             variant="standard" 
             value={myFirstName}
+            name="myFirstName"
+            onChange={handleChange}
           /> 
           <TextField 
             id="standard-basic" 
             label="Middle Name" 
             variant="standard" 
             value={myMiddleName}
+            name="myMiddleName"
+            onChange={handleChange}
           /> 
           <TextField 
             id="standard-basic" 
