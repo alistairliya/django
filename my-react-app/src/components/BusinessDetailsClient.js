@@ -46,7 +46,7 @@ const BusinessDetailsClient = ({client}) => {
 
     const handleChange = (event) => {
       setEditMode(true)
-      const { name } = event.target
+      const { name, value } = event.target
       console.log('handleChange')
       console.log(event.target.value)
       console.log(name)
@@ -58,7 +58,22 @@ const BusinessDetailsClient = ({client}) => {
 
       switch(name){
         case 'myFirstName':
-          setMyFirstName(event.target.value);
+          setMyFirstName(value)
+          break
+        case 'myMiddleName':
+          setMyMiddleName(value)
+          break
+        case 'myLastName':
+          setMyLastName(value)
+          break
+        case 'myBirthDate':
+          setMyBirthDate(value)
+          break
+        case 'mySIN':
+          setMySIN(value)
+          break
+        case 'myGender':
+          setMyGender(value)
           break
         default:
           console.log('default')
