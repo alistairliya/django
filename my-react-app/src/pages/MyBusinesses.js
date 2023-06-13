@@ -111,6 +111,9 @@ function MyBusinesses() {
 
   return (
     <div className="container">
+       <div>
+        <a href="http://localhost:3000/me/dashboard">Dashboard</a>
+        </div>
       <Booga 
         title='My Businesses'
         onAdd={()=>setShowAddBusiness(!showAddBusiness)}

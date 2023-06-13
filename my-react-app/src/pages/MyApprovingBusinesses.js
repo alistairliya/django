@@ -78,6 +78,12 @@ function MyApprovingBusinesses() {
 
   return (
     <div className="container">
+
+
+        <div>
+        <a href="http://localhost:3000/me/dashboard">Dashboard</a>
+        </div>
+
               <header className='header'>
             <h2>Businesses submitted for my approval</h2>
         </header>
