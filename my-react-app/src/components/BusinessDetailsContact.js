@@ -8,6 +8,7 @@ const BusinessDetailsContact = ({address, phone}) => {
     const { user } = useAuth()
     const [myAddress, setMyAddress] = useState(null)
     const [myPhone, setMyPhone] = useState(null)
+    const [countries, setCountries] = useState(null)
 
     useEffect(()=>{
         console.log('BusinessDetailsContact useEffect()')
@@ -32,10 +33,19 @@ const BusinessDetailsContact = ({address, phone}) => {
             return p
         }
 
+        const getAvailableCountries = async () => {
+            console.log('inside getAvailableCountries')
+            const url = 'http://127.0.0.1:8000/api/country/'
+            let countries = await fetchObject(url)
+            //console.log("got countries!")
+            //console.log(countries)
+            return countries
+        }
+
         getAddress().then((a)=>{
             console.log('setting MyAddress')
             setMyAddress(a)
-            //console.log(a)
+            console.log(a)
             //console.log('after set MyAddress')
         })
         getPhone().then((p)=>{
@@ -43,6 +53,12 @@ const BusinessDetailsContact = ({address, phone}) => {
             setMyPhone(p)
             //console.log(p)
             //console.log('after set MyPhone')
+        })
+        getAvailableCountries().then((c)=>{
+            console.log('setting Countries')
+            setCountries(c)
+            console.log(c)
+            console.log('after set Countries')
         })
         
 
@@ -75,24 +91,28 @@ const BusinessDetailsContact = ({address, phone}) => {
             label="Street Address" 
             variant="standard" 
             value={myAddress ? myAddress.street_address : ''}
+            name="myStreetAddress"
           /> 
           <TextField 
             id="standard-basic" 
             label="Unit" 
             variant="standard" 
             value={myAddress ? (myAddress.unit?myAddress.unit:"") : ''}
+            name="myUnit"
           /> 
           <TextField 
             id="standard-basic" 
             label="City" 
             variant="standard" 
             value={myAddress ? myAddress.city : ''}
+            name="myCity"
           /> 
           <TextField 
             id="standard-basic" 
             label="Province/State" 
             variant="standard" 
             value={myAddress ? myAddress.province_state.province_state_name : ''}
+            name="myProvinceState"
           /> 
         </div>
           <TextField 
@@ -100,6 +120,7 @@ const BusinessDetailsContact = ({address, phone}) => {
             label="Country" 
             variant="standard" 
             value={myAddress ? myAddress.country.country_name : ''}
+            name='myCountry'
           /> 
         <div>
           <TextField 
@@ -107,12 +128,14 @@ const BusinessDetailsContact = ({address, phone}) => {
             label="Area Code" 
             variant="standard" 
             value={myPhone ? myPhone.area_code : ''}
+            name='myAreaCode'
           /> 
           <TextField 
             id="standard-basic" 
             label="Phone Number" 
             variant="standard" 
             value={myPhone? myPhone.phone_number : ''}
+            name='myPhoneNumber'
           /> 
         </div>
         </Box>
