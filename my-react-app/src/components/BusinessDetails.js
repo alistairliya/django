@@ -148,7 +148,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         </div>
         <BusinessDetailsFP business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
         <BusinessDetailsClient client={myClient} collectPayload = {collectUpdatePayload}/>
-        <BusinessDetailsContact address={extractAddress()} phone={extractPhone()} />
+        <BusinessDetailsContact address={extractAddress()} phone={extractPhone()} collectPayload = {collectUpdatePayload}/>
         <BusinessDetailsInsurance insurance={extractInsurance()} />
         <Button 
         text='Close'
