@@ -1,6 +1,10 @@
 
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
 import {useEffect, useState} from "react"
 import { useAuth } from "../hooks/useAuth"
 // address and phone are urls
@@ -74,6 +78,11 @@ const BusinessDetailsContact = ({address, phone}) => {
         return data
     }
 
+    const handleChange = (event) => {
+    }
+
+    const countryOptions = ['Canada', 'USA'];
+
     return (
     <div className="container">
         <h2>Application Contact</h2>
@@ -121,7 +130,44 @@ const BusinessDetailsContact = ({address, phone}) => {
             variant="standard" 
             value={myAddress ? myAddress.country.country_name : ''}
             name='myCountry'
-          /> 
+          />
+          <div> 
+        <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Province</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="province-simple-select"
+          value={myAddress? myAddress.province_state.id:''}
+          label="Province"
+          onChange={handleChange}
+        >
+          <MenuItem value={1}>British Columbia</MenuItem>
+          <MenuItem value={3}>Texas</MenuItem>
+          <MenuItem value={2}>Alberta</MenuItem>
+        </Select>
+        </FormControl>
+        </div>
+        <br></br>
+        <div>
+        <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Country</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={myAddress? myAddress.country.id:''}
+          label="Country"
+          onChange={handleChange}
+        >
+          {countries?countries.map((country) => (
+          <MenuItem value={country.id}>
+            {country.country_name}
+          </MenuItem>
+        )):''}
+        </Select>
+        </FormControl>
+        </div>
+
+          
         <div>
           <TextField 
             id="standard-basic" 
