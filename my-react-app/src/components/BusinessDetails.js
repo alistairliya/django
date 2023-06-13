@@ -25,6 +25,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const [updateCounter, setUpdateCounter] = useState(0)
     const [updatePayload, setUpdatePayload] = useState({}) 
     const [editMode, setEditMode] = useState(false)
+    const [updateErrors, setUpdateErrors] = useState([])
     const { user } = useAuth()
     const getMyClient = async () => {
         console.log('inside getMyClient')
@@ -54,7 +55,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         getMyClient()
         getStatus()
         //console.log("^^^ After calling getMyClient")
-    }, [business, updateCounter])
+    }, [business, updateCounter, updateErrors])
 
     const fetchObject = async (url) =>{
         let headers = new Headers()
@@ -145,6 +146,26 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
 
     const sendUpdate = async () =>{
         console.log('sendUpdate')
+        const url = 'http://127.0.0.1:8000/api/editbusiness/edit_business/'
+        const token = user['token']
+        const auth_str = 'Token '+token
+        const headers = new Headers()
+        headers.set('Authorization', auth_str)
+        headers.set('Content-Type', 'application/json')
+        const options = {
+            method: 'PUT',
+            headers: headers,
+            body: JSON.stringify(updatePayload)
+        }
+        const fetchResult = await fetch(url, options)
+        const updatedResult = await fetchResult.json()
+        const errors = updatedResult['result']
+        if(errors.length === 0){
+            console.log('no errors')
+            setUpdateErrors(['Update successful'])
+            alert('Update successful')
+        }
+        setUpdateErrors(errors)
     }
 
     return (
@@ -166,12 +187,25 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <Button
             text = 'test'
             onClick = {test}
+            disabled = {true}
         />
         <Button
             text = 'Update'
             onClick = {sendUpdate}
             disabled = {!editMode}
         />
+
+
+        <div>
+        {
+        updateErrors.map(
+            (error, index)=>{
+                return <h5 key={index}>{error}</h5>
+            }
+        )
+        }
+    </div>
+
         </div>
     )
 }

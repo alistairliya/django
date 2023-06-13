@@ -285,7 +285,7 @@ class EditBusinessViewSet(viewsets.ViewSet):
                 try:
                     bd = datetime.strptime(bdstr, '%Y-%m-%d').date()
                 except Exception as e:
-                    message.append(f'Birthdate {bdstr} is not in the correct format: {str(e)}')
+                    message.append(f'Birth Date {bdstr} is not in the correct format: {str(e)}')
 
                 if bd:
                     client.birthdate = bd
