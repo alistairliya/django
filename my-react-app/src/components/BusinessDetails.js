@@ -24,6 +24,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const [myStatus, setMyStatus] = useState(null)
     const [updateCounter, setUpdateCounter] = useState(0)
     const [updatePayload, setUpdatePayload] = useState({}) 
+    const [editMode, setEditMode] = useState(false)
     const { user } = useAuth()
     const getMyClient = async () => {
         console.log('inside getMyClient')
@@ -132,11 +133,18 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
 
     }
 
+    // this function is called by child component in edit mode.
     const collectUpdatePayload = (key, value) =>{
+        setEditMode(true) // something is being edited
         console.log('collectUpdatePayload')
+        
         console.log(key)
         console.log(value)
         setUpdatePayload({...updatePayload, [key]:value})
+    }
+
+    const sendUpdate = async () =>{
+        console.log('sendUpdate')
     }
 
     return (
@@ -158,6 +166,11 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <Button
             text = 'test'
             onClick = {test}
+        />
+        <Button
+            text = 'Update'
+            onClick = {sendUpdate}
+            disabled = {!editMode}
         />
         </div>
     )
