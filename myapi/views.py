@@ -293,7 +293,6 @@ class EditBusinessViewSet(viewsets.ViewSet):
                 client.sin = client_data.get('sin')
             client.save()
                 
-
         # 2. Update Contact
         contact_data = data.get('contact')
         if contact_data:
@@ -317,6 +316,24 @@ class EditBusinessViewSet(viewsets.ViewSet):
                 phone.phone_number = contact_data.get('phone_number')            
                 phone.save()
         # 3. Update InsuranceApplication
+        insurance_data = data.get('insuranceapplication')
+        if insurance_data:
+            print(insurance_data)
+            insurance = InsuranceApplication.objects.get(id=insurance_data['id'])
+            if insurance_data.get('provider'):
+                provider = InsuranceProvider.objects.get(id=insurance_data.get('provider'))
+                insurance.provider = provider
+            if insurance_data.get('plan'):
+                plan = InsurancePlan.objects.get(id=insurance_data.get('plan'))
+                insurance.plan = plan 
+            if insurance_data.get('plan_type'):
+                plan_type = InsurancePlanType.objects.get(id=insurance_data.get('plan_type'))
+                insurance.plan_type = plan_type
+            if insurance_data.get('face_amount'):
+                insurance.face_amount = insurance_data.get('face_amount')
+            if insurance_data.get('planned_premium'):
+                insurance.planned_premium = insurance_data.get('planned_premium')
+            insurance.save()
         return Response({'result':message})
 
 

@@ -111,7 +111,7 @@ const BusinessDetailsInsurance = ({insurance, collectPayload}) => {
     const handleChange = (event) => {
         setEditMode(true)
         console.log("handleChange => " + event.target.name)
-        const { name, value } = event.target
+        let { name, value } = event.target
         switch(name){
             case 'myProvider':
                 console.log('########## handleChange => myProvider')
@@ -138,11 +138,9 @@ const BusinessDetailsInsurance = ({insurance, collectPayload}) => {
                 console.log('########## handleChange => FaceAmount')
                 console.log(value)
                 console.log(myInsurance)
-                if(value.charAt(0)=== '$'){
-                    setMyInsurance({...myInsurance, face_amount:value.substring(1)})
-                }else{
-                    setMyInsurance({...myInsurance, face_amount:value})
-                }
+                if(value.charAt(0)=== '$')
+                    value = value.substring(1)
+                setMyInsurance({...myInsurance, face_amount:value})
                 setUpdatePayload({...updatePayload, face_amount:value})
                 break
             case 'PlannedPremium':
@@ -150,10 +148,9 @@ const BusinessDetailsInsurance = ({insurance, collectPayload}) => {
                 console.log(value)
 
                 if(value.charAt(0)=== '$'){
-                    setMyInsurance({...myInsurance, planned_premium:value.substring(1)})
-                }else{
-                    setMyInsurance({...myInsurance, planned_premium:value})
+                    value = value.substring(1)
                 }
+                setMyInsurance({...myInsurance, planned_premium:value})
                 setUpdatePayload({...updatePayload, planned_premium:value})
                 break
 
