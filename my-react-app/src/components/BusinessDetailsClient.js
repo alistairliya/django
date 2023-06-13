@@ -11,16 +11,18 @@ import {useEffect, useState} from "react"
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 
-const BusinessDetailsClient = ({client}) => {
+const BusinessDetailsClient = ({client, collectPayload}) => {
     const [editMode, setEditMode] = useState(false)
     const [myClient, setMyClient] = useState({})
     const [myLastName , setMyLastName] = useState('Last')
-    const [myFirstName , setMyFirstName] = useState(client?client.first_name:'First')
+    const [myFirstName , setMyFirstName] = useState('First')
     const [myMiddleName , setMyMiddleName] = useState('Middle')
     const [myBirthDate , setMyBirthDate] = useState('Birth Date')
     const [myGender, setMyGender] = useState('')
     const [mySIN, setMySIN] = useState('')
     const [backgroundColor, setBackgroundColor] = useState('white');
+    const [updatePayload, setUpdatePayload] = useState({})
+
     useEffect(()=>{
         //console.log('#######################################')
         console.log('### BusinessDetailsClient useEffect ###')
@@ -38,10 +40,11 @@ const BusinessDetailsClient = ({client}) => {
         if(editMode){
           console.log('EDIT MODE')
           setBackgroundColor('lightblue')
+          collectPayload('client', {...updatePayload, id:client.id})
         }
         //console.log("^^^ BusinessDetailsClient useEffect")
         //console.log('#######################################')
-    },[myLastName, myClient, client, editMode])
+    },[myLastName, myClient, client, editMode, updatePayload])
 
 
     const handleChange = (event) => {
@@ -55,30 +58,36 @@ const BusinessDetailsClient = ({client}) => {
         console.log('set MyFirstName')
         setMyFirstName(event.target.value);
       }*/
-
       switch(name){
         case 'myFirstName':
           setMyFirstName(value)
+          setUpdatePayload({...updatePayload, first_name: value})
           break
         case 'myMiddleName':
           setMyMiddleName(value)
+          setUpdatePayload({...updatePayload, middle_name: value})
           break
         case 'myLastName':
           setMyLastName(value)
+          setUpdatePayload({...updatePayload, last_name: value})
           break
         case 'myBirthDate':
           setMyBirthDate(value)
+          setUpdatePayload({...updatePayload, birthdate: value})
           break
         case 'mySIN':
           setMySIN(value)
+          setUpdatePayload({...updatePayload, sin: value})
           break
         case 'myGender':
           setMyGender(value)
+          setUpdatePayload({... updatePayload, gender:value})
           break
         default:
           console.log('default')
       }
     }
+
     // https://mui.com/material-ui/react-text-field/
     return (
     <div className="container" style={{backgroundColor}}>
@@ -93,6 +102,7 @@ const BusinessDetailsClient = ({client}) => {
     > 
         <div>        
           <TextField 
+                 
             id="standard-basic" 
             label="First Name" 
             variant="standard" 

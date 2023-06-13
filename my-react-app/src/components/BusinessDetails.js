@@ -23,7 +23,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const [myClient, setMyClient] = useState(null)
     const [myStatus, setMyStatus] = useState(null)
     const [updateCounter, setUpdateCounter] = useState(0)
-    
+    const [updatePayload, setUpdatePayload] = useState({}) 
     const { user } = useAuth()
     const getMyClient = async () => {
         console.log('inside getMyClient')
@@ -67,7 +67,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
 
     const test = async() =>{
         //console.log("My Clinet: "+JSON.stringify(myClient))
-        refreshBusinesses()
+        //refreshBusinesses()
+        console.log(updatePayload)
     }
 
     const extractAddress = () =>{
@@ -131,6 +132,13 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
 
     }
 
+    const collectUpdatePayload = (key, value) =>{
+        console.log('collectUpdatePayload')
+        console.log(key)
+        console.log(value)
+        setUpdatePayload({...updatePayload, [key]:value})
+    }
+
     return (
         <div className="container">
         <div>Transaction ID: {business.id}</div>
@@ -139,7 +147,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             {forApproval?<Button text = 'Approve' color='green' onClick = {approveClicked} />:null}
         </div>
         <BusinessDetailsFP business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
-        <BusinessDetailsClient client={myClient}/>
+        <BusinessDetailsClient client={myClient} collectPayload = {collectUpdatePayload}/>
         <BusinessDetailsContact address={extractAddress()} phone={extractPhone()} />
         <BusinessDetailsInsurance insurance={extractInsurance()} />
         <Button 
