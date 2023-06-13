@@ -252,6 +252,19 @@ class FileViewSet(viewsets.ModelViewSet):
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class EditBusinessViewSet(viewsets.ViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
+
+    def list(self, request):
+        return Response()
+    
+    @action(detail=False, methods=['put'])
+    def edit_business(self, request, pk=None):
+        print('edit_business')
+        return Response({'status':'Looking good!'})
+
+
 class NewBusinessViewSet(viewsets.ViewSet):
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication] 

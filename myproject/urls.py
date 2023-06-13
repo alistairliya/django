@@ -66,6 +66,7 @@ router.register(r'businessssupervisor', views.BusinessSupervisorViewSet)
 router.register(r'businessapproval', views.BusinessApprovalViewSet, basename='businessapproval')
 router.register(r'newbusiness', views.NewBusinessViewSet, basename='newbusiness') # for POSTING new business 
 router.register(r'files', views.FileViewSet, basename='files') #
+router.register(r'editbusiness', views.EditBusinessViewSet, basename='editbusiness') # for PUTTING new business
 
 urlpatterns = [
     path('', include("users.urls")),
