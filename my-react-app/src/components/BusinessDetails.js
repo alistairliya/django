@@ -149,7 +149,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <BusinessDetailsFP business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
         <BusinessDetailsClient client={myClient} collectPayload = {collectUpdatePayload}/>
         <BusinessDetailsContact address={extractAddress()} phone={extractPhone()} collectPayload = {collectUpdatePayload}/>
-        <BusinessDetailsInsurance insurance={extractInsurance()} />
+        <BusinessDetailsInsurance insurance={extractInsurance()} collectPayload = {collectUpdatePayload} />
         <Button 
         text='Close'
         color='red' 

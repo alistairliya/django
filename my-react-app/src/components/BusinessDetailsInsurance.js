@@ -7,7 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 
-const BusinessDetailsInsurance = ({insurance}) => {
+const BusinessDetailsInsurance = ({insurance, collectPayload}) => {
     const { user } = useAuth()
     const [myInsurance, setMyInsurance] = useState(null)
     const [myPlan, setMyPlan] = useState(null)
@@ -18,8 +18,14 @@ const BusinessDetailsInsurance = ({insurance}) => {
     const [planTypes, setPlanTypes] = useState(null)
     const [providers, setProviders] = useState(null)
 
+
+    const [editMode, setEditMode] = useState(false)
+    const [backgroundColor, setBackgroundColor] = useState('white');
+    const [updatePayload, setUpdatePayload] = useState({})
+
     useEffect(()=>{
         console.log('*****BusinessDetailsInsurance useEffect()')
+        if(!editMode){
         console.log(insurance)
         const getPlan = async () => {
             console.log('inside getPlan')
@@ -82,8 +88,15 @@ const BusinessDetailsInsurance = ({insurance}) => {
                 console.log(p)
                 setProviders(p)
             })
-
-    }, [insurance])
+        }
+        
+        if(editMode){
+          console.log('EDIT MODE')
+          setBackgroundColor('lightblue')
+          console.log(updatePayload)
+          collectPayload('insuranceapplication', {...updatePayload, id:insurance.id})
+        }
+    }, [insurance, editMode, updatePayload])
 
     const fetchObject = async (url) =>{
         let headers = new Headers()
@@ -96,6 +109,7 @@ const BusinessDetailsInsurance = ({insurance}) => {
     }
 
     const handleChange = (event) => {
+        setEditMode(true)
         console.log("handleChange => " + event.target.name)
         const { name, value } = event.target
         switch(name){
@@ -104,18 +118,21 @@ const BusinessDetailsInsurance = ({insurance}) => {
                 console.log(value)
                 console.log(myProvider)
                 setMyProvider({...myProvider, id:value})
+                setUpdatePayload({...updatePayload, provider:value})
             break
             case 'myPlan':
                 console.log('########## handleChange => myPlan')
                 console.log(value)
                 console.log(myPlan)
                 setMyPlan({...myPlan, id:value})
+                setUpdatePayload({...updatePayload, plan:value})
                 break
             case 'myPlanType':
                 console.log('########## handleChange => myPlanType')
                 console.log(value)
                 console.log(myPlanType)
                 setMyPlanType({...myPlanType, id:value})
+                setUpdatePayload({...updatePayload, plan_type:value})
                 break
             case 'FaceAmount':
                 console.log('########## handleChange => FaceAmount')
@@ -126,6 +143,7 @@ const BusinessDetailsInsurance = ({insurance}) => {
                 }else{
                     setMyInsurance({...myInsurance, face_amount:value})
                 }
+                setUpdatePayload({...updatePayload, face_amount:value})
                 break
             case 'PlannedPremium':
                 console.log('########## handleChange => PlannedPremium')
@@ -136,6 +154,7 @@ const BusinessDetailsInsurance = ({insurance}) => {
                 }else{
                     setMyInsurance({...myInsurance, planned_premium:value})
                 }
+                setUpdatePayload({...updatePayload, planned_premium:value})
                 break
 
             default:
@@ -144,7 +163,7 @@ const BusinessDetailsInsurance = ({insurance}) => {
     }
 
     return (
-        <div className="container">
+        <div className="container" style={{backgroundColor}}>
             <h2>Insurance Information</h2>
             <Box
             component="form"
