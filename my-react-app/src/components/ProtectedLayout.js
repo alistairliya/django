@@ -20,8 +20,6 @@ export const ProtectedLayout = () => {
             sx={{ my: 2, color: "blue", display: "block" }}
             >Logout
           </Button>
-        (protected layout)
-        {user.token} 
       {outlet}
     </div>
   );
