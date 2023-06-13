@@ -13,6 +13,7 @@ const BusinessDetailsContact = ({address, phone}) => {
     const [myAddress, setMyAddress] = useState(null)
     const [myPhone, setMyPhone] = useState(null)
     const [countries, setCountries] = useState(null)
+    const [provinces, setProvinces] = useState(null)
 
     useEffect(()=>{
         console.log('BusinessDetailsContact useEffect()')
@@ -46,6 +47,13 @@ const BusinessDetailsContact = ({address, phone}) => {
             return countries
         }
 
+        const getAvailableProvinces = async () => {
+            console.log('inside getAvailableProvinces')
+            const url = 'http://127.0.0.1:8000/api/province_state/'
+            let provinces = await fetchObject(url)
+            return provinces
+        }
+
         getAddress().then((a)=>{
             console.log('setting MyAddress')
             setMyAddress(a)
@@ -63,6 +71,13 @@ const BusinessDetailsContact = ({address, phone}) => {
             setCountries(c)
             console.log(c)
             console.log('after set Countries')
+        })
+
+        getAvailableProvinces().then((p)=>{
+            console.log('setting Provinces')
+            setProvinces(p)
+            console.log(p)
+            console.log('after set Provinces')
         })
         
 
@@ -141,12 +156,17 @@ const BusinessDetailsContact = ({address, phone}) => {
           label="Province"
           onChange={handleChange}
         >
-          <MenuItem value={1}>British Columbia</MenuItem>
-          <MenuItem value={3}>Texas</MenuItem>
-          <MenuItem value={2}>Alberta</MenuItem>
+        
+          {provinces?provinces.map((province_state) => (
+          <MenuItem value={province_state.id}>
+            {province_state.province_state_name}
+          </MenuItem>
+        )):''}
+        
         </Select>
         </FormControl>
         </div>
+
         <br></br>
         <div>
         <FormControl fullWidth>
