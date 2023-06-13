@@ -131,22 +131,8 @@ const BusinessDetailsContact = ({address, phone}) => {
             value={myAddress ? myAddress.city : ''}
             name="myCity"
           /> 
-          <TextField 
-            id="standard-basic" 
-            label="Province/State" 
-            variant="standard" 
-            value={myAddress ? myAddress.province_state.province_state_name : ''}
-            name="myProvinceState"
-          /> 
         </div>
-          <TextField 
-            id="standard-basic" 
-            label="Country" 
-            variant="standard" 
-            value={myAddress ? myAddress.country.country_name : ''}
-            name='myCountry'
-          />
-          <div> 
+        <div> 
         <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Province</InputLabel>
         <Select
