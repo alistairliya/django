@@ -200,7 +200,7 @@ const BusinessDetailsContact = ({address, phone, collectPayload}) => {
         >
         
           {provinces?provinces.map((province_state) => (
-          <MenuItem value={province_state.id}>
+          <MenuItem key = {province_state.id} value={province_state.id}>
             {province_state.province_state_name}
           </MenuItem>
         )):''}
@@ -222,7 +222,7 @@ const BusinessDetailsContact = ({address, phone, collectPayload}) => {
           onChange={handleChange}
         >
           {countries?countries.map((country) => (
-          <MenuItem value={country.id}>
+          <MenuItem key={country.id} value={country.id}>
             {country.country_name}
           </MenuItem>
         )):''}

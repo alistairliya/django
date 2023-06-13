@@ -2,6 +2,10 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import {useEffect, useState} from "react"
 import { useAuth } from "../hooks/useAuth"
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
 
 const BusinessDetailsInsurance = ({insurance}) => {
     const { user } = useAuth()
@@ -9,9 +13,14 @@ const BusinessDetailsInsurance = ({insurance}) => {
     const [myPlan, setMyPlan] = useState(null)
     const [myPlanType, setMyPlanType] = useState(null)
     const [myProvider, setMyProvider] = useState(null)
+
+    const [plans, setPlans] = useState(null)
+    const [planTypes, setPlanTypes] = useState(null)
+    const [providers, setProviders] = useState(null)
+
     useEffect(()=>{
-        console.log('BusinessDetailsInsurance useEffect()')
-        //console.log(insurance)
+        console.log('*****BusinessDetailsInsurance useEffect()')
+        console.log(insurance)
         const getPlan = async () => {
             console.log('inside getPlan')
             console.log(insurance)
@@ -24,7 +33,32 @@ const BusinessDetailsInsurance = ({insurance}) => {
             setMyPlan(plan)
             setMyPlanType(type)
             setMyProvider(provider)
+            console.log('PROVIDER:')
+            console.log(provider)
         }
+
+        const getAvailablePlans = async () => {
+            const base = "http://127.0.0.1:8000/api/" 
+            let url = base + "insuranceplan/"
+            const plans = await fetchObject(url)
+            return plans    
+        }
+
+        const getAvailablePlanTypes = async () => {
+            const base = "http://127.0.0.1:8000/api/"
+            let url = base + "insuranceplantype/"
+            const planTypes = await fetchObject(url)
+            return planTypes
+        }
+
+        const getAvailableProviders = async () => {
+            const base = "http://127.0.0.1:8000/api/"
+            let url = base + "insuranceprovider/"
+            const providers = await fetchObject(url)
+            return providers
+        }
+
+
         getPlan().then((p)=>{
                 console.log("myInsurance, myPlan, myPlanType")
                 console.log(myInsurance)
@@ -32,6 +66,23 @@ const BusinessDetailsInsurance = ({insurance}) => {
                 console.log(myPlanType)
             }
         )
+
+        getAvailablePlans().then((p)=>{
+                console.log("plans")
+                console.log(p)
+                setPlans(p)
+            }   )
+        getAvailablePlanTypes().then((p)=>{
+                console.log("planTypes")
+                console.log(p)
+                setPlanTypes(p)
+            })
+        getAvailableProviders().then((p)=>{
+                console.log("providers")
+                console.log(p)
+                setProviders(p)
+            })
+
     }, [insurance])
 
     const fetchObject = async (url) =>{
@@ -44,6 +95,10 @@ const BusinessDetailsInsurance = ({insurance}) => {
         return data
     }
 
+    const handleChange = (event) => {
+        console.log(event.target.name)
+    }
+
     return (
         <div className="container">
             <h2>Insurance Information</h2>
@@ -54,7 +109,30 @@ const BusinessDetailsInsurance = ({insurance}) => {
             }}
             noValidate
             autoComplete="off"
-            > 
+            >
+
+
+        <div>
+        <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Provider</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={myProvider? myProvider.id:''}
+          label="Provider"
+          name='myProvider'
+          onChange={handleChange}
+        >
+          {providers?providers.map((provider) => (
+          <MenuItem key = {provider.id} value={provider.id}>
+            {provider.insurance_provider_name}
+          </MenuItem>
+        )):''}
+        </Select>
+        </FormControl>
+        </div>
+
+
             <div>
                 <TextField 
                 id="standard-basic" 
