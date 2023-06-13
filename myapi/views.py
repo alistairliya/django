@@ -18,6 +18,7 @@ from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from .serializers import FileSerializer
 from rest_framework.decorators import action
+from datetime import datetime
 
 # Create your views here.
 class MyBusinessView(viewsets.ModelViewSet):
@@ -255,14 +256,47 @@ class FileViewSet(viewsets.ModelViewSet):
 class EditBusinessViewSet(viewsets.ViewSet):
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
-
     def list(self, request):
         return Response()
     
+    # curl -X PUT -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' HTTP://127.0.0.1:8000/api/editbusiness/edit_business/ 
+    # curl -X PUT -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -d '{"insuranceapplication":{"planned_premium":"$1002","plan_type":2,"provider":2,"face_amount":"$1000000111","id":59},"contact":{"street_address":"12345 ABCDEFG St.","unit":"123","province_state_id":3,"country_id":2,"phone_id":1,"address_id":1}}'  HTTP://127.0.0.1:8000/api/editbusiness/edit_business/
     @action(detail=False, methods=['put'])
     def edit_business(self, request, pk=None):
         print('edit_business')
-        return Response({'status':'Looking good!'})
+        data = json.loads(request.body)
+        message = []
+        # 1. Update Client
+        client_data = data.get('client')
+        if client_data:
+            print(client_data)
+            client = Client.objects.get(id=client_data['id'])
+            if client_data.get('first_name'):
+                client.first_name = client_data.get('first_name')
+            if client_data.get('last_name'):
+                client.last_name = client_data.get('last_name')
+            if client_data.get('middle_name'):
+                client.middle_name = client_data.get('middle_name')
+            if client_data.get('gender'):
+                client.gender = client_data.get('gender')
+            if client_data.get('birthdate'):
+                bdstr = client_data.get('birthdate')
+                bd = None
+                try:
+                    bd = datetime.strptime(bdstr, '%Y-%m-%d').date()
+                except Exception as e:
+                    message.append(f'Birthdate {bdstr} is not in the correct format: {str(e)}')
+
+                if bd:
+                    client.birthdate = bd
+            if client_data.get('sin'):
+                client.sin = client_data.get('sin')
+            client.save()
+                
+
+        # 2. Update Contact
+        # 3. Update InsuranceApplication
+        return Response({'result':message})
 
 
 class NewBusinessViewSet(viewsets.ViewSet):
