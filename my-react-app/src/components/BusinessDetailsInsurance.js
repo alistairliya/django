@@ -96,7 +96,51 @@ const BusinessDetailsInsurance = ({insurance}) => {
     }
 
     const handleChange = (event) => {
-        console.log(event.target.name)
+        console.log("handleChange => " + event.target.name)
+        const { name, value } = event.target
+        switch(name){
+            case 'myProvider':
+                console.log('########## handleChange => myProvider')
+                console.log(value)
+                console.log(myProvider)
+                setMyProvider({...myProvider, id:value})
+            break
+            case 'myPlan':
+                console.log('########## handleChange => myPlan')
+                console.log(value)
+                console.log(myPlan)
+                setMyPlan({...myPlan, id:value})
+                break
+            case 'myPlanType':
+                console.log('########## handleChange => myPlanType')
+                console.log(value)
+                console.log(myPlanType)
+                setMyPlanType({...myPlanType, id:value})
+                break
+            case 'FaceAmount':
+                console.log('########## handleChange => FaceAmount')
+                console.log(value)
+                console.log(myInsurance)
+                if(value.charAt(0)=== '$'){
+                    setMyInsurance({...myInsurance, face_amount:value.substring(1)})
+                }else{
+                    setMyInsurance({...myInsurance, face_amount:value})
+                }
+                break
+            case 'PlannedPremium':
+                console.log('########## handleChange => PlannedPremium')
+                console.log(value)
+
+                if(value.charAt(0)=== '$'){
+                    setMyInsurance({...myInsurance, planned_premium:value.substring(1)})
+                }else{
+                    setMyInsurance({...myInsurance, planned_premium:value})
+                }
+                break
+
+            default:
+                break
+        }
     }
 
     return (
@@ -174,38 +218,22 @@ const BusinessDetailsInsurance = ({insurance}) => {
         </div>
 
 
-            <div>
-                <TextField 
-                id="standard-basic" 
-                label="Provider" 
-                variant="standard" 
-                value={myProvider ? myProvider.insurance_provider_name : ''}
-                />
-                <TextField 
-                id="standard-basic" 
-                label="Plan" 
-                variant="standard" 
-                value={myPlan ? myPlan.insurance_plan_name : ''}
-                />
-                <TextField 
-                id="standard-basic" 
-                label="Plan Type" 
-                variant="standard" 
-                value={myPlanType ? myPlanType.insurnace_plan_type_name : ''}
-                />
-            </div>
             <div> 
                 <TextField 
                 id="standard-basic" 
                 label="Face Amount" 
                 variant="standard" 
-                value={myInsurance ? "$"+myInsurance.face_amount : ''}
+                value={myInsurance ? '$'+myInsurance.face_amount : ''}
+                name="FaceAmount"
+                onChange={handleChange}
                 /> 
                 <TextField 
                 id="standard-basic" 
                 label="Planned Premium" 
                 variant="standard" 
-                value={myInsurance ? "$"+myInsurance.planned_premium : ''}
+                value={myInsurance ? '$'+myInsurance.planned_premium : ''}
+                name = "PlannedPremium"
+                onChange={handleChange}
                 /> 
             </div>
             </Box>
