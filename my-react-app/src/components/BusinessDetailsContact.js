@@ -174,7 +174,7 @@ const BusinessDetailsContact = ({address, phone, collectPayload}) => {
             id="standard-basic" 
             label="Unit" 
             variant="standard" 
-            value={myAddress ? (myAddress.unit?myAddress.unit:"") : ''}
+            value={myAddress ? (myAddress.unit_number?myAddress.unit_number:"") : ''}
             name="myUnit"
             onChange={handleChange}
           /> 

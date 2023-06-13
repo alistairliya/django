@@ -295,6 +295,27 @@ class EditBusinessViewSet(viewsets.ViewSet):
                 
 
         # 2. Update Contact
+        contact_data = data.get('contact')
+        if contact_data:
+            print(contact_data)
+            address = Address.objects.get(id=contact_data['address_id'])
+            if contact_data.get('street_address'):
+                address.street_address = contact_data.get('street_address')
+            if contact_data.get('unit'):
+                address.unit_number = contact_data.get('unit')
+            if contact_data.get('city'):
+                address.city = contact_data.get('city')
+            if contact_data.get('province_state_id'):
+                province = ProvinceState.objects.get(id=contact_data.get('province_state_id'))
+                address.province_state = province
+            if contact_data.get('country_id'):
+                country = Country.objects.get(id=contact_data.get('country_id'))
+                address.country = country
+            address.save()
+            if contact_data.get('phone_number'):
+                phone = Phone.objects.get(id=contact_data.get('phone_id'))
+                phone.phone_number = contact_data.get('phone_number')            
+                phone.save()
         # 3. Update InsuranceApplication
         return Response({'result':message})
 
