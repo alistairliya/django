@@ -131,6 +131,47 @@ const BusinessDetailsInsurance = ({insurance}) => {
         </Select>
         </FormControl>
         </div>
+<br></br>
+        <div>
+        <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Plan</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={myPlan? myPlan.id:''}
+          label="Plan"
+          name='myPlan'
+          onChange={handleChange}
+        >
+          {plans?plans.map((plan) => (
+          <MenuItem key = {plan.id} value={plan.id}>
+            {plan.insurance_plan_name}
+          </MenuItem>
+        )):''}
+        </Select>
+        </FormControl>
+        </div>
+<br></br>
+        <div>
+        <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Plan Type</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={myPlanType? myPlanType.id:''}
+          label="Plan Type"
+          name='myPlanType'
+          onChange={handleChange}
+        >
+          {planTypes?planTypes.map((planType) => (
+          <MenuItem key = {planType.id} value={planType.id}>
+            {planType.insurnace_plan_type_name}
+
+          </MenuItem>
+        )):''}
+        </Select>
+        </FormControl>
+        </div>
 
 
             <div>
