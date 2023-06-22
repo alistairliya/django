@@ -5,7 +5,7 @@ import NewClient from './NewClient'
 
 import {useState, useEffect} from 'react'
 import { useAuth } from "../hooks/useAuth"
-const NBF2 = ({client,setClient, onNextClicked}) => {
+const NBF2 = ({client,setClient, onNextClicked, onPrevClicked}) => {
     const [clients, setClients] = useState([])
 
     const { user } = useAuth()
@@ -54,8 +54,8 @@ const NBF2 = ({client,setClient, onNextClicked}) => {
         <h2>New Business Form - Client Information</h2>
     {
       clients.length > 0?
-        (<Clients clients={clients} client={client} setClient={setClient} onNextClicked={onNextClicked}/>):
-        (<NewClient client={client} setClient={setClient} onNextClicked={onNextClicked}></NewClient>)
+        (<Clients clients={clients} client={client} setClient={setClient} onNextClicked={onNextClicked} onPrevClicked={onPrevClicked}/>):
+        (<NewClient client={client} setClient={setClient} onNextClicked={onNextClicked} onPrevClicked={onPrevClicked}></NewClient>)
     }
     </div>
   )
