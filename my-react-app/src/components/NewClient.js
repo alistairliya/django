@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import Select from 'react-select' // https://react-select.com/home
+import Button from './Button'
 
 const NewClient = ({client, onNextClicked, onPrevClicked, setClient, disabled}) => {
 
@@ -23,6 +24,11 @@ const NewClient = ({client, onNextClicked, onPrevClicked, setClient, disabled}) 
       e.preventDefault() // avoiding submitting to a page.
       setClient({last_name:lastName, first_name:firstName, middle_name:middleName, gender:gender, sin:sin, birthdate:birthDate, is_new_client:true})
       onNextClicked()
+  }
+
+  const previousClicked = (e) =>{
+    e.preventDefault()
+    onPrevClicked()
   }
 
   return (
@@ -52,6 +58,7 @@ const NewClient = ({client, onNextClicked, onPrevClicked, setClient, disabled}) 
           <Select options={[{value:'M',label:'Male'},{value:'F', label:'Female'}]} onChange={(e)=>{setGender(e.value)}} />
         </div>
         <input type='submit' value='Next' className='btn btn-block' />
+        <input type='submit' value='Prev' className='btn btn-block' onClick={previousClicked} />
     </form>
   )
 }

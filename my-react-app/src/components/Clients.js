@@ -4,7 +4,7 @@ import {useState} from 'react'
 import NewClient from './NewClient'
 import Button from './Button'
 
-const Clients = ({clients, client, setClient, onNextClicked}) => {
+const Clients = ({clients, client, setClient, onNextClicked, onPrevClicked}) => {
     
     const [checked, setChecked] = useState(false)
     const [clientId, setClientId] = useState()
@@ -53,7 +53,7 @@ const Clients = ({clients, client, setClient, onNextClicked}) => {
             </form>
         </div>
         )}
-        {checked && <div><NewClient setClient={setClient} onNextClicked={onNextClicked} client={client}></NewClient></div>}
+        {checked && <div><NewClient setClient={setClient} onNextClicked={onNextClicked} onPrevClicked={onPrevClicked} client={client}></NewClient></div>}
         <div>
             <label>
                 <input 
