@@ -67,6 +67,12 @@ table {
   
 }
 
+.btn-block-3 {
+  /*display: block;*/
+  width: 20%;
+  float: center;
+  
+}
 .business {
   background: #f4f4f4;
   margin: 5px;
