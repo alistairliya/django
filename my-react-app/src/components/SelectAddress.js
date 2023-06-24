@@ -3,7 +3,7 @@ import Button from './Button'
 import Select from 'react-select' // https://react-select.com/home
 import {useState, useEffect} from 'react'
 
-const SelectAddress = ({addresses, setAddress, onNextClicked}) => {
+const SelectAddress = ({addresses, setAddress, onNextClicked, onPrevClicked}) => {
     const [clientAddresses, setClientAddresses] = useState(addresses)
     const [selectedAddress, setSelectedAddress] = useState()
    
@@ -34,6 +34,11 @@ const SelectAddress = ({addresses, setAddress, onNextClicked}) => {
         setAddress(selectedAddress)
         onNextClicked()
     }
+  
+    const previousClicked = (e) =>{
+        e.preventDefault()
+        onPrevClicked()
+    }
 
     return (
         <div>
@@ -44,7 +49,8 @@ const SelectAddress = ({addresses, setAddress, onNextClicked}) => {
                 onChange={handleSelection}
             />
             <form onSubmit={onSubmit}>
-            <input type='submit' value='Next' className='btn btn-block' />  
+            <input type='submit' value='Prev' className='btn btn-block' onClick={previousClicked} />
+            <input type='submit' value='Next' className='btn btn-block-2' />  
             </form>
         </div>
     )

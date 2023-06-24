@@ -62,7 +62,7 @@ const NewBusiness = ({onAdd, close}) => {
     const nbfs = [
         <NBF1 setClient={setClient} onNextClicked = {onNextClicked}/>, 
         <NBF2 setClient={setClient} onNextClicked = {onNextClicked} onPrevClicked={onPrevClicked} client={client}  />,
-        <NBF3 setApplicantAddress= {setApplicantAddress} onNextClicked = {onNextClicked} client={client}/>,
+        <NBF3 setApplicantAddress= {setApplicantAddress} onNextClicked = {onNextClicked} onPrevClicked={onPrevClicked} client={client}/>,
         <NBF4 onNextClicked = {onNextClicked} setApplicantPhones = {setApplicantPhones} client = {client} />,
         <NBF5 onNextClicked = {onNextClicked} setInsuranceInfo={setApplicantInsurance}/>,
         <NBF6 onNextClicked={onNextClicked} setMedicals= {setMedicals}/>,

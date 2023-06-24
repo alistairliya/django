@@ -2,7 +2,7 @@ import Select from 'react-select' // https://react-select.com/home
 import { useState, useEffect } from "react"
 import { useAuth } from "../hooks/useAuth"
 
-const NewAddress = ({onNextClicked, setAddress}) => {
+const NewAddress = ({onNextClicked, onPrevClicked, setAddress}) => {
     const {user} = useAuth()
     const [unitNumber, setUnitNumber] = useState('')
     const [streetAddress, setStreetAddress] = useState('')
@@ -30,6 +30,10 @@ const NewAddress = ({onNextClicked, setAddress}) => {
         onNextClicked()
     }
 
+  const previousClicked = (e) =>{
+    e.preventDefault()
+    onPrevClicked()
+  }
 
     const fetchSomeList = async(what) =>{
         console.log('start fetchSomeList')
@@ -130,7 +134,8 @@ const NewAddress = ({onNextClicked, setAddress}) => {
             <input type='text' placeholder="Postal Code" value={postalCode} onChange={(e)=>setPostalCode(e.target.value)} />
         </div>
         <form className="add-form" onSubmit={onSubmit}>
-            <input type='submit' value='Next' className='btn btn-block' />
+            <input type='submit' value='Prev' className='btn btn-block' onClick={previousClicked} />
+            <input type='submit' value='Next' className='btn btn-block-2' />
         </form>
     </div>
   )
