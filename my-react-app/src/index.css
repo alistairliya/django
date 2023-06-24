@@ -56,8 +56,15 @@ table {
 }
 
 .btn-block {
-  display: block;
-  width: 100%;
+  /*display: block;*/
+  width: 20%;
+}
+
+.btn-block-2 {
+  /*display: block;*/
+  width: 20%;
+  float: right;
+  
 }
 
 .business {

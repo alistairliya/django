@@ -57,8 +57,8 @@ const NewClient = ({client, onNextClicked, onPrevClicked, setClient, disabled}) 
         <label>Gender</label>
           <Select options={[{value:'M',label:'Male'},{value:'F', label:'Female'}]} onChange={(e)=>{setGender(e.value)}} />
         </div>
-        <input type='submit' value='Next' className='btn btn-block' />
         <input type='submit' value='Prev' className='btn btn-block' onClick={previousClicked} />
+        <input type='submit' value='Next' className='btn btn-block-2' />
     </form>
   )
 }
