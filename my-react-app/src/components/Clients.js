@@ -30,6 +30,11 @@ const Clients = ({clients, client, setClient, onNextClicked, onPrevClicked}) => 
         e.preventDefault()
         onNextClicked()
     }
+  
+    const previousClicked = (e) =>{
+        e.preventDefault()
+        onPrevClicked()
+    }
 
     const handleSelection = (selected)=>{
         console.log('handleSelection')
@@ -49,7 +54,8 @@ const Clients = ({clients, client, setClient, onNextClicked, onPrevClicked}) => 
                 onChange={handleSelection}
             />
             <form onSubmit={onSubmit}>
-            <input type='submit' value='Next' className='btn btn-block' />  
+            <input type='submit' value='Prev' className='btn btn-block' onClick={previousClicked} />
+            <input type='submit' value='Next' className='btn btn-block-2' />  
             </form>
         </div>
         )}
