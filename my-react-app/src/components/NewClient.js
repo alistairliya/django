@@ -4,8 +4,8 @@ import Button from './Button'
 
 const NewClient = ({client, onNextClicked, onPrevClicked, setClient, disabled}) => {
 
-  const [lastName, setLastName] = useState(client.lastName)
-  const [firstName, setFirstName] = useState(client.firstName)
+  const [lastName, setLastName] = useState(client.search_last_name)
+  const [firstName, setFirstName] = useState(client.search_first_name)
   const [middleName, setMiddleName] = useState('')
   const [birthDate, setBirthDate] = useState("2000-01-01")
   const [sin, setSin] = useState('')
@@ -22,7 +22,7 @@ const NewClient = ({client, onNextClicked, onPrevClicked, setClient, disabled}) 
 
   const onSubmit = (e) =>{
       e.preventDefault() // avoiding submitting to a page.
-      setClient({last_name:lastName, first_name:firstName, middle_name:middleName, gender:gender, sin:sin, birthdate:birthDate, is_new_client:true})
+      setClient({last_name:lastName, first_name:firstName, middle_name:middleName, gender:gender, sin:sin, birthdate:birthDate, is_new_client:true, search_first_name:client.search_first_name, search_last_name:client.search_last_name})
       onNextClicked()
   }
 
