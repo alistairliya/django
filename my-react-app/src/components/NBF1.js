@@ -14,7 +14,7 @@ const NBF1 = ({onAdd, setClient, onNextClicked}) => {
             return
         }
         //setClient({lastName:lastName, firstName:firstName})
-        setClient({last_name:lastName, first_name:firstName})
+        setClient({search_last_name:lastName, search_first_name:firstName})
         onNextClicked()
 
         //onAdd({lastName, firstName})

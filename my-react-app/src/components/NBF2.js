@@ -16,7 +16,7 @@ const NBF2 = ({client,setClient, onNextClicked, onPrevClicked}) => {
         console.log(client)
         const getClients = async() =>{
             console.log(client)
-            const possibleClients = await fetchClient(client.first_name, client.last_name)
+            const possibleClients = await fetchClient(client.search_first_name, client.search_last_name)
             console.log(possibleClients)
             setClients(possibleClients)
         }

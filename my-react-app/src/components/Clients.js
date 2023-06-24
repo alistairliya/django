@@ -40,7 +40,11 @@ const Clients = ({clients, client, setClient, onNextClicked, onPrevClicked}) => 
         console.log('handleSelection')
         console.log(selected)
         setClientId(selected.value)
-        setClient(selected.value)
+        let value = selected.value
+        value.search_first_name = client.search_first_name
+        value.search_last_name = client.search_last_name
+        //setClient(selected.value)
+        setClient(value)
     }
 
   return (
