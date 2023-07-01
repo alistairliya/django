@@ -35,7 +35,7 @@ const NBF1 = ({onAdd, setClient, onNextClicked, forInsured=false}) => {
             <label>First Name</label>
             <input type='text' placeholder="Client's First Name" value={firstName} onChange={(e)=>setFirstName(e.target.value)} />
         </div>
-        <input type='submit' value='Next' className='btn btn-block' />
+        <input type='submit' value='Next' className='btn btn-block-3' />
     </form>
   )
 }

@@ -72,10 +72,29 @@ table {
   width: 20%;
   float: right;
   color: white;
-  background-color: blue;
-  margin: 10px
-  
+  background-color: black;
+  margin: 10px  
 }
+
+.btn-block-3:disabled {
+  /*display: block;*/
+  opacity: 0.5;
+}
+
+.btn-block-4 {
+  /*display: block;*/
+  width: 30%;
+  float: left;
+  color: white;
+  background-color: black;
+  margin: 10px  
+}
+
+.btn-block-4:disabled {
+  /*display: block;*/
+  opacity: 0.5;
+}
+
 .business {
   background: #f4f4f4;
   margin: 5px;
