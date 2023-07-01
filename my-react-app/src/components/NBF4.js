@@ -33,12 +33,12 @@ const NBF4 = ({onNextClicked, onPrevClicked,onCreateClicked, setApplicantPhones,
         <h3>Insured Information</h3>     
             <input 
                    type="checkbox"
-                   checked={!sameAsApplicant}
+                   checked={sameAsApplicant}
                    onChange={()=>setSameAsApplicant(!sameAsApplicant)}
                />
                <label>Same as Applicant</label>
                <form>
-                <input type='submit' value='Create Application' disabled={sameAsApplicant} className='btn btn-block-4' onClick={onCreateClicked} />
+                <input type='submit' value='Create Application' disabled={!sameAsApplicant} className='btn btn-block-4' onClick={onCreateClicked} />
                </form>
       
       </div>
@@ -51,7 +51,7 @@ const NBF4 = ({onNextClicked, onPrevClicked,onCreateClicked, setApplicantPhones,
       {!forInsured && insuredInfo}
       <form className="add-form" onSubmit={onSubmit}>
             <input type='submit' value='Prev' className='btn btn-block' onClick={previousClicked} />
-            <input type='submit' value='Next' className='btn btn-block-3'  disabled={!sameAsApplicant}/>
+            <input type='submit' value='Next' className='btn btn-block-3'  disabled={sameAsApplicant}/>
       </form>
     </div>
   )

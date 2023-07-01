@@ -80,7 +80,7 @@ const NewBusiness = ({onAdd, close}) => {
         <NBF4 onNextClicked = {onNextClicked} onPrevClicked = {onPrevClicked} onCreateClicked={onCreateClicked} setApplicantPhones = {setApplicantPhones} client = {client} />, 
 
         // If applicant and insured are different
-        <NBF1 setClient={setInsured} onNextClicked = {onNextClicked} forInsured={true}/>, 
+        <NBF1 setClient={setInsured} onNextClicked = {onNextClicked} onPrevClicked={onPrevClicked} forInsured={true}/>, 
         <NBF2 setClient={setInsured} onNextClicked = {onNextClicked} onPrevClicked={onPrevClicked} client={insured} forInsured={true}  />,
         <NBF3 setApplicantAddress= {setInsuredAddress} onNextClicked = {onNextClicked} onPrevClicked={onPrevClicked} client={insured} forInsured={true}/>,
         <NBF4 onNextClicked = {onNextClicked} onPrevClicked = {onPrevClicked} onCreateClicked={onCreateClicked} setApplicantPhones = {setInsuredPhones} client = {insured} forInsured={true} />, 

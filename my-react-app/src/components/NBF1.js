@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-const NBF1 = ({onAdd, setClient, onNextClicked, forInsured=false}) => {
+const NBF1 = ({onAdd, setClient, onNextClicked, onPrevClicked, forInsured=false}) => {
     const [lastName, setLastName] = useState('')
     const [firstName, setFirstName] = useState('')
 
@@ -24,6 +24,12 @@ const NBF1 = ({onAdd, setClient, onNextClicked, forInsured=false}) => {
 
     }
 
+    const previousClicked = (e) =>{
+        e.preventDefault()
+        console.log('previousClicked')
+        onPrevClicked()
+      }
+
     return (
     <form className="add-form" onSubmit={onSubmit}>
         <h2>New Business Form - Applicant Information</h2>
@@ -35,6 +41,7 @@ const NBF1 = ({onAdd, setClient, onNextClicked, forInsured=false}) => {
             <label>First Name</label>
             <input type='text' placeholder="Client's First Name" value={firstName} onChange={(e)=>setFirstName(e.target.value)} />
         </div>
+        {forInsured && <input type='submit' value='Prev' onClick={previousClicked}></input>}
         <input type='submit' value='Next' className='btn btn-block-3' />
     </form>
   )
