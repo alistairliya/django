@@ -46,12 +46,12 @@ const NBF4 = ({onNextClicked, onPrevClicked,onCreateClicked, setApplicantPhones,
 
     return (
     <div>
-      <h2>New Business Form - Applicant Phone Contacts</h2>
+      <h2>New Business Form -  {forInsured? ('Insured Contact'):('Applicant Contact')} </h2>
       <Phones setApplicantPhones={setApplicantPhones} trigger = {trigger}  existingPhones = {client.phone_list}/>
       {!forInsured && insuredInfo}
       <form className="add-form" onSubmit={onSubmit}>
             <input type='submit' value='Prev' className='btn btn-block' onClick={previousClicked} />
-            <input type='submit' value='Next' className='btn btn-block-3'  disabled={sameAsApplicant}/>
+            <input type='submit' value={forInsured? 'Create Application':'Next'} className={forInsured?'btn btn-block-4': 'btn btn-block-2'}  disabled={sameAsApplicant && !forInsured}/>
       </form>
     </div>
   )

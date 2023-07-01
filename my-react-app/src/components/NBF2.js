@@ -51,7 +51,7 @@ const NBF2 = ({client,setClient, onNextClicked, onPrevClicked, forInsured=false}
 
   return (
     <div>
-        <h2>New Business Form - Applicant Information</h2>
+        <h2>New Business Form -  {forInsured? ('Insured Information'):('Applicant Information')} </h2>
     {
       clients.length > 0?
         (<Clients clients={clients} client={client} setClient={setClient} onNextClicked={onNextClicked} onPrevClicked={onPrevClicked} />):

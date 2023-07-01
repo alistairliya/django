@@ -40,7 +40,7 @@ const NBF3 = ({onNextClicked, onPrevClicked, client, setApplicantAddress, forIns
     // Create new address for new client.
     // Optional for existing client.
     <div>
-        <h2>New Business Form - Applicant Address</h2>
+        <h2>New Business Form -  {forInsured? ('Insured Address'):('Applicant Address')}</h2>
       {existingAddresses && existingAddresses.length > 0 && !checked? 
         ( 
           

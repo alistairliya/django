@@ -67,12 +67,17 @@ table {
   
 }
 
+.btn-block-2:disabled {
+  /*display: block;*/
+  opacity: 0.5;
+}
+
 .btn-block-3 {
   /*display: block;*/
   width: 20%;
   float: right;
   color: white;
-  background-color: black;
+  background-color: red;
   margin: 10px  
 }
 
@@ -84,9 +89,9 @@ table {
 .btn-block-4 {
   /*display: block;*/
   width: 30%;
-  float: left;
+  float: right;
   color: white;
-  background-color: black;
+  background-color: red;
   margin: 10px  
 }
 
