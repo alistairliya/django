@@ -51,10 +51,10 @@ const NBF2 = ({client,setClient, onNextClicked, onPrevClicked}) => {
 
   return (
     <div>
-        <h2>New Business Form - Client Information</h2>
+        <h2>New Business Form - Applicant Information</h2>
     {
       clients.length > 0?
-        (<Clients clients={clients} client={client} setClient={setClient} onNextClicked={onNextClicked} onPrevClicked={onPrevClicked}/>):
+        (<Clients clients={clients} client={client} setClient={setClient} onNextClicked={onNextClicked} onPrevClicked={onPrevClicked} />):
         (<NewClient client={client} setClient={setClient} onNextClicked={onNextClicked} onPrevClicked={onPrevClicked}></NewClient>)
     }
     </div>

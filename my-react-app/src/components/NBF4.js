@@ -25,7 +25,7 @@ const NBF4 = ({onNextClicked, onPrevClicked,onCreateClicked, setApplicantPhones,
     }
     return (
     <div>
-      <h2>New Business Form - Client Phone Contacts</h2>
+      <h2>New Business Form - Applicant Phone Contacts</h2>
       <Phones setApplicantPhones={setApplicantPhones} trigger = {trigger}  existingPhones = {client.phone_list}/>
       <form className="add-form" onSubmit={onSubmit}>
             <input type='submit' value='Prev' className='btn btn-block' onClick={previousClicked} />

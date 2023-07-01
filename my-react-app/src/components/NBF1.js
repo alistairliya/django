@@ -26,7 +26,7 @@ const NBF1 = ({onAdd, setClient, onNextClicked}) => {
 
     return (
     <form className="add-form" onSubmit={onSubmit}>
-        <h2>New Business Form - Client Information</h2>
+        <h2>New Business Form - Applicant Information</h2>
         <div className="form-control">
             <label>Last Name</label>
             <input type='text' placeholder="Client's Last Name" value={lastName} onChange={(e)=>setLastName(e.target.value)} />

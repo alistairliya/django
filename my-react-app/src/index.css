@@ -70,7 +70,10 @@ table {
 .btn-block-3 {
   /*display: block;*/
   width: 20%;
-  float: center;
+  float: right;
+  color: white;
+  background-color: blue;
+  margin: 10px
   
 }
 .business {

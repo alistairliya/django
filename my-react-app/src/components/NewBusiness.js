@@ -36,6 +36,8 @@ const NewBusiness = ({onAdd, close}) => {
 
     const onCreateClicked = () => {
         console.log('onCreateClicked')
+        const client = collect()
+        console.log(client)
     }
 
     const collect = () => {
@@ -43,11 +45,11 @@ const NewBusiness = ({onAdd, close}) => {
             client:client,
             applicantAddress:applicantAddress,
             applicantPhones:applicantPhones,
-            applicantInsurance:applicantInsurance,
-            medicals:medicals,
-            documents:documents,
-            collaborators:collaborators,
-            complianceEntities:complianceEntities
+            //applicantInsurance:applicantInsurance,
+            //medicals:medicals,
+            //documents:documents,
+            //collaborators:collaborators,
+            //complianceEntities:complianceEntities
         }
     }
 
