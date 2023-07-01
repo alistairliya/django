@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-const NBF1 = ({onAdd, setClient, onNextClicked}) => {
+const NBF1 = ({onAdd, setClient, onNextClicked, forInsured=false}) => {
     const [lastName, setLastName] = useState('')
     const [firstName, setFirstName] = useState('')
 

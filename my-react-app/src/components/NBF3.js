@@ -4,7 +4,7 @@ import SelectAddress from './SelectAddress'
 import NewAddress from './NewAddress'
 import {useState, useEffect} from 'react'
 
-const NBF3 = ({onNextClicked, onPrevClicked, client, setApplicantAddress}) => {
+const NBF3 = ({onNextClicked, onPrevClicked, client, setApplicantAddress, forInsured=false}) => {
   //const [address, setAddress] = useState({})
   const [existingAddresses, setExistingAddresses] = useState(client.client_addresses)
   const [checked, setChecked] = useState(false)

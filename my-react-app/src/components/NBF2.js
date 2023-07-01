@@ -5,7 +5,7 @@ import NewClient from './NewClient'
 
 import {useState, useEffect} from 'react'
 import { useAuth } from "../hooks/useAuth"
-const NBF2 = ({client,setClient, onNextClicked, onPrevClicked}) => {
+const NBF2 = ({client,setClient, onNextClicked, onPrevClicked, forInsured=false}) => {
     const [clients, setClients] = useState([])
 
     const { user } = useAuth()

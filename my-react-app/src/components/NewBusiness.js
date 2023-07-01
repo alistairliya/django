@@ -14,9 +14,14 @@ import { useState, useEffect} from 'react'
 //import { useRadioGroup } from '@mui/material'
 const NewBusiness = ({onAdd, close}) => {
     const [client, setClient] = useState()
+    const [insured, setInsured] = useState()
     const [index, setIndex] = useState(0)
     const [applicantAddress, setApplicantAddress] = useState()
+    const [insuredAddress, setInsuredAddress] = useState()
     const [applicantPhones, setApplicantPhones] = useState()
+    const [insuredPhones, setInsuredPhones] = useState()
+
+
     const [applicantInsurance, setApplicantInsurance] = useState()
     const [medicals, setMedicals] = useState()
     const [documents, setDocuments] = useState()
@@ -36,8 +41,8 @@ const NewBusiness = ({onAdd, close}) => {
 
     const onCreateClicked = () => {
         console.log('onCreateClicked')
-        const client = collect()
-        console.log(client)
+        const business = collect()
+        console.log(business)
     }
 
     const collect = () => {
@@ -45,6 +50,9 @@ const NewBusiness = ({onAdd, close}) => {
             client:client,
             applicantAddress:applicantAddress,
             applicantPhones:applicantPhones,
+            insured:insured,
+            insuredAddress:insuredAddress,
+            insuredPhones:insuredPhones,
             //applicantInsurance:applicantInsurance,
             //medicals:medicals,
             //documents:documents,
@@ -69,14 +77,13 @@ const NewBusiness = ({onAdd, close}) => {
         <NBF1 setClient={setClient} onNextClicked = {onNextClicked}/>, 
         <NBF2 setClient={setClient} onNextClicked = {onNextClicked} onPrevClicked={onPrevClicked} client={client}  />,
         <NBF3 setApplicantAddress= {setApplicantAddress} onNextClicked = {onNextClicked} onPrevClicked={onPrevClicked} client={client}/>,
-        <NBF4 onNextClicked = {onNextClicked} onPrevClicked = {onPrevClicked} onCreateClicked={onCreateClicked} setApplicantPhones = {setApplicantPhones} client = {client} />,
-        <NBF5 onNextClicked = {onNextClicked} setInsuranceInfo={setApplicantInsurance}/>,
-        <NBF6 onNextClicked={onNextClicked} setMedicals= {setMedicals}/>,
-        <NBF7 onNextClicked={onNextClicked} setDocuments={setDocuments} />,
-        <NBF8 onNextClicked={onNextClicked} setCollaborators={setCollaborators} />,
-        <NBF9 onNextClicked={onNextClicked} setComplianceEntities={setComplianceEntities} />,
-        <NBF10 onNextClicked={onNextClicked} data = {collect()} close={close}/>
-    
+        <NBF4 onNextClicked = {onNextClicked} onPrevClicked = {onPrevClicked} onCreateClicked={onCreateClicked} setApplicantPhones = {setApplicantPhones} client = {client} />, 
+
+        // If applicant and insured are different
+        <NBF1 setClient={setInsured} onNextClicked = {onNextClicked} forInsured={true}/>, 
+        <NBF2 setClient={setInsured} onNextClicked = {onNextClicked} onPrevClicked={onPrevClicked} client={insured} forInsured={true}  />,
+        <NBF3 setApplicantAddress= {setInsuredAddress} onNextClicked = {onNextClicked} onPrevClicked={onPrevClicked} client={insured} forInsured={true}/>,
+        <NBF4 onNextClicked = {onNextClicked} onPrevClicked = {onPrevClicked} onCreateClicked={onCreateClicked} setApplicantPhones = {setInsuredPhones} client = {insured} forInsured={true} />, 
     ] 
     return( 
         <div className="container">{nbfs[index]}</div>

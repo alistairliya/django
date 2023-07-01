@@ -3,7 +3,7 @@
 import Phones from './NBF4Phones.js'
 
 import {useState, useEffect} from 'react'
-const NBF4 = ({onNextClicked, onPrevClicked,onCreateClicked, setApplicantPhones, client}) => {
+const NBF4 = ({onNextClicked, onPrevClicked,onCreateClicked, setApplicantPhones, client, forInsured=false}) => {
     const [trigger, setTrigger] = useState(0) // https://timmousk.com/blog/react-call-function-in-child-component/
     
     useEffect(()=>{
@@ -21,7 +21,11 @@ const NBF4 = ({onNextClicked, onPrevClicked,onCreateClicked, setApplicantPhones,
         console.log('Create pressed')
         setTrigger((trigger) => trigger + 1)
         //onNextClicked()
-        onCreateClicked()
+        //onCreateClicked()
+        if (forInsured)
+            onCreateClicked()
+        else if(!forInsured)
+            onNextClicked()
     }
     return (
     <div>
@@ -29,7 +33,7 @@ const NBF4 = ({onNextClicked, onPrevClicked,onCreateClicked, setApplicantPhones,
       <Phones setApplicantPhones={setApplicantPhones} trigger = {trigger}  existingPhones = {client.phone_list}/>
       <form className="add-form" onSubmit={onSubmit}>
             <input type='submit' value='Prev' className='btn btn-block' onClick={previousClicked} />
-            <input type='submit' value='Create' className='btn btn-block-3'/>
+            <input type='submit' value='Next' className='btn btn-block-3'/>
             
       </form>
     </div>
