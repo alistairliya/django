@@ -24,8 +24,12 @@ const NBF4 = ({onNextClicked, onPrevClicked,onCreateClicked, setApplicantPhones,
         //onCreateClicked()
         if (forInsured)
             onCreateClicked()
-        else if(!forInsured)
+        else if(!forInsured){
+          if(sameAsApplicant)
+            onCreateClicked()
+          else
             onNextClicked()
+        }
     }
 
     const insuredInfo = (
@@ -38,7 +42,7 @@ const NBF4 = ({onNextClicked, onPrevClicked,onCreateClicked, setApplicantPhones,
                />
                <label>Same as Applicant</label>
                <form>
-                <input type='submit' value='Create Application' disabled={!sameAsApplicant} className='btn btn-block-4' onClick={onCreateClicked} />
+                <input type='submit' value='Create Application' disabled={!sameAsApplicant} className='btn btn-block-4' onClick={onSubmit} />
                </form>
       
       </div>
