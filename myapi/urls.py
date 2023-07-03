@@ -4,7 +4,9 @@
 # Cannot add generic Views in routers.
 # We add the view into url here.
 
-# While this is still functional, we are no longer using this url.
+# *** NOT BEING USED ***
+# While this is still functional, 
+# *** WE ARE NO LONGER USING THIS URL ***
 # File upload is now done thru FileViewSet and the URL is configured thru the router in the project urls.py
 
 from django.urls import path

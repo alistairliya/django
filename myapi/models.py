@@ -4,6 +4,7 @@ from mybusiness.models import *
 # Create your models here.
 # File Upload based on:
 # https://blog.vivekshukla.xyz/uploading-file-using-api-django-rest-framework/
+# Used by FileViewSerializer (myproject/myapi/serializer.py) and FileViewSet (myproject/myaip/views.py)
 class File(models.Model):
     file = models.FileField(blank=False, null=False)
     remark = models.CharField(max_length=255, blank=True, null=True)
