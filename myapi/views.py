@@ -347,9 +347,12 @@ class NewBusinessViewSet(viewsets.ViewSet):
         #return Response(serializer.data)
         return Response()
 
+    # curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' http://127.0.0.1:8000/api/newbusiness/create_insurance_application/
     @action(detail=False, methods=['post'])
     def create_insurance_application(self, request, pk=None):
-        return Response({'result':'success'})
+        data = json.loads(request.body)
+        print(json.dumps(data, sort_keys=True, indent=4))
+        return Response({'result':'ok'})
     
     # curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' http://127.0.0.1:8000/api/newbusiness/create_new_business/
     @action(detail=False, methods=['post'])

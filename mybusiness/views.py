@@ -1,3 +1,6 @@
+# Not being used.
+# Original Setup file
+
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponseRedirect

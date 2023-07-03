@@ -3,6 +3,7 @@
 import Phones from './NBF4Phones.js'
 
 import {useState, useEffect} from 'react'
+
 const NBF4 = ({onNextClicked, onPrevClicked,onCreateClicked, setApplicantPhones, client, forInsured=false}) => {
     const [trigger, setTrigger] = useState(0) // https://timmousk.com/blog/react-call-function-in-child-component/
     const [sameAsApplicant, setSameAsApplicant] = useState(true)
@@ -31,6 +32,8 @@ const NBF4 = ({onNextClicked, onPrevClicked,onCreateClicked, setApplicantPhones,
             onNextClicked()
         }
     }
+
+
 
     const insuredInfo = (
       <div className='container'>

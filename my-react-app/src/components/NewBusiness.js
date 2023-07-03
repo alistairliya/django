@@ -9,7 +9,7 @@ import NBF7 from './NBF7'
 import NBF8 from './NBF8'
 import NBF9 from './NBF9'
 import NBF10 from './NBF10'
-
+import { useAuth } from "../hooks/useAuth"
 import { useState, useEffect} from 'react'
 //import { useRadioGroup } from '@mui/material'
 const NewBusiness = ({onAdd, close}) => {
@@ -27,6 +27,33 @@ const NewBusiness = ({onAdd, close}) => {
     const [documents, setDocuments] = useState()
     const [collaborators, setCollaborators] = useState()
     const [complianceEntities, setComplianceEntities] = useState()
+    const { user } = useAuth() 
+
+
+    const postToAPI = async (url, obj) => {
+        console.log('NBF10 Post to API '+url)
+        //console.log(url)
+        //console.log(obj)
+        let headers = new Headers()
+        const token = user['token']
+        console.log('TOKEN: '+token)
+        const auth_str = 'Token '+token
+        headers.set('Authorization', auth_str)
+        headers.set('Content-Type', 'application/json')
+        //console.log("before fetch")
+        const strObj = JSON.stringify(obj)
+        //console.log("after sstringify")
+        //console.log("strObj: "+strObj)
+        const res = await fetch(url,
+            {
+                method:'POST',
+                body:strObj, //JSON.stringify(obj),
+                headers:headers
+            })
+        console.log(res)
+        const data = await res.json()
+        return data
+    }
 
     const onNextClicked = () => {
         console.log("Clicked Next from index "+index)
@@ -39,10 +66,13 @@ const NewBusiness = ({onAdd, close}) => {
         setIndex(index-1)
     }
 
-    const onCreateClicked = () => {
+    const onCreateClicked = async () => {
         console.log('onCreateClicked')
         const business = collect()
         console.log(business)
+        const url = 'http://127.0.0.1:8000/api/newbusiness/create_insurance_application/'
+        const result = await postToAPI(url, business)
+        console.log(result)
     }
 
     const collect = () => {
