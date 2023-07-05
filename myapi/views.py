@@ -373,9 +373,13 @@ class NewBusinessViewSet(viewsets.ViewSet):
         data = json.loads(request.body)
         print(json.dumps(data, sort_keys=True, indent=4))
         applicant = self.get_or_create_client(data.get('client'))
-        insured = self.get_or_create_client(data.get('insured'))
+        insured = self.get_client(data.get('insured'))
+        # applicant is reference in MyBusiness.client
+        # insured is referenced in InsuranceApplication.insured_client
+
         print(applicant)
         print(insured)
+
         # For newly created business, client shoould be insured, if insured isn't applicant
         
         return Response({'result':'ok'})
