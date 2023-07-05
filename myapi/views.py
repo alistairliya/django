@@ -347,14 +347,43 @@ class NewBusinessViewSet(viewsets.ViewSet):
         #return Response(serializer.data)
         return Response()
 
+    # Helper Function - Create a new client
+    # Corresponds to step 1 of create_new_business
+    def get_or_create_client(self, client_data):
+        # create client if new client. Else just get client ID
+        client = None
+        if client_data and client_data.get('is_new_client'):
+            print('creating new client')
+            client = Client(
+                first_name=client_data.get('first_name'), 
+                last_name=client_data.get('last_name'), 
+                middle_name=client_data.get('middle_name'), 
+                birthdate=client_data.get('birthdate'), 
+                sin=client_data.get('sin'), 
+                gender=client_data.get('gender'), 
+                created_by=self.request.user)
+            client.save()
+        elif client_data:
+            client = Client.objects.get(id=client_data.get('id'))
+        return client
+    
     # curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' http://127.0.0.1:8000/api/newbusiness/create_insurance_application/
     @action(detail=False, methods=['post'])
     def create_insurance_application(self, request, pk=None):
         data = json.loads(request.body)
         print(json.dumps(data, sort_keys=True, indent=4))
+        applicant = self.get_or_create_client(data.get('client'))
+        insured = self.get_or_create_client(data.get('insured'))
+        print(applicant)
+        print(insured)
+        # For newly created business, client shoould be insured, if insured isn't applicant
+        
         return Response({'result':'ok'})
     
     # curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' http://127.0.0.1:8000/api/newbusiness/create_new_business/
+    # *** NO LONGER USE THIS ACTION ***
+    # as we changed new business creation workfflow and we no longer run from NBF1 to NBF10
+    # However, this is a good reference implmentation for how to create a new business.
     @action(detail=False, methods=['post'])
     def create_new_business(self, request, pk=None):
         data = json.loads(request.body)

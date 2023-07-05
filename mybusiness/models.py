@@ -138,6 +138,7 @@ class BusinessType(models.Model):
 class MyBusiness(models.Model):
     business_type = models.ForeignKey(BusinessType, on_delete=models.PROTECT, related_name="mybusinesses", null=True)
     product = models.ForeignKey(Product, on_delete = models.PROTECT, related_name="mybusinesses", null=True)
+    # This is the applicant client, can be different from the insured client which is in InsuranceApplication model
     client = models.ForeignKey(Client, on_delete=models.PROTECT, related_name="businesses")
     status = models.ForeignKey(BusinessStatus, on_delete=models.PROTECT, related_name="mybusinesses")
     projected_FYC = models.FloatField(null=True)
@@ -246,6 +247,7 @@ class InsurancePlan(models.Model):
 
 # Checked
 class InsuranceApplication(models.Model):
+    insured_client = models.ForeignKey(Client, on_delete=models.PROTECT, default=None, null=True, related_name="insurance_applications")
     business = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, related_name="insurance_application") #1-2-1 relationship
     product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name = "insurance_applications")
     provider = models.ForeignKey(InsuranceProvider, on_delete=models.PROTECT, related_name="insurance_applications")
