@@ -251,10 +251,10 @@ class InsurancePlan(models.Model):
 class InsuranceApplication(models.Model):
     insured_client = models.ForeignKey(Client, on_delete=models.PROTECT, default=None, null=True, related_name="insurance_applications")
     business = models.ForeignKey(MyBusiness, on_delete=models.CASCADE, related_name="insurance_application") #1-2-1 relationship
-    product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name = "insurance_applications")
-    provider = models.ForeignKey(InsuranceProvider, on_delete=models.PROTECT, related_name="insurance_applications")
-    plan_type = models.ForeignKey(InsurancePlanType, on_delete=models.PROTECT, related_name="insurance_applications")
-    plan = models.ForeignKey(InsurancePlan, on_delete=models.PROTECT, related_name="insurance_applications")
+    product = models.ForeignKey(Product, on_delete=models.PROTECT,null=True, related_name = "insurance_applications")
+    provider = models.ForeignKey(InsuranceProvider, on_delete=models.PROTECT, null=True, related_name="insurance_applications")
+    plan_type = models.ForeignKey(InsurancePlanType, on_delete=models.PROTECT, null=True, related_name="insurance_applications")
+    plan = models.ForeignKey(InsurancePlan, on_delete=models.PROTECT,null=True, related_name="insurance_applications")
     face_amount = models.FloatField(null=True)
     planned_premium = models.FloatField(null=True)
     # application address and phone use charfield to allow overwriting with client's address and phone

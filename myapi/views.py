@@ -367,7 +367,33 @@ class NewBusinessViewSet(viewsets.ViewSet):
             client = Client.objects.get(id=client_data.get('id'))
         return client
 
-    def create_address(self, address_data):
+    def get_or_create_phone(self, client, phones_data):
+        if phones_data and len(phones_data) > 0 and phones_data[0].get('selection'):
+            phone = Phone.objects.get(id=phones_data[0].get('selection').get('id'))
+        elif phones_data and len(phones_data) > 0:
+            phone_data = phones_data[0]
+            phone = Phone(
+                # clients, add later
+                # area_code
+                area_code = phone_data['area_code'],
+                # phone_number
+                phone_number = phone_data['phone_number'],
+                # phone_type
+                phone_type = PhoneType.objects.get(id=phone_data.get('phone_type').get('id')) if phone_data.get('phone_type') else PhoneType.objects.get(id=1),
+                # is_primary
+                is_primary = False,
+                # is_active
+                is_active = True,
+                # is_archived
+                is_archived = False,
+            )
+            phone.save()
+            phone.clients.add(client)
+            phone.save()
+        return phone
+
+
+    def get_or_create_address(self, client, address_data):
         address = None # Default, when Address Data not provided
         if address_data and address_data.get('is_new_address'):
             address = Address(
@@ -385,6 +411,11 @@ class NewBusinessViewSet(viewsets.ViewSet):
                 postal_code = address_data['postal_code'],
             )
             address.save()
+            client_address = ClientAddress(
+                client=client,
+                address=address,
+            )
+            client_address.save()
         elif address_data:
             #address = Address.objects.all().filter(id=address_data.get('id'))[0]
             address = Address.objects.get(id=address_data.get('id'))
@@ -399,7 +430,7 @@ class NewBusinessViewSet(viewsets.ViewSet):
 
         # 0. Create Applicant (and Insured) 
         applicant = self.get_or_create_client(data.get('client'))
-        insured = self.get_client(data.get('insured'))
+        insured = self.get_or_create_client(data.get('insured'))
         # applicant is referenced in MyBusiness.client
         # insured is referenced in InsuranceApplication.insured_client
         print(applicant)
@@ -412,12 +443,26 @@ class NewBusinessViewSet(viewsets.ViewSet):
 
         # Post to Addres
         # If newly created addres, need to connect to the client object
-
-
+        if applicant and data.get('applicantAddress'):
+            applicant_address = self.get_or_create_address(applicant, data.get('applicantAddress'))
+        if insured and data.get('insuredAddress'):
+            insured_address = self.get_or_create_address(insured, data.get('insuredAddress'))
         # Post to Phone
-
+        if applicant and data.get('applicantPhones'):
+            applicant_phone = self.get_or_create_phone(applicant, data.get('applicantPhones')) 
+        if insured and data.get('insuredPhones'):
+            insured_phone = self.get_or_create_phone(insured, data.get('insuredPhones'))
         # Post to Insurance Application
-        
+        insuranceApplication = InsuranceApplication(
+            # insured_client
+            insured_client = insured,
+            # business
+            business = new_bus,
+            insured_client_address = insured_address,
+            insured_client_phone = insured_phone,
+        )
+
+
         return Response({'result':'ok'})
     
     # curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' http://127.0.0.1:8000/api/newbusiness/create_new_business/
