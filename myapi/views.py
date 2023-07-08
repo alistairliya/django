@@ -366,21 +366,57 @@ class NewBusinessViewSet(viewsets.ViewSet):
         elif client_data:
             client = Client.objects.get(id=client_data.get('id'))
         return client
-    
+
+    def create_address(self, address_data):
+        address = None # Default, when Address Data not provided
+        if address_data and address_data.get('is_new_address'):
+            address = Address(
+                # unit_number
+                unit_number = address_data['unit_number'],
+                # street_address
+                street_address = address_data['street_address'],
+                # city
+                city = address_data['city'],
+                # province_state
+                province_state = ProvinceState.objects.all().filter(id=address_data['province']['id'])[0],
+                # country
+                country = Country.objects.all().filter(id=address_data['country']['id'])[0],
+                # postal_code
+                postal_code = address_data['postal_code'],
+            )
+            address.save()
+        elif address_data:
+            #address = Address.objects.all().filter(id=address_data.get('id'))[0]
+            address = Address.objects.get(id=address_data.get('id'))
+        print(f"address: {address.id}")
+        return address
+
     # curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' http://127.0.0.1:8000/api/newbusiness/create_insurance_application/
     @action(detail=False, methods=['post'])
     def create_insurance_application(self, request, pk=None):
         data = json.loads(request.body)
         print(json.dumps(data, sort_keys=True, indent=4))
+
+        # 0. Create Applicant (and Insured) 
         applicant = self.get_or_create_client(data.get('client'))
         insured = self.get_client(data.get('insured'))
-        # applicant is reference in MyBusiness.client
+        # applicant is referenced in MyBusiness.client
         # insured is referenced in InsuranceApplication.insured_client
-
         print(applicant)
         print(insured)
 
-        # For newly created business, client shoould be insured, if insured isn't applicant
+        # 1 Create a new Business object. Status should be DRAFT
+        status = BusinessStatus.objects.get(status_name="DRAFT")
+        new_bus = MyBusiness(client = applicant, status = status, created_by = self.request.user)
+        new_bus.save()
+
+        # Post to Addres
+        # If newly created addres, need to connect to the client object
+
+
+        # Post to Phone
+
+        # Post to Insurance Application
         
         return Response({'result':'ok'})
     
