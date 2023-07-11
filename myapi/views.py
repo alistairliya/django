@@ -447,11 +447,15 @@ class NewBusinessViewSet(viewsets.ViewSet):
             applicant_address = self.get_or_create_address(applicant, data.get('applicantAddress'))
         if insured and data.get('insuredAddress'):
             insured_address = self.get_or_create_address(insured, data.get('insuredAddress'))
+        else:
+            insured_address = applicant_address
         # Post to Phone
         if applicant and data.get('applicantPhones'):
             applicant_phone = self.get_or_create_phone(applicant, data.get('applicantPhones')) 
         if insured and data.get('insuredPhones'):
             insured_phone = self.get_or_create_phone(insured, data.get('insuredPhones'))
+        else:
+            insured_phone = applicant_phone
         # Post to Insurance Application
         insuranceApplication = InsuranceApplication(
             # insured_client
