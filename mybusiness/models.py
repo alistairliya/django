@@ -264,6 +264,8 @@ class InsuranceApplication(models.Model):
     #applicant_phone = models.ForeignKey(Phone, on_delete=models.PROTECT, related_name="insurance_applications", null=True)
     insured_client_address = models.ForeignKey(Address, on_delete=models.PROTECT, related_name="insurance_applications", null=True)
     insured_client_phone = models.ForeignKey(Phone, on_delete=models.PROTECT, related_name="insurance_applications", null=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
 
 # Checked
 class Medical(models.Model):

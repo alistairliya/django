@@ -223,7 +223,7 @@ class InsuranceApplicationSerializer(serializers.HyperlinkedModelSerializer):
     #applicant_phone = PhoneSerializer()
     class Meta:
         model = InsuranceApplication
-        fields = ['id','insured_client', 'business','product','provider','plan_type','plan','face_amount','planned_premium', 'insured_client_address','insured_client_phone']
+        fields = ['id','insured_client', 'business','product','provider','plan_type','plan','face_amount','planned_premium', 'insured_client_address','insured_client_phone', 'created_date','modified_date']
 
 class BusinessInsuranceSerializer(serializers.HyperlinkedModelSerializer):
     insurance_application = InsuranceApplicationSerializer()
