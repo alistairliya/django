@@ -435,12 +435,7 @@ class NewBusinessViewSet(viewsets.ViewSet):
         # insured is referenced in InsuranceApplication.insured_client
         print(applicant)
         print(insured)
-
-        # 1 Create a new Business object. Status should be DRAFT
-        status = BusinessStatus.objects.get(status_name="DRAFT")
-        new_bus = MyBusiness(client = applicant, status = status, created_by = self.request.user)
-        new_bus.save()
-
+        
         # Post to Addres
         # If newly created addres, need to connect to the client object
         if applicant and data.get('applicantAddress'):
@@ -456,6 +451,18 @@ class NewBusinessViewSet(viewsets.ViewSet):
             insured_phone = self.get_or_create_phone(insured, data.get('insuredPhones'))
         else:
             insured_phone = applicant_phone
+
+        # 1 Create a new Business object. Status should be DRAFT
+        status = BusinessStatus.objects.get(status_name="DRAFT")
+        new_bus = MyBusiness(
+            client = applicant, 
+            status = status,
+            applicant_client_address = applicant_address,
+            applicant_client_phone = applicant_phone, 
+            created_by = self.request.user)
+        new_bus.save()
+        print(f"Created New Business {new_bus.id}")
+
         # Post to Insurance Application
         insuranceApplication = InsuranceApplication(
             # insured_client
@@ -465,6 +472,8 @@ class NewBusinessViewSet(viewsets.ViewSet):
             insured_client_address = insured_address,
             insured_client_phone = insured_phone,
         )
+        insuranceApplication.save()
+        print(f"Created Insurance Application {insuranceApplication.id}")
 
 
         return Response({'result':'ok'})
