@@ -151,7 +151,7 @@ const BusinessDetailsContact = ({address, phone, collectPayload}) => {
     const countryOptions = ['Canada', 'USA'];
 
     return (
-    <div className="container" style={{backgroundColor}}>
+    <div style={{backgroundColor}}>
         <h2>Application Contact</h2>
         <Box
             component="form"

@@ -90,7 +90,7 @@ const BusinessDetailsClient = ({client, collectPayload}) => {
 
     // https://mui.com/material-ui/react-text-field/
     return (
-    <div className="container" style={{backgroundColor}}>
+    <div  style={{backgroundColor}}>
         <h2>Applicant Information</h2>   
         <Box
       component="form"

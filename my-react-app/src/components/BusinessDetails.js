@@ -175,10 +175,12 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <div>
             {forApproval?<Button text = 'Approve' color='green' onClick = {approveClicked} />:null}
         </div>
-        <BusinessDetailsFP business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
+        <div className="container">
         <BusinessDetailsClient client={myClient} collectPayload = {collectUpdatePayload}/>
         <BusinessDetailsContact address={extractAddress()} phone={extractPhone()} collectPayload = {collectUpdatePayload}/>
+        </div>
         <BusinessDetailsInsurance insurance={extractInsurance()} collectPayload = {collectUpdatePayload} />
+        <BusinessDetailsFP business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
         <Button 
         text='Close'
         color='red' 
