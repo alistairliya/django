@@ -73,15 +73,24 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         console.log(updatePayload)
     }
 
-    const extractAddress = () =>{
+    const extractApplicantAddress = () => {
+        return business.applicant_client_address
+    }
+
+    const extractInsuredAddress = () =>{
         const app = business.insurance_application // an array
-        if (app.length > 0 && app[0].applicant_address){
-            return app[0].applicant_address
+        if (app.length > 0 && app[0].insured_client_address){
+            return app[0].insured_client_address
         }
         return null
     }
+
+
+    const extractApplicantPhone = () => {
+        return business.applicant_client_phone
+    }
     
-    const extractPhone = () =>{
+    const extractInsuredPhone = () =>{
         const app = business.insurance_application // an array
         if (app.length > 0 && app[0].applicant_phone){
             return app[0].applicant_phone
@@ -177,7 +186,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         </div>
         <div className="container">
         <BusinessDetailsClient client={myClient} collectPayload = {collectUpdatePayload}/>
-        <BusinessDetailsContact address={extractAddress()} phone={extractPhone()} collectPayload = {collectUpdatePayload}/>
+        <BusinessDetailsContact address={extractApplicantAddress()} phone={extractApplicantPhone()} collectPayload = {collectUpdatePayload}/>
         </div>
         <BusinessDetailsInsurance insurance={extractInsurance()} collectPayload = {collectUpdatePayload} />
         <BusinessDetailsFP business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
