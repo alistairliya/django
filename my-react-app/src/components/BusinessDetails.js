@@ -197,10 +197,16 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <BusinessDetailsClient title = "Applicant Info" client={myClient} collectPayload = {collectUpdatePayload}/>
         <BusinessDetailsContact title= "Applicant Contact" address={applicantAddress} phone={applicantPhone} collectPayload = {collectUpdatePayload}/>
         </div>
+        {business.client!==business.insurance_application[0].insured_client?
+        (
         <div className="container">
         <BusinessDetailsClient title = "Insured Info" client={myClient} collectPayload = {collectUpdatePayload}/>
         <BusinessDetailsContact title= "Insured Contact" address={insuredAddress} phone={insuredPhone} collectPayload = {collectUpdatePayload}/>
         </div>
+        ):('')
+        }
+        
+
         <BusinessDetailsInsurance insurance={extractInsurance()} collectPayload = {collectUpdatePayload} />
         <BusinessDetailsFP business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
         <Button 
