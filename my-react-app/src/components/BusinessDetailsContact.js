@@ -8,7 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import {useEffect, useState} from "react"
 import { useAuth } from "../hooks/useAuth"
 // address and phone are urls
-const BusinessDetailsContact = ({address, phone, collectPayload}) => {
+const BusinessDetailsContact = ({title, address, phone, collectPayload}) => {
     const { user } = useAuth()
     const [myAddress, setMyAddress] = useState(null)
     const [myPhone, setMyPhone] = useState(null)
@@ -153,7 +153,7 @@ const BusinessDetailsContact = ({address, phone, collectPayload}) => {
 
     return (
     <div style={{backgroundColor}}>
-        <h2>Application Contact</h2>
+        <h2>{title}</h2>
         <Box
             component="form"
             sx={{

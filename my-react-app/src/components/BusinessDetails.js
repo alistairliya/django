@@ -190,8 +190,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             {forApproval?<Button text = 'Approve' color='green' onClick = {approveClicked} />:null}
         </div>
         <div className="container">
-        <BusinessDetailsClient client={myClient} collectPayload = {collectUpdatePayload}/>
-        <BusinessDetailsContact address={applicantAddress} phone={applicantPhone} collectPayload = {collectUpdatePayload}/>
+        <BusinessDetailsClient title = "Applicant Info" client={myClient} collectPayload = {collectUpdatePayload}/>
+        <BusinessDetailsContact title= "Applicant Contact" address={applicantAddress} phone={applicantPhone} collectPayload = {collectUpdatePayload}/>
         </div>
         <BusinessDetailsInsurance insurance={extractInsurance()} collectPayload = {collectUpdatePayload} />
         <BusinessDetailsFP business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>

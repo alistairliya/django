@@ -11,7 +11,7 @@ import {useEffect, useState} from "react"
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 
-const BusinessDetailsClient = ({client, collectPayload}) => {
+const BusinessDetailsClient = ({title, client, collectPayload}) => {
     const [editMode, setEditMode] = useState(false)
     const [myClient, setMyClient] = useState({})
     const [myLastName , setMyLastName] = useState('Last')
@@ -91,7 +91,7 @@ const BusinessDetailsClient = ({client, collectPayload}) => {
     // https://mui.com/material-ui/react-text-field/
     return (
     <div  style={{backgroundColor}}>
-        <h2>Applicant Information</h2>   
+        <h2>{title}</h2>   
         <Box
       component="form"
       sx={{
