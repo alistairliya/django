@@ -24,7 +24,7 @@ from datetime import datetime
 class MyBusinessView(viewsets.ModelViewSet):
     
     #queryset = MyBusiness.objects.filter(created_by = 1) #MyBusiness.objects.all()
-    queryset = MyBusiness.objects.all() #get_queryset() 
+    queryset = MyBusiness.objects.all().order_by('id').reverse() #get_queryset() 
     
     serializer_class = MyBusinessSerializer
     #permission_classes = [permissions.IsAuthenticatedOrReadOnly,
