@@ -315,6 +315,11 @@ class EditBusinessViewSet(viewsets.ViewSet):
                 phone = Phone.objects.get(id=contact_data.get('phone_id'))
                 phone.phone_number = contact_data.get('phone_number')            
                 phone.save()
+            if contact_data.get('area_code'):
+                phone = Phone.objects.get(id=contact_data.get('phone_id'))
+                phone.area_code = contact_data.get('area_code')            
+                phone.save()
+
         # 3. Update InsuranceApplication
         insurance_data = data.get('insuranceapplication')
         if insurance_data:

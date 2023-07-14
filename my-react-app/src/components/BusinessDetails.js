@@ -26,6 +26,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const [updatePayload, setUpdatePayload] = useState({}) 
     const [editMode, setEditMode] = useState(false)
     const [updateErrors, setUpdateErrors] = useState([])
+    const [applicantAddress, setApplicantAddress] = useState(null)
+    const [applicantPhone, setApplicantPhone] = useState(null)
     const { user } = useAuth()
     const getMyClient = async () => {
         console.log('inside getMyClient')
@@ -55,6 +57,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         getMyClient()
         getStatus()
         //console.log("^^^ After calling getMyClient")
+        setApplicantAddress(extractApplicantAddress())
+        setApplicantPhone(extractApplicantPhone())
     }, [business, updateCounter, updateErrors])
 
     const fetchObject = async (url) =>{
@@ -155,6 +159,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
 
     const sendUpdate = async () =>{
         console.log('sendUpdate')
+        console.log(updatePayload)
         const url = 'http://127.0.0.1:8000/api/editbusiness/edit_business/'
         const token = user['token']
         const auth_str = 'Token '+token
@@ -186,7 +191,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         </div>
         <div className="container">
         <BusinessDetailsClient client={myClient} collectPayload = {collectUpdatePayload}/>
-        <BusinessDetailsContact address={extractApplicantAddress()} phone={extractApplicantPhone()} collectPayload = {collectUpdatePayload}/>
+        <BusinessDetailsContact address={applicantAddress} phone={applicantPhone} collectPayload = {collectUpdatePayload}/>
         </div>
         <BusinessDetailsInsurance insurance={extractInsurance()} collectPayload = {collectUpdatePayload} />
         <BusinessDetailsFP business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>

@@ -134,6 +134,7 @@ const BusinessDetailsContact = ({address, phone, collectPayload}) => {
           setUpdatePayload({...updatePayload, country_id:value})
           break
         case 'myAreaCode':
+          console.log('update area code to'+value)
           setMyPhone({...myPhone, area_code:value})
           setUpdatePayload({...updatePayload, area_code:value}) 
           break
