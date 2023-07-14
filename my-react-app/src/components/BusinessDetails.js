@@ -28,6 +28,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const [updateErrors, setUpdateErrors] = useState([])
     const [applicantAddress, setApplicantAddress] = useState(null)
     const [applicantPhone, setApplicantPhone] = useState(null)
+    const [insuredAddress, setInsuredAddress] = useState(null)
+    const [insuredPhone, setInsuredPhone] = useState(null)
     const { user } = useAuth()
     const getMyClient = async () => {
         console.log('inside getMyClient')
@@ -59,6 +61,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         //console.log("^^^ After calling getMyClient")
         setApplicantAddress(extractApplicantAddress())
         setApplicantPhone(extractApplicantPhone())
+        setInsuredAddress(extractInsuredAddress())
+        setInsuredPhone(extractInsuredPhone())
     }, [business, updateCounter, updateErrors])
 
     const fetchObject = async (url) =>{
@@ -96,8 +100,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     
     const extractInsuredPhone = () =>{
         const app = business.insurance_application // an array
-        if (app.length > 0 && app[0].applicant_phone){
-            return app[0].applicant_phone
+        if (app.length > 0 && app[0].insured_client_phone){
+            return app[0].insured_client_phone
         }
         return null
     }
@@ -192,6 +196,10 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <div className="container">
         <BusinessDetailsClient title = "Applicant Info" client={myClient} collectPayload = {collectUpdatePayload}/>
         <BusinessDetailsContact title= "Applicant Contact" address={applicantAddress} phone={applicantPhone} collectPayload = {collectUpdatePayload}/>
+        </div>
+        <div className="container">
+        <BusinessDetailsClient title = "Insured Info" client={myClient} collectPayload = {collectUpdatePayload}/>
+        <BusinessDetailsContact title= "Insured Contact" address={insuredAddress} phone={insuredPhone} collectPayload = {collectUpdatePayload}/>
         </div>
         <BusinessDetailsInsurance insurance={extractInsurance()} collectPayload = {collectUpdatePayload} />
         <BusinessDetailsFP business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>

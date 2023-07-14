@@ -438,6 +438,8 @@ class NewBusinessViewSet(viewsets.ViewSet):
         # 0. Create Applicant (and Insured) 
         applicant = self.get_or_create_client(data.get('client'))
         insured = self.get_or_create_client(data.get('insured'))
+        if not insured:
+            insured = applicant # If no data for insured, same as applicant
         # applicant is referenced in MyBusiness.client
         # insured is referenced in InsuranceApplication.insured_client
         print(applicant)
