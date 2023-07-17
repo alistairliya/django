@@ -216,7 +216,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
                    type="checkbox"
                    checked={sameAsApplicant}
                    onChange={()=>setSameAsApplicant(!sameAsApplicant)}
-        />  <label>Same as Applicant</label></div>):('')}
+        />  <label>Insured Client Same as Applicant</label></div>):('')}
 
         {!sameAsApplicant?
         (
