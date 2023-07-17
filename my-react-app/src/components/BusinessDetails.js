@@ -21,6 +21,7 @@ import BusinessDetailsFP from './BusinessDetailsFP'
 
 const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApproval=false}) => {
     const [myClient, setMyClient] = useState(null)
+    const [myInsuredClient, setMyInsuredClient] = useState(null)
     const [myStatus, setMyStatus] = useState(null)
     const [updateCounter, setUpdateCounter] = useState(0)
     const [updatePayload, setUpdatePayload] = useState({}) 
@@ -32,6 +33,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const [insuredPhone, setInsuredPhone] = useState(null)
     const [sameAsApplicant, setSameAsApplicant] = useState(false)
     const { user } = useAuth()
+
     const getMyClient = async () => {
         console.log('inside getMyClient')
         let c = await fetchObject(business.client)
@@ -204,6 +206,16 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <BusinessDetailsClient title = "Applicant Info" client={myClient} collectPayload = {collectUpdatePayload}/>
         <BusinessDetailsContact title= "Applicant Contact" address={applicantAddress} phone={applicantPhone} collectPayload = {collectUpdatePayload}/>
         </div>
+
+        {!sameAsApplicant?
+        (
+        <div className="container">
+        <BusinessDetailsClient title = "Insured Info" client={myClient} collectPayload = {collectUpdatePayload}/>
+        <BusinessDetailsContact title= "Insured Contact" address={insuredAddress} phone={insuredPhone} collectPayload = {collectUpdatePayload}/>
+        </div>
+        ):('')
+        }
+        
         {
         // The display of checkbox cannot depend on sameAsApplicant variable because it changes the variable.
         // It should always display when the client info is the same as the insured info. When this is the case, the checkbox gives user option to display insured info and change insured info.
@@ -217,16 +229,6 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
                    checked={sameAsApplicant}
                    onChange={()=>setSameAsApplicant(!sameAsApplicant)}
         />  <label>Insured Client Same as Applicant</label></div>):('')}
-
-        {!sameAsApplicant?
-        (
-        <div className="container">
-        <BusinessDetailsClient title = "Insured Info" client={myClient} collectPayload = {collectUpdatePayload}/>
-        <BusinessDetailsContact title= "Insured Contact" address={insuredAddress} phone={insuredPhone} collectPayload = {collectUpdatePayload}/>
-        </div>
-        ):('')
-        }
-        
 
         <BusinessDetailsInsurance insurance={extractInsurance()} collectPayload = {collectUpdatePayload} />
         <BusinessDetailsFP business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
