@@ -30,6 +30,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const [applicantPhone, setApplicantPhone] = useState(null)
     const [insuredAddress, setInsuredAddress] = useState(null)
     const [insuredPhone, setInsuredPhone] = useState(null)
+    const [sameAsApplicant, setSameAsApplicant] = useState(false)
     const { user } = useAuth()
     const getMyClient = async () => {
         console.log('inside getMyClient')
@@ -63,6 +64,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         setApplicantPhone(extractApplicantPhone())
         setInsuredAddress(extractInsuredAddress())
         setInsuredPhone(extractInsuredPhone())
+        // Insured client same as applicant when they are the same people  
+        setSameAsApplicant(business.client===business.insurance_application[0].insured_client)
     }, [business, updateCounter, updateErrors])
 
     const fetchObject = async (url) =>{
@@ -197,7 +200,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <BusinessDetailsClient title = "Applicant Info" client={myClient} collectPayload = {collectUpdatePayload}/>
         <BusinessDetailsContact title= "Applicant Contact" address={applicantAddress} phone={applicantPhone} collectPayload = {collectUpdatePayload}/>
         </div>
-        {business.client!==business.insurance_application[0].insured_client?
+        {!sameAsApplicant?
         (
         <div className="container">
         <BusinessDetailsClient title = "Insured Info" client={myClient} collectPayload = {collectUpdatePayload}/>
