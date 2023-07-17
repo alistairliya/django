@@ -204,6 +204,15 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <BusinessDetailsClient title = "Applicant Info" client={myClient} collectPayload = {collectUpdatePayload}/>
         <BusinessDetailsContact title= "Applicant Contact" address={applicantAddress} phone={applicantPhone} collectPayload = {collectUpdatePayload}/>
         </div>
+        { business.client===business.insurance_application[0].insured_client &&
+            business.applicant_client_address===business.insurance_application[0].insured_client_address &&
+            business.applicant_client_phone===business.insurance_application[0].insured_client_phone?
+        (<div><input 
+                   type="checkbox"
+                   checked={sameAsApplicant}
+                   onChange={()=>setSameAsApplicant(!sameAsApplicant)}
+        />  <label>Same as Applicant</label></div>):('')}
+
         {!sameAsApplicant?
         (
         <div className="container">
