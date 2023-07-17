@@ -65,7 +65,11 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         setInsuredAddress(extractInsuredAddress())
         setInsuredPhone(extractInsuredPhone())
         // Insured client same as applicant when they are the same people  
-        setSameAsApplicant(business.client===business.insurance_application[0].insured_client)
+        setSameAsApplicant(
+            business.client===business.insurance_application[0].insured_client &&
+            business.applicant_client_address===business.insurance_application[0].insured_client_address &&
+            business.applicant_client_phone===business.insurance_application[0].insured_client_phone
+        )
     }, [business, updateCounter, updateErrors])
 
     const fetchObject = async (url) =>{
