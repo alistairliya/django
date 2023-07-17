@@ -204,6 +204,11 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <BusinessDetailsClient title = "Applicant Info" client={myClient} collectPayload = {collectUpdatePayload}/>
         <BusinessDetailsContact title= "Applicant Contact" address={applicantAddress} phone={applicantPhone} collectPayload = {collectUpdatePayload}/>
         </div>
+        {
+        // The display of checkbox cannot depend on sameAsApplicant variable because it changes the variable.
+        // It should always display when the client info is the same as the insured info. When this is the case, the checkbox gives user option to display insured info and change insured info.
+        // When client info is different from insured info, checkbox is not necessary because both applicant and the insured info have to be displayed.
+        }
         { business.client===business.insurance_application[0].insured_client &&
             business.applicant_client_address===business.insurance_application[0].insured_client_address &&
             business.applicant_client_phone===business.insurance_application[0].insured_client_phone?
