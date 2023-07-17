@@ -43,6 +43,14 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         //console.log('after set MyClinet')
     }
    
+    const getInsuredClient = async () => {
+        console.log('inside getInsuredClient')
+        let c = await fetchObject(business.insurance_application[0].insured_client)
+        //console.log("got client!")
+        //console.log('setting MyClinet')
+        setMyInsuredClient(c)
+        //console.log('after set MyClinet')
+    }
     //console.log('>>> BusinessDetails useEffect')
     //console.log(business.client)
     //console.log("^^^ Before calling getMyClient")
@@ -60,6 +68,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         console.log(refreshBusinesses)
 
         getMyClient()
+        getInsuredClient()
         getStatus()
         //console.log("^^^ After calling getMyClient")
         setApplicantAddress(extractApplicantAddress())
@@ -210,7 +219,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         {!sameAsApplicant?
         (
         <div className="container">
-        <BusinessDetailsClient title = "Insured Info" client={myClient} collectPayload = {collectUpdatePayload}/>
+        <BusinessDetailsClient title = "Insured Info" client={myInsuredClient} collectPayload = {collectUpdatePayload}/>
         <BusinessDetailsContact title= "Insured Contact" address={insuredAddress} phone={insuredPhone} collectPayload = {collectUpdatePayload}/>
         </div>
         ):('')
