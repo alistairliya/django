@@ -117,7 +117,7 @@ const BusinessDetailsContact = ({title, address, phone, collectPayload}) => {
           setUpdatePayload({...updatePayload, street_address:value})
           break
         case 'myUnit':
-          setMyAddress({...myAddress, unit:value})
+          setMyAddress({...myAddress, unit_number:value})
           setUpdatePayload({...updatePayload, unit:value})
           break
         case 'myCity':
