@@ -239,7 +239,7 @@ const BusinessDetailsInsurance = ({insurance, collectPayload}) => {
                 id="standard-basic" 
                 label="Face Amount" 
                 variant="standard" 
-                value={myInsurance ? '$'+myInsurance.face_amount : ''}
+                value={myInsurance ? (myInsurance.face_amount?'$'+myInsurance.face_amount:'') : ''}
                 name="FaceAmount"
                 onChange={handleChange}
                 /> 
@@ -247,7 +247,7 @@ const BusinessDetailsInsurance = ({insurance, collectPayload}) => {
                 id="standard-basic" 
                 label="Planned Premium" 
                 variant="standard" 
-                value={myInsurance ? '$'+myInsurance.planned_premium : ''}
+                value={myInsurance ? (myInsurance.planned_premium?'$'+myInsurance.planned_premium:'') : ''}
                 name = "PlannedPremium"
                 onChange={handleChange}
                 /> 
