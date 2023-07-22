@@ -16,6 +16,7 @@ import { useAuth } from "../hooks/useAuth"
 import BusinessDetailsClient from './BusinessDetailsClient'
 import BusinessDetailsContact from './BusinessDetailsContact'
 import BusinessDetailsInsurance from './BusinessDetailsInsurance'
+import BusinessDetailsAdvisors from './BusinessDetailsAdvisors'
 import BusinessDetailsFP from './BusinessDetailsFP'
 
 
@@ -241,6 +242,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         />  <label>Insured Client Same as Applicant</label></div>):('')}
 
         <BusinessDetailsInsurance insurance={extractInsurance()} collectPayload = {collectUpdatePayload} />
+        <BusinessDetailsAdvisors advisors={business.advisors} collectPayload = {collectUpdatePayload}/>
         <BusinessDetailsFP business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
         <Button 
         text='Close'
