@@ -4,9 +4,10 @@ import {useAuth} from '../hooks/useAuth'
 import NBF8Advisor from './NBF8Advisor'
 import Button from './Button'
 
-const BusinessDetailsAdvisors = ({}) => {
+const BusinessDetailsAdvisors = ({collectPayload}) => {
     const {user} = useAuth()
-    const [users, setUsers] = useState([])
+
+    const [users, setUsers] = useState([]) // all the 
     const [roles, setRoles] = useState([])
     const [advisors, setAdvisors] = useState({})
     const [collaboratorStatuses, setCollaboratorStatuses] = useState([])
@@ -58,6 +59,31 @@ const BusinessDetailsAdvisors = ({}) => {
             console.log(collaboratorPositions)
         },[users, roles, advisors, collaboratorStatuses, collaboratorPositions]
     )    
+
+    const addAdvisor = ()=>{
+        setAdvisors({...advisors, [key]:{} })
+        setKey(key+1)
+    }
+
+    // returns a function that removes the advisor
+    // Used by JSX below to create a function for each remove button
+    const removevAdvisor = (key)=>{
+        console.log('removevAdvisor building function for key: '+key.toString())
+        return ()=>{
+            const newAdvisors = {...advisors}
+            delete newAdvisors[key]
+            setAdvisors(newAdvisors)
+        }
+    }
+
+    const updateAdvisor = (key, value)=>{
+        console.log('updateAdvisor')
+        console.log(key)
+        console.log(value)
+        const newAdvisors = {...advisors}
+        newAdvisors[key] = value
+        setAdvisors(newAdvisors)
+    }
 
 
     return (
