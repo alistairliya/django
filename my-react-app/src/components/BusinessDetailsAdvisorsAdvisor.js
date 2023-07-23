@@ -3,7 +3,14 @@ import {useState, useEffect} from 'react'
 import {useAuth} from '../hooks/useAuth'
 import Select from 'react-select' // https://react-select.com/home
 
-const BusinessDetailsAdvisorsAdvisor = (id, selectedAdvisors, roles, users, collaboratorStatuses, collaboratorPositions, updateAdvisor) => {
+const BusinessDetailsAdvisorsAdvisor = ({
+    id, 
+    selectedAdvisors, 
+    roles, 
+    users, 
+    collaboratorStatuses, 
+    collaboratorPositions, 
+    updateAdvisor}) => {
 
     const [role, setRole] = useState({})
     const [advisor, setAdvisor] = useState({})
