@@ -7,7 +7,7 @@ import Button from './Button'
 const BusinessDetailsAdvisors = ({collectPayload}) => {
     const {user} = useAuth()
 
-    const [users, setUsers] = useState([]) // all the 
+    const [users, setUsers] = useState([]) // all the users of the system 
     const [roles, setRoles] = useState([])
     const [advisors, setAdvisors] = useState({})
     const [collaboratorStatuses, setCollaboratorStatuses] = useState([])
