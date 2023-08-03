@@ -339,6 +339,14 @@ class EditBusinessViewSet(viewsets.ViewSet):
             if insurance_data.get('planned_premium'):
                 insurance.planned_premium = insurance_data.get('planned_premium')
             insurance.save()
+        # 4 Update Collaborators
+        collaborator_data = data.get('collaborators')
+        if collaborator_data:
+            print(collaborator_data)
+            for key in collaborator_data:
+                collaborator = collaborator_data.get(key)
+                print(f'collaborator: {collaborator}')
+
         return Response({'result':message})
 
 
