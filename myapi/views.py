@@ -263,7 +263,7 @@ class EditBusinessViewSet(viewsets.ViewSet):
     # curl -X PUT -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -d '{"insuranceapplication":{"planned_premium":"$1002","plan_type":2,"provider":2,"face_amount":"$1000000111","id":59},"contact":{"street_address":"12345 ABCDEFG St.","unit":"123","province_state_id":3,"country_id":2,"phone_id":1,"address_id":1}}'  HTTP://127.0.0.1:8000/api/editbusiness/edit_business/
     @action(detail=False, methods=['put'])
     def edit_business(self, request, pk=None):
-        print('edit_business')
+        print(f'edit_business: {request.body}')
         data = json.loads(request.body)
         message = []
         # 1. Update Client

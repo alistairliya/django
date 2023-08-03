@@ -17,7 +17,7 @@ const BusinessDetailsAdvisors = ({collectPayload}) => {
 
     useEffect(
         ()=>{
-            console.log('useEffect in NBF8')
+            console.log('useEffect in BusinessDetailsAdvisors')
             const fetchResource = async(resource)=>{
                 let headers = new Headers()
                 const token = user['token']
@@ -50,19 +50,21 @@ const BusinessDetailsAdvisors = ({collectPayload}) => {
                 getCollaboratorStatuses()
                 getCollaboratorPosition()
             }
-            console.log('users:')
-            console.log(users)
+            //console.log('users:')
+            //console.log(users)
             console.log('advisors:')
             console.log(advisors)
-            console.log('collaboratorStatuses')
-            console.log(collaboratorStatuses)
-            console.log('collaboratorPositions')
-            console.log(collaboratorPositions)
+            //console.log('collaboratorStatuses')
+            //console.log(collaboratorStatuses)
+            //console.log('collaboratorPositions')
+            //console.log(collaboratorPositions)
         },[users, roles, advisors, collaboratorStatuses, collaboratorPositions]
     )    
 
     const addAdvisor = ()=>{
+        console.log('addAdvisor...'+key.toString())
         setAdvisors({...advisors, [key]:{} })
+        console.log('after setAdvisors')
         setKey(key+1)
     }
 
@@ -93,9 +95,9 @@ const BusinessDetailsAdvisors = ({collectPayload}) => {
             {Object.keys(advisors).map((key, index)=>{
                 //return <NBF8Advisor key={index} />
                 return (
-                    <div className='container'>
+                    <div key= {key} className='container'>
                         <NBF8Advisor 
-                            id={key} 
+                            id={key}
                             users={users} 
                             roles={roles} 
                             updateAdvisor = {updateAdvisor} 
