@@ -14,6 +14,8 @@ const BusinessDetailsAdvisors = ({collectPayload}) => {
     const [collaboratorStatuses, setCollaboratorStatuses] = useState([])
     const [collaboratorPositions, setCollaboratorPositions] = useState([])
     const [key, setKey] = useState(0)
+    const [editMode, setEditMode] = useState(false)
+    const [backgroundColor, setBackgroundColor] = useState('white');
 
     useEffect(
         ()=>{
@@ -58,7 +60,12 @@ const BusinessDetailsAdvisors = ({collectPayload}) => {
             //console.log(collaboratorStatuses)
             //console.log('collaboratorPositions')
             //console.log(collaboratorPositions)
-        },[users, roles, advisors, collaboratorStatuses, collaboratorPositions]
+            if(editMode){
+                console.log('EDIT MODE')
+                setBackgroundColor('lightblue')
+                collectPayload('collaborators', advisors)
+            }
+        },[editMode, users, roles, advisors, collaboratorStatuses, collaboratorPositions]
     )    
 
     const addAdvisor = ()=>{
@@ -76,6 +83,7 @@ const BusinessDetailsAdvisors = ({collectPayload}) => {
             const newAdvisors = {...advisors}
             delete newAdvisors[key]
             setAdvisors(newAdvisors)
+            setEditMode(true)
         }
     }
 
@@ -86,11 +94,12 @@ const BusinessDetailsAdvisors = ({collectPayload}) => {
         const newAdvisors = {...advisors}
         newAdvisors[key] = value
         setAdvisors(newAdvisors)
+        setEditMode(true)
     }
 
 
     return (
-        <div>
+        <div className="container">
             <h2>New Business Form: Advisor Information</h2>
             {Object.keys(advisors).map((key, index)=>{
                 //return <NBF8Advisor key={index} />
