@@ -189,10 +189,10 @@ class Business_User(models.Model):
     # To Do: Refactor the name from my_businesses to related_businesses
     user = models.ForeignKey(MyUser, on_delete = models.PROTECT, related_name="my_businesses")
     split = models.IntegerField(null=True) # 0 to 10000, with two implied decimals
-    user_role = models.ForeignKey(BusinessUserRole, on_delete=models.PROTECT, related_name = "businessusers")
+    user_role = models.ForeignKey(BusinessUserRole, on_delete=models.PROTECT, related_name = "businessusers", null=True)
     notes = models.CharField(max_length=1024, null=True)
     # Owner Datetime
-    created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="created_businessusers")
+    created_by = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="created_businessusers", null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     # Additional fields

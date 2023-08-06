@@ -340,13 +340,29 @@ class EditBusinessViewSet(viewsets.ViewSet):
                 insurance.planned_premium = insurance_data.get('planned_premium')
             insurance.save()
         # 4 Update Collaborators
+        business_id = data.get('business_id')
         collaborator_data = data.get('collaborators')
-        if collaborator_data:
+        if business_id and collaborator_data:
+            my_business = MyBusiness.objects.get(id=business_id)
             print(collaborator_data)
             for key in collaborator_data:
+                # For each collaborator, need to figure out if it's a new collaborator or an existing one
+                # if a business_user_id exists, then it's an existing collaborator
+                # otherwisse it is a new collaborator
                 collaborator = collaborator_data.get(key)
                 print(f'collaborator: {collaborator}')
-
+                business_user_id = collaborator.get('business_user_id')
+                if business_user_id:
+                    pass
+                else:
+                    # new collaborator
+                    print('new collaborator')
+                    user = MyUser.objects.get(id=collaborator.get('advisor').get('id'))
+                    business_user = Business_User(
+                        user=user,
+                        business=my_business
+                    )
+                    business_user.save()
         return Response({'result':message})
 
 
