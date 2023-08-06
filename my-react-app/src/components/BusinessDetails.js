@@ -242,7 +242,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         />  <label>Insured Client Same as Applicant</label></div>):('')}
 
         <BusinessDetailsInsurance insurance={extractInsurance()} collectPayload = {collectUpdatePayload} />
-        <BusinessDetailsAdvisors advisors={business.advisors} collectPayload = {collectUpdatePayload}/>
+        <BusinessDetailsAdvisors advisors={business.advisors} collectPayload = {collectUpdatePayload} business={business}/>
         <BusinessDetailsFP business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
         <Button 
         text='Close'

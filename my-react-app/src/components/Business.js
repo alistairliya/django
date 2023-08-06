@@ -27,7 +27,7 @@ const Business = ({business, onEdit, onToggle}) => {
   //console.log('----------------------') 
   if(business.related_users.length >0){ 
     for(let related_user of business.related_users){
-      if(related_user['user_role']['user_role_name']==='owner'){
+      if(related_user['user_role'] && related_user['user_role']['user_role_name']==='owner'){
         advisor = related_user.user
       }
     }

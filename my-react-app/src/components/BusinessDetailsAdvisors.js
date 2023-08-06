@@ -5,7 +5,7 @@ import NBF8Advisor from './NBF8Advisor'
 import BusinessDetailsAdvisorsAdvisor from './BusinessDetailsAdvisorsAdvisor'
 import Button from './Button'
 
-const BusinessDetailsAdvisors = ({collectPayload}) => {
+const BusinessDetailsAdvisors = ({collectPayload, business}) => {
     const {user} = useAuth()
 
     const [users, setUsers] = useState([]) // all the users of the system 
@@ -20,6 +20,7 @@ const BusinessDetailsAdvisors = ({collectPayload}) => {
     useEffect(
         ()=>{
             console.log('useEffect in BusinessDetailsAdvisors')
+            console.log(business)
             const fetchResource = async(resource)=>{
                 let headers = new Headers()
                 const token = user['token']
