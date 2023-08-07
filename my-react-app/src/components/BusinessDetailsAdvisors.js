@@ -16,11 +16,23 @@ const BusinessDetailsAdvisors = ({collectPayload, business}) => {
     const [key, setKey] = useState(0)
     const [editMode, setEditMode] = useState(false)
     const [backgroundColor, setBackgroundColor] = useState('white');
-
+    const [addedExistingAdvisor, setAddedExistingAdvisor] = useState(false)
     useEffect(
         ()=>{
             console.log('useEffect in BusinessDetailsAdvisors')
             console.log(business)
+            if(!addedExistingAdvisor && business.related_users && business.related_users.length > 0){
+                setAddedExistingAdvisor(true)
+                let myKey = 10000
+                business.related_users.forEach((user)=>{
+                    myKey += 1
+                    console.log('#$#$#$#$#$#$#$#$#$#b adding collaborator')
+                    console.log(user)
+                    addAdvisor(user, myKey)
+                })
+                console.log('AFTER ADDING COLLABORATORS !!!!!!!!!!!!!!')
+                console.log(advisors)
+            }
             const fetchResource = async(resource)=>{
                 let headers = new Headers()
                 const token = user['token']
@@ -66,16 +78,21 @@ const BusinessDetailsAdvisors = ({collectPayload, business}) => {
                 setBackgroundColor('lightblue')
                 collectPayload('collaborators', advisors)
             }
+            console.log('ADVISORS.......')
+            console.log(advisors)
         },[editMode, users, roles, advisors, collaboratorStatuses, collaboratorPositions]
     )    
 
-    const addAdvisor = (advisor)=>{
-        console.log('addAdvisor...'+key.toString())
+    const addAdvisor = (advisor, myKey)=>{
+        console.log('++++++++++++++..... addAdvisor...'+myKey.toString())
+        console.log(advisor)
         if(!advisor)
             advisor = {}
-        setAdvisors({...advisors, [key]:advisor })
+        if(!myKey)
+            myKey = key
+        setAdvisors({...advisors, [myKey]:advisor })
         console.log('after setAdvisors')
-        setKey(key+1)
+        setKey((prev) => prev + 1)
     }
 
     // returns a function that removes the advisor

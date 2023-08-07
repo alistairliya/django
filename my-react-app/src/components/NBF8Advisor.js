@@ -40,7 +40,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
     )
 
     useEffect(()=>{
-        console.log('useEffect for NBF8Advisor ID: '+id)
+        console.log('>>>>>>>>>>>>>>>>>>>> useEffect for NBF8Advisor ID: '+id)
         console.log('selectedAdvisors:')
         console.log(selectedAdvisors)
         if(selectedAdvisors[id]){
