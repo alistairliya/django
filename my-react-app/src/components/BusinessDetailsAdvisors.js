@@ -24,12 +24,15 @@ const BusinessDetailsAdvisors = ({collectPayload, business}) => {
             if(!addedExistingAdvisor && business.related_users && business.related_users.length > 0){
                 setAddedExistingAdvisor(true)
                 let myKey = 10000
+                let myAdvisors = {}
                 business.related_users.forEach((user)=>{
                     myKey += 1
                     console.log('#$#$#$#$#$#$#$#$#$#b adding collaborator')
                     console.log(user)
-                    addAdvisor(user, myKey)
+                    //addAdvisor(user, myKey)
+                    myAdvisors[myKey] = user
                 })
+                setAdvisors(myAdvisors)
                 console.log('AFTER ADDING COLLABORATORS !!!!!!!!!!!!!!')
                 console.log(advisors)
             }
