@@ -84,15 +84,18 @@ const BusinessDetailsAdvisors = ({collectPayload, business}) => {
     )    
 
     const addAdvisor = (advisor, myKey)=>{
-        console.log('++++++++++++++..... addAdvisor...'+myKey.toString())
+        console.log('++++++++++++++..... addAdvisor...')
         console.log(advisor)
         if(!advisor)
             advisor = {}
         if(!myKey)
             myKey = key
+        console.log('myKey: '+myKey.toString())
+        console.log(advisor)
         setAdvisors({...advisors, [myKey]:advisor })
         console.log('after setAdvisors')
-        setKey((prev) => prev + 1)
+        //setKey((prev) => prev + 1)
+        setKey(myKey + 1)
     }
 
     // returns a function that removes the advisor
