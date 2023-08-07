@@ -83,7 +83,7 @@ const BusinessDetailsFP = ({docName, business, refreshBusinesses, forApproval=fa
             //headers.set('Content-Type', 'application/json')
             const formData = new FormData()
             formData.append('file', file)
-            formData.append('remark', 'foobar2')
+            formData.append('remark', docName)
             formData.append('businessId', business.id)
             //const res = await fetch('http://localhost:8000/file/upload/',{
             const res = await fetch('http://localhost:8000/api/files/upload_file/',{
