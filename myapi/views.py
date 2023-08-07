@@ -259,6 +259,20 @@ class EditBusinessViewSet(viewsets.ViewSet):
     def list(self, request):
         return Response()
     
+    @action(detail=False, methods=['put'])
+    def update_status(self, request, pk=None):
+        print('update_status')
+        print(request.body)
+        data = json.loads(request.body)
+        
+        business_id = data.get('business_id')
+        status = data.get('status')
+        my_status = BusinessStatus.objects.get(status_name=status)
+        my_business = MyBusiness.objects.get(id=business_id)
+        my_business.status = my_status
+        my_business.save()
+        return Response({'result':[]})
+
     # curl -X PUT -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' HTTP://127.0.0.1:8000/api/editbusiness/edit_business/ 
     # curl -X PUT -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -d '{"insuranceapplication":{"planned_premium":"$1002","plan_type":2,"provider":2,"face_amount":"$1000000111","id":59},"contact":{"street_address":"12345 ABCDEFG St.","unit":"123","province_state_id":3,"country_id":2,"phone_id":1,"address_id":1}}'  HTTP://127.0.0.1:8000/api/editbusiness/edit_business/
     @action(detail=False, methods=['put'])

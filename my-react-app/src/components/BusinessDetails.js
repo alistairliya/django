@@ -180,6 +180,30 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         setUpdatePayload({...updatePayload, [key]:value})
     }
 
+    const submitForReview = async () =>{
+        console.log('submitForReview')
+        const url = 'http://127.0.0.1:8000/api/editbusiness/update_status/' 
+        const token = user['token']
+        const auth_str = 'Token '+token
+        const headers = new Headers()
+        headers.set('Authorization', auth_str)
+        headers.set('Content-Type', 'application/json')
+        const options = {
+            method: 'PUT',
+            headers: headers,
+            body: JSON.stringify({business_id:business.id, status:'Review'})
+        }
+        const fetchResult = await fetch(url, options)
+        const updatedResult = await fetchResult.json()
+        const errors = updatedResult['result']
+        if(errors.length === 0){
+            console.log('no errors')
+            setUpdateErrors(['Update successful'])
+            alert('Update successful')
+        }
+        setUpdateErrors(errors)
+    }
+
     const sendUpdate = async () =>{
         console.log('sendUpdate')
         console.log(updatePayload)
@@ -259,7 +283,10 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             onClick = {sendUpdate}
             disabled = {!editMode}
         />
-
+        <Button
+            text = 'Submit for Review'
+            onClick = {submitForReview}
+        />
 
         <div>
         {
