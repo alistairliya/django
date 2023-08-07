@@ -7,8 +7,8 @@ import Button from './Button'
 const BusinessDetailsFP = ({docName, business, refreshBusinesses, forApproval=false}) => {
     const [file, setFile] = useState(null) // file ready for upload
     const [fileUploadResult, setFileUploadResult] = useState(null)
-    const [fileData, setFileData] = useState(null)// uploaded files for the business
-    
+    const [fileData, setFileData] = useState(business.files)// uploaded files for the business
+    const [fileIndex, setFileIndex] = useState(-1) // index of the file to be uploaded
     const { user } = useAuth()
     const fileInputRef = useRef(null);
 
@@ -44,16 +44,27 @@ const BusinessDetailsFP = ({docName, business, refreshBusinesses, forApproval=fa
     useEffect(()=>{
         console.log('BusinessDetailsFP useEffect()')
         console.log('refreshBusinesses')
-        console.log(refreshBusinesses)
-        console.log(file)
+        console.log(docName)
+        console.log(business)
+        console.log(fileData)
+        console.log(business.files)
+        setFileIndex(-1)
 
         //getFileData()
         setFileData(business.files)
+        for(let i=0; i<business.files.length; i++){
+            console.log('for: '+i)
+            console.log(business.files[i])
+            if(business.files[i].remark === docName){
+                console.log('set index to '+ i)
+                setFileIndex(i)
+            }
+        }
         //if(file) // reset if file has a value
         //    setFile(null)
         setFileUploadResult("")
     
-    }, [file, business])
+    }, [file, business, fileIndex, fileData])
 
     const handleFileChange = (event) => {
         //event.preventDefault()
@@ -109,11 +120,15 @@ const BusinessDetailsFP = ({docName, business, refreshBusinesses, forApproval=fa
     }
 
     const showFileDetails = () =>{
-        const original_filename = fileData[fileData.length - 1].original_filename
-        const utcString = fileData[fileData.length - 1].timestamp
+        console.log('fileIndex: '+ fileIndex)
+        //const original_filename = fileData[fileData.length - 1].original_filename
+        const original_filename = fileData[fileIndex].original_filename
+        //const utcString = fileData[fileData.length - 1].timestamp
+        const utcString = fileData[fileIndex].timestamp
         const localDateTimeString = new Date(utcString).toLocaleString();
         
-        const url = fileData[fileData.length - 1].file
+        //const url = fileData[fileData.length - 1].file
+        const url = fileData[fileIndex].file
         const viewFP = () =>{
             console.log("viewFP()")
             window.open(url, '_blank', 'fullscreen=yes')
@@ -135,7 +150,7 @@ const BusinessDetailsFP = ({docName, business, refreshBusinesses, forApproval=fa
   return (
     <div className='container'>
         <h2>{docName?docName:'First Page'}</h2>
-        {fileData&&fileData.length > 0?showFileDetails():"No Uploaded File"}
+        {fileData&&fileData.length > 0 && fileIndex > -1?showFileDetails():"No Uploaded File"}
 <br/>
         <h3>Upload:</h3>
         <input type="file" onChange={handleFileChange} className='btn' ref={fileInputRef} />
