@@ -69,9 +69,11 @@ const BusinessDetailsAdvisors = ({collectPayload, business}) => {
         },[editMode, users, roles, advisors, collaboratorStatuses, collaboratorPositions]
     )    
 
-    const addAdvisor = ()=>{
+    const addAdvisor = (advisor)=>{
         console.log('addAdvisor...'+key.toString())
-        setAdvisors({...advisors, [key]:{} })
+        if(!advisor)
+            advisor = {}
+        setAdvisors({...advisors, [key]:advisor })
         console.log('after setAdvisors')
         setKey(key+1)
     }
