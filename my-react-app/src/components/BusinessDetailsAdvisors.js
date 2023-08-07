@@ -21,6 +21,7 @@ const BusinessDetailsAdvisors = ({collectPayload, business}) => {
         ()=>{
             console.log('useEffect in BusinessDetailsAdvisors')
             console.log(business)
+
             if(!addedExistingAdvisor && business.related_users && business.related_users.length > 0){
                 setAddedExistingAdvisor(true)
                 let myKey = 10000
@@ -36,6 +37,7 @@ const BusinessDetailsAdvisors = ({collectPayload, business}) => {
                 console.log('AFTER ADDING COLLABORATORS !!!!!!!!!!!!!!')
                 console.log(advisors)
             }
+            
             const fetchResource = async(resource)=>{
                 let headers = new Headers()
                 const token = user['token']
