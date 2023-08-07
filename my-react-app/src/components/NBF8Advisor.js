@@ -82,7 +82,14 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                 <Select
                     label="test"
                     options={advisorOptions}
-                    placeholder={selectedAdvisors[id] && selectedAdvisors[id].advisor && selectedAdvisors[id].advisor.first_name && selectedAdvisors[id].advisor.last_name? selectedAdvisors[id].advisor.first_name+' '+selectedAdvisors[id].advisor.last_name:'Advisor'}//'Select Advisor'
+                    placeholder={
+                        selectedAdvisors[id] && 
+                        selectedAdvisors[id].advisor && 
+                        selectedAdvisors[id].advisor.first_name && 
+                        selectedAdvisors[id].advisor.last_name? 
+                            selectedAdvisors[id].advisor.first_name+' '+selectedAdvisors[id].advisor.last_name:
+                            'Advisor'
+                        }//'Select Advisor'
                     onChange={(selectedOption)=>{
                         console.log('selectedOption')
                         console.log(selectedOption)
