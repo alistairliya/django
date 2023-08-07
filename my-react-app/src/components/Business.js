@@ -130,7 +130,8 @@ const Business = ({business, onEdit, onToggle}) => {
         <td>{business.settled_FYC}</td>
         <td>
           <AiFillTool style={{color:'red', cursor:'pointer'}} onClick={()=>onEdit(business)}/>
-          {showPdfLink()}
+          {//showPdfLink()
+          }
         </td>       
   </tr>
   </tbody>
