@@ -4,7 +4,7 @@ import { useAuth } from "../hooks/useAuth"
 import Button from './Button'
 
 
-const BusinessDetailsFP = ({business, refreshBusinesses, forApproval=false}) => {
+const BusinessDetailsFP = ({docName, business, refreshBusinesses, forApproval=false}) => {
     const [file, setFile] = useState(null) // file ready for upload
     const [fileUploadResult, setFileUploadResult] = useState(null)
     const [fileData, setFileData] = useState(null)// uploaded files for the business
@@ -123,7 +123,7 @@ const BusinessDetailsFP = ({business, refreshBusinesses, forApproval=false}) => 
             <div>Latest Uploaded File: {original_filename}</div>
             <div>Updloaded on: {localDateTimeString}</div>
             <Button 
-                text='View FP' 
+                text='View File' 
                 color='steelblue'
                 onClick={viewFP} 
             />
@@ -134,15 +134,15 @@ const BusinessDetailsFP = ({business, refreshBusinesses, forApproval=false}) => 
 
   return (
     <div className='container'>
-        <h2>First Page</h2>
-        {fileData&&fileData.length > 0?showFileDetails():"No Uploaded FP"}
+        <h2>{docName?docName:'First Page'}</h2>
+        {fileData&&fileData.length > 0?showFileDetails():"No Uploaded File"}
 <br/>
         <h3>Upload:</h3>
         <input type="file" onChange={handleFileChange} className='btn' ref={fileInputRef} />
         <div>
         {file && 
         <Button
-            text='Upload FP'
+            text='Upload File'
             color='steelblue'
             onClick={handleUpload}
         />
