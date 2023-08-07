@@ -271,7 +271,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <BusinessDetailsFP docName = 'First Page' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
         <BusinessDetailsFP docName = 'Commission Report' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
         
-        <BusinessDetailsFP docName = 'JFW Form' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
+        <BusinessDetailsFP docName = 'Delivery Receipt' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
         </div>
         <Button 
         text='Close'
