@@ -267,9 +267,12 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
 
         <BusinessDetailsInsurance insurance={extractInsurance()} collectPayload = {collectUpdatePayload} />
         <BusinessDetailsAdvisors advisors={business.advisors} collectPayload = {collectUpdatePayload} business={business}/>
+        <div className='container'>
         <BusinessDetailsFP docName = 'First Page' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
         <BusinessDetailsFP docName = 'Commission Report' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
+        
         <BusinessDetailsFP docName = 'JFW Form' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
+        </div>
         <Button 
         text='Close'
         color='red' 
