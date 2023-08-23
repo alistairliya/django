@@ -67,6 +67,7 @@ router.register(r'businessapproval', views.BusinessApprovalViewSet, basename='bu
 router.register(r'newbusiness', views.NewBusinessViewSet, basename='newbusiness') # for POSTING new business 
 router.register(r'files', views.FileViewSet, basename='files') #
 router.register(r'editbusiness', views.EditBusinessViewSet, basename='editbusiness') # for PUTTING new business
+router.register(r'notification', views.NotificationViewSet, basename='notification')
 
 urlpatterns = [
     path('', include("users.urls")),

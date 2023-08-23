@@ -311,4 +311,16 @@ class BusinessSupervisor(models.Model):
     supervisor = models.ForeignKey(MyUser, on_delete=models.PROTECT, related_name="business_supervisor")
     notes = models.CharField(blank=True, max_length=1024, null=True)
 
+class Notification(models.Model):
+    from_user = models.ForeignKey(MyUser, on_delete=models.DO_NOTHING, related_name='sent_notifications', null=True)
+    to_user = models.ForeignKey(MyUser, on_delete=models.DO_NOTHING, related_name='received_notifications', null=True)
+    related_business = models.ForeignKey(MyBusiness, on_delete=models.DO_NOTHING, related_name='notifications')
+    read = models.BooleanField()
+    message_code = models.CharField(max_length=64) # Code that suggest the type of message
+    message_text = models.CharField(max_length=1024)
+    created_date = models.DateTimeField(auto_now_add=True)
+    # How do I create a link that opens up the business?
+
+    
+
 
