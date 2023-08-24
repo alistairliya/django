@@ -271,6 +271,13 @@ class EditBusinessViewSet(viewsets.ViewSet):
         my_business = MyBusiness.objects.get(id=business_id)
         my_business.status = my_status
         my_business.save()
+        notification = Notification(
+            related_business = my_business,
+            message_text = f'Business Status Changed to {status}',
+            from_user = self.request.user,
+            message_code = 'BUSINESS_STATUS_CHANGE_REVIEW',
+        )
+        notification.save()
         return Response({'result':[]})
 
     # curl -X PUT -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' HTTP://127.0.0.1:8000/api/editbusiness/edit_business/ 
