@@ -319,8 +319,14 @@ class Notification(models.Model):
     message_code = models.CharField(max_length=64) # Code that suggest the type of message
     message_text = models.CharField(max_length=1024)
     created_date = models.DateTimeField(auto_now_add=True)
+    broadcast_group = models.CharField(max_length=64, null=True) # Group of users that will receive the messagea
     # How do I create a link that opens up the business?
 
+class UserNotification(models.Model):
+    user = models.ForeignKey(MyUser, on_delete=models.DO_NOTHING, related_name='user_notifications')
+    notification = models.ForeignKey(Notification, on_delete=models.DO_NOTHING, related_name='user_notifications')
+    read = models.BooleanField(default=False)
+    created_date = models.DateTimeField(auto_now_add=True)
     
 
 

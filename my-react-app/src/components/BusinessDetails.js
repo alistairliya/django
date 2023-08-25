@@ -191,7 +191,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         const options = {
             method: 'PUT',
             headers: headers,
-            body: JSON.stringify({business_id:business.id, status:'Review'})
+            body: JSON.stringify({business_id:business.id, status:'REVIEW'})
         }
         const fetchResult = await fetch(url, options)
         const updatedResult = await fetchResult.json()

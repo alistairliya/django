@@ -275,7 +275,8 @@ class EditBusinessViewSet(viewsets.ViewSet):
             related_business = my_business,
             message_text = f'Business Status Changed to {status}',
             from_user = self.request.user,
-            message_code = 'BUSINESS_STATUS_CHANGE_REVIEW',
+            message_code = status,
+            broadcast_group = 'STAFF'
         )
         notification.save()
         return Response({'result':[]})
@@ -770,3 +771,7 @@ class UploadFileView(APIView):
 class NotificationViewSet(viewsets.ModelViewSet):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
+
+class UserNotificationViewSet(viewsets.ModelViewSet):
+    queryset = UserNotification.objects.all()
+    serializer_class = UserNotificationSerializer
