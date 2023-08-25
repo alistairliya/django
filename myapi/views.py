@@ -279,6 +279,20 @@ class EditBusinessViewSet(viewsets.ViewSet):
             broadcast_group = 'STAFF'
         )
         notification.save()
+        # Need to also broadcast by populating UserNotifiation
+        # Loop thru all the users. If the user is a staff, insert a record
+        users = MyUser.objects.all()
+        for user in users:
+            print(f'user: {user} is staff: {user.is_staff}')
+            if user.is_staff:
+                print('inserting user notification')
+                user_notification = UserNotification(
+                    user = user,
+                    notification = notification,
+                    read = False
+                )
+                user_notification.save()
+
         return Response({'result':[]})
 
     # curl -X PUT -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' HTTP://127.0.0.1:8000/api/editbusiness/edit_business/ 
@@ -772,6 +786,8 @@ class NotificationViewSet(viewsets.ModelViewSet):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
 
+# Many-to-Nany relationship between user and notification
+# Shows if user has read a notification
 class UserNotificationViewSet(viewsets.ModelViewSet):
     queryset = UserNotification.objects.all()
     serializer_class = UserNotificationSerializer

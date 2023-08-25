@@ -285,6 +285,7 @@ class NotificationSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id','read','from_user','to_user','related_business','message_text','message_code','created_date', 'broadcast_group']
 
 class UserNotificationSerializer(serializers.HyperlinkedModelSerializer):
+    notification = NotificationSerializer()
     class Meta:
         model = UserNotification
         fields = ['id','user','notification','read','created_date']

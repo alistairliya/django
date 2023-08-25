@@ -1,7 +1,21 @@
 
+import { useAuth } from "../hooks/useAuth";
+
+import {useState, useEffect} from 'react'
 const Notifications = () => {
-  return (
-    <div>Notifications</div>
+
+    const { user } = useAuth();
+
+    useEffect(()=>{
+        //console.log(user)
+        // retrieve notifiations for the user from the backend
+    }, [])
+
+
+    return (
+    <div>
+
+    </div>
   )
 }
 
