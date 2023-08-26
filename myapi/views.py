@@ -789,5 +789,13 @@ class NotificationViewSet(viewsets.ModelViewSet):
 # Many-to-Nany relationship between user and notification
 # Shows if user has read a notification
 class UserNotificationViewSet(viewsets.ModelViewSet):
+    authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrCreator]
     queryset = UserNotification.objects.all()
     serializer_class = UserNotificationSerializer
+
+    # Return only unread messages for the user.
+    def get_queryset(self):
+        request_user = self.request.user
+        user_notifications = UserNotification.objects.filter(user = request_user.id, read = False)
+        return user_notifications
