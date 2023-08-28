@@ -12,6 +12,7 @@ const Notifications = () => {
         // retrieve notifiations for the user from the backend
         //const notifications = await fetchNotifications()
         console.log('useEffect in Notifications.js')
+        // curl -X GET http://127.0.0.1:8000/api/usernotification/  -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3'
         const fetchNotifications = async()=>{
             const notifications = await fetchObject('http://localhost:8000/api/usernotification/')
             console.log('fetched notifications')
