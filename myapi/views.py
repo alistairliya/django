@@ -258,7 +258,8 @@ class EditBusinessViewSet(viewsets.ViewSet):
     authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
     def list(self, request):
         return Response()
-    
+
+    # Submit for Review 
     @action(detail=False, methods=['put'])
     def update_status(self, request, pk=None):
         print('update_status')
@@ -271,9 +272,15 @@ class EditBusinessViewSet(viewsets.ViewSet):
         my_business = MyBusiness.objects.get(id=business_id)
         my_business.status = my_status
         my_business.save()
+        requested_user = self.request.user.username
+        name = self.request.user.first_name.strip() + ' ' + self.request.user.last_name.strip()
+        if name.strip() !='':
+            requested_user = f"{name} ({requested_user})" 
+
         notification = Notification(
             related_business = my_business,
-            message_text = f'Business Status Changed to {status}',
+            # Eugene Lin submitted Business ID 123 for REVIEW
+            message_text = f'{requested_user} submitted Business (Transaction ID: {my_business.id}) for REVIEW',
             from_user = self.request.user,
             message_code = status,
             broadcast_group = 'STAFF'
