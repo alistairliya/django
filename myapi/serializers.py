@@ -280,6 +280,9 @@ class BusinessApprovalSerializer(MyBusinessSerializer):
         fields = ['insurance_application','id','files','business_type','product','client','status','projected_FYC','settled_FYC','application_date','settled_date','application_location','created_by', 'created_date', 'modified_date', 'highlighted','business_insurance','related_users'] 
 
 class NotificationSerializer(serializers.HyperlinkedModelSerializer):
+    related_business =  MyBusinessSerializer()
+    from_user = UserSerializer()
+    to_user = UserSerializer()
     class Meta:
         model = Notification
         fields = ['id','read','from_user','to_user','related_business','message_text','message_code','created_date', 'broadcast_group']

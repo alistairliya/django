@@ -42,12 +42,14 @@ const Notifications = () => {
     return (
     <div>
         <h1>Notifications</h1>
+        <table>
         {
             notifications && notifications.map(
                 (userNotification) => {
-                    return <Notification key = {userNotification.id} notification = {userNotification.notification} />
+                    return <Notification key = {userNotification.id} userNotification = {userNotification} />
             })
         }
+        </table>
     </div>
   )
 }
