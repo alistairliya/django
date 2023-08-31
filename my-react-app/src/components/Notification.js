@@ -1,7 +1,7 @@
 
-const Notification = () => {
+const Notification = ({notification}) => {
   return (
-    <div>Notification</div>
+    <div>Notificatiopn {notification.message_text}</div>
   )
 }
 

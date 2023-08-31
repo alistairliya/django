@@ -2,6 +2,7 @@
 import { useAuth } from "../hooks/useAuth";
 
 import {useState, useEffect} from 'react'
+import Notification from './Notification'
 const Notifications = () => {
 
     const { user } = useAuth(null);
@@ -41,6 +42,12 @@ const Notifications = () => {
     return (
     <div>
         <h1>Notifications</h1>
+        {
+            notifications && notifications.map(
+                (userNotification) => {
+                    return <Notification key = {userNotification.id} notification = {userNotification.notification} />
+            })
+        }
     </div>
   )
 }
