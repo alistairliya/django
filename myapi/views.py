@@ -276,7 +276,7 @@ class EditBusinessViewSet(viewsets.ViewSet):
         name = self.request.user.first_name.strip() + ' ' + self.request.user.last_name.strip()
         if name.strip() !='':
             requested_user = f"{name} ({requested_user})" 
-
+        # Notifiecation for Admins
         notification = Notification(
             related_business = my_business,
             # Eugene Lin submitted Business ID 123 for REVIEW
@@ -299,6 +299,7 @@ class EditBusinessViewSet(viewsets.ViewSet):
                     read = False
                 )
                 user_notification.save()
+        # Notification for Collaborators
 
         return Response({'result':[]})
 
