@@ -259,7 +259,7 @@ class EditBusinessViewSet(viewsets.ViewSet):
     def list(self, request):
         return Response()
 
-    # Submit for Review 
+    # SUBMIT FOR REVIEW 
     @action(detail=False, methods=['put'])
     def update_status(self, request, pk=None):
         print('update_status')
