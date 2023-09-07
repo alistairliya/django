@@ -300,6 +300,27 @@ class EditBusinessViewSet(viewsets.ViewSet):
                 )
                 user_notification.save()
         # Notification for Collaborators
+        # Collaborators in Business_User model
+        notification = Notification(
+            related_business = my_business,
+            # Eugene Lin submitted Business ID 123 for REVIEW
+            message_text = f'{requested_user} submitted Business (Transaction ID: {my_business.id}) for collaboration',
+            from_user = self.request.user,
+            message_code = status,
+            broadcast_group = 'COLLABORATOR'
+        )
+        notification.save()
+        collaborators = Business_User.objects.filter(business = my_business)
+        for collaborator in collaborators:
+            print(f'collaborator: {collaborator}')
+            user = collaborator.user
+            print(f'user: {user}')
+            user_notification = UserNotification(
+                user = user,
+                notification = notification,
+                read = False
+            )
+            user_notification.save()
 
         return Response({'result':[]})
 
