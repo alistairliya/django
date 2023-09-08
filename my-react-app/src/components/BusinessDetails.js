@@ -67,6 +67,12 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         console.log(business)
         console.log('refreshBusinesses')
         console.log(refreshBusinesses)
+        // is user staff?
+        console.log("########### Business Details")
+        console.log(user)
+        
+        // is user owner?
+        
 
         getMyClient()
         getInsuredClient()

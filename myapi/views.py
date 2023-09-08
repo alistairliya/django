@@ -259,6 +259,11 @@ class EditBusinessViewSet(viewsets.ViewSet):
     def list(self, request):
         return Response()
 
+    @action(detail=False, methods=['get'])
+    def get_write_access(self, request):
+        print('get_write_access')
+        return Response('get write access')
+
     # SUBMIT FOR REVIEW 
     @action(detail=False, methods=['put'])
     def update_status(self, request, pk=None):
@@ -331,6 +336,24 @@ class EditBusinessViewSet(viewsets.ViewSet):
         print(f'edit_business: {request.body}')
         data = json.loads(request.body)
         message = []
+
+        # 0. Check if authorized to edit
+        # Owner and admin can edit
+        requested_user = self.request.user
+        print(f'requested_user: {requested_user}')
+        print(f'requested_user.is_staff: {requested_user.is_staff}')
+        # is requested_user a supberisor?
+        if not requested_user.is_staff:
+            # We need to check if user is owner
+            business_id = data.get('business_id')
+            my_business = MyBusiness.objects.get(id=business_id)
+            if my_business.created_by != requested_user:
+                print('not authorized')
+                message.append('You are not authorized to edit this business')
+                print(message)
+                #return Response({'result':message})
+                return Response({'result':message}, status=status.HTTP_401_UNAUTHORIZED)
+
         # 1. Update Client
         client_data = data.get('client')
         if client_data:
