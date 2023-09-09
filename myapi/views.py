@@ -259,10 +259,27 @@ class EditBusinessViewSet(viewsets.ViewSet):
     def list(self, request):
         return Response()
 
+
+    def authorized_for_write(self, business_id):
+        if not self.request.user.is_staff:
+            print('User not staff')
+            my_business = MyBusiness.objects.get(id=business_id)
+            if not my_business or my_business.created_by != self.request.user:
+                print('not authorized')
+                return False
+        return True
+
+    # Check if the requesting user has write access to the business
     @action(detail=False, methods=['get'])
     def get_write_access(self, request):
         print('get_write_access')
-        return Response('get write access')
+        business_id = self.request.query_params.get('business_id')
+        print(business_id)
+        is_authorized = self.authorized_for_write(business_id)
+        if is_authorized:
+            return Response('get write access')
+        else:
+            return Response('not authorized', status=status.HTTP_401_UNAUTHORIZED)
 
     # SUBMIT FOR REVIEW 
     @action(detail=False, methods=['put'])
