@@ -277,9 +277,9 @@ class EditBusinessViewSet(viewsets.ViewSet):
         print(business_id)
         is_authorized = self.authorized_for_write(business_id)
         if is_authorized:
-            return Response('get write access')
+            return Response({'result':'OK'})
         else:
-            return Response('not authorized', status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'result':'NO WRITE ACCESS'})
 
     # SUBMIT FOR REVIEW 
     @action(detail=False, methods=['put'])

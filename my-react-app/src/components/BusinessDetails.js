@@ -33,6 +33,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const [insuredAddress, setInsuredAddress] = useState(null)
     const [insuredPhone, setInsuredPhone] = useState(null)
     const [sameAsApplicant, setSameAsApplicant] = useState(false)
+    const [hasWriteAccess, setHasWriteAccess] = useState(false)
+
     const { user } = useAuth()
 
     const getMyClient = async () => {
@@ -62,6 +64,19 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         setMyStatus(s)
     }
 
+    const getWriteAcess = async () =>{
+        console.log('inside getWriteAcess')
+        const url = 'http://localhost:8000/api/editbusiness/get_write_access/?business_id='+business.id
+        let result = await fetchObject(url)
+        if(result['result'] === 'OK'){
+            console.log('AAAAAAAAAAAAAAAAA has write access')
+            setHasWriteAccess(true)
+        }else{
+            console.log('AAAAAAAAAAAAAAAAAAA does not have write access')
+        }
+    }
+
+
     useEffect(()=>{
         console.log('BusinessDetails useEffect()')
         console.log(business)
@@ -72,8 +87,10 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         console.log(user)
         
         // is user owner?
-        
+        // Call /api/editbusiness/get_write_access/?business_id=[business.id]
 
+        
+        getWriteAcess()
         getMyClient()
         getInsuredClient()
         getStatus()
