@@ -289,6 +289,16 @@ class EditBusinessViewSet(viewsets.ViewSet):
         data = json.loads(request.body)
         
         business_id = data.get('business_id')
+
+        authorized_for_write = self.authorized_for_write(business_id)
+        
+        message =[]
+        if not authorized_for_write:
+            message.append('You are not authorized to edit this business')
+            print(message)
+            #return Response({'result':message})
+            return Response({'result':message}, status=status.HTTP_401_UNAUTHORIZED)
+
         status = data.get('status')
         my_status = BusinessStatus.objects.get(status_name=status)
         my_business = MyBusiness.objects.get(id=business_id)

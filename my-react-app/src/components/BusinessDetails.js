@@ -204,6 +204,10 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     }
 
     const submitForReview = async () =>{
+        if(!hasWriteAccess){
+            alert('Only the onwer or supervisor can SUBMIT')
+            return
+        }
         console.log('submitForReview')
         const url = 'http://127.0.0.1:8000/api/editbusiness/update_status/' 
         const token = user['token']
@@ -228,6 +232,10 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     }
 
     const sendUpdate = async () =>{
+        if(!hasWriteAccess){
+            alert('Only the onwer or supervisor can EDIT')
+            return
+        }
         console.log('sendUpdate')
         console.log(updatePayload)
         const url = 'http://127.0.0.1:8000/api/editbusiness/edit_business/'
@@ -288,14 +296,14 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
                    disabled
         />  <label>Insured Client Same as Applicant</label></div>):('')}
 
-        <BusinessDetailsInsurance insurance={extractInsurance()} collectPayload = {collectUpdatePayload} />
-        <BusinessDetailsAdvisors advisors={business.advisors} collectPayload = {collectUpdatePayload} business={business}/>
+        <BusinessDetailsInsurance insurance={extractInsurance()} collectPayload = {collectUpdatePayload} writeAccess = {hasWriteAccess} />
+        <BusinessDetailsAdvisors advisors={business.advisors} collectPayload = {collectUpdatePayload} business={business} writeAccess = {hasWriteAccess}/>
         <div className='container'>
-        <BusinessDetailsFP docName = 'First Page' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
-        <BusinessDetailsFP docName = 'Commission Report' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
+        <BusinessDetailsFP docName = 'First Page' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval} writeAccess = {hasWriteAccess}/>
+        <BusinessDetailsFP docName = 'Commission Report' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval} writeAccess = {hasWriteAccess}/>
         
-        <BusinessDetailsFP docName = 'Delivery Receipt' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
-        <BusinessDetailsFP docName = 'TEST' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval}/>
+        <BusinessDetailsFP docName = 'Delivery Receipt' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval} writeAccess = {hasWriteAccess} />
+        <BusinessDetailsFP docName = 'TEST' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval} writeAccess = {hasWriteAccess}/>
         </div>
         <Button 
         text='Close'
@@ -310,11 +318,12 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <Button
             text = 'Update'
             onClick = {sendUpdate}
-            disabled = {!editMode}
+            disabled = {!editMode || !hasWriteAccess}
         />
         <Button
             text = 'Submit for Review'
             onClick = {submitForReview}
+            disabled = {!hasWriteAccess}
         />
 
         <div>
