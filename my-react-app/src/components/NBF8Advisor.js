@@ -3,7 +3,7 @@
 import {useState, useEffect} from 'react'
 import Select from 'react-select' // https://react-select.com/home
 
-const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collaboratorStatuses, collaboratorPositions}) => {
+const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collaboratorStatuses, collaboratorPositions, writeAccess}) => {
     const [role, setRole] = useState({})
     const [advisor, setAdvisor] = useState({})
     const [collaboratorStatus, setCollaboratorStatus] = useState({})
@@ -81,6 +81,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                 <label>Advisor:</label>
                 <Select
                     label="test"
+                    isDisabled={!writeAccess}
                     options={advisorOptions}
                     placeholder={
                         selectedAdvisors[id] && 
@@ -103,6 +104,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
             <div className="form-control">
                 <label>CFC Code:</label>
                 <input
+                    disabled={!writeAccess}
                     type="text"
                     placeholder={selectedAdvisors[id] && selectedAdvisors[id].cfcCode? selectedAdvisors[id].cfcCode:'Enter CFC Code'}
                     onChange = {(e)=>{
@@ -125,11 +127,14 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                         updateAdvisor(id, {advisor: advisor,role: selectedOption.value, fcfCode: cfcCode, collaboratorStatus: collaboratorStatus, collaboratorPosition: collaboratorPosition, split:split})
                         
                     }}
+
+                    isDisabled={!writeAccess}
                 />
             </div>
             <div className="form-control">
                 <label>Position:</label>
                 <Select
+                    isDisabled={!writeAccess}
                     options={collaboratorPositionOptions}
                     placeholder={selectedAdvisors[id] && selectedAdvisors[id].collaboratorPosition? selectedAdvisors[id].collaboratorPosition.position_name:'Position'} 
                     onChange={
@@ -145,6 +150,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
             <div className="form-control">
                 <label>Status:</label>
                 <Select 
+                    isDisabled={!writeAccess}
                     options = {collaboratorStatusOptions}
                     placeholder={selectedAdvisors[id] && selectedAdvisors[id].collaboratorStatus? selectedAdvisors[id].collaboratorStatus.status_name:'Status'}
                     onChange={
@@ -161,6 +167,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                 <label>Split:</label>
                 <input
                     type="text"
+                    isDisabled={!writeAccess}
                     placeholder={selectedAdvisors[id] && selectedAdvisors[id].split? selectedAdvisors[id].split:'Enter Split'}
                     onChange = {(e)=>{
                         console.log('e.target.value')

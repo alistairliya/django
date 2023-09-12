@@ -7,7 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 
-const BusinessDetailsInsurance = ({insurance, collectPayload}) => {
+const BusinessDetailsInsurance = ({insurance, collectPayload ,writeAccess}) => {
     const { user } = useAuth()
     const [myInsurance, setMyInsurance] = useState(null)
     const [myPlan, setMyPlan] = useState(null)
@@ -182,6 +182,7 @@ const BusinessDetailsInsurance = ({insurance, collectPayload}) => {
           label="Provider"
           name='myProvider'
           onChange={handleChange}
+          disabled={!writeAccess}
         >
           {providers?providers.map((provider) => (
           <MenuItem key = {provider.id} value={provider.id}>
@@ -202,6 +203,7 @@ const BusinessDetailsInsurance = ({insurance, collectPayload}) => {
           label="Plan"
           name='myPlan'
           onChange={handleChange}
+          disabled={!writeAccess}
         >
           {plans?plans.map((plan) => (
           <MenuItem key = {plan.id} value={plan.id}>
@@ -222,6 +224,7 @@ const BusinessDetailsInsurance = ({insurance, collectPayload}) => {
           label="Plan Type"
           name='myPlanType'
           onChange={handleChange}
+          disabled={!writeAccess}
         >
           {planTypes?planTypes.map((planType) => (
           <MenuItem key = {planType.id} value={planType.id}>
@@ -242,6 +245,7 @@ const BusinessDetailsInsurance = ({insurance, collectPayload}) => {
                 value={myInsurance ? (myInsurance.face_amount?'$'+myInsurance.face_amount:'') : ''}
                 name="FaceAmount"
                 onChange={handleChange}
+                disabled={!writeAccess}
                 /> 
                 <TextField 
                 id="standard-basic" 
@@ -250,6 +254,7 @@ const BusinessDetailsInsurance = ({insurance, collectPayload}) => {
                 value={myInsurance ? (myInsurance.planned_premium?'$'+myInsurance.planned_premium:'') : ''}
                 name = "PlannedPremium"
                 onChange={handleChange}
+                disabled={!writeAccess}
                 /> 
             </div>
             </Box>

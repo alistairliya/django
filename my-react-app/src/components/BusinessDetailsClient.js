@@ -11,7 +11,7 @@ import {useEffect, useState} from "react"
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 
-const BusinessDetailsClient = ({title, client, collectPayload}) => {
+const BusinessDetailsClient = ({title, client, collectPayload, writeAccess}) => {
     const [editMode, setEditMode] = useState(false)
     const [myClient, setMyClient] = useState({})
     const [myLastName , setMyLastName] = useState('Last')
@@ -109,6 +109,7 @@ const BusinessDetailsClient = ({title, client, collectPayload}) => {
             value={myFirstName}
             name="myFirstName"
             onChange={handleChange}
+            disabled={!writeAccess}
           /> 
           <TextField 
             id="standard-basic" 
@@ -117,6 +118,7 @@ const BusinessDetailsClient = ({title, client, collectPayload}) => {
             value={myMiddleName}
             name="myMiddleName"
             onChange={handleChange}
+            disabled={!writeAccess}
           /> 
           <TextField 
             id="standard-basic" 
@@ -125,6 +127,7 @@ const BusinessDetailsClient = ({title, client, collectPayload}) => {
             value={myLastName}
             name="myLastName"
             onChange={handleChange}
+            disabled={!writeAccess}
           /> 
         </div>
         <div>
@@ -135,6 +138,7 @@ const BusinessDetailsClient = ({title, client, collectPayload}) => {
             value={myBirthDate}
             name="myBirthDate"
             onChange={handleChange}
+            disabled={!writeAccess}
           /> 
         </div>
         <div>
@@ -145,6 +149,7 @@ const BusinessDetailsClient = ({title, client, collectPayload}) => {
             value={mySIN}
             name="mySIN"
             onChange={handleChange}
+            disabled={!writeAccess}
           /> 
         </div>
         <div>
@@ -155,6 +160,7 @@ const BusinessDetailsClient = ({title, client, collectPayload}) => {
             value={myGender}
             name="myGender"
             onChange={handleChange}
+            disabled={!writeAccess}
           /> 
 
         </div>

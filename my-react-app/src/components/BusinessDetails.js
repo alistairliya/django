@@ -269,15 +269,15 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             {forApproval?<Button text = 'Approve' color='green' onClick = {approveClicked} />:null}
         </div>
         <div className="container">
-        <BusinessDetailsClient title = "Applicant Info" client={myClient} collectPayload = {collectUpdatePayload}/>
-        <BusinessDetailsContact title= "Applicant Contact" address={applicantAddress} phone={applicantPhone} collectPayload = {collectUpdatePayload}/>
+        <BusinessDetailsClient title = "Applicant Info" client={myClient} collectPayload = {collectUpdatePayload} writeAccess = {hasWriteAccess}/>
+        <BusinessDetailsContact title= "Applicant Contact" address={applicantAddress} phone={applicantPhone} collectPayload = {collectUpdatePayload} writeAccess = {hasWriteAccess}/>
         </div>
 
         {!sameAsApplicant?
         (
         <div className="container">
-        <BusinessDetailsClient title = "Insured Info" client={myInsuredClient} collectPayload = {collectUpdatePayload}/>
-        <BusinessDetailsContact title= "Insured Contact" address={insuredAddress} phone={insuredPhone} collectPayload = {collectUpdatePayload}/>
+        <BusinessDetailsClient title = "Insured Info" client={myInsuredClient} collectPayload = {collectUpdatePayload} writeAccess = {hasWriteAccess}/>
+        <BusinessDetailsContact title= "Insured Contact" address={insuredAddress} phone={insuredPhone} collectPayload = {collectUpdatePayload} writeAccess = {hasWriteAccess}/>
         </div>
         ):('')
         }

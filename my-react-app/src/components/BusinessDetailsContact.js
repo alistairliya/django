@@ -8,7 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import {useEffect, useState} from "react"
 import { useAuth } from "../hooks/useAuth"
 // address and phone are urls
-const BusinessDetailsContact = ({title, address, phone, collectPayload}) => {
+const BusinessDetailsContact = ({title, address, phone, collectPayload, writeAccess}) => {
     const { user } = useAuth()
     const [myAddress, setMyAddress] = useState(null)
     const [myPhone, setMyPhone] = useState(null)
@@ -170,6 +170,7 @@ const BusinessDetailsContact = ({title, address, phone, collectPayload}) => {
             value={myAddress ? myAddress.street_address : ''}
             name="myStreetAddress"
             onChange={handleChange}
+            disabled={!writeAccess}
           /> 
           <TextField 
             id="standard-basic" 
@@ -178,6 +179,7 @@ const BusinessDetailsContact = ({title, address, phone, collectPayload}) => {
             value={myAddress ? (myAddress.unit_number?myAddress.unit_number:"") : ''}
             name="myUnit"
             onChange={handleChange}
+            disabled={!writeAccess}
           /> 
           <TextField 
             id="standard-basic" 
@@ -186,6 +188,7 @@ const BusinessDetailsContact = ({title, address, phone, collectPayload}) => {
             value={myAddress ? myAddress.city : ''}
             name="myCity"
             onChange={handleChange}
+            disabled={!writeAccess}
           /> 
         </div>
         <div> 
@@ -198,6 +201,7 @@ const BusinessDetailsContact = ({title, address, phone, collectPayload}) => {
           label="Province"
           name='myProvince'
           onChange={handleChange}
+          disabled={!writeAccess}
         >
         
           {provinces?provinces.map((province_state) => (
@@ -221,6 +225,7 @@ const BusinessDetailsContact = ({title, address, phone, collectPayload}) => {
           label="Country"
           name='myCountry'
           onChange={handleChange}
+          disabled={!writeAccess}
         >
           {countries?countries.map((country) => (
           <MenuItem key={country.id} value={country.id}>
@@ -240,6 +245,7 @@ const BusinessDetailsContact = ({title, address, phone, collectPayload}) => {
             value={myPhone ? myPhone.area_code : ''}
             name='myAreaCode'
             onChange={handleChange}
+            disabled={!writeAccess}
           /> 
           <TextField 
             id="standard-basic" 
@@ -248,6 +254,7 @@ const BusinessDetailsContact = ({title, address, phone, collectPayload}) => {
             value={myPhone? myPhone.phone_number : ''}
             name='myPhoneNumber'
             onChange={handleChange}
+            disabled={!writeAccess}
           /> 
         </div>
         </Box>

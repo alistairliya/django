@@ -5,7 +5,7 @@ import NBF8Advisor from './NBF8Advisor'
 import BusinessDetailsAdvisorsAdvisor from './BusinessDetailsAdvisorsAdvisor'
 import Button from './Button'
 
-const BusinessDetailsAdvisors = ({collectPayload, business}) => {
+const BusinessDetailsAdvisors = ({collectPayload, business, writeAccess}) => {
     const {user} = useAuth()
 
     const [users, setUsers] = useState([]) // all the users of the system 
@@ -140,10 +140,13 @@ const BusinessDetailsAdvisors = ({collectPayload, business}) => {
                             updateAdvisor = {updateAdvisor} 
                             selectedAdvisors = {advisors} 
                             collaboratorStatuses = {collaboratorStatuses} 
-                            collaboratorPositions ={collaboratorPositions} /> 
+                            collaboratorPositions ={collaboratorPositions}
+                            writeAccess = {writeAccess} /> 
                         <Button 
                             text='Remove' 
-                            onClick={removevAdvisor(key)} />
+                            onClick={removevAdvisor(key)} 
+                            disabled={!writeAccess}
+                            />
                     </div>
                 )
             })}
@@ -151,6 +154,7 @@ const BusinessDetailsAdvisors = ({collectPayload, business}) => {
                 text='Add Advisor' 
                 color='red' 
                 onClick={addAdvisor} 
+                disabled={!writeAccess}
             />
         </div>
     )
