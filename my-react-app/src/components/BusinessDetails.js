@@ -73,6 +73,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             setHasWriteAccess(true)
         }else{
             console.log('AAAAAAAAAAAAAAAAAAA does not have write access')
+            setHasWriteAccess(false)
         }
     }
 
@@ -105,7 +106,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             business.applicant_client_address===business.insurance_application[0].insured_client_address &&
             business.applicant_client_phone===business.insurance_application[0].insured_client_phone
         )
-    }, [business, updateCounter, updateErrors])
+    }, [business, updateCounter, updateErrors, hasWriteAccess])
 
     const fetchObject = async (url) =>{
         let headers = new Headers()
