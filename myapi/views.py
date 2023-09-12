@@ -215,9 +215,14 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
         #pass
         # A list of businesssupervisor that the user is the supervisor of
         request_user = self.request.user 
-        approving_businesses = list(BusinessSupervisor.objects.filter(supervisor = self.request.user.id).values_list('business', flat=True))
-        qs = self.queryset.filter(pk__in = approving_businesses)
-        return qs
+        #approving_businesses = list(BusinessSupervisor.objects.filter(supervisor = self.request.user.id).values_list('business', flat=True))
+        #qs = self.queryset.filter(pk__in = approving_businesses)
+        if request_user.is_staff:
+            # Admins can see all businesses
+            qs = self.queryset.all()
+            qs = self.queryset.filter(status__status_name = 'REVIEW')
+            return qs
+        return None
 
 class FileViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
