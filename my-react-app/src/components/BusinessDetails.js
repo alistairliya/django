@@ -36,6 +36,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const [sameAsApplicant, setSameAsApplicant] = useState(false)
     const [hasWriteAccess, setHasWriteAccess] = useState(false)
     const [approvalButtonsDisabled, setApprovalButtonsDisabled] = useState(false)
+    const [DeclineConfirmDisplayed, setDeclineConfirmDisplayed] = useState(false)
 
     const { user } = useAuth()
 
@@ -162,6 +163,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const declineClicked = () =>{
         console.log('declineClicked')
         setApprovalButtonsDisabled(true)
+        setDeclineConfirmDisplayed(true)
     }
 
     // Passed to BusinessDetailsDecline
@@ -173,12 +175,6 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         const result = await approvalHelper(declinedStatusUrl)
         console.log('after approvalHelper in declineConfirmed in BusinessDetails.js')
         console.log(result)
-        if(result && result.status === declinedStatusUrl){
-            console.log('declineConfirmed: status updated')
-            setApprovalButtonsDisabled(true)
-        }else{
-            console.log('declineConfirmed: status not updated')
-        }
     }
 
     
@@ -217,6 +213,10 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             await getStatus()
             await refreshBusinesses()
             console.log('after refreshBusinesses in approveClicked in BusinessDetails.js')
+            if(updatedResult && updatedResult.status === approvalStatusUrl){
+                setApprovalButtonsDisabled(true)
+                setDeclineConfirmDisplayed(false)
+            }
             return updatedResult
         }
 
@@ -307,7 +307,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
                         <Button text = 'Decline' color='red' onClick = {declineClicked} disabled = {approvalButtonsDisabled} />
                     </div>)
                 :null}
-            {approvalButtonsDisabled &&
+            {DeclineConfirmDisplayed &&
             (
                 <BusinessDetailsDecline setDeclinePopup={setApprovalButtonsDisabled} declineConfirmed = {declineConfirmed}/>
             )}
