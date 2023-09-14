@@ -167,7 +167,7 @@ const NBF8Advisor = ({id, users, roles, updateAdvisor, selectedAdvisors, collabo
                 <label>Split:</label>
                 <input
                     type="text"
-                    isDisabled={!writeAccess}
+                    disabled={!writeAccess}
                     placeholder={selectedAdvisors[id] && selectedAdvisors[id].split? selectedAdvisors[id].split:'Enter Split'}
                     onChange = {(e)=>{
                         console.log('e.target.value')
