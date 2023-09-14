@@ -2,7 +2,7 @@
 
 import Button from "./Button"
 import TextField from '@mui/material/TextField'
-import {useEffect, useState} from "react"
+import {useState} from "react"
 
 const BusinessDetailsDecline = ({setDeclinePopup, declineConfirmed}) => {
 
