@@ -157,6 +157,10 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         return insurance
     }
 
+    const declineClicked = () =>{
+        console.log('declineClicked')
+    }
+
     const approveClicked = () =>{
         console.log('approveClicked')
         console.log(business)
@@ -270,7 +274,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
                 (
                     <div>
                         <Button text = 'Approve' color='green' onClick = {approveClicked} /> 
-                        <Button text = 'Decline' />
+                        <Button text = 'Decline' color='red' onClick = {declineClicked} />
                     </div>)
                 :null}
         </div>
