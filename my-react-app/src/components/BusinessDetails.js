@@ -169,7 +169,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         // Need ID of business and ID of status
         // Hard code for now. Should be a constant somewhere.
         const approve = async () =>{
-            const approvedStatus = 'http://127.0.0.1:8000/api/businessstatus/3/'
+            const approvedStatus = 'http://127.0.0.1:8000/api/businessstatus/3/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!!
             const url = 'http://127.0.0.1:8000/api/businessapproval/' + business.id+'/'
             const data = {
                 status: approvedStatus
