@@ -225,6 +225,8 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
     
     def update(self, request, *args, **kwargs):
         print('!!! UPDATE !!!')
+        print(request.data)
+        # Add a BusinessDeclined object here
         return super().update(request, *args, **kwargs)
 
 class FileViewSet(viewsets.ModelViewSet):

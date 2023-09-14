@@ -172,7 +172,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         console.log('declineConfirmed')
         console.log(reason)
         const declinedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/4/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!! 
-        const result = await approvalHelper(declinedStatusUrl)
+        const result = await approvalHelper(declinedStatusUrl, reason)
         console.log('after approvalHelper in declineConfirmed in BusinessDetails.js')
         console.log(result)
     }
@@ -185,17 +185,18 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     }    
 
 
-    const approvalHelper = async (approvalStatusUrl) =>{
+    const approvalHelper = async (approvalStatusUrl, reason='') =>{
         console.log('APPROVALHELPER')
         // call the API to approve the business
         // curl -X PATCH -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"status":"http://127.0.0.1:8000/api/businessstatus/3/"}' http://127.0.0.1:8000/api/businessapproval/1/
         // Need ID of business and ID of status
         // Hard code for now. Should be a constant somewhere.
-        const sendApproval = async () =>{
+        const sendApproval = async (reason='') =>{
             const approvedStatus = approvalStatusUrl//'http://127.0.0.1:8000/api/businessstatus/3/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!!
             const url = 'http://127.0.0.1:8000/api/businessapproval/' + business.id+'/'
             const data = {
-                status: approvedStatus
+                status: approvedStatus,
+                reason: reason
             }
             const token = user['token']
             const auth_str = 'Token '+token
@@ -220,7 +221,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             return updatedResult
         }
 
-        const result = await sendApproval()
+        const result = await sendApproval(reason)
         console.log('Approval Helper Complete')
         console.log(result)
         return result
