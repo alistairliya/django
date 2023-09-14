@@ -164,15 +164,23 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         setDeclinePopup(true)
     }
 
+    
     const approveClicked = () =>{
+        console.log('approveClicked')
+        const approvedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/3/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!!
+        approvalHelper(approvedStatusUrl)
+    }    
+
+
+    const approvalHelper = (approvalStatusUrl) =>{
         console.log('approveClicked')
         console.log(business)
         // call the API to approve the business
         // curl -X PATCH -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"status":"http://127.0.0.1:8000/api/businessstatus/3/"}' http://127.0.0.1:8000/api/businessapproval/1/
         // Need ID of business and ID of status
         // Hard code for now. Should be a constant somewhere.
-        const approve = async () =>{
-            const approvedStatus = 'http://127.0.0.1:8000/api/businessstatus/3/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!!
+        const sendApproval = async () =>{
+            const approvedStatus = approvalStatusUrl//'http://127.0.0.1:8000/api/businessstatus/3/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!!
             const url = 'http://127.0.0.1:8000/api/businessapproval/' + business.id+'/'
             const data = {
                 status: approvedStatus
@@ -196,7 +204,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             return updatedResult
         }
 
-        approve()
+        sendApproval()
 
 
     }
