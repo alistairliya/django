@@ -164,10 +164,13 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         setDeclinePopup(true)
     }
 
+    // Passed to BusinessDetailsDecline
+    // Called when user clicks on the confirm button in BusinessDetailsDecline
     const declineConfirmed = (reason) =>{
         console.log('declineConfirmed')
         console.log(reason)
-
+        const declinedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/4/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!! 
+        approvalHelper(declinedStatusUrl)
     }
 
     
