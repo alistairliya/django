@@ -13,7 +13,9 @@ const BusinessDetailsDecline = ({setDeclinePopup}) => {
 
     const handleDecline = () => {
         console.log('handleDecline')
-        closePopup()
+        // submit to API
+
+        setDeclinePopup(false)
     }
 
   return (
