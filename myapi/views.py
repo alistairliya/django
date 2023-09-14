@@ -227,6 +227,19 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
         print('!!! UPDATE !!!')
         print(request.data)
         # Add a BusinessDeclined object here
+        # 1. Get the business
+        my_business = self.get_object()
+        # 2. Create a BusinessDeclined object
+        business_declined = BusinessDeclined(
+            business = my_business,
+            notes = request.data.get('reason'),
+            is_resolved = False)
+        business_declined.save()
+        # 4. Send notification to the user
+        # 5. Send notification to the collaborators
+        # 6. Send notification to the supervisor
+
+
         return super().update(request, *args, **kwargs)
 
 class FileViewSet(viewsets.ModelViewSet):
