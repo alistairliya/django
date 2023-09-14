@@ -266,7 +266,13 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <div>Transaction ID: {business.id}</div>
         <div>Status: {myStatus?myStatus.status_name:""}</div>
         <div>
-            {forApproval?<Button text = 'Approve' color='green' onClick = {approveClicked} />:null}
+            {forApproval?
+                (
+                    <div>
+                        <Button text = 'Approve' color='green' onClick = {approveClicked} /> 
+                        <Button text = 'Decline' />
+                    </div>)
+                :null}
         </div>
         <div className="container">
         <BusinessDetailsClient title = "Applicant Info" client={myClient} collectPayload = {collectUpdatePayload} writeAccess = {hasWriteAccess}/>
