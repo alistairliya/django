@@ -16,7 +16,6 @@ const BusinessDetailsDecline = ({setDeclinePopup, declineConfirmed}) => {
     const handleDecline = () => {
         console.log('handleDecline')
         // submit to API
-        declineConfirmed()
         setDeclinePopup(false)
         declineConfirmed(reason)
     }

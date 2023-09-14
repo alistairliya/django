@@ -35,7 +35,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const [insuredPhone, setInsuredPhone] = useState(null)
     const [sameAsApplicant, setSameAsApplicant] = useState(false)
     const [hasWriteAccess, setHasWriteAccess] = useState(false)
-    const [declinePopup, setDeclinePopup] = useState(false)
+    const [approvalButtonsDisabled, setApprovalButtonsDisabled] = useState(false)
 
     const { user } = useAuth()
 
@@ -161,7 +161,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
 
     const declineClicked = () =>{
         console.log('declineClicked')
-        setDeclinePopup(true)
+        setApprovalButtonsDisabled(true)
     }
 
     // Passed to BusinessDetailsDecline
@@ -171,6 +171,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         console.log(reason)
         const declinedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/4/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!! 
         approvalHelper(declinedStatusUrl)
+        //console.log('after approvalHelper in declineConfirmed in BusinessDetails.js')
+        //console.log(result)
     }
 
     
@@ -181,9 +183,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     }    
 
 
-    const approvalHelper = (approvalStatusUrl) =>{
-        console.log('approveClicked')
-        console.log(business)
+    const approvalHelper = async (approvalStatusUrl) =>{
+        console.log('APPROVALHELPER')
         // call the API to approve the business
         // curl -X PATCH -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"status":"http://127.0.0.1:8000/api/businessstatus/3/"}' http://127.0.0.1:8000/api/businessapproval/1/
         // Need ID of business and ID of status
@@ -213,7 +214,9 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             return updatedResult
         }
 
-        sendApproval()
+        const result = await sendApproval()
+        console.log('Approval Helper Complete')
+        console.log(result)
 
 
     }
@@ -293,13 +296,13 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             {forApproval?
                 (
                     <div>
-                        <Button text = 'Approve' color='green' onClick = {approveClicked} disabled = {declinePopup}  /> 
-                        <Button text = 'Decline' color='red' onClick = {declineClicked} disabled = {declinePopup} />
+                        <Button text = 'Approve' color='green' onClick = {approveClicked} disabled = {approvalButtonsDisabled}  /> 
+                        <Button text = 'Decline' color='red' onClick = {declineClicked} disabled = {approvalButtonsDisabled} />
                     </div>)
                 :null}
-            {declinePopup &&
+            {approvalButtonsDisabled &&
             (
-                <BusinessDetailsDecline setDeclinePopup={setDeclinePopup} declineConfirmed = {declineConfirmed}/>
+                <BusinessDetailsDecline setDeclinePopup={setApprovalButtonsDisabled} declineConfirmed = {declineConfirmed}/>
             )}
         </div>
 
