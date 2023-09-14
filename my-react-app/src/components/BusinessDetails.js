@@ -370,7 +370,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <Button
             text = 'Submit for Review'
             onClick = {submitForReview}
-            disabled = {!hasWriteAccess}
+            disabled = {!hasWriteAccess || forApproval}
         />
 
         <div>
