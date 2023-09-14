@@ -204,7 +204,6 @@ class BusinessSupervisorViewSet(viewsets.ModelViewSet):
     queryset = BusinessSupervisor.objects.all()
     serializer_class = BusinessSupervisorSerializer
 
-
 class BusinessApprovalViewSet(viewsets.ModelViewSet):
     queryset = MyBusiness.objects.all()
     serializer_class = BusinessApprovalSerializer
@@ -223,6 +222,10 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
             qs = self.queryset.filter(status__status_name = 'REVIEW')
             return qs
         return None
+    
+    def update(self, request, *args, **kwargs):
+        print('!!! UPDATE !!!')
+        return super().update(request, *args, **kwargs)
 
 class FileViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
