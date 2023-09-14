@@ -164,6 +164,12 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         setDeclinePopup(true)
     }
 
+    const declineConfirmed = (reason) =>{
+        console.log('declineConfirmed')
+        console.log(reason)
+
+    }
+
     
     const approveClicked = () =>{
         console.log('approveClicked')
@@ -290,7 +296,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
                 :null}
             {declinePopup &&
             (
-                <BusinessDetailsDecline setDeclinePopup={setDeclinePopup}/>
+                <BusinessDetailsDecline setDeclinePopup={setDeclinePopup} declineConfirmed = {declineConfirmed}/>
             )}
         </div>
 

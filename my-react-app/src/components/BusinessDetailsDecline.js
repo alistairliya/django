@@ -2,9 +2,11 @@
 
 import Button from "./Button"
 import TextField from '@mui/material/TextField'
+import {useEffect, useState} from "react"
 
-const BusinessDetailsDecline = ({setDeclinePopup}) => {
+const BusinessDetailsDecline = ({setDeclinePopup, declineConfirmed}) => {
 
+    const [reason, setReason] = useState('')
 
     const closePopup = () => {
         setDeclinePopup(false)
@@ -14,8 +16,16 @@ const BusinessDetailsDecline = ({setDeclinePopup}) => {
     const handleDecline = () => {
         console.log('handleDecline')
         // submit to API
-
+        declineConfirmed()
         setDeclinePopup(false)
+        declineConfirmed(reason)
+    }
+
+    const handleReasonChange = (e) => {
+        console.log('handleReasonChange')
+        console.log(e.target.value)
+        //const { name, value } = e.target
+        setReason(e.target.value)
     }
 
   return (
@@ -26,6 +36,8 @@ const BusinessDetailsDecline = ({setDeclinePopup}) => {
                 label="Reason for Decline"
                 multiline    
                 rows={4}
+                name='myReason'
+                onChange={handleReasonChange}
             />
         </div>
         <div>
