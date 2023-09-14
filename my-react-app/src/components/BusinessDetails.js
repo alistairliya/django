@@ -18,6 +18,7 @@ import BusinessDetailsContact from './BusinessDetailsContact'
 import BusinessDetailsInsurance from './BusinessDetailsInsurance'
 import BusinessDetailsAdvisors from './BusinessDetailsAdvisors'
 import BusinessDetailsFP from './BusinessDetailsFP'
+import BusinessDetailsDecline from './BusinessDetailsDecline'
 
 
 const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApproval=false}) => {
@@ -34,6 +35,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const [insuredPhone, setInsuredPhone] = useState(null)
     const [sameAsApplicant, setSameAsApplicant] = useState(false)
     const [hasWriteAccess, setHasWriteAccess] = useState(false)
+    const [declinePopup, setDeclinePopup] = useState(false)
 
     const { user } = useAuth()
 
@@ -159,6 +161,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
 
     const declineClicked = () =>{
         console.log('declineClicked')
+        setDeclinePopup(true)
     }
 
     const approveClicked = () =>{
@@ -277,7 +280,13 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
                         <Button text = 'Decline' color='red' onClick = {declineClicked} />
                     </div>)
                 :null}
+            {declinePopup &&
+            (
+                <BusinessDetailsDecline/>
+            )}
         </div>
+
+
         <div className="container">
         <BusinessDetailsClient title = "Applicant Info" client={myClient} collectPayload = {collectUpdatePayload} writeAccess = {hasWriteAccess}/>
         <BusinessDetailsContact title= "Applicant Contact" address={applicantAddress} phone={applicantPhone} collectPayload = {collectUpdatePayload} writeAccess = {hasWriteAccess}/>
