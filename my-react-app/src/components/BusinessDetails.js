@@ -276,8 +276,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             {forApproval?
                 (
                     <div>
-                        <Button text = 'Approve' color='green' onClick = {approveClicked} /> 
-                        <Button text = 'Decline' color='red' onClick = {declineClicked} />
+                        <Button text = 'Approve' color='green' onClick = {approveClicked}  /> 
+                        <Button text = 'Decline' color='red' onClick = {declineClicked} disabled = {declinePopup} />
                     </div>)
                 :null}
             {declinePopup &&
