@@ -282,7 +282,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
                 :null}
             {declinePopup &&
             (
-                <BusinessDetailsDecline/>
+                <BusinessDetailsDecline setDeclinePopup={setDeclinePopup}/>
             )}
         </div>
 

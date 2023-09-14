@@ -1,8 +1,18 @@
 // rafce
 
-const BusinessDetailsDecline = () => {
+import Button from "./Button"
+
+const BusinessDetailsDecline = ({setDeclinePopup}) => {
+
+
+    const closePopup = () => {
+        setDeclinePopup(false)
+    }
+
   return (
-    <div>BusinessDetailsDecline</div>
+    <div>BusinessDetailsDecline
+    <Button text='Close' onClick={closePopup} /> 
+    </div>
   )
 }
 
