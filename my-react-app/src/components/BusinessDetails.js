@@ -166,13 +166,19 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
 
     // Passed to BusinessDetailsDecline
     // Called when user clicks on the confirm button in BusinessDetailsDecline
-    const declineConfirmed = (reason) =>{
+    const declineConfirmed = async (reason) =>{
         console.log('declineConfirmed')
         console.log(reason)
         const declinedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/4/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!! 
-        approvalHelper(declinedStatusUrl)
-        //console.log('after approvalHelper in declineConfirmed in BusinessDetails.js')
-        //console.log(result)
+        const result = await approvalHelper(declinedStatusUrl)
+        console.log('after approvalHelper in declineConfirmed in BusinessDetails.js')
+        console.log(result)
+        if(result && result.status === declinedStatusUrl){
+            console.log('declineConfirmed: status updated')
+            setApprovalButtonsDisabled(true)
+        }else{
+            console.log('declineConfirmed: status not updated')
+        }
     }
 
     
@@ -217,6 +223,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         const result = await sendApproval()
         console.log('Approval Helper Complete')
         console.log(result)
+        return result
 
 
     }
