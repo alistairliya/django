@@ -882,3 +882,10 @@ class UserNotificationViewSet(viewsets.ModelViewSet):
         request_user = self.request.user
         user_notifications = UserNotification.objects.filter(user = request_user.id, read = False)
         return user_notifications
+    
+
+class BusinessDeclinedViewSet(viewsets.ModelViewSet):
+    authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = BusinessDeclined.objects.all()
+    serializer_class = BusinessDeclinedSerializer

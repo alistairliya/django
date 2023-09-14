@@ -327,6 +327,12 @@ class UserNotification(models.Model):
     notification = models.ForeignKey(Notification, on_delete=models.DO_NOTHING, related_name='user_notifications')
     read = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
+
+class BusinessDeclined(models.Model):
+    business = models.ForeignKey(MyBusiness, on_delete=models.PROTECT, related_name="business_declined")
+    notes = models.CharField(max_length=1024, null=True, blank=True)
+    is_resolved = models.BooleanField(default=False)
+    created_date = models.DateTimeField(auto_now_add=True)
     
 
 

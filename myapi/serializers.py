@@ -292,3 +292,8 @@ class UserNotificationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = UserNotification
         fields = ['id','user','notification','read','created_date']
+
+class BusinessDeclinedSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = BusinessDeclined
+        fields = ['id','business','notes','is_resolved','created_date']
