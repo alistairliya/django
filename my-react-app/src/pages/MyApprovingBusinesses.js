@@ -93,7 +93,7 @@ function MyApprovingBusinesses() {
           businesses = {businesses} 
           onEdit = {editBusiness} 
           onToggle={toggleReminder}
-          showApproved = {false}
+          showDeclined = {false}
         /> 
       ):( 
         'No business to show'

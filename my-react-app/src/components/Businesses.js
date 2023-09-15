@@ -4,33 +4,34 @@ import {useEffect, useState} from "react"
 import Button from './Button'
 
 
-const Businesses = ({businesses, onEdit, onToggle, showApproved = true}) => { 
+const Businesses = ({businesses, onEdit, onToggle, showDeclined = true}) => { 
 
-  const [showApprovedBusinesses, setShowApprovedBusinessess] = useState(true)
+  const [showDeclinedOnly, setShowDeclinedOnly] = useState(false)
 
   useEffect(()=>{
     console.log('useEffect for Businesses')
-    setShowApprovedBusinessess(showApproved)
+    //setShowDeclinedOnly(showDeclined)
   },[])
 
-  const isBusinessYetApproved = (business) => {
-    if(!showApprovedBusinesses && business.status === "http://localhost:8000/api/businessstatus/3/"){
-      // Do not show approvved and business is prroved
-      console.log('isBusinessYetApproved: false')
-      return false
+  const isBusinessDeclined = (business) => {
+    if(!showDeclinedOnly){
+      return true // show everything
     }
-    console.log('isBusinessYetApproved: true')
-    console.log(showApproved)
-    console.log(business.status)
-    return true
+    
+    if(showDeclinedOnly && business.status === "http://localhost:8000/api/businessstatus/4/"){
+      return true
+    }
+
+    return false
   }
 
   return (
     <div className="container">
       <div>
         <Button 
-          text = {showApprovedBusinesses?'Hide Approved':'Show Approved'}
-          onClick = {() => setShowApprovedBusinessess(!showApprovedBusinesses)}
+          text = {showDeclinedOnly?'Show All':'Show Declined Only'}
+          onClick = {() => setShowDeclinedOnly(!showDeclinedOnly)}
+          disabled = {!showDeclined}
         />
       </div>
     <table>
@@ -49,7 +50,7 @@ const Businesses = ({businesses, onEdit, onToggle, showApproved = true}) => {
         <td></td>
      </tr>
      </tbody>
-      {businesses.filter(isBusinessYetApproved).map((business)=>(
+      {businesses.filter(isBusinessDeclined).map((business)=>(
         <Business key={business.id} business={business} onEdit={onEdit} onToggle={onToggle}/>
       ))}
     </table>
