@@ -29,7 +29,7 @@ const Businesses = ({businesses, onEdit, onToggle, showDeclined = true}) => {
     <div className="container">
       <div>
         <Button 
-          text = {showDeclinedOnly?'Show All':'Show Declined Only'}
+          text = {showDeclinedOnly?'Show All':'Show Rejected Only'}
           onClick = {() => setShowDeclinedOnly(!showDeclinedOnly)}
           disabled = {!showDeclined}
         />
