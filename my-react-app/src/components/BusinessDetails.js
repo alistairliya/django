@@ -356,7 +356,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         
         <div>
             {
-                myStatus && myStatus.status_name === 'ACCEPTED'&&(<BusinessDetailsPolicyDelivery/>)
+                myStatus && myStatus.status_name === 'ACCEPTED'&&(<BusinessDetailsPolicyDelivery business={business} refreshBusinesses={refreshBusinesses}/>)
             }
         </div>
 
