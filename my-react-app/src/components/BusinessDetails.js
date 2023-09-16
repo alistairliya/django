@@ -19,6 +19,7 @@ import BusinessDetailsInsurance from './BusinessDetailsInsurance'
 import BusinessDetailsAdvisors from './BusinessDetailsAdvisors'
 import BusinessDetailsFP from './BusinessDetailsFP'
 import BusinessDetailsDecline from './BusinessDetailsDecline'
+import BusinessDetailsPolicyDelivery from './BusinessDetailsPolicyDelivery'
 
 
 const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApproval=false}) => {
@@ -352,6 +353,13 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         
         <BusinessDetailsFP docName = 'Delivery Receipt' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval} writeAccess = {hasWriteAccess} />
         </div>
+        
+        <div>
+            {
+                myStatus && myStatus.status_name === 'ACCEPTED'&&(<BusinessDetailsPolicyDelivery/>)
+            }
+        </div>
+
         <Button 
         text='Close'
         color='red' 
