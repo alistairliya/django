@@ -285,12 +285,14 @@ class EditBusinessViewSet(viewsets.ViewSet):
 
     def authorized_for_write(self, business_id):
         my_business = MyBusiness.objects.get(id=business_id)
+        
         # Note that business with ACCEPTED status cannot be modified.
-        my_status = my_business.status.status_name
-        print(f'my_status: {my_status}')
-        if my_status == 'ACCEPTED':
-            print('Business already ACCEPTED')
-            return False
+        #my_status = my_business.status.status_name
+        #print(f'my_status: {my_status}')
+        #if my_status == 'ACCEPTED':
+        #    print('Business already ACCEPTED')
+        #    return False
+        
         if not self.request.user.is_staff:
             print('User not staff')
             if not my_business or my_business.created_by != self.request.user:
@@ -303,6 +305,15 @@ class EditBusinessViewSet(viewsets.ViewSet):
     def get_write_access(self, request):
         print('get_write_access')
         business_id = self.request.query_params.get('business_id')
+
+        # Note that business with ACCEPTED status cannot be modified.
+        my_business = MyBusiness.objects.get(id=business_id)
+        my_status = my_business.status.status_name
+        print(f'my_status: {my_status}')
+        if my_status == 'ACCEPTED':
+            print('Business already ACCEPTED')
+            return Response({'result': 'Cannot edit ACCEPTED business'})
+ 
         print(business_id)
         is_authorized = self.authorized_for_write(business_id)
         if is_authorized:
