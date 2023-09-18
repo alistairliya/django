@@ -63,9 +63,10 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     //console.log("^^^ Before calling getMyClient")
     const getStatus = async () => {
         console.log('inside getStatus')
+        console.log(business.status)
         let s = await fetchObject(business.status)
         console.log(s)
-        setMyStatus(s)
+        await setMyStatus(s)
     }
 
     const getWriteAcess = async () =>{
@@ -173,27 +174,28 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         console.log('declineConfirmed')
         console.log(reason)
         const declinedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/4/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!! 
-        const result = await approvalHelper(declinedStatusUrl, reason)
+        const result = await reviewHelper(declinedStatusUrl, reason)
         console.log('after approvalHelper in declineConfirmed in BusinessDetails.js')
         console.log(result)
     }
 
-    
-    const approveClicked = () =>{
+    // Important: This actually sets status into ACCEPTED
+    const reviewClicked = () =>{
         console.log('approveClicked')
         const approvedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/3/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!!
-        approvalHelper(approvedStatusUrl)
+        reviewHelper(approvedStatusUrl)
     }    
 
 
-    const approvalHelper = async (approvalStatusUrl, reason='') =>{
+    const reviewHelper = async (approvalStatusUrl, reason='') =>{
         console.log('APPROVALHELPER')
         // call the API to approve the business
         // curl -X PATCH -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"status":"http://127.0.0.1:8000/api/businessstatus/3/"}' http://127.0.0.1:8000/api/businessapproval/1/
         // Need ID of business and ID of status
         // Hard code for now. Should be a constant somewhere.
-        const sendApproval = async (reason='') =>{
+        const sendReview = async (reason='') =>{
             const approvedStatus = approvalStatusUrl//'http://127.0.0.1:8000/api/businessstatus/3/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!!
+            //BusinessApprovalViewSet
             const url = 'http://127.0.0.1:8000/api/businessapproval/' + business.id+'/'
             const data = {
                 status: approvedStatus,
@@ -221,10 +223,11 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             }
             return updatedResult
         }
-
-        const result = await sendApproval(reason)
-        console.log('Approval Helper Complete')
+        // result coming back is a business object
+        const result = await sendReview(reason)
+        console.log("sendApproval result : ")
         console.log(result)
+        console.log('Approval Helper Complete')
         return result
 
 
@@ -246,6 +249,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             return
         }
         console.log('submitForReview')
+        // EditBusinessViewSet.update_status
         const url = 'http://127.0.0.1:8000/api/editbusiness/update_status/' 
         const token = user['token']
         const auth_str = 'Token '+token
@@ -259,13 +263,20 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         }
         const fetchResult = await fetch(url, options)
         const updatedResult = await fetchResult.json()
-        const errors = updatedResult['result']
+        if(updatedResult['data']){
+            business.status = updatedResult['data']['status']
+            await getStatus()
+            await refreshBusinesses()
+        }
+ 
+        const errors = updatedResult['errors']
         if(errors.length === 0){
             console.log('no errors')
             setUpdateErrors(['Update successful'])
             alert('Update successful')
         }
         setUpdateErrors(errors)
+        setUpdateCounter(updateCounter + 1)
     }
 
     const sendUpdate = async () =>{
@@ -301,11 +312,12 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <div className="container">
         <div>Transaction ID: {business.id}</div>
         <div>Status: {myStatus?myStatus.status_name:""}</div>
+        <div>Test: {updateCounter}</div>
         <div>
             {forApproval?
                 (
                     <div>
-                        <Button text = 'Accept' color='green' onClick = {approveClicked} disabled = {approvalButtonsDisabled}  /> 
+                        <Button text = 'Accept' color='green' onClick = {reviewClicked} disabled = {approvalButtonsDisabled}  /> 
                         <Button text = 'Reject' color='red' onClick = {declineClicked} disabled = {approvalButtonsDisabled} />
                     </div>)
                 :null}
@@ -356,7 +368,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         
         <div>
             {
-                myStatus && myStatus.status_name === 'ACCEPTED'&&(<BusinessDetailsPolicyDelivery business={business} refreshBusinesses={refreshBusinesses}/>)
+                myStatus && myStatus.status_name === 'ACCEPTED'&&(<BusinessDetailsPolicyDelivery business={business} refreshBusinesses={refreshBusinesses} getStatus={getStatus}/>)
             }
         </div>
 

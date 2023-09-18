@@ -4,7 +4,7 @@ import BusinessDetailsFP from './BusinessDetailsFP'
 import Button from './Button'
 import { useAuth } from "../hooks/useAuth"
 
-const BusinessDetailsPolicyDelivery = ({business, refreshBusinesses, hasWriteAccess = true}) => {
+const BusinessDetailsPolicyDelivery = ({business, refreshBusinesses, getStatus, hasWriteAccess = true}) => {
   
     const { user } = useAuth()
     
@@ -27,7 +27,13 @@ const BusinessDetailsPolicyDelivery = ({business, refreshBusinesses, hasWriteAcc
         }
         const fetchResult = await fetch(url, options)
         const updatedResult = await fetchResult.json()
-        const errors = updatedResult['result']
+
+        if(updatedResult['data']){
+            business.status = updatedResult['data']['status']
+            await getStatus()
+            await refreshBusinesses()
+        }
+        const errors = updatedResult['errors']
         if(errors.length === 0){
             console.log('no errors')
             alert('Update successful')
@@ -44,7 +50,7 @@ const BusinessDetailsPolicyDelivery = ({business, refreshBusinesses, hasWriteAcc
         <h2>Policy Delivery Confirmation</h2>
         <div>
             <Button
-                text = 'Submit for Review'
+                text = 'Submit for Approval'
                 onClick={ handleClick} 
             />
         </div>

@@ -225,7 +225,7 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
     
     def update(self, request, *args, **kwargs):
         print('!!! UPDATE !!!')
-        print(request.data)
+        print(f"Request Data {request.data}")
         # Add a BusinessDeclined object here
         # 1. Get the business
         my_business = self.get_object()
@@ -279,6 +279,7 @@ class FileViewSet(viewsets.ModelViewSet):
 class EditBusinessViewSet(viewsets.ViewSet):
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
+
     def list(self, request):
         return Response()
 
@@ -392,8 +393,12 @@ class EditBusinessViewSet(viewsets.ViewSet):
                 read = False
             )
             user_notification.save()
-
-        return Response({'result':[]})
+        print("$$$$$$$$$ my_business")
+        #json_data = json.dumps(my_business)
+        #print(json_data)
+        data = MyBusinessSerializer(my_business, context={'request': request}).data
+        print(data)
+        return Response({'errors':[], 'data':data}) # must return array
 
     # curl -X PUT -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' HTTP://127.0.0.1:8000/api/editbusiness/edit_business/ 
     # curl -X PUT -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -d '{"insuranceapplication":{"planned_premium":"$1002","plan_type":2,"provider":2,"face_amount":"$1000000111","id":59},"contact":{"street_address":"12345 ABCDEFG St.","unit":"123","province_state_id":3,"country_id":2,"phone_id":1,"address_id":1}}'  HTTP://127.0.0.1:8000/api/editbusiness/edit_business/

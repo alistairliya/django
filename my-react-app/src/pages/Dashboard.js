@@ -11,7 +11,7 @@ function Dashboard() {
         <a href="http://localhost:3000/me/businesses">My Businesses</a>
         </div>
         <div>
-        <a href="http://localhost:3000/me/approve">My Approvals</a>
+        <a href="http://localhost:3000/me/approve">Reviews</a>
         </div>
         <Footer/>
       </div>
