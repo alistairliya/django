@@ -219,7 +219,7 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
         if request_user.is_staff:
             # Admins can see all businesses
             qs = self.queryset.all()
-            qs = self.queryset.filter(status__status_name = 'REVIEW')
+            qs = self.queryset.filter(status__status_name = 'REVIEW') | self.queryset.filter(status__status_name = 'PENDING')
             return qs
         return None
     
