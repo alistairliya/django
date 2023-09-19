@@ -65,6 +65,9 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         console.log('inside getStatus')
         console.log(business.status)
         let s = await fetchObject(business.status)
+        if(s.status_name === 'REVIEW'){
+            setApprovalButtonsDisabled(false)
+        }
         console.log(s)
         await setMyStatus(s)
     }
@@ -314,7 +317,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <div>Status: {myStatus?myStatus.status_name:""}</div>
         <div>Test: {updateCounter}</div>
         <div>
-            {forApproval?
+            {forApproval?// && myStatus && (myStatus.status_name ==='REVIEW' || myStatus.status_name ==='PENDING')?
                 (
                     <div>
                         <Button text = 'Accept' color='green' onClick = {reviewClicked} disabled = {approvalButtonsDisabled}  /> 
@@ -323,7 +326,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
                 :null}
             {DeclineConfirmDisplayed &&
             (
-                <BusinessDetailsDecline setDeclinePopup={setApprovalButtonsDisabled} declineConfirmed = {declineConfirmed}/>
+                <BusinessDetailsDecline setDeclinePopup={setDeclineConfirmDisplayed} setApprovalButtonDisabled={setApprovalButtonsDisabled} declineConfirmed = {declineConfirmed}/>
             )}
         </div>
 
