@@ -116,10 +116,10 @@ function MyApprovingBusinesses() {
               <header className='header'>
             <h2>Submitted Business</h2>
         </header>
+      {detailedBusiness && <BusinessDetails business={detailedBusiness} closeComponent={closeBusinessDetailsComponent} refreshBusinesses={refreshBusinesses} forApproval={true}/>}
         <div>
         <Select options={options} onChange={(e)=>setShowingStatus(e.value)} />
         </div>
-      {detailedBusiness && <BusinessDetails business={detailedBusiness} closeComponent={closeBusinessDetailsComponent} refreshBusinesses={refreshBusinesses} forApproval={true}/>}
       {businesses.length > 0?(
         <Businesses 
           businesses = {businesses.filter(filterSelection)} 
