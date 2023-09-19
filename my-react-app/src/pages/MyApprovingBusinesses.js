@@ -9,6 +9,9 @@ import NewBusiness from '../components/NewBusiness'
 import BusinessDetails from '../components/BusinessDetails'
 //import About from '../components/About' 
 import { useAuth } from "../hooks/useAuth";
+import Select from 'react-select' // https://react-select.com/home
+import { AiFillCodeSandboxSquare } from 'react-icons/ai'
+
 function MyApprovingBusinesses() {
 
     const { user } = useAuth();
@@ -17,6 +20,7 @@ function MyApprovingBusinesses() {
   const [refreshTrigger , setRefreshTrigger] = useState(0)
 
   const [businesses, setBusinesses] = useState([])
+  const [showingStatus, setShowingStatus] = useState('ALL') // all, approved, declined
 
   useEffect(()=>{
     console.log('useEffect in MyApprovinngBusinesses.js')
@@ -26,7 +30,9 @@ function MyApprovingBusinesses() {
       setBusinesses(businessesFromServer.reverse())      
     }
     getBusinesses()
-  }, [refreshTrigger])
+  }, [refreshTrigger, showingStatus])
+
+
 
   // curl -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json' http://127.0.0.1:8000/api/businessapproval/
   const fetchBusiness = async()=>{
@@ -74,7 +80,30 @@ function MyApprovingBusinesses() {
     const refreshBusinesses = () => {
         console.log('refreshing...')
         setRefreshTrigger(refreshTrigger+1)
+    }
+    
+    // Hack this for now
+      const statusMap = {
+        'PENDING':'http://localhost:8000/api/businessstatus/2/',
+        'REVIEW':'http://localhost:8000/api/businessstatus/1/',
       }
+    const filterSelection = (business) =>{
+        if (showingStatus === 'ALL') {
+            return true
+        } else if (showingStatus === 'PENDING') {
+            return business.status === statusMap['PENDING'] 
+        } else if (showingStatus === 'REVIEW') {
+            return business.status === statusMap['REVIEW']
+        }
+        return false
+    }
+
+
+    const options = [
+      { value: 'ALL', label: 'ALL' },
+      { value: 'PENDING', label: 'PENDING' },
+      { value: 'REVIEW', label: 'REVIEW' }
+    ]
 
   return (
     <div className="container">
@@ -85,12 +114,15 @@ function MyApprovingBusinesses() {
         </div>
 
               <header className='header'>
-            <h2>Businesses submitted for my review</h2>
+            <h2>Submitted Business</h2>
         </header>
+        <div>
+        <Select options={options} onChange={(e)=>setShowingStatus(e.value)} />
+        </div>
       {detailedBusiness && <BusinessDetails business={detailedBusiness} closeComponent={closeBusinessDetailsComponent} refreshBusinesses={refreshBusinesses} forApproval={true}/>}
       {businesses.length > 0?(
         <Businesses 
-          businesses = {businesses} 
+          businesses = {businesses.filter(filterSelection)} 
           onEdit = {editBusiness} 
           onToggle={toggleReminder}
           showDeclined = {false}
