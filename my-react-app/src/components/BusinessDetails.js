@@ -320,8 +320,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             {forApproval?// && myStatus && (myStatus.status_name ==='REVIEW' || myStatus.status_name ==='PENDING')?
                 (
                     <div>
-                        <Button text = {myStatus === 'REVIEW'?'Accept':'APPROVE'} color='green' onClick = {reviewClicked} disabled = {approvalButtonsDisabled}  /> 
-                        <Button text = 'Reject' color='red' onClick = {rejectClicked} disabled = {approvalButtonsDisabled} />
+                        <Button text = {myStatus.status_name === 'REVIEW'?'Accept':'APPROVE'} color='green' onClick = {reviewClicked} disabled = {approvalButtonsDisabled}  /> 
+                        <Button text = {myStatus.status_name === 'REVIEW'?'Reject':'DECLINE'} color='red' onClick = {rejectClicked} disabled = {approvalButtonsDisabled} />
                     </div>)
                 :null}
             {DeclineConfirmDisplayed &&
