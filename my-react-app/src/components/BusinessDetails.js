@@ -371,7 +371,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         
         <div>
             {
-                myStatus && (myStatus.status_name === 'ACCEPTED' || myStatus.status_name === 'PENDING') &&(<BusinessDetailsPolicyDelivery business={business} refreshBusinesses={refreshBusinesses} getStatus={getStatus}/>)
+                // In PENDING status, PolicyDeliveryConfirmation should not be allowed to be edited
+                myStatus && (myStatus.status_name === 'ACCEPTED' || myStatus.status_name === 'PENDING') &&(<BusinessDetailsPolicyDelivery business={business} refreshBusinesses={refreshBusinesses} getStatus={getStatus} hasWriteAccess={myStatus.status_name !== 'PENDING'}/>)
             }
         </div>
 
