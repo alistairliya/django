@@ -176,7 +176,15 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const rejectDeclineConfirmed = async (reason) =>{
         console.log('declineConfirmed')
         console.log(reason)
-        const declinedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/4/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!! 
+        // Fix the hadcode late
+        // REJECTED
+        let declinedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/4/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!! 
+        console.log('myStatus: '+myStatus.status_name) 
+        if(myStatus.status_name === 'PENDING'){
+            // DECLINED
+            declinedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/9/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!! 
+        }
+        console.log("Seding declining status URL to backend: "+declinedStatusUrl)
         const result = await reviewHelper(declinedStatusUrl, reason)
         console.log('after approvalHelper in declineConfirmed in BusinessDetails.js')
         console.log(result)
