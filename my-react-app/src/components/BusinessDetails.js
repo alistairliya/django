@@ -65,7 +65,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         console.log('inside getStatus')
         console.log(business.status)
         let s = await fetchObject(business.status)
-        if(s.status_name === 'REVIEW'){
+        if(s.status_name === 'REVIEW' || s.status_name === 'PENDING'){
             setApprovalButtonsDisabled(false)
         }
         console.log(s)
@@ -229,6 +229,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             await refreshBusinesses()
             console.log('after refreshBusinesses in approveClicked in BusinessDetails.js')
             if(updatedResult && updatedResult.status === approvalStatusUrl){
+                console.log('setting approvalButtonsDisabled to true')
                 setApprovalButtonsDisabled(true)
                 setDeclineConfirmDisplayed(false)
             }
