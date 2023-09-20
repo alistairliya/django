@@ -185,7 +185,14 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     // Important: This actually sets status into ACCEPTED
     const reviewClicked = () =>{
         console.log('approveClicked')
-        const approvedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/3/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!!
+        
+        // !!!HARDCODE FOR NOW. NEED FIX LATER!!!
+        let approvedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/3/' // REVIEW statst
+        if(myStatus.status_name === 'PENDING'){
+            approvedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/8/' // PENDING statu
+        }
+
+        
         reviewHelper(approvedStatusUrl)
     }    
 
