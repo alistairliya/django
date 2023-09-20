@@ -182,8 +182,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         console.log(result)
     }
 
-    // Important: This actually sets status into ACCEPTED
-    const reviewClicked = () =>{
+    // Important: This sets status into ACCEPTED/APPROVED
+    const acceptApproveClicked = () =>{
         console.log('approveClicked')
         
         // !!!HARDCODE FOR NOW. NEED FIX LATER!!!
@@ -327,7 +327,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             {forApproval?// && myStatus && (myStatus.status_name ==='REVIEW' || myStatus.status_name ==='PENDING')?
                 (
                     <div>
-                        <Button text = {myStatus.status_name === 'REVIEW'?'Accept':'APPROVE'} color='green' onClick = {reviewClicked} disabled = {approvalButtonsDisabled}  /> 
+                        <Button text = {myStatus.status_name === 'REVIEW'?'Accept':'APPROVE'} color='green' onClick = {acceptApproveClicked} disabled = {approvalButtonsDisabled}  /> 
                         <Button text = {myStatus.status_name === 'REVIEW'?'Reject':'DECLINE'} color='red' onClick = {rejectClicked} disabled = {approvalButtonsDisabled} />
                     </div>)
                 :null}
