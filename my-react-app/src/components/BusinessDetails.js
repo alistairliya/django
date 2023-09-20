@@ -165,7 +165,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         return insurance
     }
 
-    const declineClicked = () =>{
+    const rejectClicked = () =>{
         console.log('declineClicked')
         setApprovalButtonsDisabled(true)
         setDeclineConfirmDisplayed(true)
@@ -321,7 +321,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
                 (
                     <div>
                         <Button text = 'Accept' color='green' onClick = {reviewClicked} disabled = {approvalButtonsDisabled}  /> 
-                        <Button text = 'Reject' color='red' onClick = {declineClicked} disabled = {approvalButtonsDisabled} />
+                        <Button text = 'Reject' color='red' onClick = {rejectClicked} disabled = {approvalButtonsDisabled} />
                     </div>)
                 :null}
             {DeclineConfirmDisplayed &&
