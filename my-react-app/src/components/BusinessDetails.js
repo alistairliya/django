@@ -173,7 +173,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
 
     // Passed to BusinessDetailsDecline
     // Called when user clicks on the confirm button in BusinessDetailsDecline
-    const declineConfirmed = async (reason) =>{
+    const rejectDeclineConfirmed = async (reason) =>{
         console.log('declineConfirmed')
         console.log(reason)
         const declinedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/4/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!! 
@@ -333,7 +333,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
                 :null}
             {DeclineConfirmDisplayed &&
             (
-                <BusinessDetailsDecline setDeclinePopup={setDeclineConfirmDisplayed} setApprovalButtonDisabled={setApprovalButtonsDisabled} declineConfirmed = {declineConfirmed}/>
+                <BusinessDetailsDecline setDeclinePopup={setDeclineConfirmDisplayed} setApprovalButtonDisabled={setApprovalButtonsDisabled} declineConfirmed = {rejectDeclineConfirmed}/>
             )}
         </div>
 
