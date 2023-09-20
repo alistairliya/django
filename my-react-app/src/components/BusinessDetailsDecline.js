@@ -34,7 +34,7 @@ const BusinessDetailsDecline = ({setDeclinePopup, setApprovalButtonDisabled, dec
         <div>
             <TextField
                 id="outlined-multiline-static"
-                label="Reason for Decline"
+                label="Reason"
                 multiline    
                 rows={4}
                 name='myReason'
