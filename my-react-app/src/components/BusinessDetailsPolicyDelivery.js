@@ -51,7 +51,8 @@ const BusinessDetailsPolicyDelivery = ({business, refreshBusinesses, getStatus, 
         <div>
             <Button
                 text = 'Submit for Approval'
-                onClick={ handleClick} 
+                onClick={ handleClick}
+                disabled = {!hasWriteAccess} 
             />
         </div>
         <BusinessDetailsFP docName = ' ' business = {business} refreshBusinesses = {refreshBusinesses}  writeAccess = {hasWriteAccess} />
