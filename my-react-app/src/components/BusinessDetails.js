@@ -188,7 +188,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         
         // !!!HARDCODE FOR NOW. NEED FIX LATER!!!
         let approvedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/3/' // REVIEW statst
-        if(myStatus.status_name === 'PENDING'){
+        
+        if(myStatus && myStatus.status_name === 'PENDING'){
             approvedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/8/' // PENDING statu
         }
 
@@ -327,8 +328,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             {forApproval?// && myStatus && (myStatus.status_name ==='REVIEW' || myStatus.status_name ==='PENDING')?
                 (
                     <div>
-                        <Button text = {myStatus.status_name === 'REVIEW'?'Accept':'APPROVE'} color='green' onClick = {acceptApproveClicked} disabled = {approvalButtonsDisabled}  /> 
-                        <Button text = {myStatus.status_name === 'REVIEW'?'Reject':'DECLINE'} color='red' onClick = {rejectDeclineClicked} disabled = {approvalButtonsDisabled} />
+                        <Button text = {myStatus && myStatus.status_name === 'REVIEW'?'Accept':'APPROVE'} color='green' onClick = {acceptApproveClicked} disabled = {approvalButtonsDisabled}  /> 
+                        <Button text = {myStatus && myStatus.status_name === 'REVIEW'?'Reject':'DECLINE'} color='red' onClick = {rejectDeclineClicked} disabled = {approvalButtonsDisabled} />
                     </div>)
                 :null}
             {DeclineConfirmDisplayed &&
