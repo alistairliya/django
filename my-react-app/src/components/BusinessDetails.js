@@ -389,7 +389,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <div>
             {
                 // In PENDING status, PolicyDeliveryConfirmation should not be allowed to be edited
-                myStatus && (myStatus.status_name === 'ACCEPTED' || myStatus.status_name === 'PENDING') &&(<BusinessDetailsPolicyDelivery business={business} refreshBusinesses={refreshBusinesses} getStatus={getStatus} hasWriteAccess={myStatus.status_name !== 'PENDING'}/>)
+                // In DECLINED sttus, users should be able to re-upload the documment ad resubmit,
+                myStatus && (myStatus.status_name === 'ACCEPTED' || myStatus.status_name === 'PENDING'||myStatus.status_name==='DECLINED') &&(<BusinessDetailsPolicyDelivery business={business} refreshBusinesses={refreshBusinesses} getStatus={getStatus} hasWriteAccess={myStatus.status_name !== 'PENDING'}/>)
             }
         </div>
 
@@ -411,7 +412,12 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <Button
             text = 'Submit for Review'
             onClick = {submitForReview}
-            disabled = {!hasWriteAccess || forApproval}
+            // Submit for Reivew Button should not appear when:
+            disabled = {!hasWriteAccess  // User des not have write accesss. This happens at ACCEPTED status when user uploads Policy Delivery Confirmtno and submits ta instead
+                        || forApproval // or the component us ued for approval process by an admin 
+                        || (myStatus && myStatus.status_name === 'DECLINED') //or it is DECLINED and user should be resubmiting Policy Deliery Confirmation intead
+                        || (myStatus && myStatus.status_name === 'PENDING')  // or it is PENDING
+                    }                        
         />
 
         <div>
