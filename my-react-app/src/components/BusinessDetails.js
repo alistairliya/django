@@ -419,7 +419,6 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         />
         <div>
             <div>hasWritAccess: {hasWriteAccess?"TRUE":"FALSE"}</div>
-            <div>isSubmitForReviewDisabled: {isSubmitForReviewDisabled?"TRUE":"FALSE"}</div>
         </div>
         <Button
             text = 'Submit for Review'
