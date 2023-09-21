@@ -38,7 +38,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const [hasWriteAccess, setHasWriteAccess] = useState(false)
     const [approvalButtonsDisabled, setApprovalButtonsDisabled] = useState(false)
     const [DeclineConfirmDisplayed, setDeclineConfirmDisplayed] = useState(false)
-
+    const [isSubmitForReviewDisabled, setIsSubmitForReviewDisabled] = useState(false)
     const { user } = useAuth()
 
     const getMyClient = async () => {
@@ -94,6 +94,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         // is user staff?
         console.log("########### Business Details")
         console.log(user)
+        setHasWriteAccess(false)
         
         // is user owner?
         // Call /api/editbusiness/get_write_access/?business_id=[business.id]
@@ -114,7 +115,13 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             business.applicant_client_address===business.insurance_application[0].insured_client_address &&
             business.applicant_client_phone===business.insurance_application[0].insured_client_phone
         )
-    }, [business, updateCounter, updateErrors, hasWriteAccess])
+        setIsSubmitForReviewDisabled(
+            !hasWriteAccess  // User des not have write accesss. This happens at ACCEPTED status when user uploads Policy Delivery Confirmtno and submits ta instead
+            //|| forApproval // or the component us ued for approval process by an admin 
+            //|| (myStatus && myStatus.status_name === 'DECLINED') //or it is DECLINED and user should be resubmiting Policy Deliery Confirmation intead
+            //|| (myStatus && myStatus.status_name === 'PENDING') 
+        )
+    }, [business, updateCounter, updateErrors])
 
     const fetchObject = async (url) =>{
         let headers = new Headers()
@@ -265,7 +272,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
 
     const submitForReview = async () =>{
         if(!hasWriteAccess){
-            alert('Only the onwer or supervisor can SUBMIT')
+            alert('Only the owner or supervisor can SUBMIT')
             return
         }
         console.log('submitForReview')
@@ -328,11 +335,12 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         setUpdateErrors(errors)
     }
 
+ 
+
     return (
         <div className="container">
         <div>Transaction ID: {business.id}</div>
         <div>Status: {myStatus?myStatus.status_name:""}</div>
-        <div>Test: {updateCounter}</div>
         <div>
             {forApproval?// && myStatus && (myStatus.status_name ==='REVIEW' || myStatus.status_name ==='PENDING')?
                 (
@@ -409,15 +417,20 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             onClick = {sendUpdate}
             disabled = {!editMode || !hasWriteAccess}
         />
+        <div>
+            <div>hasWritAccess: {hasWriteAccess?"TRUE":"FALSE"}</div>
+            <div>isSubmitForReviewDisabled: {isSubmitForReviewDisabled?"TRUE":"FALSE"}</div>
+        </div>
         <Button
             text = 'Submit for Review'
             onClick = {submitForReview}
             // Submit for Reivew Button should not appear when:
-            disabled = {!hasWriteAccess  // User des not have write accesss. This happens at ACCEPTED status when user uploads Policy Delivery Confirmtno and submits ta instead
+            disabled = {!hasWriteAccess}//{isSubmitForReviewDisabled}
+            /*{!hasWriteAccess  // User des not have write accesss. This happens at ACCEPTED status when user uploads Policy Delivery Confirmtno and submits ta instead
                         || forApproval // or the component us ued for approval process by an admin 
                         || (myStatus && myStatus.status_name === 'DECLINED') //or it is DECLINED and user should be resubmiting Policy Deliery Confirmation intead
                         || (myStatus && myStatus.status_name === 'PENDING')  // or it is PENDING
-                    }                        
+                    }      */                  
         />
 
         <div>

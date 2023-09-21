@@ -311,8 +311,8 @@ class EditBusinessViewSet(viewsets.ViewSet):
         my_business = MyBusiness.objects.get(id=business_id)
         my_status = my_business.status.status_name
         print(f'my_status: {my_status}')
-        if my_status == 'ACCEPTED':
-            print('Business already ACCEPTED')
+        if my_status == 'REVIEW' or my_status == 'ACCEPTED' or my_status == 'PENDING' or my_status == 'DECLINED' or my_status == 'APPROVED': # DECLINED should not have write access either because it already has been accepted in the previous step
+            print('cannot edit')
             return Response({'result': 'Cannot edit ACCEPTED business'})
  
         print(business_id)
