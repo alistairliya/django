@@ -205,7 +205,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         let approvedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/3/' // REVIEW statst
         
         if(myStatus && myStatus.status_name === 'PENDING'){
-            approvedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/8/' // PENDING statu
+            approvedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/6/' // SETTLED status, Requiremet 1.8
         }
 
         
