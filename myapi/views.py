@@ -229,7 +229,12 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
         # Add a BusinessDeclined object here
         # 1. Get the business
         my_business = self.get_object()
+        # If approved, need to update SettledDate
+        my_business.settled_date = datetime.now()
+        my_business.save()
+        
         # 2. Create a BusinessDeclined object
+        # WHY IS THIS HERE EVEN FOR APPROVED?
         business_declined = BusinessDeclined(
             business = my_business,
             notes = request.data.get('reason'),
