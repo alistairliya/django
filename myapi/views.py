@@ -53,6 +53,10 @@ class MyBusinessView(viewsets.ModelViewSet):
         #   The query below will crash if user not authenticated.
         owner_businesses =list( Business_User.objects.filter(user = request_user).values_list('business', flat=True)) 
         qs |= self.queryset.filter(pk__in = owner_businesses)
+
+        # If status is DECLINED and today - creatd_date > specified period
+        # then remove the business from the queryset  
+
         return qs
     
 class StatusViewSet(viewsets.ModelViewSet):
