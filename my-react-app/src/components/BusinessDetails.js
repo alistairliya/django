@@ -392,6 +392,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         <BusinessDetailsFP docName = 'Commission Report' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval} writeAccess = {hasWriteAccess}/>
         
         <BusinessDetailsFP docName = 'Delivery Receipt' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval} writeAccess = {hasWriteAccess} />
+        <BusinessDetailsFP docName = 'JFW FOM' business = {business} refreshBusinesses = {refreshBusinesses} forApproval = {forApproval} writeAccess = {hasWriteAccess} />
         </div>
         
         <div>
