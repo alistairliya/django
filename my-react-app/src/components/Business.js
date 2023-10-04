@@ -82,9 +82,9 @@ const Business = ({business, onEdit, onToggle}) => {
     }
     if (client.id === undefined){
         //console.log('fetching client')
-        fetchResource() 
+        fetchResource() // fetching clint for each business 
     }
-    getStatus()
+    getStatus() // fetching status for each businesss
 
   },[client, business])
 
