@@ -288,7 +288,9 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
         print(f"Request Data {request.data}")
         # Add a BusinessDeclined object here
         # 1. Get the business
-        my_business = self.get_object()
+        approval_business_id = self.get_object().id
+        print(f"Approval Businesss ID: {approval_business_id}")
+        
         # If approved, need to update SettledDate
         # my_business.settled_date = datetime.now()
         # my_business.save()
@@ -305,6 +307,14 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
         # 6. Send notification to the supervisor
 
         result = super().update(request, *args, **kwargs)
+        #my_business = self.get_object()
+        my_business = MyBusiness.objects.get(id=approval_business_id)
+        print(f"my_business: {my_business}")
+        if my_business.status.status_name == 'APPROVED':
+            print('STATUS APPROVED')
+            my_business.settled_date = datetime.now()
+            my_business.save()
+
         return result
 
 
