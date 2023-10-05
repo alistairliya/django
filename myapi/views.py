@@ -290,8 +290,8 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
         # 1. Get the business
         my_business = self.get_object()
         # If approved, need to update SettledDate
-        my_business.settled_date = datetime.now()
-        my_business.save()
+        # my_business.settled_date = datetime.now()
+        # my_business.save()
 
         # 2. Create a BusinessDeclined object
         # WHY IS THIS HERE EVEN FOR APPROVED?
