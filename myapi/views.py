@@ -304,7 +304,8 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
         # 5. Send notification to the collaborators
         # 6. Send notification to the supervisor
 
-        return super().update(request, *args, **kwargs)
+        result = super().update(request, *args, **kwargs)
+        return result
 
 
 class FileViewSet(viewsets.ModelViewSet):
