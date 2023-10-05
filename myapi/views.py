@@ -283,6 +283,7 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
             return qs
         return None
 
+    # This is used for both ACCEPT and APPROVE  
     def update(self, request, *args, **kwargs):
         print('!!! UPDATE !!!')
         print(f"Request Data {request.data}")
@@ -306,14 +307,21 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
         # 5. Send notification to the collaborators
         # 6. Send notification to the supervisor
 
+        # The actual UPDATE
         result = super().update(request, *args, **kwargs)
-        #my_business = self.get_object()
+        
+        # Attach any addtionl info
         my_business = MyBusiness.objects.get(id=approval_business_id)
-        print(f"my_business: {my_business}")
+        # SETTLED DATE
         if my_business.status.status_name == 'APPROVED':
             print('STATUS APPROVED')
             my_business.settled_date = datetime.now()
             my_business.save()
+
+        # SETTLED FYC
+        # REASON AND NOTES
+
+        
 
         return result
 
