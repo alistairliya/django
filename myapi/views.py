@@ -295,11 +295,11 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
 
         # 2. Create a BusinessDeclined object
         # WHY IS THIS HERE EVEN FOR APPROVED?
-        business_declined = BusinessDeclined(
-            business=my_business,
-            notes=request.data.get('reason'),
-            is_resolved=False)
-        business_declined.save()
+        # business_declined = BusinessDeclined(
+        #     business=my_business,
+        #     notes=request.data.get('reason'),
+        #     is_resolved=False)
+        # business_declined.save()
         # 4. Send notification to the user
         # 5. Send notification to the collaborators
         # 6. Send notification to the supervisor
