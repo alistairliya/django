@@ -19,6 +19,7 @@ import BusinessDetailsInsurance from './BusinessDetailsInsurance'
 import BusinessDetailsAdvisors from './BusinessDetailsAdvisors'
 import BusinessDetailsFP from './BusinessDetailsFP'
 import BusinessDetailsDecline from './BusinessDetailsDecline'
+import BusinessDetailsApprove from './BusinessDetailsApprove'
 import BusinessDetailsPolicyDelivery from './BusinessDetailsPolicyDelivery'
 
 
@@ -38,6 +39,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const [hasWriteAccess, setHasWriteAccess] = useState(false)
     const [approvalButtonsDisabled, setApprovalButtonsDisabled] = useState(false)
     const [DeclineConfirmDisplayed, setDeclineConfirmDisplayed] = useState(false)
+    const [ApprovalConfirmDisplayed, setApprovalConfirmDisplaed] = useState(false)
     const [isSubmitForReviewDisabled, setIsSubmitForReviewDisabled] = useState(false)
     const { user } = useAuth()
 
@@ -197,9 +199,16 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         console.log(result)
     }
 
+
     // Important: This sets status into ACCEPTED/APPROVED
     const acceptApproveClicked = () =>{
         console.log('approveClicked')
+        setApprovalConfirmDisplaed(true)
+        setApprovalButtonsDisabled(true)
+       
+    }
+    
+    const acceptApproveConfirmed = async (reason) =>{
         
         // !!!HARDCODE FOR NOW. NEED FIX LATER!!!
         let approvedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/3/' // REVIEW statst
@@ -209,8 +218,9 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         }
 
         
-        reviewHelper(approvedStatusUrl)
-    }    
+        reviewHelper(approvedStatusUrl, reason)
+    
+    }
 
 
     const reviewHelper = async (approvalStatusUrl, reason='') =>{
@@ -351,8 +361,19 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
                 :null}
             {DeclineConfirmDisplayed &&
             (
-                <BusinessDetailsDecline setDeclinePopup={setDeclineConfirmDisplayed} setApprovalButtonDisabled={setApprovalButtonsDisabled} declineConfirmed = {rejectDeclineConfirmed}/>
+                <BusinessDetailsDecline 
+                    setDeclinePopup={setDeclineConfirmDisplayed} 
+                    setApprovalButtonDisabled={setApprovalButtonsDisabled} 
+                    declineConfirmed = {rejectDeclineConfirmed}
+                />
             )}
+            {ApprovalConfirmDisplayed && 
+                <BusinessDetailsApprove
+                    setPopup={setApprovalConfirmDisplaed}
+                    setButtonsDisabled={setApprovalButtonsDisabled}
+                    confirmed = {acceptApproveConfirmed} 
+                />
+            }
         </div>
 
 
