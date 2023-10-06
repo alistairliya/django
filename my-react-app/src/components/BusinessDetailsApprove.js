@@ -63,8 +63,15 @@ const BusinessDetailsApprove = ({setPopup, setButtonsDisabled, confirmed, displa
             />
         </div>
         <div>
-            <Button text='Confirm' onClick={handleApprove} />
-            <Button text='Cancelel' onClick={closePopup} />
+            <Button 
+                text='Confirm' 
+                onClick={handleApprove}
+                disabled={displayFYC && !strSettledFYC} 
+            />
+            <Button 
+                text='Cancelel' 
+                onClick={closePopup} 
+            />
         </div>
     </div>
   )
