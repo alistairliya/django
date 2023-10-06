@@ -4,8 +4,9 @@ import Button from "./Button"
 import TextField from '@mui/material/TextField'
 import {useState} from "react"
 
-const BusinessDetailsApprove = ({setPopup, setButtonsDisabled, confirmed}) => {
+const BusinessDetailsApprove = ({setPopup, setButtonsDisabled, confirmed, displayFYC = true}) => {
     const [reason, setReason] = useState('')
+    const [strSettledFYC, setStrSettledFYC] = useState('')
 
     const closePopup = () => {
         setPopup(false)
@@ -27,8 +28,30 @@ const BusinessDetailsApprove = ({setPopup, setButtonsDisabled, confirmed}) => {
         //const { name, value } = e.target
         setReason(e.target.value)
     }
+
+    const handleSettleFYCChange = (e) => {
+        let { name, value } = e.target
+        if(value.charAt(0) === '$'){
+            value = value.substring(1)
+        }
+        setStrSettledFYC(value)
+    }
+
   return (
     <div>
+        {displayFYC &&
+        <div className="container">
+                <TextField 
+                    id="standard-basic" 
+                    label="Settled FYC" 
+                    variant="standard" 
+                    name="SettledFYC"
+                    onChange={handleSettleFYCChange}
+                    disabled={false}
+                    value={strSettledFYC? "$"+strSettledFYC:""}
+                /> 
+        </div>
+        }
         <div>
             <TextField
                 id="outlined-multiline-static"
