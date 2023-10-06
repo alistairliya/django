@@ -355,8 +355,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             {forApproval?// && myStatus && (myStatus.status_name ==='REVIEW' || myStatus.status_name ==='PENDING')?
                 (
                     <div>
-                        <Button text = {myStatus && myStatus.status_name === 'REVIEW'?'Accept':'APPROVE'} color='green' onClick = {acceptApproveClicked} disabled = {approvalButtonsDisabled}  /> 
-                        <Button text = {myStatus && myStatus.status_name === 'REVIEW'?'Reject':'DECLINE'} color='red' onClick = {rejectDeclineClicked} disabled = {approvalButtonsDisabled} />
+                        <Button text = {myStatus && myStatus.status_name === 'REVIEW'?'Accept':'APPROVE'} color='green' onClick = {acceptApproveClicked} disabled = {!myStatus || approvalButtonsDisabled}  /> 
+                        <Button text = {myStatus && myStatus.status_name === 'REVIEW'?'Reject':'DECLINE'} color='red' onClick = {rejectDeclineClicked} disabled = {!myStatus || approvalButtonsDisabled} />
                     </div>)
                 :null}
             {DeclineConfirmDisplayed &&
@@ -371,7 +371,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
                 <BusinessDetailsApprove
                     setPopup={setApprovalConfirmDisplaed}
                     setButtonsDisabled={setApprovalButtonsDisabled}
-                    confirmed = {acceptApproveConfirmed} 
+                    confirmed = {acceptApproveConfirmed}
+                    displayFYC = {myStatus && myStatus.status_name === 'PENDING'} 
                 />
             }
         </div>
