@@ -291,6 +291,7 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
         # 1. Get the business
         approval_business_id = self.get_object().id
         print(f"Approval Businesss ID: {approval_business_id}")
+
         
         # If approved, need to update SettledDate
         # my_business.settled_date = datetime.now()
@@ -312,10 +313,21 @@ class BusinessApprovalViewSet(viewsets.ModelViewSet):
         
         # Attach any addtionl info
         my_business = MyBusiness.objects.get(id=approval_business_id)
+        
+
+        try:
+            settled_fyc = float(request.data['settledFYC'])
+        except ValueError:
+            settled_fyc = None 
+        
+
+        
         # SETTLED DATE
         if my_business.status.status_name == 'APPROVED':
             print('STATUS APPROVED')
             my_business.settled_date = datetime.now()
+            if settled_fyc:
+                my_business.settled_FYC = settled_fyc
             my_business.save()
 
         # SETTLED FYC

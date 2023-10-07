@@ -208,7 +208,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
        
     }
     
-    const acceptApproveConfirmed = async (reason) =>{
+    const acceptApproveConfirmed = async (reason, settledFYC) =>{
         
         // !!!HARDCODE FOR NOW. NEED FIX LATER!!!
         let approvedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/3/' // REVIEW statst
@@ -218,12 +218,12 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         }
 
         
-        reviewHelper(approvedStatusUrl, reason)
+        reviewHelper(approvedStatusUrl, reason, settledFYC)
     
     }
 
 
-    const reviewHelper = async (approvalStatusUrl, reason='') =>{
+    const reviewHelper = async (approvalStatusUrl, reason='', settledFYC='') =>{
         console.log('APPROVALHELPER')
         // call the API to approve the business
         // curl -X PATCH -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"status":"http://127.0.0.1:8000/api/businessstatus/3/"}' http://127.0.0.1:8000/api/businessapproval/1/
@@ -235,7 +235,8 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
             const url = 'http://127.0.0.1:8000/api/businessapproval/' + business.id+'/'
             const data = {
                 status: approvedStatus,
-                reason: reason
+                reason: reason,
+                settledFYC: settledFYC
             }
             const token = user['token']
             const auth_str = 'Token '+token

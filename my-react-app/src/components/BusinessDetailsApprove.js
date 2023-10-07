@@ -18,7 +18,7 @@ const BusinessDetailsApprove = ({setPopup, setButtonsDisabled, confirmed, displa
         console.log('handleDecline')
         // submit to API
         setPopup(false)
-        confirmed(reason)
+        confirmed(reason, strSettledFYC)
         setButtonsDisabled(false)
     }
 
@@ -34,7 +34,22 @@ const BusinessDetailsApprove = ({setPopup, setButtonsDisabled, confirmed, displa
         if(value.charAt(0) === '$'){
             value = value.substring(1)
         }
-        setStrSettledFYC(value)
+        let trailer = ''
+        if(value.charAt(value.length-1) === '.'){
+            console.log('setting trailer to period')
+            trailer = '.'
+        }
+        value = parseFloat(value)
+        if(isNaN(value)){
+            console.log('NAN: '+value)
+            setStrSettledFYC('')
+        }else{
+            console.log('Number ' + value)
+            if(value.toString().indexOf('.')>=0)
+                setStrSettledFYC(value)
+            else
+                setStrSettledFYC(value+trailer)
+        }
     }
 
   return (
