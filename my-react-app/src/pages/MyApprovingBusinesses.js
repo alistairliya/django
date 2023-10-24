@@ -11,6 +11,7 @@ import BusinessDetails from '../components/BusinessDetails'
 import { useAuth } from "../hooks/useAuth";
 import Select from 'react-select' // https://react-select.com/home
 import { AiFillCodeSandboxSquare } from 'react-icons/ai'
+import {ROOT_URL} from '../constants'
 
 function MyApprovingBusinesses() {
 
@@ -44,7 +45,7 @@ function MyApprovingBusinesses() {
     const auth_str = 'Token '+token 
     console.log(auth_str)
     headers.set('Authorization', auth_str)
-    const res = await fetch('http://localhost:8000/api/businessapproval/',{headers:headers})
+    const res = await fetch(ROOT_URL+'/api/businessapproval/',{headers:headers})
     const data = await res.json()
     console.log(data)
     return data
@@ -84,8 +85,8 @@ function MyApprovingBusinesses() {
     
     // Hack this for now
       const statusMap = {
-        'PENDING':'http://localhost:8000/api/businessstatus/2/',
-        'REVIEW':'http://localhost:8000/api/businessstatus/1/',
+        'PENDING':ROOT_URL+'/api/businessstatus/2/',
+        'REVIEW':ROOT_URL+'/api/businessstatus/1/',
       }
     const filterSelection = (business) =>{
         if (showingStatus === 'ALL') {

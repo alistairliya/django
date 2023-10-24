@@ -1,4 +1,5 @@
 
+import {ROOT_URL} from '../constants'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Select, { SelectChangeEvent } from '@mui/material/Select';
@@ -43,7 +44,7 @@ const BusinessDetailsContact = ({title, address, phone, collectPayload, writeAcc
 
         const getAvailableCountries = async () => {
             console.log('inside getAvailableCountries')
-            const url = 'http://127.0.0.1:8000/api/country/'
+            const url = ROOT_URL+'/api/country/'
             let countries = await fetchObject(url)
             //console.log("got countries!")
             //console.log(countries)
@@ -52,7 +53,7 @@ const BusinessDetailsContact = ({title, address, phone, collectPayload, writeAcc
 
         const getAvailableProvinces = async () => {
             console.log('inside getAvailableProvinces')
-            const url = 'http://127.0.0.1:8000/api/province_state/'
+            const url = ROOT_URL+'/api/province_state/'
             let provinces = await fetchObject(url)
             return provinces
         }

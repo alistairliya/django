@@ -2,7 +2,7 @@
 import Business from './Business'
 import {useEffect, useState} from "react"
 import Button from './Button'
-
+import {ROOT_URL} from '../constants'
 
 const Businesses = ({businesses, onEdit, onToggle, showDeclined = true}) => { 
 
@@ -18,7 +18,7 @@ const Businesses = ({businesses, onEdit, onToggle, showDeclined = true}) => {
       return true // show everything
     }
     
-    if(showDeclinedOnly && business.status === "http://localhost:8000/api/businessstatus/4/"){
+    if(showDeclinedOnly && business.status === ROOT_URL+"/api/businessstatus/4/"){
       return true
     }
 

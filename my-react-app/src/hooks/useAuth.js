@@ -1,6 +1,7 @@
 import { createContext, useContext, useMemo } from "react";
 import {  useNavigate } from "react-router-dom";
 import { useLocalStorage } from "./useLocalStorage";
+import {ROOT_URL} from '../constants'
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -14,7 +15,7 @@ export const AuthProvider = ({ children }) => {
     let formData = new FormData();
     formData.append('username', data['email']);
     formData.append('password', data['password']);
-    const res = await fetch('http://localhost:8000/api-token-auth/',{
+    const res = await fetch(ROOT_URL+'/api-token-auth/',{
         method:'POST',
         body:formData
     })

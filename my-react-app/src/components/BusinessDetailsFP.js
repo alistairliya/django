@@ -2,7 +2,7 @@
 import {useEffect, useState, useRef} from "react"
 import { useAuth } from "../hooks/useAuth"
 import Button from './Button'
-
+import {ROOT_URL} from '../constants'
 
 const BusinessDetailsFP = ({docName, business, refreshBusinesses, forApproval=false, writeAccess}) => {
     const [file, setFile] = useState(null) // file ready for upload
@@ -18,7 +18,7 @@ const BusinessDetailsFP = ({docName, business, refreshBusinesses, forApproval=fa
         const token = user['token']
         const auth_str = 'Token '+token
         headers.set('Authorization', auth_str)
-        const url = 'http://localhost:8000/api/'+resource+'/' 
+        const url = ROOT_URL+'/api/'+resource+'/' 
         console.log('fetchFromAPI() url: '+url)
         const res = await fetch(url, {headers:headers})
         const data = await res.json()
@@ -96,8 +96,8 @@ const BusinessDetailsFP = ({docName, business, refreshBusinesses, forApproval=fa
             formData.append('file', file)
             formData.append('remark', docName)
             formData.append('businessId', business.id)
-            //const res = await fetch('http://localhost:8000/file/upload/',{
-            const res = await fetch('http://localhost:8000/api/files/upload_file/',{
+            //const res = await fetch(ROOT_URL+'/file/upload/',{
+            const res = await fetch(ROOT_URL+'/api/files/upload_file/',{
                 method:'POST',
                 body: formData,
                 headers: headers

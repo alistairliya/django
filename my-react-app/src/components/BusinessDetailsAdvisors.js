@@ -4,7 +4,7 @@ import {useAuth} from '../hooks/useAuth'
 import NBF8Advisor from './NBF8Advisor'
 import BusinessDetailsAdvisorsAdvisor from './BusinessDetailsAdvisorsAdvisor'
 import Button from './Button'
-
+import {ROOT_URL} from '../constants'
 const BusinessDetailsAdvisors = ({collectPayload, business, writeAccess}) => {
     const {user} = useAuth()
 
@@ -44,7 +44,7 @@ const BusinessDetailsAdvisors = ({collectPayload, business, writeAccess}) => {
                 const auth_str = 'Token '+token
                 console.log(auth_str)
                 headers.set('Authorization', auth_str)
-                const res = await fetch('http://localhost:8000/api/'+resource+'/', {headers:headers})
+                const res = await fetch(ROOT_URL+'/api/'+resource+'/', {headers:headers})
                 const data = await res.json()
                 return data
             }

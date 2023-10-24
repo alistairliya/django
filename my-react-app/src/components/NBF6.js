@@ -4,6 +4,7 @@
 import { useEffect,useState } from "react"
 import { useAuth } from "../hooks/useAuth"
 import Medical from './NBF6CheckBoxes'
+import {ROOT_URL} from '../constants'
 
 // Select ones that apply
 const NBF6 = ({onNextClicked, setMedicals}) => {
@@ -18,7 +19,7 @@ const NBF6 = ({onNextClicked, setMedicals}) => {
             const token = user['token']
             const auth_str = 'Token '+token
             headers.set('Authorization', auth_str)
-            let url = 'http://localhost:8000/api/'+resource+'/'
+            let url = ROOT_URL+'/api/'+resource+'/'
             const res = await fetch(url,{headers:headers})
             const data = await res.json()
             setAvailableMedicals(data)

@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react'
 import Button from './Button'
 import { useAuth } from "../hooks/useAuth"
 import React from 'react'
-
+import {ROOT_URL} from '../constants'
 /**
  * Two problems:
  * 1. Adding new phone number wipes out previous seleciton.
@@ -48,7 +48,7 @@ const Phones = ({setApplicantPhones,  existingPhones}) => {
             const auth_str = 'Token '+token
             headers.set('Authorization', auth_str)
 
-            const res = await fetch('http://localhost:8000/api/phonetype/', {headers:headers})
+            const res = await fetch(ROOT_URL+'/api/phonetype/', {headers:headers})
             const data = await res.json()
             //setPhoneElementList([<Phone key='x' addPhone = {addPhone} existingPhones = {existingPhones} phoneTypes={data}/>])
             return data

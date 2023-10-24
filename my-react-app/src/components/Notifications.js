@@ -3,6 +3,7 @@ import { useAuth } from "../hooks/useAuth";
 
 import {useState, useEffect} from 'react'
 import Notification from './Notification'
+import {ROOT_URL} from '../constants'
 const Notifications = () => {
 
     const { user } = useAuth(null);
@@ -15,7 +16,7 @@ const Notifications = () => {
         console.log('useEffect in Notifications.js')
         // curl -X GET http://127.0.0.1:8000/api/usernotification/  -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3'
         const fetchNotifications = async()=>{
-            const notifications = await fetchObject('http://localhost:8000/api/usernotification/')
+            const notifications = await fetchObject(ROOT_URL+'/api/usernotification/')
             console.log('fetched notifications')
             await setNotifications(notifications)
             console.log(notifications)

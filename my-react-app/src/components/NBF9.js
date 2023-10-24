@@ -3,6 +3,7 @@
 import { useAuth } from "../hooks/useAuth"
 import { useEffect, useState } from "react"
 import ComplianceEntity from './NBF9Comp.js' // reuse NBF7Doc
+import {ROOT_URL} from '../constants'
 
 const NBF9 = ({onNextClicked, setComplianceEntities}) => {
 
@@ -19,7 +20,7 @@ const NBF9 = ({onNextClicked, setComplianceEntities}) => {
             console.log('TOKEN: '+token)
             const auth_str = 'Token '+token
             headers.set('Authorization', auth_str)
-            let url = 'http://localhost:8000/api/'+resource+'/'
+            let url = ROOT_URL+'/api/'+resource+'/'
             const res = await fetch(url,{headers:headers})
             const data = await res.json()
             setAvailableComplianceEntities(data)

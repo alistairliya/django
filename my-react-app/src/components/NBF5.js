@@ -9,7 +9,7 @@
 import { useAuth } from "../hooks/useAuth"
 import {useState, useEffect} from 'react'
 import Select from "react-select"
-
+import {ROOT_URL} from '../constants'
 const NBF5 = ({setInsuranceInfo, onNextClicked}) => {
 
 
@@ -28,7 +28,7 @@ const NBF5 = ({setInsuranceInfo, onNextClicked}) => {
             const token = user['token']
             const auth_str = 'Token '+token
             headers.set('Authorization', auth_str)
-            let url = 'http://localhost:8000/api/'+resource+'/'
+            let url = ROOT_URL+'/api/'+resource+'/'
             console.log(url)
             const res = await fetch(url,{headers:headers})
             const data = await res.json()

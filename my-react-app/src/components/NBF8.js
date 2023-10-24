@@ -8,6 +8,7 @@ import {useState, useEffect} from 'react'
 import {useAuth} from '../hooks/useAuth'
 import NBF8Advisor from './NBF8Advisor'
 import Button from './Button'
+import {ROOT_URL} from '../constants'
 
 const NBF8 = ({onNextClicked, setCollaborators}) => {
     const {user} = useAuth()
@@ -27,7 +28,7 @@ const NBF8 = ({onNextClicked, setCollaborators}) => {
                 const auth_str = 'Token '+token
                 console.log(auth_str)
                 headers.set('Authorization', auth_str)
-                const res = await fetch('http://localhost:8000/api/'+resource+'/', {headers:headers})
+                const res = await fetch(ROOT_URL+'/api/'+resource+'/', {headers:headers})
                 const data = await res.json()
                 return data
             }

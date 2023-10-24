@@ -1,6 +1,7 @@
 import Select from 'react-select' // https://react-select.com/home
 import { useState, useEffect } from "react"
 import { useAuth } from "../hooks/useAuth"
+import {ROOT_URL} from '../constants'
 
 const NewAddress = ({onNextClicked, onPrevClicked, setAddress}) => {
     const {user} = useAuth()
@@ -41,7 +42,7 @@ const NewAddress = ({onNextClicked, onPrevClicked, setAddress}) => {
         const token = user['token']
         const auth_str = 'Token '+token
         headers.set('Authorization', auth_str)
-        let url = 'http://localhost:8000/api/'+what+'/'
+        let url = ROOT_URL+'/api/'+what+'/'
         const res = await fetch(url, {headers:headers})
         const data = await res.json()
         console.log('done fetchSomeList')

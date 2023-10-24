@@ -1,5 +1,5 @@
 //rafce
-
+import{ROOT_URL} from '../constants'
 import BusinessDetailsFP from './BusinessDetailsFP'
 import Button from './Button'
 import { useAuth } from "../hooks/useAuth"
@@ -14,7 +14,7 @@ const BusinessDetailsPolicyDelivery = ({business, refreshBusinesses, getStatus, 
             return
         }
         console.log('submitForReview')
-        const url = 'http://127.0.0.1:8000/api/editbusiness/update_status/' 
+        const url = ROOT_URL+'/api/editbusiness/update_status/' 
         const token = user['token']
         const auth_str = 'Token '+token
         const headers = new Headers()

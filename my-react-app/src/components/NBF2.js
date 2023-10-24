@@ -5,6 +5,7 @@ import NewClient from './NewClient'
 
 import {useState, useEffect} from 'react'
 import { useAuth } from "../hooks/useAuth"
+import {ROOT_URL} from '../constants'
 const NBF2 = ({client,setClient, onNextClicked, onPrevClicked, forInsured=false}) => {
     const [clients, setClients] = useState([])
 
@@ -30,7 +31,7 @@ const NBF2 = ({client,setClient, onNextClicked, onPrevClicked, forInsured=false}
         const auth_str = 'Token '+token
         console.log(auth_str)
         headers.set('Authorization', auth_str)
-        let url = 'http://localhost:8000/api/clients/'
+        let url = ROOT_URL+'/api/clients/'
         if(first_name!==''){
             url = url + '?first_name='+first_name
         } 

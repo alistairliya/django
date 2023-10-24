@@ -11,6 +11,7 @@ import NBF9 from './NBF9'
 import NBF10 from './NBF10'
 import { useAuth } from "../hooks/useAuth"
 import { useState, useEffect} from 'react'
+import {ROOT_URL} from '../constants'
 //import { useRadioGroup } from '@mui/material'
 const NewBusiness = ({onAdd, close}) => {
     const [client, setClient] = useState()
@@ -70,7 +71,7 @@ const NewBusiness = ({onAdd, close}) => {
         console.log('onCreateClicked')
         const business = collect()
         console.log(business)
-        const url = 'http://127.0.0.1:8000/api/newbusiness/create_insurance_application/'
+        const url = ROOT_URL+'/api/newbusiness/create_insurance_application/'
         const result = await postToAPI(url, business)
         console.log(result)
     }

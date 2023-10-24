@@ -17,7 +17,7 @@
 // - A client may have multiple addresses, but MyBusiness only makes reference to Client which then references to one or more addresses.
 // - - May need to make a field to associate a single address with the business.
 import { useEffect, useState } from "react"
-
+import {ROOT_URL} from '../constants'
 import { useAuth } from "../hooks/useAuth"
 
 import Select from 'react-select' // https://react-select.com/home
@@ -48,7 +48,7 @@ const NBF10 = ({data, close}) => {
             const auth_str = 'Token '+token
             console.log(auth_str)
             headers.set('Authorization', auth_str)
-            const res = await fetch('http://localhost:8000/api/'+resource+'/', {headers:headers})
+            const res = await fetch(ROOT_URL+'/api/'+resource+'/', {headers:headers})
             const data = await res.json()
             return data
         }
@@ -96,7 +96,7 @@ const NBF10 = ({data, close}) => {
             // To be implemented.
             // POST new client
             // Example:
-            // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"first_name":"A", "last_name":"Americano","birthdate":"1999-12-09","sin":"123456789","created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00", "created_by":"http://127.0.0.1:8000/api/users/9/","gender":"M"}' http://127.0.0.1:8000/api/clients/   
+            // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"first_name":"A", "last_name":"Americano","birthdate":"1999-12-09","sin":"123456789","created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00", "created_by":ROOT_URL+"/api/users/9/","gender":"M"}' http://127.0.0.1:8000/api/clients/   
             
             const client = data['client']
             const clientObj = {
@@ -108,12 +108,12 @@ const NBF10 = ({data, close}) => {
                     "gender":client.gender,
                     "created_date":"2023-04-02T00:00",
                     "modified_date":"2023-04-02T00:00",
-                    "created_by":"http://127.0.0.1:8000/api/users/9/"
+                    "created_by":ROOT_URL+"/api/users/9/"
             }
             console.log("Ready to post to clients!")
             console.log(clientObj)
             
-            const result = await postToAPI('http://127.0.0.1:8000/api/clients/', clientObj)
+            const result = await postToAPI(ROOT_URL+'/api/clients/', clientObj)
             
             setClientId(result.id)
             console.log('NBF10 Client ID: '+result.id)
@@ -132,7 +132,7 @@ const NBF10 = ({data, close}) => {
         if(!dataProcessed && data['applicantAddress'].is_new_address != null){
             console.log('NBF10 Address is new. Store into DB and get adderss ID')
             setDataProcessed(true)
-            // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d '{"unit_number":"101","street_address":"11111 FooBarFoo Ave","city":"Big City","province_state":"http://127.0.0.1:8000/api/province_state/1/", "country":"http://127.0.0.1:8000/api/country/1/", "postal_code":"VXVSVS","address_type":"http://127.0.0.1:8000/api/addresstype/1/" }' http://127.0.0.1:8000/api/addresss/
+            // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d '{"unit_number":"101","street_address":"11111 FooBarFoo Ave","city":"Big City","province_state":ROOT_URL+"/api/province_state/1/", "country":ROOT_URL+"/api/country/1/", "postal_code":"VXVSVS","address_type":ROOT_URL+"/api/addresstype/1/" }' http://127.0.0.1:8000/api/addresss/
             const postAddress = async (mydata) => {
                 const addressObj = {
                     // unit_number
@@ -142,16 +142,16 @@ const NBF10 = ({data, close}) => {
                     // city
                     "city":mydata.applicantAddress.city,
                     // province_state
-                    "province_state":"http://127.0.0.1:8000/api/province_state/"+mydata.applicantAddress.province.id+'/',
+                    "province_state":ROOT_URL+"/api/province_state/"+mydata.applicantAddress.province.id+'/',
                     // country
                     "country":"http://127.0.0.1.8000/api/country/"+mydata.applicantAddress.country.id+'/',
                     // postal_code
                     "postal_code":mydata.applicantAddress.postal_code,
                     // address_type
-                    "address_type":"http://127.0.0.1:8000/api/addresstype/1/", // Hardcode for now
+                    "address_type":ROOT_URL+"/api/addresstype/1/", // Hardcode for now
                     // description
                 }
-                const url = 'http://127.0.0.1:8000/api/addresss/'
+                const url = ROOT_URL+'/api/addresss/'
                 const data = await postToAPI(url, addressObj)
                 return data 
             }
@@ -251,15 +251,15 @@ const NBF10 = ({data, close}) => {
         console.log('NBF10 Create My Business')
         
         // REST API TO POST TO MyBusiness
-        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00","client":"http://127.0.0.1:8000/api/clients/1/", "status":"http://127.0.0.1:8000/api/businessstatus/1/"}' http://127.0.0.1:8000/api/mybusiness/ 
+        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00","client":ROOT_URL+"/api/clients/1/", "status":ROOT_URL+"/api/businessstatus/1/"}' http://127.0.0.1:8000/api/mybusiness/ 
         const postMyBusiness = async () =>{
 
             const mybusiness = 
             {
                 // business_type. eg. Insurance <- not important at this time
                 // product. eg. Life 1. FK to Product Type
-                "client":"http://127.0.0.1:8000/api/clients/"+clientId+"/", 
-                "status":"http://127.0.0.1:8000/api/businessstatus/1/",
+                "client":ROOT_URL+"/api/clients/"+clientId+"/", 
+                "status":ROOT_URL+"/api/businessstatus/1/",
                 // projeted_FYC
                 // application_date
                 // settled_date
@@ -268,7 +268,7 @@ const NBF10 = ({data, close}) => {
                 "created_date":"2023-04-02T00:00",
                 "modified_date":"2023-04-01T00:00",
             }
-            let url = 'http://localhost:8000/api/mybusiness/'
+            let url = ROOT_URL+'/api/mybusiness/'
             const data = await postToAPI(url, mybusiness)
             return data
         }
@@ -287,16 +287,16 @@ const NBF10 = ({data, close}) => {
                 // new phone
                 
                 const phoneObj = {
-                    "clients": ["http://127.0.0.1:8000/api/clients/"+clientId+"/"],
+                    "clients": [ROOT_URL+"/api/clients/"+clientId+"/"],
                     "area_code": phone.area_code,
                     "phone_number": phone.phone_number,
-                    "phone_type": "http://127.0.0.1:8000/api/phonetype/"+phone.phone_type.id+"/",
+                    "phone_type": ROOT_URL+"/api/phonetype/"+phone.phone_type.id+"/",
                     "is_primary": false,
                     "is_active": true,
                     "is_archived": false,
                     "notes": null
                 }
-                const url = 'http://127.0.0.1:8000/api/phone/'
+                const url = ROOT_URL+'/api/phone/'
                 const result = await postToAPI(url, phoneObj)
                 phoneId = result.id
                 console.log("Successfully posted to phone: "+phoneId)
@@ -304,7 +304,7 @@ const NBF10 = ({data, close}) => {
             return phoneId
         }
 
-        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d '{"unit_number":"","street_address":"1237 Red Sox Ave.","city":"Boston","province_state":"http://127.0.0.1:8000/api/province_state/3/","country":"http://127.0.0.1.8000/api/country/2/","postal_code":"123512","address_type":"http://127.0.0.1:8000/api/addresstype/1/"}' http://127.0.0.1:8000/api/addresss/
+        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d '{"unit_number":"","street_address":"1237 Red Sox Ave.","city":"Boston","province_state":ROOT_URL+"/api/province_state/3/","country":"http://127.0.0.1.8000/api/country/2/","postal_code":"123512","address_type":ROOT_URL+"/api/addresstype/1/"}' http://127.0.0.1:8000/api/addresss/
         const postAddress = async () => {
             let addressId = null
             if(data.applicantAddress.is_new_address){
@@ -316,16 +316,16 @@ const NBF10 = ({data, close}) => {
                     // city
                     "city":data.applicantAddress.city,
                     // province_state
-                    "province_state":"http://127.0.0.1:8000/api/province_state/"+data.applicantAddress.province.id+'/',
+                    "province_state":ROOT_URL+"/api/province_state/"+data.applicantAddress.province.id+'/',
                     // country
                     "country":"http://127.0.0.1.8000/api/country/"+data.applicantAddress.country.id+'/',
                     // postal_code
                     "postal_code":data.applicantAddress.postal_code,
                     // address_type
-                    "address_type":"http://127.0.0.1:8000/api/addresstype/1/", // Hardcode for now
+                    "address_type":ROOT_URL+"/api/addresstype/1/", // Hardcode for now
                     // description
                 }
-                const url = 'http://127.0.0.1:8000/api/addresss/'
+                const url = ROOT_URL+'/api/addresss/'
                 const result = await postToAPI(url, addressObj)
                 addressId = result.id
             }else{
@@ -336,38 +336,38 @@ const NBF10 = ({data, close}) => {
         // p225/60r17 1156 1307 230 20 10:30 
         // WORKING ON THIS RIGHT NOW!!!!
         // REST API TO POST TO InsurnaceApplication
-        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"business":"http://127.0.0.1:8000/api/mybusiness/12/","product":"http://127.0.0.1:8000/api/product/1/", "plan_type":"http://127.0.0.1:8000/api/insuranceplantype/1/","plan":"http://127.0.0.1:8000/api/insuranceplan/1/","face_amount":1.0, "planned_premium":2.0,"provider":"http://127.0.0.1:8000/api/insuranceprovider/1/"}' http://127.0.0.1:8000/api/insuranceapplication/
+        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"business":ROOT_URL+"/api/mybusiness/12/","product":ROOT_URL+"/api/product/1/", "plan_type":ROOT_URL+"/api/insuranceplantype/1/","plan":ROOT_URL+"/api/insuranceplan/1/","face_amount":1.0, "planned_premium":2.0,"provider":ROOT_URL+"/api/insuranceprovider/1/"}' http://127.0.0.1:8000/api/insuranceapplication/
         // From Doc: If the Product Type of a Product points to insurance, use this table (InsuranceApplication) for insurance specific data.
         const postInsuranceApplication = async (businessId, addressId, phoneId) =>{
             console.log('NBF10 Post Insurance Application')
             const insuranceApplication = {
                 // business
-                "business":"http://127.0.0.1:8000/api/mybusiness/"+businessId+"/",
+                "business":ROOT_URL+"/api/mybusiness/"+businessId+"/",
                 // product
-                "product":"http://127.0.0.1:8000/api/product/1/", // <- hard coded for now
+                "product":ROOT_URL+"/api/product/1/", // <- hard coded for now
                 // plan_type
-                "plan_type":"http://127.0.0.1:8000/api/insuranceplantype/"+applicantInsurancePlanTypeId+"/",
+                "plan_type":ROOT_URL+"/api/insuranceplantype/"+applicantInsurancePlanTypeId+"/",
                 // plan
-                "plan":"http://127.0.0.1:8000/api/insuranceplan/"+applicantInsurancePlanId+"/",
+                "plan":ROOT_URL+"/api/insuranceplan/"+applicantInsurancePlanId+"/",
                 // face_amount
                 "face_amount":applicantInsuranceFaceAmount, 
                 // planned_premium
                 "planned_premium":applicantInsurancePlannedPremium,
                 // provider
-                "provider":"http://127.0.0.1:8000/api/insuranceprovider/"+applicantInsuranceProviderId+"/",
+                "provider":ROOT_URL+"/api/insuranceprovider/"+applicantInsuranceProviderId+"/",
                 // applicant_address
-                "applicant_address":"http://127.0.0.1:8000/api/addresss/"+addressId+"/",
+                "applicant_address":ROOT_URL+"/api/addresss/"+addressId+"/",
                 // applicant_phone
-                "applicant_phone":"http://127.0.0.1:8000/api/phone/"+phoneId+"/",
+                "applicant_phone":ROOT_URL+"/api/phone/"+phoneId+"/",
             
             }
             console.log(insuranceApplication)
-            let url = 'http://localhost:8000/api/insuranceapplication/'
+            let url = ROOT_URL+'/api/insuranceapplication/'
             const data = await postToAPI(url, insuranceApplication)
             return data
 
         }
-        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"user":"http://127.0.0.1:8000/api/users/9/", "business":"http://127.0.0.1:8000/api/mybusiness/23/","user_role":"http://127.0.0.1:8000/api/businessuserrole/1/","created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00", "created_by":"http://127.0.0.1:8000/api/users/9/" }' http://127.0.0.1:8000/api/businessuser/ 
+        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"user":ROOT_URL+"/api/users/9/", "business":ROOT_URL+"/api/mybusiness/23/","user_role":ROOT_URL+"/api/businessuserrole/1/","created_date":"2023-04-02T00:00","modified_date":"2023-04-01T00:00", "created_by":ROOT_URL+"/api/users/9/" }' http://127.0.0.1:8000/api/businessuser/ 
         const postBusinessUser = async (businessId) =>{
             console.log('NBF10 Post Business User')
             
@@ -376,15 +376,15 @@ const NBF10 = ({data, close}) => {
                 console.log(collaborators[k])
                 const businessUser = {
                     // user
-                    "user":"http://127.0.0.1:8000/api/users/"+collaborators[k].advisor.id+"/",
+                    "user":ROOT_URL+"/api/users/"+collaborators[k].advisor.id+"/",
                     // business
-                    "business":"http://127.0.0.1:8000/api/mybusiness/"+businessId+"/",
+                    "business":ROOT_URL+"/api/mybusiness/"+businessId+"/",
                     // user_role
-                    "user_role" : "http://127.0.0.1:8000/api/businessuserrole/"+collaborators[k].role.id+"/",
+                    "user_role" : ROOT_URL+"/api/businessuserrole/"+collaborators[k].role.id+"/",
                     // collaborator_status
-                    "collaborator_status" : "http://127.0.0.1:8000/api/collaboratorstatus/"+collaborators[k].collaboratorStatus.id+"/",
+                    "collaborator_status" : ROOT_URL+"/api/collaboratorstatus/"+collaborators[k].collaboratorStatus.id+"/",
                     // collaborator_position
-                    "collaborator_position" : "http://127.0.0.1:8000/api/collaboratorposition/" + collaborators[k].collaboratorPosition.id+"/",
+                    "collaborator_position" : ROOT_URL+"/api/collaboratorposition/" + collaborators[k].collaboratorPosition.id+"/",
                     // cfc_code
                     "cfc_code" : collaborators[k].cfcCode,
                     
@@ -393,16 +393,16 @@ const NBF10 = ({data, close}) => {
                     "created_date":"2023-04-02T00:00",
                     "modified_date":"2023-04-01T00:00",
                     // created_by
-                    "created_by":"http://127.0.0.1:8000/api/users/9/" // <- hard coded for now
+                    "created_by":ROOT_URL+"/api/users/9/" // <- hard coded for now
                 }
                 console.log('NBF10 Business User')
                 console.log(businessUser)
                 console.log(JSON.stringify(businessUser))
-                let url = 'http://localhost:8000/api/businessuser/'
+                let url = ROOT_URL+'/api/businessuser/'
                 await postToAPI(url, businessUser)
             }
         }
-        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d '{"business":"http://127.0.0.1:8000/api/mybusiness/37/", "compliance_entity":"http://127.0.0.1:8000/api/complianceentity/3/", "notes":"This is a test"}' http://127.0.0.1:8000/api/businesscompliance/
+        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d '{"business":ROOT_URL+"/api/mybusiness/37/", "compliance_entity":ROOT_URL+"/api/complianceentity/3/", "notes":"This is a test"}' http://127.0.0.1:8000/api/businesscompliance/
         const postBusinessCompliance = async (businessId) =>{
             console.log('NBF10 Post Business Compliance')
             for(let k in complianceEntities){
@@ -410,13 +410,13 @@ const NBF10 = ({data, close}) => {
                 console.log(complianceEntities[k])
                 const businessCompliance = {
                     // business
-                    "business":"http://127.0.0.1:8000/api/mybusiness/"+businessId+"/",
+                    "business":ROOT_URL+"/api/mybusiness/"+businessId+"/",
                     // compliance_entity
-                    "compliance_entity":"http://127.0.0.1:8000/api/complianceentity/"+k+"/", // key is ID
+                    "compliance_entity":ROOT_URL+"/api/complianceentity/"+k+"/", // key is ID
                     // notes
                     "notes":complianceEntities[k].notes
                 }
-                let url = "http://127.0.0.1:8000/api/businesscompliance/" 
+                let url = ROOT_URL+"/api/businesscompliance/" 
                 console.log(JSON.stringify(businessCompliance))
                 await postToAPI(url, businessCompliance)    
             }
@@ -424,7 +424,7 @@ const NBF10 = ({data, close}) => {
 
 
 
-        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d '{"business":"http://127.0.0.1:8000/api/mybusiness/37/", "document":"http://127.0.0.1:8000/api/document/3/", "notes":"This is a test" }' http://127.0.0.1:8000/api/businessdocument/
+        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d '{"business":ROOT_URL+"/api/mybusiness/37/", "document":ROOT_URL+"/api/document/3/", "notes":"This is a test" }' http://127.0.0.1:8000/api/businessdocument/
         const postBusinessDocument = async (businessId) =>{
             console.log('NBF10 Post Business Document')
             for(let k in documents){
@@ -432,13 +432,13 @@ const NBF10 = ({data, close}) => {
                 console.log(documents[k])
                 const businessDocument = {
                     // business
-                    "business":"http://127.0.0.1:8000/api/mybusiness/"+businessId+"/",
+                    "business":ROOT_URL+"/api/mybusiness/"+businessId+"/",
                     // document
-                    "document":"http://127.0.0.1:8000/api/document/"+k+"/", // key is ID
+                    "document":ROOT_URL+"/api/document/"+k+"/", // key is ID
                     // notes
                     "notes":documents[k].notes
                 }
-                let url = "http://127.0.0.1:8000/api/businessdocument/"
+                let url = ROOT_URL+"/api/businessdocument/"
                 console.log(JSON.stringify(businessDocument))
                 await postToAPI(url, businessDocument)
             }
@@ -451,32 +451,32 @@ const NBF10 = ({data, close}) => {
                 console.log(medicals[k])
                 const businessMedical = {
                     // business
-                    "business":"http://127.0.0.1:8000/api/mybusiness/"+businessId+"/",
+                    "business":ROOT_URL+"/api/mybusiness/"+businessId+"/",
                     // medical
-                    "medical":"http://127.0.0.1:8000/api/medical/"+k+"/", // key is ID
+                    "medical":ROOT_URL+"/api/medical/"+k+"/", // key is ID
                     // notes
                     "notes":medicals[k].notes,
                     // status
-                    "status":"http://127.0.0.1:8000/api/status/2/" // <- hard coded for now
+                    "status":ROOT_URL+"/api/status/2/" // <- hard coded for now
                 }
-                let url = "http://127.0.0.1:8000/api/businessmedical/"
+                let url = ROOT_URL+"/api/businessmedical/"
                 console.log(JSON.stringify(businessMedical))
                 await postToAPI(url, businessMedical)
             }
         }
 
 
-        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d '{"business":"http://127.0.0.1:8000/api/mybusiness/71/","user":"http://127.0.0.1:8000/api/users/1/","notes":"test"}' "http://127.0.0.1:8000/api/businessssupervisor/"
+        // curl -X POST -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d '{"business":ROOT_URL+"/api/mybusiness/71/","user":ROOT_URL+"/api/users/1/","notes":"test"}' ROOT_URL+"/api/businessssupervisor/"
         const postBusinessSupervisor = async (businessId, userId) =>{
             console.log('NBF10 Post Business Supervisor')
             const businessSupervisor = {
                 // business
-                "business":"http://127.0.0.1:8000/api/mybusiness/"+businessId+"/",
+                "business":ROOT_URL+"/api/mybusiness/"+businessId+"/",
                 // user
-                "supervisor":"http://127.0.0.1:8000/api/users/"+userId+"/",
+                "supervisor":ROOT_URL+"/api/users/"+userId+"/",
                 "notes":""
             }
-            let url = "http://127.0.0.1:8000/api/businessssupervisor/"
+            let url = ROOT_URL+"/api/businessssupervisor/"
             console.log(JSON.stringify(businessSupervisor))
             await postToAPI(url, businessSupervisor)
         }
@@ -502,7 +502,7 @@ const NBF10 = ({data, close}) => {
     }
 
     const sendDataToAPI = async () => {
-        const url = "http://127.0.0.1:8000/api/newbusiness/create_new_business/"
+        const url = ROOT_URL+"/api/newbusiness/create_new_business/"
         console.log("sendDataToAPI")
         console.log(data)
         await postToAPI(url, data)

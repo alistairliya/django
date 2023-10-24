@@ -6,7 +6,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-
+import {ROOT_URL} from '../constants'
 const BusinessDetailsInsurance = ({insurance, collectPayload ,writeAccess}) => {
     const { user } = useAuth()
     const [myInsurance, setMyInsurance] = useState(null)
@@ -44,21 +44,21 @@ const BusinessDetailsInsurance = ({insurance, collectPayload ,writeAccess}) => {
         }
 
         const getAvailablePlans = async () => {
-            const base = "http://127.0.0.1:8000/api/" 
+            const base = ROOT_URL+"/api/" 
             let url = base + "insuranceplan/"
             const plans = await fetchObject(url)
             return plans    
         }
 
         const getAvailablePlanTypes = async () => {
-            const base = "http://127.0.0.1:8000/api/"
+            const base = ROOT_URL+"/api/"
             let url = base + "insuranceplantype/"
             const planTypes = await fetchObject(url)
             return planTypes
         }
 
         const getAvailableProviders = async () => {
-            const base = "http://127.0.0.1:8000/api/"
+            const base = ROOT_URL+"/api/"
             let url = base + "insuranceprovider/"
             const providers = await fetchObject(url)
             return providers

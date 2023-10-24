@@ -8,7 +8,6 @@
 // BusinessDocument
 // BusinessMedical
 
-
 import Button from './Button'
 
 import {useEffect, useState} from "react"
@@ -21,7 +20,7 @@ import BusinessDetailsFP from './BusinessDetailsFP'
 import BusinessDetailsDecline from './BusinessDetailsDecline'
 import BusinessDetailsApprove from './BusinessDetailsApprove'
 import BusinessDetailsPolicyDelivery from './BusinessDetailsPolicyDelivery'
-
+import {ROOT_URL} from '../constants'
 
 const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApproval=false}) => {
     const [myClient, setMyClient] = useState(null)
@@ -76,7 +75,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
 
     const getWriteAcess = async () =>{
         console.log('inside getWriteAcess')
-        const url = 'http://localhost:8000/api/editbusiness/get_write_access/?business_id='+business.id
+        const url = ROOT_URL+'/api/editbusiness/get_write_access/?business_id='+business.id
         let result = await fetchObject(url)
         if(result['result'] === 'OK'){
             console.log('AAAAAAAAAAAAAAAAA has write access')
@@ -187,11 +186,11 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         console.log(reason)
         // Fix the hadcode late
         // REJECTED
-        let declinedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/4/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!! 
+        let declinedStatusUrl = ROOT_URL+'/api/businessstatus/4/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!! 
         console.log('myStatus: '+myStatus.status_name) 
         if(myStatus.status_name === 'PENDING'){
             // DECLINED
-            declinedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/9/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!! 
+            declinedStatusUrl = ROOT_URL+'/api/businessstatus/9/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!! 
         }
         console.log("Seding declining status URL to backend: "+declinedStatusUrl)
         const result = await reviewHelper(declinedStatusUrl, reason)
@@ -211,10 +210,10 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const acceptApproveConfirmed = async (reason, settledFYC) =>{
         
         // !!!HARDCODE FOR NOW. NEED FIX LATER!!!
-        let approvedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/3/' // REVIEW statst
+        let approvedStatusUrl = ROOT_URL+'/api/businessstatus/3/' // REVIEW statst
         
         if(myStatus && myStatus.status_name === 'PENDING'){
-            approvedStatusUrl = 'http://127.0.0.1:8000/api/businessstatus/8/' // APPROVED status, Requiremet 1.8
+            approvedStatusUrl = ROOT_URL+'/api/businessstatus/8/' // APPROVED status, Requiremet 1.8
         }
 
         
@@ -226,13 +225,13 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
     const reviewHelper = async (approvalStatusUrl, reason='', settledFYC='') =>{
         console.log('APPROVALHELPER')
         // call the API to approve the business
-        // curl -X PATCH -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"status":"http://127.0.0.1:8000/api/businessstatus/3/"}' http://127.0.0.1:8000/api/businessapproval/1/
+        // curl -X PATCH -H 'Authorization: Token 9af7ed53fa7a0356998896d8224e67e65c8650a3' -H 'Content-Type: application/json'  -d  '{"status":ROOT_URL+"/api/businessstatus/3/"}' http://127.0.0.1:8000/api/businessapproval/1/
         // Need ID of business and ID of status
         // Hard code for now. Should be a constant somewhere.
         const sendReview = async (reason='') =>{
-            const approvedStatus = approvalStatusUrl//'http://127.0.0.1:8000/api/businessstatus/3/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!!
+            const approvedStatus = approvalStatusUrl//ROOT_URL+'/api/businessstatus/3/' // !!!HARDCODE FOR NOW. NEED FIX LATER!!!
             //BusinessApprovalViewSet
-            const url = 'http://127.0.0.1:8000/api/businessapproval/' + business.id+'/'
+            const url = ROOT_URL+'/api/businessapproval/' + business.id+'/'
             const data = {
                 status: approvedStatus,
                 reason: reason,
@@ -288,7 +287,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         }
         console.log('submitForReview')
         // EditBusinessViewSet.update_status
-        const url = 'http://127.0.0.1:8000/api/editbusiness/update_status/' 
+        const url = ROOT_URL+'/api/editbusiness/update_status/' 
         const token = user['token']
         const auth_str = 'Token '+token
         const headers = new Headers()
@@ -324,7 +323,7 @@ const BusinessDetails = ({business, closeComponent, refreshBusinesses, forApprov
         }
         console.log('sendUpdate')
         console.log(updatePayload)
-        const url = 'http://127.0.0.1:8000/api/editbusiness/edit_business/'
+        const url = ROOT_URL+'/api/editbusiness/edit_business/'
         const token = user['token']
         const auth_str = 'Token '+token
         const headers = new Headers()
