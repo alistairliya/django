@@ -615,15 +615,16 @@ class EditBusinessViewSet(viewsets.ViewSet):
         collaborator_data = data.get('collaborators')
         if business_id and collaborator_data:
             my_business = MyBusiness.objects.get(id=business_id)
-            print(collaborator_data)
+            print(f'\n\n {collaborator_data}')
             for key in collaborator_data:
                 # For each collaborator, need to figure out if it's a new collaborator or an existing one
                 # if a business_user_id exists, then it's an existing collaborator
                 # otherwisse it is a new collaborator
                 collaborator = collaborator_data.get(key)
-                print(f'collaborator: {collaborator}')
-                business_user_id = collaborator.get('business_user_id')
+                print(f'\n\ncollaborator:\n {collaborator}')
+                business_user_id = collaborator.get('id') # Exiting collaborator loaded directly from businessuser. The "id" is the ID from each record in businessuser
                 if business_user_id:
+                    print(f"\nExisting Collaborator: {collaborator} \n")
                     pass # HERE!!!!
                 else:
                     # new collaborator
