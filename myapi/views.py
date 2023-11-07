@@ -624,7 +624,7 @@ class EditBusinessViewSet(viewsets.ViewSet):
                 print(f'collaborator: {collaborator}')
                 business_user_id = collaborator.get('business_user_id')
                 if business_user_id:
-                    pass
+                    pass # HERE!!!!
                 else:
                     # new collaborator
                     print('new collaborator')
@@ -632,7 +632,17 @@ class EditBusinessViewSet(viewsets.ViewSet):
                         id=collaborator.get('advisor').get('id'))
                     business_user = Business_User(
                         user=user,
-                        business=my_business
+                        business=my_business,
+                        split = int(collaborator.get('split')),
+                        # user role
+                        user_role = BusinessUserRole.objects.get(id=collaborator.get('role').get('id')),
+                        # collaborator_status
+                        collaborator_status = CollaboratorStatus.objects.get(id=collaborator.get('collaboratorStatus').get('id')),
+                        # collaborator_position
+                        collaborator_position = CollaboratorPosition.objects.get(id=collaborator.get('collaboratorPosition').get('id')),
+                        # cfc_code
+                        cfc_code = collaborator.get('cfcCode'),
+                        created_by = self.request.user 
                     )
                     business_user.save()
         return Response({'result': message})
