@@ -71,8 +71,8 @@ class MyBusinessView(viewsets.ModelViewSet):
         # set of business both DECLINED and older than given period
         qs_part = self.queryset.filter(
             created_date__lt=dt1, status=declined_status)
-        qs = qs.difference(qs_part).order_by('id').reverse()
-        #qs = qs.order_by('id').reverse()
+        #qs = qs.difference(qs_part).order_by('id').reverse() # this causes problem whem trying to filter business by id. comment out for now.
+        qs = qs.order_by('id').reverse()
 
         return qs
 
@@ -646,8 +646,11 @@ class EditBusinessViewSet(viewsets.ViewSet):
                         created_by = self.request.user 
                     )
                     business_user.save()
-        return Response({'result': message})
-
+        #from django.core import serializers as my_serializer
+        #serialized_obj = my_serializer.serialize('json', [ my_business, ])
+        data = MyBusinessSerializer(
+            my_business, context={'request': request}).data
+        return Response({'result': message, 'business':data})
 
 class NewBusinessViewSet(viewsets.ViewSet):
     permission_classes = [permissions.IsAuthenticated]
