@@ -629,7 +629,31 @@ class EditBusinessViewSet(viewsets.ViewSet):
                     #print(f"\nExisting Collaborator: {collaborator} \n")
                     businessUserObj = Business_User.objects.get(id=business_user_id)
                     # save data from collaborator into businessUserObj
-                    pass # HERE!!!!
+                    # 1. Update Advisor. Fiel: user
+                    advisorId = collaborator.get('advisor').get('id')
+                    advisor = MyUser.objects.get(id=advisorId)
+                    businessUserObj.user = advisor
+
+                    # 2. Update Role. Field: user_role
+                    roleId = collaborator.get('role').get('id')
+                    role = BusinessUserRole.objects.get(id=roleId)
+                    businessUserObj.user_role = role
+                    # 3. Update CFC Code
+                    cfcCode = collaborator.get('cfcCode')
+                    businessUserObj.cfc_code = cfcCode
+                    # 4. Update Status
+                    statusId = collaborator.get('collaboratorStatus').get('id')
+                    statusObj = CollaboratorStatus.objects.get(id=statusId)
+                    businessUserObj.collaborator_status = statusObj
+                    # 5. Update Position
+                    positionId = collaborator.get('collaboratorPosition').get('id')
+                    positionObj = CollaboratorPosition.objects.get(id=positionId)
+                    businessUserObj.collaborator_position = positionObj
+                    # 6. Update Split
+                    split = collaborator.get('split')
+                    businessUserObj.split = split
+                    # Save
+                    businessUserObj.save()
                 else:
                     # new collaborator
                     print('NEW COLLABORATOR')
