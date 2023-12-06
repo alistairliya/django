@@ -677,7 +677,7 @@ class EditBusinessViewSet(viewsets.ViewSet):
         #from django.core import serializers as my_serializer
         #serialized_obj = my_serializer.serialize('json', [ my_business, ])
         data = MyBusinessSerializer(
-            my_business, context={'request': request}).data
+            MyBusiness.objects.get(id=business_id), context={'request': request}).data
         return Response({'result': message, 'business':data})
 
 class NewBusinessViewSet(viewsets.ViewSet):
